@@ -1,5 +1,10 @@
 # Visualisering af relationer - HTML5 visual relationsbrowser
 
+Dette repositorie indeholder kode for html5-widget udviklet af solsort.com ApS.
+
+Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
+
+
 ## Overordnet tidsplan og kravspecifikation
 
 
