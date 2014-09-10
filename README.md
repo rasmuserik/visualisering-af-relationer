@@ -10,6 +10,9 @@ Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
 
 ## Noter
 
+- start 15. september, til 26. to-ugers sprints, ÷u42-
+
+
 - kodestandard ting
 
 - kravspec
@@ -47,6 +50,8 @@ Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
 
 - overlay  ie.
 - kig på spotify ui
+
+- NB: tiles!
 
 ## DONE
 
