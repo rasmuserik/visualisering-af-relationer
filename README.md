@@ -1,6 +1,6 @@
 # Visualisering af relationer - HTML5 visual relationsbrowser
 
-Dette repositorie indeholder kode for html5-widget udviklet af solsort.com ApS.
+Dette repositorie indeholder noter og koder fra Rasmus ifbm. visualisering af relationer projektet.
 
 Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
 
@@ -16,7 +16,7 @@ Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
   - formål: præsentation af relationer, - udforske
   - use cases
     - applikation til storskærm
-      - flere samtidige brugere_?_
+      - ikke flere samtidige brugere per skærm
     - ddb cms modul
       - pc+mobil+tablet
       - fokusomra∂e mobil og tablet
@@ -28,7 +28,7 @@ Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
     - udforskning af bibliotekssamling
     - forøgelse af brug af online resourcer
   - teknologivalg og afgrænsning
-    - ie10? ie9? android4+ (eller 2.2+) _?_
+    - ie10? ie9? android4+ (eller 2.2+) IE - DDB-standard  _?_
     - valgte test target platforme _?_
     - vanilla-js eller _?_
 - relationstyper
@@ -42,6 +42,12 @@ Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
 
 - fokus til at starter med relationsbrowser på object og kollektion
 - begreber - rlationer der vender ind ad eller ud ad 
+
+- klassiske musikværker
+
+- overlay  ie.
+- kig på spotify ui
+
 ## DONE
 
 - _indledende møde vejle 2014-08-06_
