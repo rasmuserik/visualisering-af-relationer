@@ -4,69 +4,85 @@ Dette repositorie indeholder noter og koder fra Rasmus ifbm. visualisering af re
 
 Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
 
+# Udviklingsstatus / task board
 
-## Overordnet tidsplan og kravspecifikation
+Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger. 
+Hvert sprint afsluttes med en ny release, demo og retrospektiv.
+Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
 
-
-## Noter
-
-- start 15. september, til 26. to-ugers sprints, ÷u42-
-
-
-- kodestandard ting
-
-- kravspec
-  - formål: præsentation af relationer, - udforske
-  - use cases
-    - applikation til storskærm
-      - ikke flere samtidige brugere per skærm
-    - ddb cms modul
-      - pc+mobil+tablet
-      - fokusomra∂e mobil og tablet
-  - effekt
-    - formidling af biblioteksmaterialer
-      - mere brug af depot og magasin
-      - NB: måling af brug i applikation
-      - NB: materialer på biblioteket, ie. depot og magasin-bøger
-    - udforskning af bibliotekssamling
-    - forøgelse af brug af online resourcer
-  - teknologivalg og afgrænsning
-    - ie10? ie9? android4+ (eller 2.2+) IE - DDB-standard  _?_
-    - valgte test target platforme _?_
-    - vanilla-js eller _?_
-- relationstyper
-  - undersøg - hvad er tilgængeligt via brønd etc. _?_
-  - typer
-    - addi/extererne - anmeldelser, forfatteromtaler, etc. relateret til værket
-      - infomedia, etc. anmeldelse, etc. forsøg på at lappe på værkvisning
-    - strukturelle indenfor værk - ting.collections
-      - værkoversigt ie. flere materialer i samme værk/søgeresultat, ie. ved søgning
-    - "cirkulære" manifestation-manifestation
-
-- fokus til at starter med relationsbrowser på object og kollektion
-- begreber - rlationer der vender ind ad eller ud ad 
-
-- klassiske musikværker
-
-- overlay  ie.
-- kig på spotify ui
-
-- NB: tiles!
+Herunder er igangværende opgave i nuværende sprint, - opdateres løbende som de bliver løst.
 
 ## DONE
 
-- _indledende møde vejle 2014-08-06_
+- infrastruktur: oprettelse af github repositorie, og basale filer i dette
+
+## In progress
+
+- infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci, browserling etc.
 
 ## TODO
 
-### Sprint 0 - opstartsfasen
+- Infrastruktur - værktøj og rammer for projektet skal på plads og op at køre
+  - infrastruktur: automatisk løbende publicering af kørende demo af visualiseringen ved github-commits
+  - infrastruktur: automatisk lint/indent/... af javascriptkode
+  - infrastruktur: eksempeldata som kan anvendes til udviklingen prototypen indtil vi har en webservice, ie. eksempel på hvilke data webservicen vil levere
+- Afklaring - dokumentation af designvalg og årsager til disse
+  - afklaring: overordnet applikationsarkitektur
+  - afklaring: kodestandard - NB: check for standard fra ting.dk
+  - afklaring: teknologivalg - understøttede browsere, anvendte teknologier
+  - afklaring: release og test-strategi
+  - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
+- Prototype - kørende minimal relationsvisualisering oppe at køre så der er noget at tage udgangspunkt i - til at starte med sandsynligvist visualisering af ADDI-relationer(da disse nok er lettest tilgængelige) som ville kunne komme op på side med enkelt materiale
+  - prototype: graf-layout via d3.js
+  - prototype: overlay med visualisering ved tryk på knap, og indlejring af dette i html
+  - prototype: visualisering af materiale (forside + tekst) på visualiseringsoverlay
+  - prototype: visualisering af ADDI-relationer på visualiseringsoverlay
 
-- _arbejdsmøde vejle 2014-09-10_
+# Release-log og changelog
 
-- infrastruktur
-  - github repositorie
-  - integrationsserver/testrunner, travis-ci, browserling etc.
-- kravspec/projektafklaring
-- sample data for prototyping
+Ved afslutningen af hvert sprint laves en ny release, med beskrivelse herunder.
 
-### Later
+
+# Backlog
+
+Backloggen indeholder de idéer/emner/ting der kan laves i projektet.
+Kan med fordel formuleres som deciderede user-stories, og prioriteres.
+Herunder nogle mulige emner, som senere kan brydes op i opgaver og placeres i TODO i task-board'et. 
+
+- Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
+- Visualiserings-view: strukturelle relationer
+- Visualiserings-view: cirkulære relationer - relationer der vender ud ad
+- evt. sky/graf-agtig
+- evt. tile/mesh-visualisering
+- træstruktur-visualisering rettet mod små skærme
+- Sikre at visualiseringsoverlayet tilpasser sig zoom og scroll på skærmen.
+- Mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
+- Storskærmsapplikation (evt. via node-webkit)
+- opsamling af statistik / måling af anvendelse
+- forbedring/optimering ud fra indsamlet statistik
+
+----
+
+# Projektnoter
+
+*nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)*
+
+- Use cases
+  - DDB-CMS - mobil - tablet - pc 
+    - eksempelvis knap/overlay på værkvisning object/collection
+    - eksempelvis knap/overlay ved hvert værk i søgeresultat
+  - storskærme med touch - dog kun én bruger per skærm (ikke flere samtidige brugere af samme skærm)
+- Platform: chrome/firefox/safari7+/opera/ie10+/android4+, og evt. ie9+/android2.2+ hvis muligt/overkommeligt
+- Formål: udforskning af biblioteksmaterialer, evt. lappe på værkvisning, præsentere relationer bedre
+- Inspiration:
+  - kig på spotify ui
+  - tiles/mesh
+  - komplekse strukturelle relationer i klassiske musikværker
+
+
+## Møder og arrangementer
+
+- næste udviklernetværksmøde i Herning - med præsentation/status på projekt
+
+- indledende møde vejle 2014-08-06
+- arbejdsmøde vejle 2014-09-10
