@@ -1,8 +1,9 @@
 # Visualisering af relationer - HTML5 visual relationsbrowser
 
-Dette repositorie indeholder noter og koder fra Rasmus ifbm. visualisering af relationer projektet.
+Dette repositorie indeholder kode i forbindelse med projektet `visualisering af relationer`, og kommer til at indeholde en html5 visuel relationsbrowser til de danske biblioteker.
 
-Drupal/DDB integration og fuld kode kommer til at ligge i andet repositorie.
+Projektet drives af Vejle og Herning biblioteker med støtte fra DDB-puljen.
+
 
 # Udviklingsstatus / task board
 
@@ -10,7 +11,7 @@ Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger.
 Hvert sprint afsluttes med en ny release, demo og retrospektiv.
 Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
 
-Herunder er igangværende opgave i nuværende sprint, - opdateres løbende som de bliver løst.
+Herunder er igangværende opgaver i nuværende sprint, - opdateres løbende som de bliver løst.
 
 ## DONE
 
