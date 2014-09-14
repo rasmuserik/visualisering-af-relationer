@@ -5,7 +5,7 @@ Dette repositorie indeholder kode i forbindelse med projektet `visualisering af 
 Projektet drives af Vejle og Herning biblioteker med støtte fra DDB-puljen.
 
 
-# Udviklingsstatus / task board
+# Udviklingsstatus / task board for nuværende sprint
 
 Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger. 
 Hvert sprint afsluttes med en ny release, demo og retrospektiv.
@@ -44,7 +44,7 @@ Herunder er igangværende opgaver i nuværende sprint, - opdateres løbende som 
 Ved afslutningen af hvert sprint laves en ny release, med beskrivelse herunder.
 
 
-# Backlog
+# Backlog for hele projektet
 
 Backloggen indeholder de idéer/emner/ting der kan laves i projektet.
 Kan med fordel formuleres som deciderede user-stories, og prioriteres.
