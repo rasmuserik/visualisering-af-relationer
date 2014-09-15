@@ -1,5 +1,11 @@
 language: node_js
 node_js:
-    - "0.10"
-install:
-    - "npm install -g bower && npm install && bower install && cd test && bower install && cd .."
+  - "0.10"
+before_install:
+  - "npm install -g grunt-cli"
+  - "npm install -g bower"
+install: 
+  - "npm install"
+before_script:
+  - "bower install"
+  - "cd test && bower install && cd .."
