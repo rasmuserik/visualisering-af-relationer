@@ -10,6 +10,12 @@
 
 module.exports = function (grunt) {
 
+  var js_source = [
+        'Gruntfile.js',
+        '<%= config.app %>/scripts/{,*/}*.js',
+        '!<%= config.app %>/scripts/vendor/*',
+        'test/spec/{,*/}*.js'];
+
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
 
@@ -35,7 +41,7 @@ module.exports = function (grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: ['<%= config.app %>/scripts/{,*/}*.js'],
+        files: js_source,
         tasks: ['jshint'],
         options: {
           livereload: true
@@ -127,13 +133,18 @@ module.exports = function (grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
-      all: [
-        'Gruntfile.js',
-        '<%= config.app %>/scripts/{,*/}*.js',
-        '!<%= config.app %>/scripts/vendor/*',
-        'test/spec/{,*/}*.js'
-      ]
+      all: js_source
     },
+
+    "jsbeautifier" : {
+        files : js_source,
+        options : {
+          js: {
+            preserveNewlines: true
+          }
+        }
+    },
+
 
     // Mocha testing framework configuration options
     mocha: {
@@ -376,4 +387,6 @@ module.exports = function (grunt) {
     'test',
     'build'
   ]);
+
+  grunt.loadNpmTasks('grunt-jsbeautifier');
 };

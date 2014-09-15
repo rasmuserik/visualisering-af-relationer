@@ -2,6 +2,7 @@
   "name": "visualisering-af-relationer",
   "private": true,
   "dependencies": {
-    "jquery": "~1.11.1"
+    "jquery": "~1.11.1",
+    "d3": "~3.4.11"
   }
 }
