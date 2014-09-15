@@ -2,4 +2,4 @@ language: node_js
 node_js:
     - "0.10"
 install:
-    - "npm install -g bower && npm install -g grunt && npm install && bower install && cd test && bower install && cd .. && grunt build"
+    - "npm install -g bower && npm install -g grunt && npm install && bower install && cd test && bower install && cd .."
