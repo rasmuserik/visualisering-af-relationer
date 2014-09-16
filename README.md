@@ -18,16 +18,17 @@ Herunder er igangværende opgaver i nuværende sprint, - opdateres løbende som 
 ## DONE
 
 - infrastruktur: oprettelse af github repositorie, og basale filer i dette
+- infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci, browserling etc.
+- infrastruktur: lint/indent/... af javascriptkode
 
 ## In progress
 
-- infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci, browserling etc.
+- prototype: overlay med visualisering ved tryk på knap, og indlejring af dette i html
 
 ## TODO
 
 - Infrastruktur - værktøj og rammer for projektet skal på plads og op at køre
   - infrastruktur: automatisk løbende publicering af kørende demo af visualiseringen ved github-commits
-  - infrastruktur: automatisk lint/indent/... af javascriptkode
   - infrastruktur: eksempeldata som kan anvendes til udviklingen prototypen indtil vi har en webservice, ie. eksempel på hvilke data webservicen vil levere
 - Afklaring - dokumentation af designvalg og årsager til disse
   - afklaring: overordnet applikationsarkitektur
@@ -37,7 +38,6 @@ Herunder er igangværende opgaver i nuværende sprint, - opdateres løbende som 
   - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - Prototype - kørende minimal relationsvisualisering oppe at køre så der er noget at tage udgangspunkt i - til at starte med sandsynligvist visualisering af ADDI-relationer(da disse nok er lettest tilgængelige) som ville kunne komme op på side med enkelt materiale
   - prototype: graf-layout via d3.js
-  - prototype: overlay med visualisering ved tryk på knap, og indlejring af dette i html
   - prototype: visualisering af materiale (forside + tekst) på visualiseringsoverlay
   - prototype: visualisering af ADDI-relationer på visualiseringsoverlay
 
