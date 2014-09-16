@@ -10,7 +10,7 @@
 
 module.exports = function(grunt) {
 
-  var js_source = [
+  var jsSources = [
     'Gruntfile.js',
     '<%= config.app %>/scripts/{,*/}*.js',
     '!<%= config.app %>/scripts/vendor/*',
@@ -42,7 +42,7 @@ module.exports = function(grunt) {
         tasks: ['wiredep']
       },
       js: {
-        files: js_source,
+        files: jsSources,
         tasks: ['jshint'],
         options: {
           livereload: true
@@ -134,11 +134,11 @@ module.exports = function(grunt) {
         jshintrc: '.jshintrc',
         reporter: require('jshint-stylish')
       },
-      all: js_source
+      all: jsSources
     },
 
-    "jsbeautifier": {
-      files: js_source,
+    jsbeautifier: {
+      files: jsSources,
       options: {
         js: {
           indentSize: 2,
