@@ -11,7 +11,7 @@ Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger.
 Hvert sprint afsluttes med en ny release, demo og retrospektiv.
 Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
 
-Vi bruger scrumdo til at holde styr på opgaverne, taskboard etc. er på http://scrumdo.com/TODO/add/the/correct/url
+Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://www.scrumdo.com/projects/project/visualisering-af-relationer
 
 ## Installation/kørsel
 
