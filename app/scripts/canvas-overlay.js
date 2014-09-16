@@ -1,18 +1,36 @@
 // A canvas-element at device resolution, that fits the entire window
-// TODO: scrollbar ratio issue
 (function() {
   CanvasOverlay = function() { //{{{1constructor
     this.canvas = document.createElement('canvas');
     this.canvas.className = "CanvasOverlay"
+    this._visible = false;
   };
+
   CanvasOverlay.prototype.show = function() { //{{{1 add the element to the dom
+    if(this._visible) {
+      return;
+    }
+
+    // hide scrollbars
+    this._originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden"
+
     document.body.appendChild(this.canvas);
     this.updatePosition()
   };
+
   CanvasOverlay.prototype.hide = function() { //{{{1 remove the element from the dom
+    if(!this._visible) {
+      return;
+    }
     if(this.canvas.parentElement) {
       document.body.removeChild(this.canvas);
     }
+
+    // restore scrollbars
+    document.body.style.overflow = this._originalOverflow;
+
+    this._visible = false;
   };
   CanvasOverlay.prototype.requestRedraw = function() { //{{{1 override this function
     var ctx = this.canvas.getContext('2d');
