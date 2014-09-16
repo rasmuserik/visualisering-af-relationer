@@ -6,26 +6,29 @@ Dette repositorie indeholder kode i forbindelse med projektet `visualisering af 
 
 Projektet drives af Vejle og Herning biblioteker med støtte fra DDB-puljen.
 
-
-# Udviklingsstatus / task board for nuværende sprint
-
 Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger. 
 Hvert sprint afsluttes med en ny release, demo og retrospektiv.
 Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
 
-Herunder er igangværende opgaver i nuværende sprint, - opdateres løbende som de bliver løst.
+Vi bruger scrumdo til at holde styr på opgaverne, tasboard etc. er på http://scrumdo.com/TODO/add/the/correct/url
 
-## DONE
+# done/releaselog
+
+
+Indeværende sprint:
+version 0.1.0, release 26/9
 
 - infrastruktur: oprettelse af github repositorie, og basale filer i dette
-- infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci, browserling etc.
+- infrastruktur: opsætning af grunt, bower etc.
+- infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
 - infrastruktur: lint/indent/... af javascriptkode
 
-## In progress
+
+# todo/backlog
+
+Dette sprint:
 
 - prototype: overlay med visualisering ved tryk på knap, og indlejring af dette i html
-
-## TODO
 
 - Infrastruktur - værktøj og rammer for projektet skal på plads og op at køre
   - infrastruktur: automatisk løbende publicering af kørende demo af visualiseringen ved github-commits
@@ -41,16 +44,7 @@ Herunder er igangværende opgaver i nuværende sprint, - opdateres løbende som 
   - prototype: visualisering af materiale (forside + tekst) på visualiseringsoverlay
   - prototype: visualisering af ADDI-relationer på visualiseringsoverlay
 
-# Release-log og changelog
-
-Ved afslutningen af hvert sprint laves en ny release, med beskrivelse herunder.
-
-
-# Backlog for hele projektet
-
-Backloggen indeholder de idéer/emner/ting der kan laves i projektet.
-Kan med fordel formuleres som deciderede user-stories, og prioriteres.
-Herunder nogle mulige emner, som senere kan brydes op i opgaver og placeres i TODO i task-board'et. 
+## Later
 
 - Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - Visualiserings-view: strukturelle relationer
@@ -68,7 +62,7 @@ Herunder nogle mulige emner, som senere kan brydes op i opgaver og placeres i TO
 
 # Projektnoter
 
-*nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)*
+_nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)_
 
 - Use cases
   - DDB-CMS - mobil - tablet - pc 
