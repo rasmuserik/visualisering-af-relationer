@@ -10,7 +10,14 @@ Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger.
 Hvert sprint afsluttes med en ny release, demo og retrospektiv.
 Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
 
-Vi bruger scrumdo til at holde styr på opgaverne, tasboard etc. er på http://scrumdo.com/TODO/add/the/correct/url
+Vi bruger scrumdo til at holde styr på opgaverne, taskboard etc. er på http://scrumdo.com/TODO/add/the/correct/url
+
+## Installation/kørsel
+
+- installer _npm_, _bower_ `npm install -g bower` og _grunt_ `npm install -g grunt-cli`
+- hent projekt-afhængigheder `npm install`, `bower install`, `cd test; bower install`
+- kør `grunt build` for at bygge minifiseret/optimeret udgave af kode i `dist/`. Se også de øvrige grunt-kommandoer med `grunt --help`
+
 
 # done/releaselog
 
