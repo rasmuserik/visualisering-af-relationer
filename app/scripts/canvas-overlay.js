@@ -7,7 +7,7 @@
   };
 
   CanvasOverlay.prototype.show = function() { //{{{1 add the element to the dom
-    if(this._visible) {
+    if (this._visible) {
       return;
     }
 
@@ -20,10 +20,10 @@
   };
 
   CanvasOverlay.prototype.hide = function() { //{{{1 remove the element from the dom
-    if(!this._visible) {
+    if (!this._visible) {
       return;
     }
-    if(this.canvas.parentElement) {
+    if (this.canvas.parentElement) {
       document.body.removeChild(this.canvas);
     }
 
@@ -35,12 +35,12 @@
   CanvasOverlay.prototype.requestRedraw = function() { //{{{1 override this function
     var ctx = this.canvas.getContext('2d');
     ctx.fillStyle = "#f00";
-    ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
+    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.fillStyle = "#0f0";
-    ctx.fillRect(5,5, this.canvas.width-10, this.canvas.height-10);
-    for(var i = 0; i < 100; ++i) {
-    ctx.fillStyle = "#00f";
-    ctx.fillRect(i,i,1,1);
+    ctx.fillRect(5, 5, this.canvas.width - 10, this.canvas.height - 10);
+    for (var i = 0; i < 100; ++i) {
+      ctx.fillStyle = "#00f";
+      ctx.fillRect(i, i, 1, 1);
     }
   }
   CanvasOverlay.prototype.updatePosition = function() { //{{{1 make it fit the window, nb: $(window).scroll(function(){canvasOverlay.updatePosition()})
@@ -61,10 +61,9 @@
     this.canvas.style.left = x + "px";
     this.canvas.style.width = width + "px";
     this.canvas.style.height = height + "px";
-    console.log(x,xres,width, this.canvas)
+    console.log(x, xres, width, this.canvas)
 
-    if (originalWidth !== xres
-        || originalHeight !== yres) {
+    if (originalWidth !== xres || originalHeight !== yres) {
       this.canvas.width = xres;
       this.canvas.height = yres;
       this.requestRedraw();
