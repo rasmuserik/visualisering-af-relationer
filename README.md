@@ -43,7 +43,7 @@ Dette sprint:
   - infrastruktur: eksempeldata som kan anvendes til udviklingen prototypen indtil vi har en webservice, ie. eksempel på hvilke data webservicen vil levere
 - Afklaring - dokumentation af designvalg og årsager til disse
   - afklaring: overordnet applikationsarkitektur
-  - afklaring: kodestandard - NB: check for standard fra ting.dk
+  - afklaring: kodestandard - NB: check for standard fra ting.dk - http://ting.dk/wiki/ding-code-guidelines
   - afklaring: teknologivalg - understøttede browsere, anvendte teknologier
   - afklaring: release og test-strategi
   - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
