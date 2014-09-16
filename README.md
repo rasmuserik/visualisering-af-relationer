@@ -29,7 +29,7 @@ version 0.1.0, release 26/9
 - infrastruktur: oprettelse af github repositorie, og basale filer i dette
 - infrastruktur: opsætning af grunt, bower etc.
 - infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
-- infrastruktur: lint/indent/... af javascriptkode
+- infrastruktur: codeclimate/lint/indent/... af javascriptkode
 
 
 # todo/backlog

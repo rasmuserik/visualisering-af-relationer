@@ -42,7 +42,7 @@
     ]
   },
   "scripts": {
-    "test": "grunt test"
+    "test": "grunt jshint && grunt test"
   },
   "engines": {
     "node": ">=0.10.0"
