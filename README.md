@@ -75,6 +75,20 @@ Dette sprint:
 
 # Projektnoter
 
+## Follow-up status message
+
+- forslag til data for webservice, ie. dummy data i https://github.com/solsort/visualisering-af-relationer/blob/master/app/scripts/main.js
+  - a la linked data
+- workflow for release/test, og testplan
+  - choice of test platforms
+- teknologivalg
+- næste udviklermøde
+- status på kode, link til github-repositoier https://github.com/solsort/visualisering-af-relationer og nævn commits-side for live opdatering :)
+- bortrejst næste uge
+- ikke sikker på om der når at være noget oppe at køre i næste uge, men arbejder hårdt på det ;)
+- arbejdssprog i dokumentation dansk eller engelsk, - http://ting.dk/wiki/ding-code-guidelines engelsk for comments?
+
+## Diverse
 _nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)_
 
 - Use cases
