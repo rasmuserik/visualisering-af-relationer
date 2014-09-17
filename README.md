@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/solsort/visualisering-af-relationer.svg?branch=master)](https://travis-ci.org/solsort/visualisering-af-relationer)
+[![Code Climate](https://codeclimate.com/github/solsort/visualisering-af-relationer/badges/gpa.svg)](https://codeclimate.com/github/solsort/visualisering-af-relationer)
 
 # Visualisering af relationer - HTML5 visual relationsbrowser
 
@@ -10,7 +11,14 @@ Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger.
 Hvert sprint afsluttes med en ny release, demo og retrospektiv.
 Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
 
-Vi bruger scrumdo til at holde styr på opgaverne, tasboard etc. er på http://scrumdo.com/TODO/add/the/correct/url
+Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://www.scrumdo.com/projects/project/visualisering-af-relationer
+
+## Installation/kørsel
+
+- installer _npm_, _bower_ `npm install -g bower` og _grunt_ `npm install -g grunt-cli`
+- hent projekt-afhængigheder `npm install`, `bower install`, `cd test; bower install`
+- kør `grunt build` for at bygge minifiseret/optimeret udgave af kode i `dist/`. Se også de øvrige grunt-kommandoer med `grunt --help`
+
 
 # done/releaselog
 
@@ -21,7 +29,7 @@ version 0.1.0, release 26/9
 - infrastruktur: oprettelse af github repositorie, og basale filer i dette
 - infrastruktur: opsætning af grunt, bower etc.
 - infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
-- infrastruktur: lint/indent/... af javascriptkode
+- infrastruktur: codeclimate/lint/indent/... af javascriptkode
 - prototype: overlay med visualisering
 
 # todo/backlog
@@ -31,24 +39,18 @@ Dette sprint:
 - infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
 - prototype: sample data structure for graph
 - prototype: basic d3 layout for graf
-- prototype: tegning af dummy brøndobjekt
+- prototype: tegning af dummy brøndobjekt - visualisering af materiale (forside + tekst) på visualiseringsoverlay
 - prototype: tegning af graf til enkelte relationer
 - prototype: klynge af relationer efter type
 - prototype: tegning af klynge/sky
-
-- Afklaring - dokumentation af designvalg og årsager til disse
-  - afklaring: overordnet applikationsarkitektur
-  - afklaring: kodestandard - NB: check for standard fra ting.dk
-  - afklaring: teknologivalg - understøttede browsere, anvendte teknologier
-  - afklaring: release og test-strategi
-  - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
-- Prototype - kørende minimal relationsvisualisering oppe at køre så der er noget at tage udgangspunkt i - til at starte med sandsynligvist visualisering af ADDI-relationer(da disse nok er lettest tilgængelige) som ville kunne komme op på side med enkelt materiale
-  - prototype: graf-layout via d3.js
-  - prototype: visualisering af materiale (forside + tekst) på visualiseringsoverlay
-  - prototype: visualisering af ADDI-relationer på visualiseringsoverlay
+- afklaring: overordnet applikationsarkitektur
+- afklaring: kodestandard - NB: check for standard fra ting.dk - http://ting.dk/wiki/ding-code-guidelines
+- afklaring: release og test-strategi, inkl workflow og understøttede platforme
+- afklaring: successkriterier og produktmål HTML5 relationsbrowser
 
 ## Later
 
+- afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - Visualiserings-view: strukturelle relationer
 - Visualiserings-view: cirkulære relationer - relationer der vender ud ad
