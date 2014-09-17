@@ -22,17 +22,20 @@ version 0.1.0, release 26/9
 - infrastruktur: opsætning af grunt, bower etc.
 - infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
 - infrastruktur: lint/indent/... af javascriptkode
-
+- prototype: overlay med visualisering
 
 # todo/backlog
 
 Dette sprint:
 
-- prototype: overlay med visualisering ved tryk på knap, og indlejring af dette i html
+- infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
+- prototype: sample data structure for graph
+- prototype: basic d3 layout for graf
+- prototype: tegning af dummy brøndobjekt
+- prototype: tegning af graf til enkelte relationer
+- prototype: klynge af relationer efter type
+- prototype: tegning af klynge/sky
 
-- Infrastruktur - værktøj og rammer for projektet skal på plads og op at køre
-  - infrastruktur: automatisk løbende publicering af kørende demo af visualiseringen ved github-commits
-  - infrastruktur: eksempeldata som kan anvendes til udviklingen prototypen indtil vi har en webservice, ie. eksempel på hvilke data webservicen vil levere
 - Afklaring - dokumentation af designvalg og årsager til disse
   - afklaring: overordnet applikationsarkitektur
   - afklaring: kodestandard - NB: check for standard fra ting.dk
