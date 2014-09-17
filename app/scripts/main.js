@@ -1,8 +1,6 @@
 (function() {
   'use strict';
-  //{{{1 dummy data set for sample visualisation
-
-  var sampleRelations = [{
+  var sampleRelations = [{ //{{{1
     property: 'Cover',
     value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD'
   }, {
@@ -134,23 +132,17 @@
     value: 'ting:870970-basis%3A15153431',
     title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
   }];
-
+  //{{{1 code for testing/demo
   $(function() {
     document.body.innerHTML += JSON.stringify(sampleRelations);
-    console.log(document.body.innerHTML);
-  });
 
+    // button on sample page pops up visualisation
+    $('#relvis-button').click(function() {
+      var canvasOverlay = new window.CanvasOverlay();
+      canvasOverlay.show();
+    });
 
-  //{{{1 code for testing/demo
-
-  // button on sample page pops up visualisation
-  $('#visres-button').click(function() {
-    var canvasOverlay = new window.CanvasOverlay();
-    canvasOverlay.show();
-  });
-
-  // show visualisation on load if we have #relvis hash
-  $(function() {
+    // show visualisation on load if we have #relvis hash
     if (location.hash === '#relvis') {
       var canvasOverlay = new window.CanvasOverlay();
       canvasOverlay.show();
