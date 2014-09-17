@@ -47,6 +47,7 @@ Dette sprint:
 - afklaring: kodestandard - NB: check for standard fra ting.dk - http://ting.dk/wiki/ding-code-guidelines
 - afklaring: release og test-strategi, inkl workflow og understøttede platforme
 - afklaring: successkriterier og produktmål HTML5 relationsbrowser
+- (infrastruktur: sample data til udvikling - holt)
 
 ## Later
 
