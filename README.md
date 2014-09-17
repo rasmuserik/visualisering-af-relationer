@@ -19,6 +19,14 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 - hent projekt-afhængigheder `npm install`, `bower install`, `cd test; bower install`
 - kør `grunt build` for at bygge minifiseret/optimeret udgave af kode i `dist/`. Se også de øvrige grunt-kommandoer med `grunt --help`
 
+## Kodestandard
+
+Vi følger Ding coding standard for javascript  http://ting.dk/wiki/ding-code-guidelines/.
+Og tilføjer mere stringens ifht. eksempelvis jshint.
+
+Se `.jshintrc`, samt `jsbeautifier: {...}` afsnittet i `Gruntfile.js` for konkrete valg om formattering og valg af tilgang.
+
+Kommentarer indeholder desuden fold markers til at navigere i filen med editorer der understøtter det: `{{{1`, `{{{2`, ...
 
 # done/releaselog
 
@@ -30,6 +38,7 @@ version 0.1.0, release 26/9
 - infrastruktur: opsætning af grunt, bower etc.
 - infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
 - infrastruktur: codeclimate/lint/indent/... af javascriptkode
+- afklaring: kodestandard
 - prototype: overlay med visualisering
 
 # todo/backlog
@@ -44,7 +53,6 @@ Dette sprint:
 - prototype: klynge af relationer efter type
 - prototype: tegning af klynge/sky
 - afklaring: overordnet applikationsarkitektur
-- afklaring: kodestandard - NB: check for standard fra ting.dk - http://ting.dk/wiki/ding-code-guidelines
 - afklaring: release og test-strategi, inkl workflow og understøttede platforme
 - afklaring: successkriterier og produktmål HTML5 relationsbrowser
 - (infrastruktur: sample data til udvikling - holt)
