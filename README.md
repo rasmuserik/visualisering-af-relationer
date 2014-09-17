@@ -39,6 +39,7 @@ version 0.1.0, release 26/9
 - infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
 - infrastruktur: codeclimate/lint/indent/... af javascriptkode
 - afklaring: kodestandard
+- prototype: sample/dummy data structure for graph
 - prototype: overlay med visualisering
 
 # todo/backlog
@@ -46,7 +47,6 @@ version 0.1.0, release 26/9
 Dette sprint:
 
 - infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
-- prototype: sample data structure for graph
 - prototype: basic d3 layout for graf
 - prototype: tegning af dummy brøndobjekt - visualisering af materiale (forside + tekst) på visualiseringsoverlay
 - prototype: tegning af graf til enkelte relationer
@@ -54,7 +54,6 @@ Dette sprint:
 - prototype: tegning af klynge/sky
 - afklaring: overordnet applikationsarkitektur
 - afklaring: release og test-strategi, inkl workflow og understøttede platforme
-- afklaring: successkriterier og produktmål HTML5 relationsbrowser
 - (infrastruktur: sample data til udvikling - holt)
 
 ## Later

@@ -3,143 +3,142 @@
   //{{{1 dummy data set for sample visualisation
 
   var sampleRelations = [{
-    type: 'Cover',
-    large: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD',
-    small: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_list_medium/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=AckPhF2k'
+    property: 'Cover',
+    value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD'
   }, {
-    type: 'Titel',
+    property: 'Small cover',
+    value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_list_medium/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=AckPhF2k'
+  }, {
+    property: 'Titel',
     value: 'Siddhartha - en indisk legende'
   }, {
-    type: 'Creator',
+    property: 'Creator',
     value: 'Hermann Hesse (2012)'
   }, {
-    type: 'Description',
+    property: 'Description',
     value: 'Om en from brahmanersøn, der i sin søgen efter sandheden forkaster sine fædres tro. Hans vej går gennem askese, møde med Buddha, kærlighedsoplevelser og et verdsligt liv, før han falder til ro'
   }, {
-    type: 'Serie',
+    property: 'Serie',
     value: 'Gyldendals paperbacks'
   }, {
-    type: 'Emne',
+    property: 'Emne',
     value: 'religiøse bøger'
   }, {
-    type: 'Id',
+    property: 'Id',
     value: 'ting:870970-basis%3A23243431'
   }, {
-    type: 'Type',
+    property: 'Type',
     value: 'Bog'
   }, {
-    type: 'Sprog',
+    property: 'Sprog',
     value: 'Dansk'
   }, {
-    type: 'Emne',
+    property: 'Emne',
     value: 'religiøse bøger'
   }, {
-    type: 'Emne',
+    property: 'Emne',
     value: 'siddhartha'
   }, {
-    type: 'Bidrag af',
+    property: 'Bidrag af',
     value: 'Karl Hornelund'
   }, {
-    type: 'Original title',
+    property: 'Original title',
     value: 'Siddhartha'
   }, {
-    type: 'ISBN-nummer',
+    property: 'ISBN-nummer',
     value: '9788702142570'
   }, {
-    type: 'Udgave',
+    property: 'Udgave',
     value: '6. udgave'
   }, {
-    type: 'Omfang',
+    property: 'Omfang',
     value: '126 sider'
   }, {
-    type: 'Udgiver',
+    property: 'Udgiver',
     value: 'Gyldendal'
   }, {
-    type: 'Publikum',
+    property: 'Publikum',
     value: 'voksenmaterialer'
   }, {
-    type: 'Opstilling',
-    value: 'Intet eksemplar hjemme på Vejle Bibliotek',
-    placement: 'Vejle > Voksen > Magasin > Skøn > > Hesse',
-    antal: 1,
-    available: 0
+    property: 'Opstilling',
+    value: '0/1 eksemplar hjemme på Vejle > Voksen > Magasin > Skøn > > Hesse'
   }, {
-    type: 'Opstilling',
-    value: '1 eksemplar hjemme på Jelling Bibliotek',
-    placement: 'Jelling > Voksen > Magasin > Skøn > > Hesse',
-    antal: 1,
-    available: 1
+    property: 'Opstilling',
+    value: '1/1 eksemplar hjemme på Jelling > Voksen > Magasin > Skøn > > Hesse'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : Leben und Werk im Bild : mit dem Kurzgefassten Lebenslauf von Hermann Hesse'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A12543431',
+    title: 'Hermann Hesse : Leben und Werk im Bild : mit dem Kurzgefassten Lebenslauf von Hermann Hesse'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : pilgrim of crisis : a biography'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A85143431',
+    title: 'Hermann Hesse : pilgrim of crisis : a biography'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : life and art'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A14943431',
+    title: 'Hermann Hesse : life and art'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A91483431',
+    title: 'Hermann Hesse'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : sein Leben und sein Werk (Ved Anni Carlsson, Otto Basler)',
-    details: 'Af indholdet: Anni Carlsson: Vom Steppenwolf zur Morgenlandfahrt ; Otto Basler: Der Weg zum Glasperlenspiel'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A19898431',
+    title: 'Hermann Hesse : sein Leben und sein Werk (Ved Anni Carlsson, Otto Basler)\nAf indholdet: Anni Carlsson: Vom Steppenwolf zur Morgenlandfahrt ; Otto Basler: Der Weg zum Glasperlenspiel'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : sein Leben und sein Werk'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A87875131',
+    title: 'Hermann Hesse : sein Leben und sein Werk'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : a pictorial biography'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A91431241',
+    title: 'Hermann Hesse : a pictorial biography'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : sein Leben und sein Werk (Ved Anni Carlsson)',
-    details: 'Side 236-256: Anni Carlsson: Vom Steppenwolf zur Morgenlandfahrt ; Side 257-300: Anni Carlsson: Hermann Hesses \'Glasperlenspiel\' in seinen Wesensgesetzen'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A57873431',
+    title: 'Hermann Hesse : sein Leben und sein Werk (Ved Anni Carlsson)\nSide 236-256: Anni Carlsson: Vom Steppenwolf zur Morgenlandfahrt ; Side 257-300: Anni Carlsson: Hermann Hesses \'Glasperlenspiel\' in seinen Wesensgesetzen'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : die Bilderwelt seines Lebens'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A48143431',
+    title: 'Hermann Hesse : die Bilderwelt seines Lebens'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : Werk und Leben : ein Dichterbildnis'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A48178431',
+    title: 'Hermann Hesse : Werk und Leben : ein Dichterbildnis'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : Leben und Werk (Ved Hermann Hesse ...)'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A14787431',
+    title: 'Hermann Hesse : Leben und Werk (Ved Hermann Hesse ...)'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : eine Chronik in Bildern'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A95145731',
+    title: 'Hermann Hesse : eine Chronik in Bildern'
   }, {
-    type: 'Om forfatteren',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Hermann Hesse : biography and bibliography. Volume 1'
+    property: 'Om forfatteren',
+    value: 'ting:870970-basis%3A41573431',
+    title: 'Hermann Hesse : biography and bibliography. Volume 1'
   }, {
-    type: 'Anmeldelse',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Berlingske tidende, 2013-01-24'
+    property: 'Anmeldelse',
+    value: 'ting:870970-basis%3A14853431',
+    title: 'Berlingske tidende, 2013-01-24'
   }, {
-    type: 'Anmeldelse',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Politiken, 2013-02-09'
+    property: 'Anmeldelse',
+    value: 'ting:870970-basis%3A14878731',
+    title: 'Politiken, 2013-02-09'
   }, {
-    type: 'Anmeldelse',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Weekendavisen, 2013-01-25'
+    property: 'Anmeldelse',
+    value: 'ting:870970-basis%3A48588431',
+    title: 'Weekendavisen, 2013-01-25'
   }, {
-    type: 'Lektørudtalelse',
-    value: 'ting:870970-basis%3A23243431',
-    text: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
+    property: 'Lektørudtalelse',
+    value: 'ting:870970-basis%3A15153431',
+    title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
   }];
+
+  $(function() {
+    document.body.innerHTML += JSON.stringify(sampleRelations);
+    console.log(document.body.innerHTML);
+  });
 
 
   //{{{1 code for testing/demo
