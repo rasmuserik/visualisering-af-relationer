@@ -1,5 +1,34 @@
 (function() {
   'use strict';
+  //util {{{1
+  function findBoundaries(list, keys) {
+    var i, j, item, key;
+    var min = {};
+    var max = {};
+    var range = {};
+    for (i = 0; i < keys.length; ++i) {
+      min[keys[i]] = Number.POSITIVE_INFINITY;
+      max[keys[i]] = Number.NEGATIVE_INFINITY;
+    }
+    for (i = 0; i < list.length; ++i) {
+      item = list[i];
+      for (j = 0; j < keys.length; ++j) {
+        key = keys[j];
+        if (typeof item[key] === "number") {
+          min[key] = Math.min(item[key], min[key])
+          max[key] = Math.max(item[key], max[key])
+        }
+      }
+    }
+    for (i = 0; i < keys.length; ++i) {
+      range[keys[i]] = max[keys[i]] - min[keys[i]];
+    }
+    return {
+      min: min,
+      max: max,
+      range: range
+    };
+  }
   var sampleItem = [{ //{{{1
     property: 'Cover',
     value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD'
@@ -174,7 +203,6 @@
       rel = item[i];
       property = rel.property;
       category = categoryMap[property];
-      console.log(property, category, categoryMap);
       if (category) {
         node = {
           label: property + '\n' + (rel.title || rel.value),
@@ -198,9 +226,25 @@
       edges: edges
     };
   }
-  //{{{2
-  console.log(createNodesExternal(sampleItem));
+  //{{{2 create force graph
+  function createGraph(canvas) {
+    var graph, force;
+    graph = createNodesExternal(sampleItem);
+    force = d3.layout.force()
+      .size([1000, 1000])
+      .nodes(graph.nodes)
+      .links(graph.edges)
+      .start();
+    //.gravity(1)
+    //.charge(-120)
+    //.linkDistance(30)
 
+    force.on('tick', function() {
+      var ctx = canvas.getContext('2d');
+      var boundaries = findBoundaries(graph.nodes, ['x', 'y']);
+      console.log("force tick", boundaries.range.x, boundaries.range.y);
+    });
+  }
 
 
   //{{{1 code for testing/demo
@@ -211,12 +255,14 @@
     $('#relvis-button').click(function() {
       var canvasOverlay = new window.CanvasOverlay();
       canvasOverlay.show();
+      createGraph(canvasOverlay.canvas);
     });
 
     // show visualisation on load if we have #relvis hash
     if (location.hash === '#relvis') {
       var canvasOverlay = new window.CanvasOverlay();
       canvasOverlay.show();
+      createGraph(canvasOverlay.canvas);
     }
   });
 })();
