@@ -211,6 +211,8 @@
     for (i = 0; i < item.length; ++i) {
       rel = item[i];
       property = rel.property;
+      if(property === 'Cover') { root.imgSrc = rel.value; }
+      if(property === 'Titel') { root.label = rel.value; }
       category = categoryMap[property];
       if (category) {
         node = {
