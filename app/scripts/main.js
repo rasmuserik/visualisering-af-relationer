@@ -14,9 +14,9 @@
       item = list[i];
       for (j = 0; j < keys.length; ++j) {
         key = keys[j];
-        if (typeof item[key] === "number") {
-          min[key] = Math.min(item[key], min[key])
-          max[key] = Math.max(item[key], max[key])
+        if (typeof item[key] === 'number') {
+          min[key] = Math.min(item[key], min[key]);
+          max[key] = Math.max(item[key], max[key]);
         }
       }
     }
@@ -26,7 +26,15 @@
     return {
       min: min,
       max: max,
-      range: range
+      range: range,
+      zeroOne: function(item) {
+        var result = {};
+        for (var i = 0; i < keys.length; ++i) {
+          var key = keys[i];
+          result[key] = (item[key] - this.min[key]) / this.range[key];
+        }
+        return result;
+      }
     };
   }
   var sampleItem = [{ //{{{1
@@ -166,7 +174,7 @@
     authorInfo: ['Om forfatteren', 'Creator'],
     review: ['Anmeldelse', 'Lektørudtalelse'],
     structure: ['Serie', 'Udgave', 'Collection'],
-    circular: ['Publikum', 'Emne', 'Sprog', 'Serie']
+    circular: ['Publikum', 'Emne', 'Sprog']
   };
 
   function createNodesExternal(item) { //{{{2
@@ -174,6 +182,7 @@
 
     // {{{3 graph definition and root nodes
     root = {
+      label: 'root',
       type: 'root',
       visible: true
     };
@@ -230,19 +239,29 @@
   function createGraph(canvas) {
     var graph, force;
     graph = createNodesExternal(sampleItem);
-    force = d3.layout.force()
-      .size([1000, 1000])
+    force = window.d3.layout.force()
+      .size([window.innerWidth, window.innerHeight])
       .nodes(graph.nodes)
       .links(graph.edges)
+      .charge(-120)
+      .linkDistance(30)
       .start();
     //.gravity(1)
-    //.charge(-120)
-    //.linkDistance(30)
 
     force.on('tick', function() {
+      var i;
       var ctx = canvas.getContext('2d');
-      var boundaries = findBoundaries(graph.nodes, ['x', 'y']);
-      console.log("force tick", boundaries.range.x, boundaries.range.y);
+      var boundaries = findBoundaries(graph.nodes.filter(function(o) {
+        return o.visible;
+      }), ['x', 'y']);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (i = 0; i < graph.nodes.length; ++i) {
+        var node = graph.nodes[i];
+        if (node.visible) {
+          var xy = boundaries.zeroOne(node);
+          ctx.fillText(node.label.slice(0, 40), (0.01 + xy.x * 0.9) * canvas.width, (0.07 + xy.y * 0.9) * canvas.height);
+        }
+      }
     });
   }
 
