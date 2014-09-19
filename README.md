@@ -43,11 +43,13 @@ version 0.1.0, release 26/9
 - prototype: overlay med visualisering
 - prototype: basic d3 layout for graf
 - prototype: klynge af relationer efter type
+- prototype: calculation of size of nodes in graph
 
 # todo/backlog
 
 Dette sprint:
 
+- prototype: different coordinate systems - graph-calculation, visual layout, screen
 - infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
 - prototype: tegning af dummy brøndobjekt - visualisering af materiale (forside + tekst) på visualiseringsoverlay
 - prototype: tegning af graf til enkelte relationer
