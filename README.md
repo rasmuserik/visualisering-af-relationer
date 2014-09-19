@@ -41,16 +41,16 @@ version 0.1.0, release 26/9
 - afklaring: kodestandard
 - prototype: sample/dummy data structure for graph
 - prototype: overlay med visualisering
+- prototype: basic d3 layout for graf
+- prototype: klynge af relationer efter type
 
 # todo/backlog
 
 Dette sprint:
 
 - infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
-- prototype: basic d3 layout for graf
 - prototype: tegning af dummy brøndobjekt - visualisering af materiale (forside + tekst) på visualiseringsoverlay
 - prototype: tegning af graf til enkelte relationer
-- prototype: klynge af relationer efter type
 - prototype: tegning af klynge/sky
 - afklaring: overordnet applikationsarkitektur
 - afklaring: release og test-strategi, inkl workflow og understøttede platforme
@@ -77,8 +77,6 @@ Dette sprint:
 
 ## Follow-up status message
 
-- forslag til data for webservice, ie. dummy data i https://github.com/solsort/visualisering-af-relationer/blob/master/app/scripts/main.js
-  - a la linked data
 - workflow for release/test, og testplan
   - choice of test platforms
 - teknologivalg

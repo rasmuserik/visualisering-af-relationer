@@ -34,6 +34,7 @@
     this._visible = false;
   };
   CanvasOverlay.prototype.requestRedraw = function() { //{{{1 override this function
+    /*
     var ctx = this.canvas.getContext('2d');
     ctx.fillStyle = '#f00';
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
@@ -43,6 +44,7 @@
       ctx.fillStyle = '#00f';
       ctx.fillRect(i, i, 1, 1);
     }
+    */
   };
   CanvasOverlay.prototype.updatePosition = function() { //{{{1 make it fit the window, nb: $(window).scroll(function(){canvasOverlay.updatePosition()})
     var originalWidth = this.canvas.width;

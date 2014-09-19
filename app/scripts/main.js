@@ -1,7 +1,22 @@
 (function() {
   'use strict';
   //util {{{1
-  function findBoundaries(list, keys) {
+  function square(a) { return a * a; }
+  function nearestPoints(list) {//{{{2
+    for(var i = 0; i < list.length; ++i) {
+      list[i].nearestDist = Number.POSITIVE_INFINITY;
+    }
+    for(var i = 0; i < list.length; ++i) {
+      var a = list[i];
+      for(var j = 0; j < i; ++j) {
+        var b = list[j];
+        var dist = Math.sqrt(square(a.x-b.x) + square(a.y-b.y));
+        a.nearestDist = Math.min(dist, a.nearestDist);
+        b.nearestDist = Math.min(dist, b.nearestDist);
+      }
+    }
+  }
+  function findBoundaries(list, keys) { //{{{2
     var i, j, item, key;
     var min = {};
     var max = {};
@@ -242,7 +257,8 @@
     var graph, force;
     graph = createNodesExternal(sampleItem);
     force = window.d3.layout.force()
-      .size([window.innerWidth, window.innerHeight])
+      //.size([window.innerWidth, window.innerHeight])
+      .size([100,100])
       .nodes(graph.nodes)
       .links(graph.edges)
       .charge(-120)
@@ -259,8 +275,15 @@
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (i = 0; i < graph.nodes.length; ++i) {
         var node = graph.nodes[i];
+        nearestPoints(graph.nodes.filter(function(elem){return elem.visible;}));
         if (node.visible) {
           var xy = boundaries.zeroOne(node);
+          ctx.fillStyle = "#000";
+          var sx = node.nearestDist / boundaries.range.x * Math.SQRT1_2;
+          var sy = node.nearestDist / boundaries.range.y * Math.SQRT1_2;
+          ctx.fillRect((xy.x - sx/2)*canvas.width, (xy.y - sy/2) * canvas.height, sx * canvas.width, sx * canvas.height)
+            //, sz.x*canvas.width, sz.y*canvas.height);
+          ctx.fillStyle = "#f00";
           ctx.fillText(node.label.slice(0, 40), (0.01 + xy.x * 0.9) * canvas.width, (0.07 + xy.y * 0.9) * canvas.height);
         }
       }
