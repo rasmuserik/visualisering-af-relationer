@@ -273,27 +273,42 @@
       .start();
     //.gravity(1)
 
+    var t0 = Date.now();
     force.on('tick', function() {
+      //console.log(Date.now() - t0);
+      t0 = Date.now();
+
       var i;
       var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = 'rgba(0,0,0,0.2)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
       var visibleNodes = graph.nodes.filter(function(o) {
         return o.visible;
       });
       var boundaries = findBoundaries(visibleNodes, ['x', 'y']);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      for (i = 0; i < graph.nodes.length; ++i) {
-        var node = graph.nodes[i];
+      visibleNodes = visibleNodes.map(function(node) {
+        var newNode = Object.create(node);
+        var xy = boundaries.zeroOne(node);
+        newNode.x = (xy.x * 0.8 + 0.1) * canvas.width;
+        newNode.y = (xy.y * 0.8 + 0.1) * canvas.height;
+        return newNode;
+      });
+
+      for (i = 0; i < visibleNodes.length; ++i) {
+        var node = visibleNodes[i];
         nearestPoints(visibleNodes);
-        if (node.visible) {
-          var xy = boundaries.zeroOne(node);
-          ctx.fillStyle = '#000';
-          var sx = node.nearestDist / boundaries.range.x * Math.SQRT1_2;
-          var sy = node.nearestDist / boundaries.range.y * Math.SQRT1_2;
-          ctx.fillRect((xy.x - sx / 2) * canvas.width, (xy.y - sy / 2) * canvas.height, sx * canvas.width, sx * canvas.height);
-          //, sz.x*canvas.width, sz.y*canvas.height);
-          ctx.fillStyle = '#f00';
-          ctx.fillText(node.label.slice(0, 40), (0.01 + xy.x * 0.9) * canvas.width, (0.07 + xy.y * 0.9) * canvas.height);
-        }
+        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        var size = node.nearestDist; // * Math.SQRT1_2;
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, size / 2, 0, Math.PI * 2);
+        ctx.fill();
+        //ctx.fillRect(node.x - size/2, node.y - size/2, size, size);
+        //, sz.x*canvas.width, sz.y*canvas.height);
+        ctx.font = '20px sans serif';
+        ctx.fillStyle = '#f00';
+        ctx.fillText(node.label.slice(0, 40), node.x - size * 0.4, node.y);
       }
     });
   }
@@ -305,14 +320,14 @@
 
     // button on sample page pops up visualisation
     $('#relvis-button').click(function() {
-      var canvasOverlay = new window.CanvasOverlay();
+      var canvasOverlay = window.canvasOverlay = new window.CanvasOverlay();
       canvasOverlay.show();
       createGraph(canvasOverlay.canvas);
     });
 
     // show visualisation on load if we have #relvis hash
     if (location.hash === '#relvis') {
-      var canvasOverlay = new window.CanvasOverlay();
+      var canvasOverlay = window.canvasOverlay = new window.CanvasOverlay();
       canvasOverlay.show();
       createGraph(canvasOverlay.canvas);
     }
