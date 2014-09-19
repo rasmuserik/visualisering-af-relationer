@@ -307,7 +307,7 @@
         nearestPoints(visibleNodes);
         ctx.fillStyle = 'rgba(255,255,255,0.5)';
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
-        var size = node.nearestDist * 0.8 -  0.3 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+        var size = node.nearestDist * 0.8 -  0.32 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
         ctx.beginPath();
         ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
         ctx.fill();
