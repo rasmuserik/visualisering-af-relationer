@@ -1,21 +1,25 @@
 (function() {
   'use strict';
   //util {{{1
-  function square(a) { return a * a; }
-  function nearestPoints(list) {//{{{2
-    for(var i = 0; i < list.length; ++i) {
+  function square(a) {
+    return a * a;
+  }
+
+  function nearestPoints(list) { //{{{2
+    for (var i = 0; i < list.length; ++i) {
       list[i].nearestDist = Number.POSITIVE_INFINITY;
     }
-    for(var i = 0; i < list.length; ++i) {
+    for (i = 0; i < list.length; ++i) {
       var a = list[i];
-      for(var j = 0; j < i; ++j) {
+      for (var j = 0; j < i; ++j) {
         var b = list[j];
-        var dist = Math.sqrt(square(a.x-b.x) + square(a.y-b.y));
+        var dist = Math.sqrt(square(a.x - b.x) + square(a.y - b.y));
         a.nearestDist = Math.min(dist, a.nearestDist);
         b.nearestDist = Math.min(dist, b.nearestDist);
       }
     }
   }
+
   function findBoundaries(list, keys) { //{{{2
     var i, j, item, key;
     var min = {};
@@ -226,8 +230,12 @@
     for (i = 0; i < item.length; ++i) {
       rel = item[i];
       property = rel.property;
-      if(property === 'Cover') { root.imgSrc = rel.value; }
-      if(property === 'Titel') { root.label = rel.value; }
+      if (property === 'Cover') {
+        root.imgSrc = rel.value;
+      }
+      if (property === 'Titel') {
+        root.label = rel.value;
+      }
       category = categoryMap[property];
       if (category) {
         node = {
@@ -257,8 +265,7 @@
     var graph, force;
     graph = createNodesExternal(sampleItem);
     force = window.d3.layout.force()
-      //.size([window.innerWidth, window.innerHeight])
-      .size([100,100])
+      .size([window.innerWidth, window.innerHeight])
       .nodes(graph.nodes)
       .links(graph.edges)
       .charge(-120)
@@ -269,21 +276,22 @@
     force.on('tick', function() {
       var i;
       var ctx = canvas.getContext('2d');
-      var boundaries = findBoundaries(graph.nodes.filter(function(o) {
+      var visibleNodes = graph.nodes.filter(function(o) {
         return o.visible;
-      }), ['x', 'y']);
+      });
+      var boundaries = findBoundaries(visibleNodes, ['x', 'y']);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       for (i = 0; i < graph.nodes.length; ++i) {
         var node = graph.nodes[i];
-        nearestPoints(graph.nodes.filter(function(elem){return elem.visible;}));
+        nearestPoints(visibleNodes);
         if (node.visible) {
           var xy = boundaries.zeroOne(node);
-          ctx.fillStyle = "#000";
+          ctx.fillStyle = '#000';
           var sx = node.nearestDist / boundaries.range.x * Math.SQRT1_2;
           var sy = node.nearestDist / boundaries.range.y * Math.SQRT1_2;
-          ctx.fillRect((xy.x - sx/2)*canvas.width, (xy.y - sy/2) * canvas.height, sx * canvas.width, sx * canvas.height)
-            //, sz.x*canvas.width, sz.y*canvas.height);
-          ctx.fillStyle = "#f00";
+          ctx.fillRect((xy.x - sx / 2) * canvas.width, (xy.y - sy / 2) * canvas.height, sx * canvas.width, sx * canvas.height);
+          //, sz.x*canvas.width, sz.y*canvas.height);
+          ctx.fillStyle = '#f00';
           ctx.fillText(node.label.slice(0, 40), (0.01 + xy.x * 0.9) * canvas.width, (0.07 + xy.y * 0.9) * canvas.height);
         }
       }
