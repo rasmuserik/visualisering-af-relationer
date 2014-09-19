@@ -6,6 +6,12 @@
   }
 
   function nearestPoints(list) { //{{{2
+    function assignDist(a, b, dist) {
+      if(a.nearestDist > dist) {
+        a.nearestDist = dist;
+        a.nearestNode = b;
+      }
+    }
     for (var i = 0; i < list.length; ++i) {
       list[i].nearestDist = Number.POSITIVE_INFINITY;
     }
@@ -14,8 +20,8 @@
       for (var j = 0; j < i; ++j) {
         var b = list[j];
         var dist = Math.sqrt(square(a.x - b.x) + square(a.y - b.y));
-        a.nearestDist = Math.min(dist, a.nearestDist);
-        b.nearestDist = Math.min(dist, b.nearestDist);
+        assignDist(a, b, dist);
+        assignDist(b, a, dist);
       }
     }
   }
@@ -300,10 +306,12 @@
         var node = visibleNodes[i];
         nearestPoints(visibleNodes);
         ctx.fillStyle = 'rgba(255,255,255,0.5)';
-        var size = node.nearestDist; // * Math.SQRT1_2;
+        // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
+        var size = node.nearestDist * 0.8 -  0.3 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, size / 2, 0, Math.PI * 2);
+        ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
         ctx.fill();
+        ctx.stroke();
         //ctx.fillRect(node.x - size/2, node.y - size/2, size, size);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
