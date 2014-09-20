@@ -1,6 +1,6 @@
 (function() {
   'use strict';
-  var visualObjectRatio = 13/8;
+  var visualObjectRatio = 13 / 8;
   var margin = 0.05;
   //util {{{1
   function square(a) {
@@ -205,6 +205,7 @@
   };
 
   var categoryNodeList = [];
+
   function createNodesExternal(item) { //{{{2
     var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node;
 
@@ -302,8 +303,8 @@
       visibleNodes = visibleNodes.map(function(node) {
         var newNode = Object.create(node);
         var xy = boundaries.zeroOne(node);
-        newNode.x = (xy.x * (1-2*margin) + margin) * canvas.width;
-        newNode.y = (xy.y * (1-2*margin) + margin) * canvas.height;
+        newNode.x = (xy.x * (1 - 2 * margin) + margin) * canvas.width;
+        newNode.y = (xy.y * (1 - 2 * margin) + margin) * canvas.height;
         return newNode;
       });
 
@@ -330,7 +331,7 @@
         ctx.quadraticCurveTo(node.x - size, node.y - size / visualObjectRatio, node.x - size, node.y);
         ctx.fill();
         //ctx.stroke();
-        ctx.fillRect(node.x - size, node.y - size/visualObjectRatio, size*2, size*2/visualObjectRatio);
+        ctx.fillRect(node.x - size, node.y - size / visualObjectRatio, size * 2, size * 2 / visualObjectRatio);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
         ctx.fillStyle = '#f00';
