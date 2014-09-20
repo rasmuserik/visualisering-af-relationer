@@ -1,6 +1,7 @@
 (function() {
   'use strict';
   var visualObjectRatio = 13/8;
+  var margin = 0.05;
   //util {{{1
   function square(a) {
     return a * a;
@@ -203,6 +204,7 @@
     circular: ['Publikum', 'Emne', 'Sprog']
   };
 
+  var categoryNodeList = [];
   function createNodesExternal(item) { //{{{2
     var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node;
 
@@ -219,6 +221,7 @@
     // {{{3 create nodes for categories to get clouds
     categoryNodes = {};
     categoryMap = {};
+    categoryNodeList = [];
     for (category in categories) {
       if (categories.hasOwnProperty(category)) {
         categoryNodes[category] = {
@@ -226,6 +229,7 @@
           type: 'category',
           visible: false
         };
+        categoryNodeList.push(categoryNodes[category]);
         nodes.push(categoryNodes[category]);
         for (i = 0; i < categories[category].length; ++i) {
           categoryMap[categories[category][i]] = category;
@@ -298,28 +302,34 @@
       visibleNodes = visibleNodes.map(function(node) {
         var newNode = Object.create(node);
         var xy = boundaries.zeroOne(node);
-        newNode.x = (xy.x * 0.8 + 0.1) * canvas.width;
-        newNode.y = (xy.y * 0.8 + 0.1) * canvas.height;
+        newNode.x = (xy.x * (1-2*margin) + margin) * canvas.width;
+        newNode.y = (xy.y * (1-2*margin) + margin) * canvas.height;
         return newNode;
       });
+
+      categoryNodeList[0].x = boundaries.min.x;
+      categoryNodeList[0].y = boundaries.min.y;
+      categoryNodeList[1].x = boundaries.max.x;
+      categoryNodeList[1].y = boundaries.min.y;
+      categoryNodeList[2].x = boundaries.max.x;
+      categoryNodeList[2].y = boundaries.max.y;
+      categoryNodeList[3].x = boundaries.min.x;
+      categoryNodeList[3].y = boundaries.max.y;
 
       for (i = 0; i < visibleNodes.length; ++i) {
         var node = visibleNodes[i];
         nearestPoints(visibleNodes);
-        ctx.fillStyle = 'rgba(255,255,255,1)';
+        ctx.fillStyle = 'rgba(255,255,255,0.9)';
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
         var size = node.nearestDist * 0.8 - 0.39 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
         ctx.beginPath();
-        //ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
-        /*
         ctx.moveTo(node.x - size, node.y);
         ctx.quadraticCurveTo(node.x - size, node.y + size / visualObjectRatio, node.x, node.y + size / visualObjectRatio);
         ctx.quadraticCurveTo(node.x + size, node.y + size / visualObjectRatio, node.x + size, node.y);
         ctx.quadraticCurveTo(node.x + size, node.y - size / visualObjectRatio, node.x, node.y - size / visualObjectRatio);
         ctx.quadraticCurveTo(node.x - size, node.y - size / visualObjectRatio, node.x - size, node.y);
-        */
         ctx.fill();
-        ctx.stroke();
+        //ctx.stroke();
         ctx.fillRect(node.x - size, node.y - size/visualObjectRatio, size*2, size*2/visualObjectRatio);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
