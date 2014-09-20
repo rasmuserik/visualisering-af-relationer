@@ -1,5 +1,6 @@
 (function() {
   'use strict';
+  var visualObjectRatio = 13/8;
   //util {{{1
   function square(a) {
     return a * a;
@@ -7,7 +8,7 @@
 
   function nearestPoints(list) { //{{{2
     function assignDist(a, b, dist) {
-      if(a.nearestDist > dist) {
+      if (a.nearestDist > dist) {
         a.nearestDist = dist;
         a.nearestNode = b;
       }
@@ -19,7 +20,7 @@
       var a = list[i];
       for (var j = 0; j < i; ++j) {
         var b = list[j];
-        var dist = Math.sqrt(square(a.x - b.x) + square(a.y - b.y));
+        var dist = Math.sqrt(square(a.x - b.x) + square((a.y - b.y) * visualObjectRatio));
         assignDist(a, b, dist);
         assignDist(b, a, dist);
       }
@@ -305,14 +306,21 @@
       for (i = 0; i < visibleNodes.length; ++i) {
         var node = visibleNodes[i];
         nearestPoints(visibleNodes);
-        ctx.fillStyle = 'rgba(255,255,255,0.5)';
+        ctx.fillStyle = 'rgba(255,255,255,1)';
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
-        var size = node.nearestDist * 0.8 -  0.32 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+        var size = node.nearestDist * 0.8 - 0.39 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
         ctx.beginPath();
-        ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
+        //ctx.arc(node.x, node.y, size, 0, Math.PI * 2);
+        /*
+        ctx.moveTo(node.x - size, node.y);
+        ctx.quadraticCurveTo(node.x - size, node.y + size / visualObjectRatio, node.x, node.y + size / visualObjectRatio);
+        ctx.quadraticCurveTo(node.x + size, node.y + size / visualObjectRatio, node.x + size, node.y);
+        ctx.quadraticCurveTo(node.x + size, node.y - size / visualObjectRatio, node.x, node.y - size / visualObjectRatio);
+        ctx.quadraticCurveTo(node.x - size, node.y - size / visualObjectRatio, node.x - size, node.y);
+        */
         ctx.fill();
         ctx.stroke();
-        //ctx.fillRect(node.x - size/2, node.y - size/2, size, size);
+        ctx.fillRect(node.x - size, node.y - size/visualObjectRatio, size*2, size*2/visualObjectRatio);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
         ctx.fillStyle = '#f00';
