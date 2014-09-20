@@ -251,7 +251,7 @@
       category = categoryMap[property];
       if (category) {
         node = {
-          label: property + '\n' + (rel.title || rel.value),
+          label: /* property + '\n' + */ (rel.title || rel.value),
           property: property,
           value: rel.value,
           visible: true
@@ -317,12 +317,14 @@
       categoryNodeList[3].x = boundaries.min.x;
       categoryNodeList[3].y = boundaries.max.y;
 
+      nearestPoints(visibleNodes);
       for (i = 0; i < visibleNodes.length; ++i) {
         var node = visibleNodes[i];
-        nearestPoints(visibleNodes);
-        ctx.fillStyle = 'rgba(255,255,255,0.9)';
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
         var size = node.nearestDist * 0.8 - 0.39 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+
+        ctx.fillStyle = 'rgba(255,255,255,1)';
+        /*
         ctx.beginPath();
         ctx.moveTo(node.x - size, node.y);
         ctx.quadraticCurveTo(node.x - size, node.y + size / visualObjectRatio, node.x, node.y + size / visualObjectRatio);
@@ -330,12 +332,13 @@
         ctx.quadraticCurveTo(node.x + size, node.y - size / visualObjectRatio, node.x, node.y - size / visualObjectRatio);
         ctx.quadraticCurveTo(node.x - size, node.y - size / visualObjectRatio, node.x - size, node.y);
         ctx.fill();
+        */
         //ctx.stroke();
         ctx.fillRect(node.x - size, node.y - size / visualObjectRatio, size * 2, size * 2 / visualObjectRatio);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
         ctx.fillStyle = '#f00';
-        ctx.fillText(node.label.slice(0, 40), node.x - size * 0.4, node.y);
+        ctx.fillText(node.label.slice(0, 40), node.x - size * 0.9, node.y + 5);
       }
     });
   }
