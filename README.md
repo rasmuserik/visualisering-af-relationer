@@ -44,6 +44,7 @@ version 0.1.0, release 26/9
 - prototype: basic d3 layout for graf
 - prototype: klynge af relationer efter type
 - prototype: calculation of size of nodes in graph
+- prototype: tekst indenfor box i canvas
 
 # todo/backlog
 
