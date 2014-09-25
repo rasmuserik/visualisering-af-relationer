@@ -45,22 +45,21 @@ version 0.1.0, release 26/9
 - prototype: klynge af relationer efter type
 - prototype: calculation of size of nodes in graph
 - prototype: tekst indenfor box i canvas
+- prototype: tegning af klynge/sky
 
 # todo/backlog
 
 Dette sprint:
 
-- prototype: different coordinate systems - graph-calculation, visual layout, screen
 - infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
 - prototype: tegning af dummy brøndobjekt - visualisering af materiale (forside + tekst) på visualiseringsoverlay
-- prototype: tegning af graf til enkelte relationer
-- prototype: tegning af klynge/sky
+- prototype: evt. tegning af graf til enkelte relationer
 - afklaring: overordnet applikationsarkitektur
 - afklaring: release og test-strategi, inkl workflow og understøttede platforme
-- (infrastruktur: sample data til udvikling - holt)
 
 ## Later
 
+- prototype: different coordinate systems - graph-calculation, visual layout, screen
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - Visualiserings-view: strukturelle relationer
