@@ -44,17 +44,32 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 ## Applikationsarkitektur og teknologivalg
 
 _TODO_
+_foreløbigt udkast_
 
 - opdeling i mikrolibraries
-- generisk relation / tripler
+  - canvas-overlay
+  - touch-normaliser/handler
+  - logger
+  - graph-layout
+  - abstraktion mellem 
+- filstruktur
+  - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
+  - `test/` - kildekode testcases
+  - `dist/` - den minificerede optimerede app havner her når `grunt build køres`
+  - `node_modules/`, `bower_components/`, `.tmp/` - autogenerede og installerede dependencies og temporære filer
+  - `bower.json`, `.gitignore`, `package.json`, `.yo-rc.json`, `.travis.yml`, `Gruntfile.js`, `.editorconfig`, `.gitattributes`, `COPYING`, `.jshintrc`  - konfigurationsfiler og metainformationer
+  - `README.md` denne fil/dokumentation
+- data representation generisk relation / tripler
 - teknologivalg
-  - grunt
-  - bower
-  - npm
-  - travis
-  - jshint
-  - jsbeautifier
-  - ekstra-sprog
+  - jquery - abstraktion over browserforskelligheder, vælges da den allerede anvendes på DDB-CMS hvilket er det primære sted hvor relationsbrowseren skal indlejres
+  - d3js  - 
+  - grunt - byggeværktøj
+  - bower - styring af afhængigheder ifht. browserafhængigheder
+  - npm - bruges primært til installation af util 
+  - travis - service for continous integration - automatisk kørsel af test
+  - jshint - værktøj til at understøtte best practices
+  - jsbeautifier 
+  - andre sprog/dialekter
 
 ## Kodestandard
 
@@ -68,7 +83,7 @@ Kommentarer indeholder desuden fold markers til at navigere i filen med editorer
 
 ## Release- og teststrategi og workflow.
 
-*foreløbigt udkast*
+_foreløbigt udkast_
 
 - Release strategi html5-applikationen
   - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
