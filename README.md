@@ -19,47 +19,106 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 - hent projekt-afhængigheder `npm install`, `bower install`, `cd test; bower install`
 - kør `grunt build` for at bygge minifiseret/optimeret udgave af kode i `dist/`. Se også de øvrige grunt-kommandoer med `grunt --help`
 
+## Successkriterier og produktmål for HTML5 relationsbrowseren
+
+*foreløbigt udkast*
+
+- Relationsbrowseren skal fungere uanset hvilket system den implementeres i:
+  - Skal kunne indlejres på hjemmesider, herunder særligt DDB
+  - Skal kunne indlejres i applikation til storskærm (dog kun med en interagerende bruger ad gangen)
+- Resultatet skal være en enkeltstående minifiseret javascript-fil, der kun afhænger af jquery og d3js
+  - Skal have sit eget JavaScript scope, og ikke kollidere med globale objekter
+  - Skal kunne initialiseres og styres med et enkelt api
+- Relationsbrowseren skad mindst have tre "views":
+  - Eksterne relationer: Fokus på et enkelt materiale, med visning tilhørende relationer (anmeldelser, forfatterinfo, værkstruktur og emner/cirkulære-relationer)
+  - Strukturelle relationer: En samling af materialer og deres indbyrdes struktur, ie. bind i serie, eller et tidskrift med artikler
+  - Cirkulære relationer: Relationer mellem forskellige værker eksempelvis på baggrund af emne, forfatter eller ADHL(andre der har lånt)
+- Målplatform er efgrænset til nyere browsere der har features til at understøtte en visuel dynamisk relationsbrowser 
+  - Webbrowsere: IE10+, Chrome, Safari, Firefox, iOS browser, Android 4+ browser
+  - Skal fungere på mobil, tablet, computer og storskærm (dog kun med én interagerende bruger ad gangen)
+- Teknologi og kode
+  - Der kan frit vælges teknologi der gør det mest effektivt at udvikle modulet
+  - Arkitektur og valg skal dokumenteres
+  - Koden skal overholde best practices
+
+## Applikationsarkitektur og teknologivalg
+
+_TODO_
+
+- opdeling i mikrolibraries
+- generisk relation / tripler
+- teknologivalg
+  - grunt
+  - bower
+  - npm
+  - travis
+  - jshint
+  - jsbeautifier
+  - ekstra-sprog
+
 ## Kodestandard
 
-Vi følger Ding coding standard for javascript  http://ting.dk/wiki/ding-code-guidelines/.
-Og tilføjer mere stringens ifht. eksempelvis jshint.
+Som udgangspunkt anvendes Ding coding standard for javascript http://ting.dk/wiki/ding-code-guidelines/.
 
 Se `.jshintrc`, samt `jsbeautifier: {...}` afsnittet i `Gruntfile.js` for konkrete valg om formattering og valg af tilgang.
+I forhold til jshint, er der truffet en del valg om at være mere stringent end ding-code-guidelines kræver. 
+Nuværende eneste undtagelse hvor vi er mindre stringente, er at vi tillader brug af bitwise operatorer da disse skal bruges til geometriske beregninger.
 
-Kommentarer indeholder desuden fold markers til at navigere i filen med editorer der understøtter det: `{{{1`, `{{{2`, ...
+Kommentarer indeholder desuden fold markers til at navigere i filen med editorer der understøtter dette, ie.: `{{{1`, `{{{2`, ...
+
+## Release- og teststrategi og workflow.
+
+*foreløbigt udkast*
+
+- Release strategi html5-applikationen
+  - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
+  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://solsort.com/visualisering-af-relationer
+  - Releases bliver tagget i git, og også opdateret i `package.json`, og i releaseloggen i `README.md`
+  - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
+- Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
+  - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
+  - På Android og iOS enheder, både tablet og telefon.
+  - Bugs, ændringer etc. tilføjes på https://github.com/solsort/visualisering-af-relationer/issues/new
+- Efter test kan den minifiserede udgave inkluderes i https://github.com/vejlebib/navn-på-repositorie-for-drupal-modulet
+
+## Indlejring/API
+
+Afklares/implementeres/dokumenteres i et kommende sprint.
+
 
 # done/releaselog
 
-
 Indeværende sprint:
-version 0.1.0, release 26/9
+- ...
 
-- infrastruktur: oprettelse af github repositorie, og basale filer i dette
-- infrastruktur: opsætning af grunt, bower etc.
-- infrastruktur: integrationsserver - automatisk kørsel af test ved commit til github, ie.: travis-ci
-- infrastruktur: codeclimate/lint/indent/... af javascriptkode
-- afklaring: kodestandard
-- prototype: sample/dummy data structure for graph
-- prototype: overlay med visualisering
-- prototype: basic d3 layout for graf
-- prototype: klynge af relationer efter type
-- prototype: calculation of size of nodes in graph
-- prototype: tekst indenfor box i canvas
-- prototype: tegning af klynge/sky
+## Version 0.1.0, released 26/9, sprint "Projektstart"
+
+- Infrastruktur udvikling af HTML5 relationsbrowseren
+  - oprettelse af github-repositorie `github.com/solsort/visualisering-af-relationer`, så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
+  - application skeleton
+  - build environment: grunt, bower, npm, jshint, jsbeautifier, codeclimate
+  - continous integration server
+- Start på første prototype af den eksterne relationsbrowser
+  - sample/dummy data for development
+  - overlay for visualisering
+  - layout af elementer via d3 force graph
+  - automatisk skalering af elementer
+  - linjeskift og automatisk skalering af tekst
+  - tegning af klynge/sky
+- Afklaring og dokumentation
+  - kodestandard
+  - udkast til release og test-strategi
 
 # todo/backlog
 
-Dette sprint:
-
-- infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
-- prototype: tegning af dummy brøndobjekt - visualisering af materiale (forside + tekst) på visualiseringsoverlay
-- prototype: evt. tegning af graf til enkelte relationer
 - afklaring: overordnet applikationsarkitektur
-- afklaring: release og test-strategi, inkl workflow og understøttede platforme
+- polish: sky som quadratic curve
 
 ## Later
 
+- infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
 - prototype: different coordinate systems - graph-calculation, visual layout, screen
+- refactoring/polish
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - Visualiserings-view: strukturelle relationer
@@ -84,8 +143,6 @@ Dette sprint:
 - teknologivalg
 - næste udviklermøde
 - status på kode, link til github-repositoier https://github.com/solsort/visualisering-af-relationer og nævn commits-side for live opdatering :)
-- bortrejst næste uge
-- ikke sikker på om der når at være noget oppe at køre i næste uge, men arbejder hårdt på det ;)
 - arbejdssprog i dokumentation dansk eller engelsk, - http://ting.dk/wiki/ding-code-guidelines engelsk for comments?
 
 ## Diverse
@@ -96,7 +153,6 @@ _nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre 
     - eksempelvis knap/overlay på værkvisning object/collection
     - eksempelvis knap/overlay ved hvert værk i søgeresultat
   - storskærme med touch - dog kun én bruger per skærm (ikke flere samtidige brugere af samme skærm)
-- Platform: chrome/firefox/safari7+/opera/ie10+/android4+, og evt. ie9+/android2.2+ hvis muligt/overkommeligt
 - Formål: udforskning af biblioteksmaterialer, evt. lappe på værkvisning, præsentere relationer bedre
 - Inspiration:
   - kig på spotify ui
