@@ -374,7 +374,6 @@
         var size = node.nearestDist * 0.8 - 0.39 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
 
         ctx.fillStyle = 'rgba(255,255,255,1)';
-        /*
         ctx.beginPath();
         ctx.moveTo(node.x - size, node.y);
         ctx.quadraticCurveTo(node.x - size, node.y + size / visualObjectRatio, node.x, node.y + size / visualObjectRatio);
@@ -382,15 +381,17 @@
         ctx.quadraticCurveTo(node.x + size, node.y - size / visualObjectRatio, node.x, node.y - size / visualObjectRatio);
         ctx.quadraticCurveTo(node.x - size, node.y - size / visualObjectRatio, node.x - size, node.y);
         ctx.fill();
+        /*
         */
-        //ctx.stroke();
-        ctx.fillRect(node.x - size, node.y - size / visualObjectRatio, size * 2, size * 2 / visualObjectRatio);
+        ctx.stroke();
+        //ctx.fillRect(node.x - size, node.y - size / visualObjectRatio, size * 2, size * 2 / visualObjectRatio);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
         ctx.fillStyle = '#f00';
+        var textBoxSize = 0.75;
         writeBox(ctx, node.label,
-          node.x - size, node.y - size / visualObjectRatio,
-          size * 2, size * 2 / visualObjectRatio);
+          node.x - size * textBoxSize, node.y - size * textBoxSize / visualObjectRatio,
+          size * textBoxSize * 2, size * textBoxSize * 2 / visualObjectRatio);
       }
     });
   }
