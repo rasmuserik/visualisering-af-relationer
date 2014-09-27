@@ -109,11 +109,11 @@ Indeværende sprint:
 ## Version 0.1.0, released 27/9, sprint "Projektstart"
 
 - Infrastruktur udvikling af HTML5 relationsbrowseren
-  - oprettelse af github-repositorie `github.com/solsort/visualisering-af-relationer`, så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
+  - oprettelse af github-repositorie http://github.com/solsort/visualisering-af-relationer så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
   - application skeleton
   - build environment: grunt, bower, npm, jshint, jsbeautifier, codeclimate
   - continous integration server
-  - online udgave af seneste release på ssl.solsort.com
+  - online udgave af seneste release på http://ssl.solsort.com/visualisering-af-relationer
 - Start på første prototype af den eksterne relationsbrowser
   - sample/dummy data for development
   - overlay for visualisering
