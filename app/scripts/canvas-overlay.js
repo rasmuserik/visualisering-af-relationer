@@ -51,8 +51,8 @@
     var originalHeight = this.canvas.height;
 
     var devicePixelRatio = window.devicePixelRatio || 1;
-    var x = window.scrollX;
-    var y = window.scrollY;
+    var x = window.scrollX || 0; // TODO: find scroll position in IE, instead of 0 dummy value
+    var y = window.scrollY || 0; // TODO: find scroll position in IE, instead of 0 dummy value
     var xres = document.documentElement.clientWidth * devicePixelRatio;
     var yres = document.documentElement.clientHeight * devicePixelRatio;
     var width = window.innerWidth;
