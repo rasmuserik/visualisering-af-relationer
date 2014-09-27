@@ -43,12 +43,9 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 
 ## Applikationsarkitektur og teknologivalg
 
-_TODO_
-_foreløbigt udkast_
-
-- opdeling i mikrolibraries
-  - canvas-overlay
-  - touch-normaliser/handler
+- Applikationen kommer til at bestå af flere forskellige mindre dele og microlibraries:
+  - √canvas-overlay -
+  - touch-normaliser/handler - normalisering af muse/touch-events
   - logger
   - graph-layout
   - abstraktion mellem 
