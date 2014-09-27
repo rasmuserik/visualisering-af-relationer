@@ -1,6 +1,6 @@
 {
   "name": "visualisering-af-relationer",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository" : { "type" : "git", "url" : "http://github.com/solsort/visualisering-af-relationer.git" },
   "devDependencies": {
     "grunt-jsbeautifier": "^0.2.7",

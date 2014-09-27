@@ -153,18 +153,7 @@ Indeværende sprint:
 
 # Projektnoter
 
-## Follow-up status message
-
-- workflow for release/test, og testplan
-  - choice of test platforms
-- teknologivalg
-- næste udviklermøde
-- status på kode, link til github-repositoier https://github.com/solsort/visualisering-af-relationer og nævn commits-side for live opdatering :)
-- arbejdssprog i dokumentation dansk eller engelsk, - http://ting.dk/wiki/ding-code-guidelines engelsk for comments?
-- adhl-data fra hack4dk
-
-## Diverse
-_nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)_
+_nedenstående er mine(rasmuserik) umiddelbare noter_
 
 - Use cases
   - DDB-CMS - mobil - tablet - pc 
