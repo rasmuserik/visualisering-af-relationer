@@ -44,8 +44,8 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 ## Applikationsarkitektur og teknologivalg
 
 - Nuværende arkitektur
-  - canvas-overlay - komponent der sikre
-  - main - prototype-kode, skal refaktoreres nedenstående beskrevne komponenter
+  - `canvas-overlay` - komponent der sikre
+  - `main` - prototype-kode, skal refaktoreres nedenstående beskrevne komponenter
 - Plan for arkitektur, koden forventes ihvertfald opdelt i følgende dele, - dele af disse udtrækkes til separate komponenter senere hen:
   - `canvas-overlay` - fuldskærmsoverlay, der abstraherer browserforskelle i forhold til skærm og mouse/touch-events.
   - `graph-layout` - udregner graf-layoutet på data-modellen i graf-vektorrummet
@@ -55,15 +55,14 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
   - `data-model` - data for objekter og relationer organiseres primært som objekter + triple store.
   - `data-source` - opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
   - `util` - utility functions
-- filstruktur
+- Filstruktur
   - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
   - `test/` - kildekode testcases
   - `dist/` - den minificerede optimerede app havner her når `grunt build køres`
   - `node_modules/`, `bower_components/`, `.tmp/` - autogenerede og installerede dependencies og temporære filer
   - `bower.json`, `.gitignore`, `package.json`, `.yo-rc.json`, `.travis.yml`, `Gruntfile.js`, `.editorconfig`, `.gitattributes`, `COPYING`, `.jshintrc`  - konfigurationsfiler og metainformationer
   - `README.md` denne fil/dokumentation
-- data representation generisk relation / tripler
-- teknologivalg
+- Teknologivalg
   - jquery - abstraktion over browserforskelligheder, vælges da den allerede anvendes på DDB-CMS hvilket er det primære sted hvor relationsbrowseren skal indlejres
   - d3js - bruges til graf-layout og forskellig geometrisk funktionalitet
   - grunt - byggeværktøj
@@ -89,7 +88,7 @@ _foreløbigt udkast_
 - Release strategi html5-applikationen
   - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
   - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://ssl.solsort.com/visualisering-af-relationer
-  - Releases bliver tagget i git, og også opdateret i `package.json`, og i releaseloggen i `README.md`
+  - Releases bliver tagget i git `git tag v0.?.?; git push --tags`, og også opdateret i `package.json`, og i releaseloggen i `README.md`
   - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
 - Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
   - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
@@ -107,13 +106,14 @@ Afklares/implementeres/dokumenteres i et kommende sprint.
 Indeværende sprint:
 - ...
 
-## Version 0.1.0, released 26/9, sprint "Projektstart"
+## Version 0.1.0, released 27/9, sprint "Projektstart"
 
 - Infrastruktur udvikling af HTML5 relationsbrowseren
   - oprettelse af github-repositorie `github.com/solsort/visualisering-af-relationer`, så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
   - application skeleton
   - build environment: grunt, bower, npm, jshint, jsbeautifier, codeclimate
   - continous integration server
+  - online udgave af seneste release på ssl.solsort.com
 - Start på første prototype af den eksterne relationsbrowser
   - sample/dummy data for development
   - overlay for visualisering
@@ -123,26 +123,31 @@ Indeværende sprint:
   - tegning af klynge/sky
 - Afklaring og dokumentation
   - kodestandard
+  - applikationsarkitektur
   - udkast til release og test-strategi
+  - udkast til produktmål
 
 # todo/backlog
 
+Indeværende sprint:
+- ...
 
 ## Later
 
+- afklaring implementation af indlejrings-API
 - fix positionering af canvasoverlay i IE
 - prototype: different coordinate systems - graph-calculation, visual layout, screen
 - refactoring/polish af kode
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
-- Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
-- Visualiserings-view: strukturelle relationer
-- Visualiserings-view: cirkulære relationer - relationer der vender ud ad
+- visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
+- visualiserings-view: strukturelle relationer
+- visualiserings-view: cirkulære relationer - relationer der vender ud ad
 - evt. sky/graf-agtig
 - evt. tile/mesh-visualisering
 - træstruktur-visualisering rettet mod små skærme
-- Sikre at visualiseringsoverlayet tilpasser sig zoom og scroll på skærmen.
-- Mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
-- Storskærmsapplikation (evt. via node-webkit)
+- sikre at visualiseringsoverlayet tilpasser sig zoom og scroll på skærmen.
+- mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
+- storskærmsapplikation (evt. via node-webkit)
 - opsamling af statistik / måling af anvendelse
 - forbedring/optimering ud fra indsamlet statistik
 
@@ -156,6 +161,7 @@ Indeværende sprint:
 - næste udviklermøde
 - status på kode, link til github-repositoier https://github.com/solsort/visualisering-af-relationer og nævn commits-side for live opdatering :)
 - arbejdssprog i dokumentation dansk eller engelsk, - http://ting.dk/wiki/ding-code-guidelines engelsk for comments?
+- adhl-data fra hack4dk
 
 ## Diverse
 _nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)_
