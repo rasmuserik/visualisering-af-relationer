@@ -43,15 +43,18 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 
 ## Applikationsarkitektur og teknologivalg
 
-_TODO_
-_foreløbigt udkast_
-
-- opdeling i mikrolibraries
-  - canvas-overlay
-  - touch-normaliser/handler
-  - logger
-  - graph-layout
-  - abstraktion mellem 
+- Nuværende arkitektur
+  - canvas-overlay - komponent der sikre
+  - main - prototype-kode, skal refaktoreres nedenstående beskrevne komponenter
+- Plan for arkitektur, koden forventes ihvertfald opdelt i følgende dele, - dele af disse udtrækkes til separate komponenter senere hen:
+  - `canvas-overlay` - fuldskærmsoverlay, der abstraherer browserforskelle i forhold til skærm og mouse/touch-events.
+  - `graph-layout` - udregner graf-layoutet på data-modellen i graf-vektorrummet
+  - `graph-canvas` - afbilleder graf-vektorrummet til canvas-vektorrummet, og håndtere events (zoom, og interaktion med graf), og sikre flydende transitioner
+  - `item-view` - ved hvordan de enkelte objekter og relationer tegnes på canvas
+  - `graph-model` - genererer graf ud fra datamodellen, herunder kant-liste og også kontrol af graf-layout
+  - `data-model` - data for objekter og relationer organiseres primært som objekter + triple store.
+  - `data-source` - opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
+  - `util` - utility functions
 - filstruktur
   - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
   - `test/` - kildekode testcases
@@ -62,14 +65,12 @@ _foreløbigt udkast_
 - data representation generisk relation / tripler
 - teknologivalg
   - jquery - abstraktion over browserforskelligheder, vælges da den allerede anvendes på DDB-CMS hvilket er det primære sted hvor relationsbrowseren skal indlejres
-  - d3js  - 
+  - d3js - bruges til graf-layout og forskellig geometrisk funktionalitet
   - grunt - byggeværktøj
   - bower - styring af afhængigheder ifht. browserafhængigheder
-  - npm - bruges primært til installation af util 
-  - travis - service for continous integration - automatisk kørsel af test
-  - jshint - værktøj til at understøtte best practices
-  - jsbeautifier 
-  - andre sprog/dialekter
+  - npm - bruges primært til installation af øvrige værktøj
+  - travis-ci - service for continous integration - automatisk kørsel af test
+  - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
 
 ## Kodestandard
 
@@ -87,7 +88,7 @@ _foreløbigt udkast_
 
 - Release strategi html5-applikationen
   - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
-  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://solsort.com/visualisering-af-relationer
+  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://ssl.solsort.com/visualisering-af-relationer
   - Releases bliver tagget i git, og også opdateret i `package.json`, og i releaseloggen i `README.md`
   - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
 - Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
@@ -126,14 +127,12 @@ Indeværende sprint:
 
 # todo/backlog
 
-- afklaring: overordnet applikationsarkitektur
-- polish: sky som quadratic curve
 
 ## Later
 
-- infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
+- fix positionering af canvasoverlay i IE
 - prototype: different coordinate systems - graph-calculation, visual layout, screen
-- refactoring/polish
+- refactoring/polish af kode
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - Visualiserings-view: strukturelle relationer
@@ -146,8 +145,6 @@ Indeværende sprint:
 - Storskærmsapplikation (evt. via node-webkit)
 - opsamling af statistik / måling af anvendelse
 - forbedring/optimering ud fra indsamlet statistik
-
-----
 
 # Projektnoter
 
