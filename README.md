@@ -43,30 +43,34 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 
 ## Applikationsarkitektur og teknologivalg
 
-- Applikationen kommer til at bestå af flere forskellige mindre dele og microlibraries:
-  - √canvas-overlay -
-  - touch-normaliser/handler - normalisering af muse/touch-events
-  - logger
-  - graph-layout
-  - abstraktion mellem 
-- filstruktur
+- Nuværende arkitektur
+  - `canvas-overlay` - komponent der sikre
+  - `main` - prototype-kode, skal refaktoreres nedenstående beskrevne komponenter
+- Plan for arkitektur, koden forventes ihvertfald opdelt i følgende dele, - dele af disse udtrækkes til separate komponenter senere hen:
+  - `canvas-overlay` - fuldskærmsoverlay, der abstraherer browserforskelle i forhold til skærm og mouse/touch-events.
+  - `graph-layout` - udregner graf-layoutet på data-modellen i graf-vektorrummet
+  - `graph-canvas` - afbilleder graf-vektorrummet til canvas-vektorrummet, og håndtere events (zoom, og interaktion med graf), og sikre flydende transitioner
+  - `data-model` - data for objekter og relationer organiseres primært som objekter + triple store.
+  - `util` - utility functions
+  - `logging` - application logging and statistics
+  - `item-view` - *applikationsspecifik* ved hvordan de enkelte objekter og relationer tegnes på canvas
+  - `graph-model` - *applikationsspecifik* genererer graf ud fra datamodellen, herunder kant-liste og også kontrol af graf-layout
+  - `data-source` - *applikationsspecifik* opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
+- Filstruktur
   - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
   - `test/` - kildekode testcases
   - `dist/` - den minificerede optimerede app havner her når `grunt build køres`
   - `node_modules/`, `bower_components/`, `.tmp/` - autogenerede og installerede dependencies og temporære filer
   - `bower.json`, `.gitignore`, `package.json`, `.yo-rc.json`, `.travis.yml`, `Gruntfile.js`, `.editorconfig`, `.gitattributes`, `COPYING`, `.jshintrc`  - konfigurationsfiler og metainformationer
   - `README.md` denne fil/dokumentation
-- data representation generisk relation / tripler
-- teknologivalg
+- Teknologivalg
   - jquery - abstraktion over browserforskelligheder, vælges da den allerede anvendes på DDB-CMS hvilket er det primære sted hvor relationsbrowseren skal indlejres
-  - d3js  - 
+  - d3js - bruges til graf-layout og forskellig geometrisk funktionalitet
   - grunt - byggeværktøj
   - bower - styring af afhængigheder ifht. browserafhængigheder
-  - npm - bruges primært til installation af util 
-  - travis - service for continous integration - automatisk kørsel af test
-  - jshint - værktøj til at understøtte best practices
-  - jsbeautifier 
-  - andre sprog/dialekter
+  - npm - bruges primært til installation af øvrige værktøj
+  - travis-ci - service for continous integration - automatisk kørsel af test
+  - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
 
 ## Kodestandard
 
@@ -84,8 +88,8 @@ _foreløbigt udkast_
 
 - Release strategi html5-applikationen
   - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
-  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://solsort.com/visualisering-af-relationer
-  - Releases bliver tagget i git, og også opdateret i `package.json`, og i releaseloggen i `README.md`
+  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://ssl.solsort.com/visualisering-af-relationer
+  - Releases bliver tagget i git `git tag v0.?.?; git push --tags`, og også opdateret i `package.json`, og i releaseloggen i `README.md`
   - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
 - Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
   - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
@@ -97,19 +101,19 @@ _foreløbigt udkast_
 
 Afklares/implementeres/dokumenteres i et kommende sprint.
 
-
 # done/releaselog
 
 Indeværende sprint:
 - ...
 
-## Version 0.1.0, released 26/9, sprint "Projektstart"
+## Version 0.1.0, released 27/9, sprint "Projektstart"
 
 - Infrastruktur udvikling af HTML5 relationsbrowseren
-  - oprettelse af github-repositorie `github.com/solsort/visualisering-af-relationer`, så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
+  - oprettelse af github-repositorie http://github.com/solsort/visualisering-af-relationer så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
   - application skeleton
   - build environment: grunt, bower, npm, jshint, jsbeautifier, codeclimate
   - continous integration server
+  - online udgave af seneste release på http://ssl.solsort.com/visualisering-af-relationer
 - Start på første prototype af den eksterne relationsbrowser
   - sample/dummy data for development
   - overlay for visualisering
@@ -119,46 +123,61 @@ Indeværende sprint:
   - tegning af klynge/sky
 - Afklaring og dokumentation
   - kodestandard
+  - applikationsarkitektur
   - udkast til release og test-strategi
+  - udkast til produktmål
 
 # todo/backlog
 
-- afklaring: overordnet applikationsarkitektur
-- polish: sky som quadratic curve
+Indeværende sprint:
+- API for embedning
+  - afklar api for embedning
+  - implementér
+  - dokumentér
+- refaktorér - gå mere i retning af arkitekturplan
+  - item-view som separat komponent
+  - util som separat komponent
+  - fælles relvis scope
+  - data-model som separat komponent
+  - graph-layout som separat komponent
+  - graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
+  - graph-canvas som separat komponent
+  - mere dokumentation og test
+- klarere data model
+  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
+  - single data object with all data
+  - generering af graf-data fra triple-store-data
+- graph-canvas
+  - to-vejs transformation mellem canvas-koordinater og graf-koordinater
+  - klik/touch element afklar hvilket
+- visualisering
+  - forside som del af visning hvis tilgængelig
+  - kanter/linjer mellem relationer
+- canvas-overlay
+  - korrekt placering af canvas i Internet Explorer
+  - opdater position ved scroll/zoom/skærm-rotation
+  - abstraher touch/mouse-events
+  - skala/unit-information
+  - håndtér unsupported browsers
+  - Undersøg om vi kan køre på android 2.?, eller er bundet til android 4+ pga. canvas bugs.
 
 ## Later
 
-- infrastruktur: automatisk deploy løbende publicering af kørende demo af visualiseringen ved github-commits
-- prototype: different coordinate systems - graph-calculation, visual layout, screen
-- refactoring/polish
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
-- Visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
-- Visualiserings-view: strukturelle relationer
-- Visualiserings-view: cirkulære relationer - relationer der vender ud ad
+- visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
+- visualiserings-view: strukturelle relationer
+- visualiserings-view: cirkulære relationer - relationer der vender ud ad
 - evt. sky/graf-agtig
 - evt. tile/mesh-visualisering
 - træstruktur-visualisering rettet mod små skærme
-- Sikre at visualiseringsoverlayet tilpasser sig zoom og scroll på skærmen.
-- Mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
-- Storskærmsapplikation (evt. via node-webkit)
+- mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
+- storskærmsapplikation (evt. via node-webkit)
 - opsamling af statistik / måling af anvendelse
-- forbedring/optimering ud fra indsamlet statistik
-
-----
+- forbedring/optimering ud fra indsamlet statistik - logger modul
 
 # Projektnoter
 
-## Follow-up status message
-
-- workflow for release/test, og testplan
-  - choice of test platforms
-- teknologivalg
-- næste udviklermøde
-- status på kode, link til github-repositoier https://github.com/solsort/visualisering-af-relationer og nævn commits-side for live opdatering :)
-- arbejdssprog i dokumentation dansk eller engelsk, - http://ting.dk/wiki/ding-code-guidelines engelsk for comments?
-
-## Diverse
-_nedenstående er mine(rasmuserik) umiddelbare noter, gennemlæs gerne og sikre at de er korrekte, og fjern så denne kommentar :)_
+_nedenstående er mine(rasmuserik) umiddelbare noter_
 
 - Use cases
   - DDB-CMS - mobil - tablet - pc 
