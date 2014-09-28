@@ -50,11 +50,11 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
   - `canvas-overlay` - fuldskærmsoverlay, der abstraherer browserforskelle i forhold til skærm og mouse/touch-events.
   - `graph-layout` - udregner graf-layoutet på data-modellen i graf-vektorrummet
   - `graph-canvas` - afbilleder graf-vektorrummet til canvas-vektorrummet, og håndtere events (zoom, og interaktion med graf), og sikre flydende transitioner
-  - `item-view` - ved hvordan de enkelte objekter og relationer tegnes på canvas
-  - `graph-model` - genererer graf ud fra datamodellen, herunder kant-liste og også kontrol af graf-layout
   - `data-model` - data for objekter og relationer organiseres primært som objekter + triple store.
-  - `data-source` - opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
   - `util` - utility functions
+  - `item-view` - *applikationsspecifik* ved hvordan de enkelte objekter og relationer tegnes på canvas
+  - `graph-model` - *applikationsspecifik* genererer graf ud fra datamodellen, herunder kant-liste og også kontrol af graf-layout
+  - `data-source` - *applikationsspecifik* opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
 - Filstruktur
   - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
   - `test/` - kildekode testcases
@@ -100,7 +100,6 @@ _foreløbigt udkast_
 
 Afklares/implementeres/dokumenteres i et kommende sprint.
 
-
 # done/releaselog
 
 Indeværende sprint:
@@ -130,14 +129,39 @@ Indeværende sprint:
 # todo/backlog
 
 Indeværende sprint:
-- ...
+- API for embedning
+  - afklar api for embedning
+  - implementér
+  - dokumentér
+- refaktorér - gå mere i retning af arkitekturplan
+  - item-view som separat komponent
+  - util som separat komponent
+  - fælles relvis scope
+  - data-model som separat komponent
+  - graph-layout som separat komponent
+  - graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
+  - graph-canvas som separat komponent
+  - mere dokumentation og test
+- klarere data model
+  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
+  - single data object with all data
+  - generering af graf-data fra triple-store-data
+- graph-canvas
+  - to-vejs transformation mellem canvas-koordinater og graf-koordinater
+  - klik/touch element afklar hvilket
+- visualisering
+  - forside som del af visning hvis tilgængelig
+  - kanter/linjer mellem relationer
+- canvas-overlay
+  - korrekt placering af canvas i Internet Explorer
+  - opdater position ved scroll/zoom/skærm-rotation
+  - abstraher touch/mouse-events
+  - skala/unit-information
+  - håndtér unsupported browsers
+  - Undersøg om vi kan køre på android 2.?, eller er bundet til android 4+ pga. canvas bugs.
 
 ## Later
 
-- afklaring implementation af indlejrings-API
-- fix positionering af canvasoverlay i IE
-- prototype: different coordinate systems - graph-calculation, visual layout, screen
-- refactoring/polish af kode
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - visualiserings-view: strukturelle relationer
@@ -145,11 +169,10 @@ Indeværende sprint:
 - evt. sky/graf-agtig
 - evt. tile/mesh-visualisering
 - træstruktur-visualisering rettet mod små skærme
-- sikre at visualiseringsoverlayet tilpasser sig zoom og scroll på skærmen.
 - mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
 - storskærmsapplikation (evt. via node-webkit)
 - opsamling af statistik / måling af anvendelse
-- forbedring/optimering ud fra indsamlet statistik
+- forbedring/optimering ud fra indsamlet statistik - logger modul
 
 # Projektnoter
 
