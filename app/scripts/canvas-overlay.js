@@ -1,7 +1,8 @@
 // A canvas-element at device resolution, that fits the entire window
 (function() {
   'use strict';
-  var CanvasOverlay = window.CanvasOverlay = function() { //{{{1constructor
+  var relvis = window.relvis = window.relvis || {};
+  var CanvasOverlay = relvis.CanvasOverlay = function() { //{{{1constructor
     this.canvas = document.createElement('canvas');
     this.canvas.className = 'CanvasOverlay';
     this._visible = false;

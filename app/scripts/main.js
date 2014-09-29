@@ -1,5 +1,6 @@
 (function() {
   'use strict';
+  var relvis = window.relvis = window.relvis || {};
   var visualObjectRatio = 13 / 8;
   var margin = 0.05;
   //{{{1 canvas text drawing
@@ -403,14 +404,14 @@
 
     // button on sample page pops up visualisation
     $('#relvis-button').click(function() {
-      var canvasOverlay = window.canvasOverlay = new window.CanvasOverlay();
+      var canvasOverlay = window.canvasOverlay = new relvis.CanvasOverlay();
       canvasOverlay.show();
       createGraph(canvasOverlay.canvas);
     });
 
     // show visualisation on load if we have #relvis hash
     if (location.hash === '#relvis') {
-      var canvasOverlay = window.canvasOverlay = new window.CanvasOverlay();
+      var canvasOverlay = window.canvasOverlay = new relvis.CanvasOverlay();
       canvasOverlay.show();
       createGraph(canvasOverlay.canvas);
     }
