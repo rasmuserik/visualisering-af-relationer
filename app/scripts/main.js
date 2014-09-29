@@ -1,9 +1,7 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  var visualObjectRatio = 13 / 8;
-  var margin = 0.05;
-  //{{{1 canvas text drawing
+  //{{{1 canvas text drawing - graph-canvas
   relvis.textLayout = function textLayout(ctx, str, width) { //{{{2
     window.ctx = ctx;
     var spacing = ctx.measureText(' ').width;
@@ -52,69 +50,7 @@
       }
     }
   };
-  // Utility functions {{{1
-  relvis.square = function(a) { //{{{2
-    return a * a;
-  };
-
-  relvis.nearestPoints = function(list) { //{{{2
-    function assignDist(a, b, dist) {
-      if (a.nearestDist > dist) {
-        a.nearestDist = dist;
-        a.nearestNode = b;
-      }
-    }
-    for (var i = 0; i < list.length; ++i) {
-      list[i].nearestDist = Number.POSITIVE_INFINITY;
-    }
-    for (i = 0; i < list.length; ++i) {
-      var a = list[i];
-      for (var j = 0; j < i; ++j) {
-        var b = list[j];
-        var dist = Math.sqrt(relvis.square(a.x - b.x) + relvis.square((a.y - b.y) * visualObjectRatio));
-        assignDist(a, b, dist);
-        assignDist(b, a, dist);
-      }
-    }
-  };
-
-  relvis.findBoundaries = function findBoundaries(list, keys) { //{{{2
-    var i, j, item, key;
-    var min = {};
-    var max = {};
-    var range = {};
-    for (i = 0; i < keys.length; ++i) {
-      min[keys[i]] = Number.POSITIVE_INFINITY;
-      max[keys[i]] = Number.NEGATIVE_INFINITY;
-    }
-    for (i = 0; i < list.length; ++i) {
-      item = list[i];
-      for (j = 0; j < keys.length; ++j) {
-        key = keys[j];
-        if (typeof item[key] === 'number') {
-          min[key] = Math.min(item[key], min[key]);
-          max[key] = Math.max(item[key], max[key]);
-        }
-      }
-    }
-    for (i = 0; i < keys.length; ++i) {
-      range[keys[i]] = max[keys[i]] - min[keys[i]];
-    }
-    return {
-      min: min,
-      max: max,
-      range: range,
-      zeroOne: function(item) {
-        var result = {};
-        for (var i = 0; i < keys.length; ++i) {
-          var key = keys[i];
-          result[key] = (item[key] - this.min[key]) / this.range[key];
-        }
-        return result;
-      }
-    };
-  };
-  var sampleItem = [{ //{{{1
+  var sampleItem = [{ //{{{1 - graph-model
     property: 'Cover',
     value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD'
   }, {
@@ -247,6 +183,7 @@
     title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
   }];
   //{{{1 d3 force layout experiment
+  var margin = 0.05;
   var categories = {
     authorInfo: ['Om forfatteren', 'Creator'],
     review: ['Anmeldelse', 'Lektørudtalelse'],
@@ -337,6 +274,7 @@
 
     var t0 = Date.now();
     force.on('tick', function() {
+      relvis.visualObjectRatio = 13 / 8;
       //console.log(Date.now() - t0);
       t0 = Date.now();
 
@@ -376,22 +314,22 @@
         ctx.fillStyle = 'rgba(255,255,255,1)';
         ctx.beginPath();
         ctx.moveTo(node.x - size, node.y);
-        ctx.quadraticCurveTo(node.x - size, node.y + size / visualObjectRatio, node.x, node.y + size / visualObjectRatio);
-        ctx.quadraticCurveTo(node.x + size, node.y + size / visualObjectRatio, node.x + size, node.y);
-        ctx.quadraticCurveTo(node.x + size, node.y - size / visualObjectRatio, node.x, node.y - size / visualObjectRatio);
-        ctx.quadraticCurveTo(node.x - size, node.y - size / visualObjectRatio, node.x - size, node.y);
+        ctx.quadraticCurveTo(node.x - size, node.y + size / relvis.visualObjectRatio, node.x, node.y + size / relvis.visualObjectRatio);
+        ctx.quadraticCurveTo(node.x + size, node.y + size / relvis.visualObjectRatio, node.x + size, node.y);
+        ctx.quadraticCurveTo(node.x + size, node.y - size / relvis.visualObjectRatio, node.x, node.y - size / relvis.visualObjectRatio);
+        ctx.quadraticCurveTo(node.x - size, node.y - size / relvis.visualObjectRatio, node.x - size, node.y);
         ctx.fill();
         /*
          */
         ctx.stroke();
-        //ctx.fillRect(node.x - size, node.y - size / visualObjectRatio, size * 2, size * 2 / visualObjectRatio);
+        //ctx.fillRect(node.x - size, node.y - size / relvis.visualObjectRatio, size * 2, size * 2 / relvis.visualObjectRatio);
         //, sz.x*canvas.width, sz.y*canvas.height);
         ctx.font = '20px sans serif';
         ctx.fillStyle = '#f00';
         var textBoxSize = 0.75;
         relvis.writeBox(ctx, node.label,
-          node.x - size * textBoxSize, node.y - size * textBoxSize / visualObjectRatio,
-          size * textBoxSize * 2, size * textBoxSize * 2 / visualObjectRatio);
+          node.x - size * textBoxSize, node.y - size * textBoxSize / relvis.visualObjectRatio,
+          size * textBoxSize * 2, size * textBoxSize * 2 / relvis.visualObjectRatio);
       }
     });
   }
