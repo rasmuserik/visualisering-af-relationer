@@ -257,32 +257,41 @@
       categoryNodeList[3].y = boundaries.max.y;
 
       relvis.nearestPoints(visibleNodes);
+
       for (i = 0; i < visibleNodes.length; ++i) {
         var node = visibleNodes[i];
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
         var size = node.nearestDist * 0.8 - 0.34 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+        var w = size * 2;
+        var x = node.x - w / 2;
+        var h = size * 2 / relvis.visualObjectRatio;
+        var y = node.y - h / 2;
 
-        ctx.fillStyle = 'rgba(255,255,255,1)';
-        ctx.beginPath();
-        ctx.moveTo(node.x - size, node.y);
-        ctx.quadraticCurveTo(node.x - size, node.y + size / relvis.visualObjectRatio, node.x, node.y + size / relvis.visualObjectRatio);
-        ctx.quadraticCurveTo(node.x + size, node.y + size / relvis.visualObjectRatio, node.x + size, node.y);
-        ctx.quadraticCurveTo(node.x + size, node.y - size / relvis.visualObjectRatio, node.x, node.y - size / relvis.visualObjectRatio);
-        ctx.quadraticCurveTo(node.x - size, node.y - size / relvis.visualObjectRatio, node.x - size, node.y);
-        ctx.fill();
-        /*
-         */
-        ctx.stroke();
-        //ctx.fillRect(node.x - size, node.y - size / relvis.visualObjectRatio, size * 2, size * 2 / relvis.visualObjectRatio);
-        //, sz.x*canvas.width, sz.y*canvas.height);
-        ctx.font = '20px sans serif';
-        ctx.fillStyle = '#f00';
-        var textBoxSize = 0.75;
-        relvis.writeBox(ctx, node.label,
-          node.x - size * textBoxSize, node.y - size * textBoxSize / relvis.visualObjectRatio,
-          size * textBoxSize * 2, size * textBoxSize * 2 / relvis.visualObjectRatio);
+        drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
       }
     });
+  }
+
+  function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) {}
+
+  function drawNode(ctx, node, x, y, w, h, unit) {
+    var boxSize = 0.75;
+    ctx.lineWidth = unit * 1;
+    ctx.fillStyle = 'rgba(255,255,255,1)';
+    ctx.beginPath();
+    ctx.moveTo(x, y + h / 2);
+    ctx.quadraticCurveTo(x, y, x + w / 2, y);
+    ctx.quadraticCurveTo(x + w, y, x + w, y + h / 2);
+    ctx.quadraticCurveTo(x + w, y + h, x + w / 2, y + h);
+    ctx.quadraticCurveTo(x, y + h, x, y + h / 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = '#000';
+    relvis.writeBox(ctx, node.label,
+      x + w * (1 - boxSize) / 2,
+      y + h * (1 - boxSize) / 2,
+      w * boxSize,
+      h * boxSize);
   }
 
 
