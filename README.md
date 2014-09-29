@@ -159,7 +159,8 @@ Indeværende sprint:
   - abstraher touch/mouse-events
   - skala/unit-information
   - håndtér unsupported browsers
-  - Undersøg om vi kan køre på android 2.?, eller er bundet til android 4+ pga. canvas bugs.
+  - Undersøg om vi kan køre på android 2, eller er bundet til android 4+ pga. canvas bugs.
+  - browser-like events
 
 ## Later
 
