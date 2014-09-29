@@ -256,7 +256,18 @@
       categoryNodeList[3].x = boundaries.min.x;
       categoryNodeList[3].y = boundaries.max.y;
 
-      relvis.nearestPoints(visibleNodes);
+      relvis.nearestPoints(visibleNodes, 'x', 'y');
+
+      var visibleEdges = graph.edges.filter(function(e) {
+        return e.source.visible && e.target.visible;
+      });
+
+      visibleEdges.forEach(function(e) {
+        drawEdge(ctx, e.source, e.target, 
+          e.source.x, e.source.y, 
+          e.target.x, e.target.y, 
+          window.devicePixelRatio || 1);
+      });
 
       for (i = 0; i < visibleNodes.length; ++i) {
         var node = visibleNodes[i];
@@ -272,7 +283,13 @@
     });
   }
 
-  function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) {}
+  function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) {
+    ctx.lineWidth = unit * 1;
+    ctx.beginPath();
+    ctx.moveTo(x0, y0);
+    ctx.lineTo(x1, y1);
+    ctx.stroke();
+  }
 
   function drawNode(ctx, node, x, y, w, h, unit) {
     var boxSize = 0.75;

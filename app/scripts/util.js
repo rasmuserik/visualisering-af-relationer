@@ -6,7 +6,7 @@
     return a * a;
   };
 
-  relvis.nearestPoints = function(list) { //{{{1
+  relvis.nearestPoints = function(list, x, y) { //{{{1
     function assignDist(a, b, dist) {
       if (a.nearestDist > dist) {
         a.nearestDist = dist;
@@ -20,7 +20,7 @@
       var a = list[i];
       for (var j = 0; j < i; ++j) {
         var b = list[j];
-        var dist = Math.sqrt(relvis.square(a.x - b.x) + relvis.square((a.y - b.y) * relvis.visualObjectRatio));
+        var dist = Math.sqrt(relvis.square(a[x] - b[x]) + relvis.square((a[y] - b[y]) * relvis.visualObjectRatio));
         assignDist(a, b, dist);
         assignDist(b, a, dist);
       }
