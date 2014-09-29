@@ -239,12 +239,10 @@
         return o.visible;
       });
       var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
-      visibleNodes = visibleNodes.map(function(node) {
-        var newNode = Object.create(node);
+      visibleNodes.forEach(function(node) {
         var xy = boundaries.zeroOne(node);
-        newNode.x = (xy.x * (1 - 2 * margin) + margin) * canvas.width;
-        newNode.y = (xy.y * (1 - 2 * margin) + margin) * canvas.height;
-        return newNode;
+        node.vx = (xy.x * (1 - 2 * margin) + margin) * canvas.width;
+        node.vy = (xy.y * (1 - 2 * margin) + margin) * canvas.height;
       });
 
       categoryNodeList[0].x = boundaries.min.x;
@@ -256,16 +254,16 @@
       categoryNodeList[3].x = boundaries.min.x;
       categoryNodeList[3].y = boundaries.max.y;
 
-      relvis.nearestPoints(visibleNodes, 'x', 'y');
+      relvis.nearestPoints(visibleNodes, 'vx', 'vy');
 
       var visibleEdges = graph.edges.filter(function(e) {
         return e.source.visible && e.target.visible;
       });
 
       visibleEdges.forEach(function(e) {
-        drawEdge(ctx, e.source, e.target, 
-          e.source.x, e.source.y, 
-          e.target.x, e.target.y, 
+        relvis.drawEdge(ctx, e.source, e.target, 
+          e.source.vx, e.source.vy, 
+          e.target.vx, e.target.vy, 
           window.devicePixelRatio || 1);
       });
 
@@ -274,24 +272,25 @@
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
         var size = node.nearestDist * 0.8 - 0.34 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
         var w = size * 2;
-        var x = node.x - w / 2;
+        var x = node.vx - w / 2;
         var h = size * 2 / relvis.visualObjectRatio;
-        var y = node.y - h / 2;
+        var y = node.vy - h / 2;
 
-        drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
+        relvis.drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
       }
     });
   }
 
-  function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) {
+  relvis.drawEdge = function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) {
     ctx.lineWidth = unit * 1;
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
+    ctx.lineWidth = unit * 2;
     ctx.stroke();
-  }
+  };
 
-  function drawNode(ctx, node, x, y, w, h, unit) {
+  relvis.drawNode = function drawNode(ctx, node, x, y, w, h, unit) {
     var boxSize = 0.75;
     ctx.lineWidth = unit * 1;
     ctx.fillStyle = 'rgba(255,255,255,1)';
@@ -309,7 +308,7 @@
       y + h * (1 - boxSize) / 2,
       w * boxSize,
       h * boxSize);
-  }
+  };
 
 
   //{{{1 code for testing/demo
