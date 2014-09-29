@@ -4,7 +4,7 @@
   var visualObjectRatio = 13 / 8;
   var margin = 0.05;
   //{{{1 canvas text drawing
-  function textLayout(ctx, str, width) { //{{{2
+  relvis.textLayout = function textLayout(ctx, str, width) { //{{{2
     window.ctx = ctx;
     var spacing = ctx.measureText(' ').width;
     var words = str.split(' ');
@@ -31,15 +31,15 @@
       len: linePos
     });
     return lines;
-  }
+  };
 
-  function writeBox(ctx, str, x, y, w, h) { //{{{2
+  relvis.writeBox = function writeBox(ctx, str, x, y, w, h) { //{{{2
     var size = 60;
     var lines, i, maxLen;
     do {
       size = size * 0.9 | 0;
       ctx.font = size + 'px sans-serif';
-      lines = textLayout(ctx, str, w);
+      lines = relvis.textLayout(ctx, str, w);
       maxLen = 0;
       for (i = 0; i < lines.length; ++i) {
         maxLen = Math.max(maxLen, lines[i].len);
@@ -51,14 +51,13 @@
         ctx.fillText(lines[i].str, x, y + size * (i + 1));
       }
     }
-  }
-  window.textLayout = textLayout;
+  };
   // Utility functions {{{1
-  function square(a) { //{{{2
+  relvis.square = function(a) { //{{{2
     return a * a;
-  }
+  };
 
-  function nearestPoints(list) { //{{{2
+  relvis.nearestPoints = function(list) { //{{{2
     function assignDist(a, b, dist) {
       if (a.nearestDist > dist) {
         a.nearestDist = dist;
@@ -72,14 +71,14 @@
       var a = list[i];
       for (var j = 0; j < i; ++j) {
         var b = list[j];
-        var dist = Math.sqrt(square(a.x - b.x) + square((a.y - b.y) * visualObjectRatio));
+        var dist = Math.sqrt(relvis.square(a.x - b.x) + relvis.square((a.y - b.y) * visualObjectRatio));
         assignDist(a, b, dist);
         assignDist(b, a, dist);
       }
     }
-  }
+  };
 
-  function findBoundaries(list, keys) { //{{{2
+  relvis.findBoundaries = function findBoundaries(list, keys) { //{{{2
     var i, j, item, key;
     var min = {};
     var max = {};
@@ -114,7 +113,7 @@
         return result;
       }
     };
-  }
+  };
   var sampleItem = [{ //{{{1
     property: 'Cover',
     value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD'
@@ -350,7 +349,7 @@
       var visibleNodes = graph.nodes.filter(function(o) {
         return o.visible;
       });
-      var boundaries = findBoundaries(visibleNodes, ['x', 'y']);
+      var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
       visibleNodes = visibleNodes.map(function(node) {
         var newNode = Object.create(node);
         var xy = boundaries.zeroOne(node);
@@ -368,7 +367,7 @@
       categoryNodeList[3].x = boundaries.min.x;
       categoryNodeList[3].y = boundaries.max.y;
 
-      nearestPoints(visibleNodes);
+      relvis.nearestPoints(visibleNodes);
       for (i = 0; i < visibleNodes.length; ++i) {
         var node = visibleNodes[i];
         // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
@@ -390,7 +389,7 @@
         ctx.font = '20px sans serif';
         ctx.fillStyle = '#f00';
         var textBoxSize = 0.75;
-        writeBox(ctx, node.label,
+        relvis.writeBox(ctx, node.label,
           node.x - size * textBoxSize, node.y - size * textBoxSize / visualObjectRatio,
           size * textBoxSize * 2, size * textBoxSize * 2 / visualObjectRatio);
       }
@@ -400,8 +399,6 @@
 
   //{{{1 code for testing/demo
   $(function() {
-    document.body.innerHTML += JSON.stringify(sampleItem);
-
     // button on sample page pops up visualisation
     $('#relvis-button').click(function() {
       var canvasOverlay = window.canvasOverlay = new relvis.CanvasOverlay();
