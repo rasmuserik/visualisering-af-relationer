@@ -1,6 +1,8 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
+  relvis.visualObjectRatio = 13 / 8;
+
   relvis.drawEdge = function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) { //{{{1
     ctx.lineWidth = unit * 1;
     ctx.beginPath();
