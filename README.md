@@ -138,7 +138,7 @@ Indeværende sprint:
   - item-view som separat komponent
   - √util som separat komponent
   - √fælles relvis scope
-  - data-model som separat komponent
+  - √data-model som separat komponent
   - graph-layout som separat komponent
   - graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
   - •graph-canvas som separat komponent
@@ -152,7 +152,7 @@ Indeværende sprint:
   - klik/touch element afklar hvilket
 - visualisering
   - forside som del af visning hvis tilgængelig
-  - kanter/linjer mellem relationer
+  - √kanter/linjer mellem relationer
 - canvas-overlay
   - korrekt placering af canvas i Internet Explorer
   - opdater position ved scroll/zoom/skærm-rotation
