@@ -134,7 +134,7 @@
     value: 'ting:870970-basis%3A15153431',
     title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
   }];
-  var categories = {  //{{{1
+  var categories = { //{{{1
     authorInfo: ['Om forfatteren', 'Creator'],
     review: ['Anmeldelse', 'Lektørudtalelse'],
     circular: ['Publikum', 'Emne', 'Sprog'],
@@ -172,10 +172,22 @@
         }
       }
     }
-    categoryNodeList[0].fixedPosition = {x:0, y:0};
-    categoryNodeList[1].fixedPosition = {x:1, y:0};
-    categoryNodeList[2].fixedPosition = {x:0, y:1};
-    categoryNodeList[3].fixedPosition = {x:1, y:1};
+    categoryNodeList[0].fixedPosition = {
+      x: 0,
+      y: 0
+    };
+    categoryNodeList[1].fixedPosition = {
+      x: 1,
+      y: 0
+    };
+    categoryNodeList[2].fixedPosition = {
+      x: 0,
+      y: 1
+    };
+    categoryNodeList[3].fixedPosition = {
+      x: 1,
+      y: 1
+    };
 
     // {{{3 nodes for individual relations
     for (i = 0; i < item.length; ++i) {

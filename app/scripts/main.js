@@ -4,6 +4,7 @@
   //{{{1 d3 force layout experiment
   //{{{2 create force graph
   var margin = 0.05;
+
   function createGraph(canvas) {
     var graph, force;
     graph = relvis.getActiveGraph();
@@ -34,7 +35,7 @@
       var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
 
       graph.nodes.forEach(function(node) {
-        if(node.fixedPosition) {
+        if (node.fixedPosition) {
           node.x = node.fixedPosition.x * boundaries.range.x + boundaries.min.x;
           node.y = node.fixedPosition.y * boundaries.range.y + boundaries.min.y;
         }
@@ -53,9 +54,9 @@
       });
 
       visibleEdges.forEach(function(e) {
-        relvis.drawEdge(ctx, e.source, e.target, 
-          e.source.vx, e.source.vy, 
-          e.target.vx, e.target.vy, 
+        relvis.drawEdge(ctx, e.source, e.target,
+          e.source.vx, e.source.vy,
+          e.target.vx, e.target.vy,
           window.devicePixelRatio || 1);
       });
 
