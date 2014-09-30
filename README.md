@@ -138,7 +138,6 @@ Indeværende sprint:
   - √item-view som separat komponent
   - √util som separat komponent
   - √fælles relvis scope
-  - data-model som separat komponent
   - graph-layout som separat komponent
   - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
   - •graph-canvas som separat komponent
@@ -147,6 +146,7 @@ Indeværende sprint:
   - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
   - single data object with all data
   - generering af graf-data fra triple-store-data
+  - data-model som separat komponent
 - graph-canvas
   - to-vejs transformation mellem canvas-koordinater og graf-koordinater
   - klik/touch element afklar hvilket
