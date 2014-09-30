@@ -2,6 +2,7 @@
     'use strict';
 
     function showGraph() {
+      var relvis = window.relvis;
       var canvasOverlay = new relvis.CanvasOverlay();
       canvasOverlay.show();
       relvis.createGraph(function(graph) {
