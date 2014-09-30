@@ -135,12 +135,12 @@ Indeværende sprint:
   - implementér
   - dokumentér
 - refaktorér - gå mere i retning af arkitekturplan
-  - item-view som separat komponent
+  - √item-view som separat komponent
   - √util som separat komponent
   - √fælles relvis scope
-  - √data-model som separat komponent
+  - data-model som separat komponent
   - graph-layout som separat komponent
-  - graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
+  - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
   - •graph-canvas som separat komponent
   - mere dokumentation og test
 - klarere data model
