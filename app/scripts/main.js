@@ -1,9 +1,12 @@
   $(function() {
     'use strict';
+
     function showGraph() {
       var canvasOverlay = new relvis.CanvasOverlay();
       canvasOverlay.show();
-      relvis.createGraph( function(graph) { relvis.drawGraph(canvasOverlay.canvas, graph); });
+      relvis.createGraph(function(graph) {
+        relvis.drawGraph(canvasOverlay.canvas, graph);
+      });
     }
 
     // button on sample page pops up visualisation
