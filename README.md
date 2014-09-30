@@ -138,7 +138,7 @@ Indeværende sprint:
   - √item-view som separat komponent
   - √util som separat komponent
   - √fælles relvis scope
-  - graph-layout som separat komponent
+  - √graph-layout som separat komponent
   - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
   - √graph-canvas som separat komponent
   - mere dokumentation og test
