@@ -13,6 +13,11 @@
   };
 
   relvis.drawNode = function drawNode(ctx, node, x, y, w, h, unit) { //{{{1
+    var boxSize = 1; // scale box up/down
+    var x0 = x + w * (1 - boxSize) / 2;
+    var y0 = y + h * (1 - boxSize) / 2;
+
+    // load image if available
     var img;
     if (node.imgSrc) {
       img = images[node.imgSrc];
@@ -21,11 +26,9 @@
         img.src = node.imgSrc;
       }
     }
-    var boxSize = 1;
-    var x0 = x + w * (1 - boxSize) / 2;
-    var y0 = y + h * (1 - boxSize) / 2;
 
     /*
+    // draw superellipsis as text background
     ctx.lineWidth = unit * 1;
     ctx.fillStyle = 'rgba(255,255,255,1)';
     ctx.beginPath();
@@ -38,11 +41,13 @@
     ctx.stroke();
     */
 
+    // draw background box with border
     ctx.fillStyle = '#000';
     ctx.fillRect(x - unit, y - unit, w + unit * 2, h + unit * 2);
     ctx.fillStyle = 'rgba(255,255,255,1)';
     ctx.fillRect(x, y, w, h);
 
+    // draw image if available
     var imgWidth = 0;
     if (img && img.complete) {
       var imgRatio = img.naturalWidth / img.naturalHeight;
@@ -51,13 +56,14 @@
       imgHeight = imgWidth / imgRatio;
       ctx.drawImage(img, x0, y0, imgWidth, imgHeight);
     }
-    imgWidth += w * 0.02;
 
+    // draw text
+    var textLeftMargin = 0.02 * w;
     ctx.fillStyle = '#000';
     relvis.writeBox(ctx, node.label,
-      x + w * (1 - boxSize) / 2 + imgWidth,
+      x + w * (1 - boxSize) / 2 + imgWidth + textLeftMargin,
       y + h * (1 - boxSize) / 2,
-      w * boxSize - imgWidth,
+      w * boxSize - imgWidth - textLeftMargin,
       h * boxSize);
   };
 })();

@@ -166,7 +166,7 @@ Indeværende sprint:
   - √graph-layout som separat komponent
   - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
   - √graph-canvas som separat komponent
-  - •mere dokumentation 
+  - √mere dokumentation 
   - mere test
 - klarere data model
   - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`

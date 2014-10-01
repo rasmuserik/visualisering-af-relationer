@@ -7,6 +7,13 @@
   };
 
   relvis.nearestPoints = function(list, x, y) { //{{{1
+    // this is a function that finds the neares points for a list of nodes
+    //
+    // the x and y parameters is the property-names of the x and y
+    // in each of the objecrs in the list
+    //
+    // the axis are weighted by the relvis visualObjectRatio
+
     function assignDist(a, b, dist) {
       if (a.nearestDist > dist) {
         a.nearestDist = dist;
@@ -28,6 +35,9 @@
   };
 
   relvis.findBoundaries = function findBoundaries(list, keys) { //{{{1
+    // given a list of objects and keys to look at, this function
+    // returns an object telling the min/max/range of each of the keys
+    // and a function to normalise another object to the range
     var i, j, item, key;
     var min = {};
     var max = {};
