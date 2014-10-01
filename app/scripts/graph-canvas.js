@@ -2,13 +2,17 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
-  relvis.textLayout = function textLayout(ctx, str, width) { //{{{1
+  var measureCache = {};
+
+  relvis.textLayout = function textLayout(ctx, str, width, size) { //{{{1
     window.ctx = ctx;
-    var spacing = ctx.measureText(' ').width;
+    function measure(str) {
+      var t = size + ',' + str;
+      return (measureCache[t] = (measureCache[t] || ctx.measureText(str).width));
+    }
+    var spacing = measure(' ');
     var words = str.split(' ');
-    var lengths = words.map(function(word) {
-      return ctx.measureText(word).width;
-    });
+    var lengths = words.map(measure);
     var lines = [];
     var line = [];
     var linePos = 0;
@@ -37,7 +41,7 @@
     do {
       size = size * 0.9 | 0;
       ctx.font = size + 'px sans-serif';
-      lines = relvis.textLayout(ctx, str, w);
+      lines = relvis.textLayout(ctx, str, w, size);
       maxLen = 0;
       for (i = 0; i < lines.length; ++i) {
         maxLen = Math.max(maxLen, lines[i].len);
