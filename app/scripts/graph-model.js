@@ -4,9 +4,6 @@
   var categoryNodeList = [];
   var sampleItem = [{ //{{{1 - graph-model
     property: 'Cover',
-    value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_primary_large/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=jAqN8JPD'
-  }, {
-    property: 'Small cover',
     value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_list_medium/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=AckPhF2k'
   }, {
     property: 'Titel',

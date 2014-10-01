@@ -151,7 +151,7 @@ Indeværende sprint:
   - to-vejs transformation mellem canvas-koordinater og graf-koordinater
   - klik/touch element afklar hvilket
 - visualisering
-  - forside som del af visning hvis tilgængelig
+  - √forside som del af visning hvis tilgængelig
   - √kanter/linjer mellem relationer
 - canvas-overlay
   - korrekt placering af canvas i Internet Explorer
