@@ -61,8 +61,8 @@
 
     // calculate desired size/position of canvas to match the view
     var devicePixelRatio = window.devicePixelRatio || 1;
-    var x = window.scrollX || 0; // TODO: find scroll position in IE, instead of 0 dummy value
-    var y = window.scrollY || 0; // TODO: find scroll position in IE, instead of 0 dummy value
+    var x = window.scrollX || window.pageXOffset || 0;
+    var y = window.scrollY || window.pageYOffset || 0;
     var xres = document.documentElement.clientWidth * devicePixelRatio;
     var yres = document.documentElement.clientHeight * devicePixelRatio;
     var width = window.innerWidth;
