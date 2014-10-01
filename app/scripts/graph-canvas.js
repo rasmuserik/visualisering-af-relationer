@@ -90,7 +90,7 @@
     for (var i = 0; i < visibleNodes.length; ++i) {
       var node = visibleNodes[i];
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
-      var size = node.nearestDist * 0.8 - 0.34 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+      var size = node.nearestDist * 0.7 - 0.30 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
       var w = size * 2;
       var x = node.vx - w / 2;
       var h = size * 2 / relvis.visualObjectRatio;
