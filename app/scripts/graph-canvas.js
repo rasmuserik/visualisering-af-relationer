@@ -1,8 +1,9 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
+
   function drawGraph() { //{{{1
-    if(!relvis.nodes) {
+    if (!relvis.nodes) {
       return;
     }
     var margin = 0.05;
@@ -51,7 +52,7 @@
   };
   relvis.requestRedraw = function() { //{{{1 
     // TODO: throttle this function, and make it async
-    if(!this.overlayVisible) {
+    if (!this.overlayVisible) {
       return;
     }
     drawGraph();

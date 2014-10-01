@@ -10,8 +10,12 @@
     relvis.overlayVisible = false;
 
     // resize canvas on screen resize
-    $(window).scroll(function(){relvis.updateOverlayPosition();});
-    $(window).resize(function(){relvis.updateOverlayPosition();});
+    $(window).scroll(function() {
+      relvis.updateOverlayPosition();
+    });
+    $(window).resize(function() {
+      relvis.updateOverlayPosition();
+    });
   });
 
   relvis.showCanvasOverlay = function() { //{{{1 
@@ -47,7 +51,7 @@
   };
 
   relvis.updateOverlayPosition = function() { //{{{1
-    if(!this.overlayVisible) {
+    if (!this.overlayVisible) {
       return;
     }
 

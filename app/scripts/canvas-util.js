@@ -4,6 +4,7 @@
   var measureCache = {};
   relvis.textLayout = function textLayout(ctx, str, width, size) { //{{{1
     window.ctx = ctx;
+
     function measure(str) {
       var t = size + ',' + str;
       return (measureCache[t] = (measureCache[t] || ctx.measureText(str).width));
