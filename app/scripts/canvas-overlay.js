@@ -2,55 +2,60 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  var CanvasOverlay = relvis.CanvasOverlay = function() { //{{{1constructor
-    this.canvas = document.createElement('canvas');
-    this.canvas.className = 'CanvasOverlay';
-    this._visible = false;
-  };
+  $(function() {
+    relvis.canvas = document.createElement('canvas');
+    relvis.canvas.className = 'CanvasOverlay';
 
-  CanvasOverlay.prototype.show = function() { //{{{1 add the element to the dom
-    if (this._visible) {
+    // keep track of whether the element is shown
+    relvis.overlayVisible = false;
+
+    // resize canvas on screen resize
+    $(window).scroll(function(){relvis.updateOverlayPosition();});
+    $(window).resize(function(){relvis.updateOverlayPosition();});
+  });
+
+  relvis.showCanvasOverlay = function() { //{{{1 
+    // do nothing if already visible
+    if (this.overlayVisible) {
       return;
     }
+    this.overlayVisible = true;
 
     // hide scrollbars
     this._originalOverflow = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
 
+    // add the element to the dom, and update positions
     document.body.appendChild(this.canvas);
-    this.updatePosition();
+    relvis.updateOverlayPosition();
   };
 
-  CanvasOverlay.prototype.hide = function() { //{{{1 remove the element from the dom
-    if (!this._visible) {
+  relvis.hideCanvasOverlay = function() { //{{{1
+    // do nothing if already hidden
+    if (!this.overlayVisible) {
       return;
     }
+    this.overlayVisible = false;
+
+    // remove the element from the dom
     if (this.canvas.parentElement) {
       document.body.removeChild(this.canvas);
     }
 
     // restore scrollbars
     document.body.style.overflow = this._originalOverflow;
+  };
 
-    this._visible = false;
-  };
-  CanvasOverlay.prototype.requestRedraw = function() { //{{{1 override this function
-    /*
-    var ctx = this.canvas.getContext('2d');
-    ctx.fillStyle = '#f00';
-    ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
-    ctx.fillStyle = '#0f0';
-    ctx.fillRect(5, 5, this.canvas.width - 10, this.canvas.height - 10);
-    for (var i = 0; i < 100; ++i) {
-      ctx.fillStyle = '#00f';
-      ctx.fillRect(i, i, 1, 1);
+  relvis.updateOverlayPosition = function() { //{{{1
+    if(!this.overlayVisible) {
+      return;
     }
-    */
-  };
-  CanvasOverlay.prototype.updatePosition = function() { //{{{1 make it fit the window, nb: $(window).scroll(function(){canvasOverlay.updatePosition()})
+
+    // find the current size, to see if we need update canvas-size + redraw
     var originalWidth = this.canvas.width;
     var originalHeight = this.canvas.height;
 
+    // calculate desired size/position of canvas to match the view
     var devicePixelRatio = window.devicePixelRatio || 1;
     var x = window.scrollX || 0; // TODO: find scroll position in IE, instead of 0 dummy value
     var y = window.scrollY || 0; // TODO: find scroll position in IE, instead of 0 dummy value
@@ -59,6 +64,7 @@
     var width = window.innerWidth;
     var height = window.innerHeight;
 
+    // style the canvas to be an overlay filling the entire screen
     this.canvas.style.position = 'absolute';
     this.canvas.style.zIndex = 1000000000;
     this.canvas.style.top = y + 'px';
@@ -66,6 +72,7 @@
     this.canvas.style.width = width + 'px';
     this.canvas.style.height = height + 'px';
 
+    // set the canvas resolution and redraw if needed
     if (originalWidth !== xres || originalHeight !== yres) {
       this.canvas.width = xres;
       this.canvas.height = yres;

@@ -3,11 +3,9 @@
 
     function showGraph() {
       var relvis = window.relvis;
-      var canvasOverlay = new relvis.CanvasOverlay();
-      canvasOverlay.show();
-      relvis.createGraph(function(graph) {
-        relvis.drawGraph(canvasOverlay.canvas, graph);
-      });
+      relvis.createGraph();
+      relvis.layoutGraph();
+      relvis.showCanvasOverlay();
     }
 
     // button on sample page pops up visualisation

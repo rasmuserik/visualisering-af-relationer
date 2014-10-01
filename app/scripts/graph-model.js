@@ -138,7 +138,7 @@
     structure: ['Serie', 'Udgave', 'Collection']
   };
 
-  function createNodesExternal(item) { //{{{2
+  function createNodesExternal(item) { //{{{1
     var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node;
 
     // {{{3 graph definition and root nodes
@@ -215,12 +215,14 @@
         });
       }
     }
+    relvis.nodes = nodes;
+    relvis.edges = edges;
     return {
       nodes: nodes,
       edges: edges
     };
   }
-  relvis.getActiveGraph = function() { //{{{2
+  relvis.createGraph = function() { //{{{1
     return createNodesExternal(sampleItem);
   };
 })();

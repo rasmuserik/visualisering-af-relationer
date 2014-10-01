@@ -1,69 +1,19 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-
-  var measureCache = {};
-
-  relvis.textLayout = function textLayout(ctx, str, width, size) { //{{{1
-    window.ctx = ctx;
-    function measure(str) {
-      var t = size + ',' + str;
-      return (measureCache[t] = (measureCache[t] || ctx.measureText(str).width));
+  function drawGraph() { //{{{1
+    if(!relvis.nodes) {
+      return;
     }
-    var spacing = measure(' ');
-    var words = str.split(' ');
-    var lengths = words.map(measure);
-    var lines = [];
-    var line = [];
-    var linePos = 0;
-    for (var i = 0; i < words.length; ++i) {
-      if (linePos > 0 && linePos + lengths[i] > width) {
-        lines.push({
-          str: line.join(' '),
-          len: linePos
-        });
-        line = [];
-        linePos = 0;
-      }
-      line.push(words[i]);
-      linePos += lengths[i] + spacing;
-    }
-    lines.push({
-      str: line.join(' '),
-      len: linePos
-    });
-    return lines;
-  };
-
-  relvis.writeBox = function writeBox(ctx, str, x, y, w, h) { //{{{1
-    var size = 60;
-    var lines, i, maxLen;
-    do {
-      size = size * 0.9 | 0;
-      ctx.font = size + 'px sans-serif';
-      lines = relvis.textLayout(ctx, str, w, size);
-      maxLen = 0;
-      for (i = 0; i < lines.length; ++i) {
-        maxLen = Math.max(maxLen, lines[i].len);
-      }
-    } while (size > 13 && (maxLen > w || lines.length * size > h));
-
-    for (i = 0; i < lines.length; ++i) {
-      if (size * (i + 1) < h) {
-        ctx.fillText(lines[i].str, x, y + size * (i + 1));
-      }
-    }
-  };
-
-  relvis.drawGraph = function drawGraph(canvas, graph) { //{{{1
     var margin = 0.05;
 
+    var canvas = relvis.canvas;
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    var visibleNodes = graph.nodes.filter(function(o) {
+    var visibleNodes = relvis.nodes.filter(function(o) {
       return o.visible;
     });
     var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
@@ -76,7 +26,7 @@
 
     relvis.nearestPoints(visibleNodes, 'vx', 'vy');
 
-    var visibleEdges = graph.edges.filter(function(e) {
+    var visibleEdges = relvis.edges.filter(function(e) {
       return e.source.visible && e.target.visible;
     });
 
@@ -99,4 +49,12 @@
       relvis.drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
     }
   };
-})();
+  relvis.requestRedraw = function() { //{{{1 
+    // TODO: throttle this function, and make it async
+    if(!this.overlayVisible) {
+      return;
+    }
+    drawGraph();
+  };
+
+})(); //{{{1

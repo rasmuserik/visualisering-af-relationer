@@ -41,37 +41,6 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
   - Arkitektur og valg skal dokumenteres
   - Koden skal overholde best practices
 
-## Applikationsarkitektur og teknologivalg
-
-- Nuværende arkitektur
-  - `canvas-overlay` - komponent der sikre
-  - `main` - prototype-kode, skal refaktoreres nedenstående beskrevne komponenter
-- Plan for arkitektur, koden forventes ihvertfald opdelt i følgende dele, - dele af disse udtrækkes til separate komponenter senere hen:
-  - `canvas-overlay` - fuldskærmsoverlay, der abstraherer browserforskelle i forhold til skærm og mouse/touch-events.
-  - `graph-layout` - udregner graf-layoutet på data-modellen i graf-vektorrummet
-  - `graph-canvas` - afbilleder graf-vektorrummet til canvas-vektorrummet, og håndtere events (zoom, og interaktion med graf), og sikre flydende transitioner
-  - `data-model` - data for objekter og relationer organiseres primært som objekter + triple store.
-  - `util` - utility functions
-  - `logging` - application logging and statistics
-  - `item-view` - *applikationsspecifik* ved hvordan de enkelte objekter og relationer tegnes på canvas
-  - `graph-model` - *applikationsspecifik* genererer graf ud fra datamodellen, herunder kant-liste og også kontrol af graf-layout
-  - `data-source` - *applikationsspecifik* opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
-- Filstruktur
-  - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
-  - `test/` - kildekode testcases
-  - `dist/` - den minificerede optimerede app havner her når `grunt build køres`
-  - `node_modules/`, `bower_components/`, `.tmp/` - autogenerede og installerede dependencies og temporære filer
-  - `bower.json`, `.gitignore`, `package.json`, `.yo-rc.json`, `.travis.yml`, `Gruntfile.js`, `.editorconfig`, `.gitattributes`, `COPYING`, `.jshintrc`  - konfigurationsfiler og metainformationer
-  - `README.md` denne fil/dokumentation
-- Teknologivalg
-  - jquery - abstraktion over browserforskelligheder, vælges da den allerede anvendes på DDB-CMS hvilket er det primære sted hvor relationsbrowseren skal indlejres
-  - d3js - bruges til graf-layout og forskellig geometrisk funktionalitet
-  - grunt - byggeværktøj
-  - bower - styring af afhængigheder ifht. browserafhængigheder
-  - npm - bruges primært til installation af øvrige værktøj
-  - travis-ci - service for continous integration - automatisk kørsel af test
-  - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
-
 ## Kodestandard
 
 Som udgangspunkt anvendes Ding coding standard for javascript http://ting.dk/wiki/ding-code-guidelines/.
@@ -100,6 +69,62 @@ _foreløbigt udkast_
 ## Indlejring/API
 
 Afklares/implementeres/dokumenteres i et kommende sprint.
+
+# Applikationsarkitektur og teknologivalg
+
+## Cross-component functions and properties
+
+- canvas-overlay
+  - overlayVisible
+  - showCanvasOverlay()
+  - hideCanvasOverlay() 
+- canvas-util
+  - writeBox(...)
+- graph-canvas
+  - requestRedraw()
+- item-view
+  - visualObjectRatio
+  - drawEdge(...)
+  - drawNode(...)
+- graph-layout
+  - layoutGraph()
+- graph-model
+  - edges
+  - nodes
+  - createGraph()
+- util
+  - nearestPoints(...)
+  - findBoundaries(...)
+
+## Mind map
+- Nuværende arkitektur
+  - `canvas-overlay` - komponent der sikre
+  - `main` - prototype-kode, skal refaktoreres nedenstående beskrevne komponenter
+- Plan for arkitektur, koden forventes ihvertfald opdelt i følgende dele, - dele af disse udtrækkes til separate komponenter senere hen:
+  - `canvas-overlay` - fuldskærmsoverlay, der abstraherer browserforskelle i forhold til skærm og mouse/touch-events.
+  - `graph-layout` - udregner graf-layoutet på data-modellen i graf-vektorrummet
+  - `graph-canvas` - afbilleder graf-vektorrummet til canvas-vektorrummet, og håndtere events (zoom, og interaktion med graf), og sikre flydende transitioner
+  - `data-model` - data for objekter og relationer organiseres primært som objekter + triple store.
+  - `util` - utility functions
+  - `logging` - application logging and statistics
+  - `item-view` - *applikationsspecifik* ved hvordan de enkelte objekter og relationer tegnes på canvas
+  - `graph-model` - *applikationsspecifik* genererer graf ud fra datamodellen, herunder kant-liste og også kontrol af graf-layout
+  - `data-source` - *applikationsspecifik* opdaterer data-modellen ud fra web-servicen, og kan forespørges for hvilke data der skal opdateres snarest
+- Filstruktur
+  - `app/` - selve kildekoden, javascript koden ligger i `app/scripts`
+  - `test/` - kildekode testcases
+  - `dist/` - den minificerede optimerede app havner her når `grunt build køres`
+  - `node_modules/`, `bower_components/`, `.tmp/` - autogenerede og installerede dependencies og temporære filer
+  - `bower.json`, `.gitignore`, `package.json`, `.yo-rc.json`, `.travis.yml`, `Gruntfile.js`, `.editorconfig`, `.gitattributes`, `COPYING`, `.jshintrc`  - konfigurationsfiler og metainformationer
+  - `README.md` denne fil/dokumentation
+- Teknologivalg
+  - jquery - abstraktion over browserforskelligheder, vælges da den allerede anvendes på DDB-CMS hvilket er det primære sted hvor relationsbrowseren skal indlejres
+  - d3js - bruges til graf-layout og forskellig geometrisk funktionalitet
+  - grunt - byggeværktøj
+  - bower - styring af afhængigheder ifht. browserafhængigheder
+  - npm - bruges primært til installation af øvrige værktøj
+  - travis-ci - service for continous integration - automatisk kørsel af test
+  - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
 
 # done/releaselog
 
@@ -155,7 +180,7 @@ Indeværende sprint:
   - √kanter/linjer mellem relationer
 - canvas-overlay
   - korrekt placering af canvas i Internet Explorer
-  - opdater position ved scroll/zoom/skærm-rotation
+  - √opdater position ved scroll/zoom/skærm-rotation
   - abstraher touch/mouse-events
   - skala/unit-information
   - håndtér unsupported browsers
