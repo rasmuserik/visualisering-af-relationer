@@ -1,17 +1,22 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  var measureCache = {};
-  relvis.textLayout = function textLayout(ctx, str, width, size) { //{{{1
+  var measureCache = {}; // cache text sizes for performance reasons
+
+  relvis.textLayout = function textLayout(ctx, str, width, fontSize) { //{{{1
     window.ctx = ctx;
 
+    var words = str.split(' ');
+
+    // Find the the length all words
     function measure(str) {
-      var t = size + ',' + str;
+      var t = fontSize + ',' + str;
       return (measureCache[t] = (measureCache[t] || ctx.measureText(str).width));
     }
     var spacing = measure(' ');
-    var words = str.split(' ');
     var lengths = words.map(measure);
+
+    // Split the text into lines
     var lines = [];
     var line = [];
     var linePos = 0;
@@ -31,12 +36,15 @@
       str: line.join(' '),
       len: linePos
     });
+
     return lines;
   };
 
   relvis.writeBox = function writeBox(ctx, str, x, y, w, h) { //{{{1
-    var size = 60;
     var lines, i, maxLen;
+
+    // repeatedly reduce font-size until text fits within box
+    var size = 60;
     do {
       size = size * 0.9 | 0;
       ctx.font = size + 'px sans-serif';
@@ -47,6 +55,7 @@
       }
     } while (size > 13 && (maxLen > w || lines.length * size > h));
 
+    // draw the lines of text
     for (i = 0; i < lines.length; ++i) {
       if (size * (i + 1) < h) {
         ctx.fillText(lines[i].str, x, y + size * (i + 1));

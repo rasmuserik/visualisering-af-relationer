@@ -49,7 +49,7 @@
 
       relvis.drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
     }
-  };
+  }
   relvis.requestRedraw = function() { //{{{1 
     // TODO: throttle this function, and make it async
     if (!this.overlayVisible) {
