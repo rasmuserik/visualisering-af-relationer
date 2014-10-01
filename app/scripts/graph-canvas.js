@@ -3,30 +3,32 @@
   var relvis = window.relvis = window.relvis || {};
 
   function drawGraph() { //{{{1
-    if (!relvis.nodes) {
+    if (!relvis.nodes || !relvis.overlayVisible) {
       return;
     }
-    var margin = 0.05;
 
+    var visibleNodes = relvis.nodes.filter(function(o) {
+      return o.visible;
+    });
+
+    // get and clear drawing context
     var canvas = relvis.canvas;
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    var visibleNodes = relvis.nodes.filter(function(o) {
-      return o.visible;
-    });
+    // Calculate view coordinates for all points
+    var margin = 0.05;
     var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
-
     visibleNodes.forEach(function(node) {
       var xy = boundaries.zeroOne(node);
       node.vx = (xy.x * (1 - 2 * margin) + margin) * canvas.width;
       node.vy = (xy.y * (1 - 2 * margin) + margin) * canvas.height;
     });
-
     relvis.nearestPoints(visibleNodes, 'vx', 'vy');
 
+    // Draw edges
     var visibleEdges = relvis.edges.filter(function(e) {
       return e.source.visible && e.target.visible;
     });
@@ -38,6 +40,7 @@
         window.devicePixelRatio || 1);
     });
 
+    // drawNodes
     for (var i = 0; i < visibleNodes.length; ++i) {
       var node = visibleNodes[i];
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
@@ -50,11 +53,9 @@
       relvis.drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
     }
   }
+
   relvis.requestRedraw = function() { //{{{1 
     // TODO: throttle this function, and make it async
-    if (!this.overlayVisible) {
-      return;
-    }
     drawGraph();
   };
 
