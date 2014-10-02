@@ -49,7 +49,7 @@
 
     // draw image if available
     var imgWidth = 0;
-    if (img && img.complete) {
+    if (img && img.complete && img.naturalWidth) {
       var imgRatio = img.naturalWidth / img.naturalHeight;
       var imgHeight = boxSize * h;
       imgWidth = imgHeight * Math.min(imgRatio, 0.8);
