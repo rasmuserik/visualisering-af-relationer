@@ -5,7 +5,8 @@
   var categoryNodeList = [];
   var sampleItem = [{ //{{{1 - graph-model
     property: 'Cover',
-    value: 'http://dev.vejlebib.dk/sites/default/files/styles/ding_list_medium/public/ting/covers/object/796e550251e19f9e2deeb270d0d80670.jpg?itok=AckPhF2k'
+    // as forside from vejlebib expires, we temporarily use a link for the frontpage of goodreads during development
+    value: 'http://d.gr-assets.com/books/1394861337l/52036.jpg'
   }, {
     property: 'Titel',
     value: 'Siddhartha - en indisk legende'
