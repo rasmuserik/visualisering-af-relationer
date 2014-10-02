@@ -6,15 +6,15 @@ $(function() {
   function unsupportedPlatform() { //{{{1
     // check that canvas is supported
     var elem = document.createElement('canvas');
-    if(! elem.getContext) {
+    if (!elem.getContext) {
       return 'Missing canvas support';
     }
 
     // check that android version > 2.1 due to canvas bugs in version 2.1 and earlier 
     var android = navigator.userAgent.match(/android.*?([12]\.[0-9])/i);
-    if(android && (+android[1] < 2.2) &&
+    if (android && (+android[1] < 2.2) &&
       !navigator.userAgent.match(/(firefox|chrome|opera)/i)) {
-        return 'Buggy android version:\n' + navigator.userAgent;
+      return 'Buggy android version:\n' + navigator.userAgent;
     }
 
     // everything is ok
@@ -22,10 +22,10 @@ $(function() {
   }
 
   function showGraph() { //{{{1
-    if(relvis.overlayVisible) {
+    if (relvis.overlayVisible) {
       return;
     }
-    if(unsupportedPlatform()) {
+    if (unsupportedPlatform()) {
       window.alert('Warning unsupported platform.\n' + unsupportedPlatform());
     }
     relvis.createGraph();
@@ -37,6 +37,7 @@ $(function() {
     // button on sample page pops up visualisation
     $('#relvis-button').click(showGraph);
     var elems = document.getElementsByClassName('relvis-request');
+
     function makeHandler(elem) {
       return function() {
         var id = elem.getAttribute('data-relvis-id');
@@ -44,9 +45,9 @@ $(function() {
         showGraph();
       };
     }
-    for(var i = 0; i < elems.length; ++i) {
+    for (var i = 0; i < elems.length; ++i) {
       var elem = elems[i];
-      if(unsupportedPlatform()) {
+      if (unsupportedPlatform()) {
         elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
       } else {
         var handler = makeHandler(elem);
@@ -58,7 +59,7 @@ $(function() {
     }
 
     // show visualisation on load if we have #relvis hash
-    if (location.hash.slice(0,7) === '#relvis' && !unsupportedPlatform()) {
+    if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform()) {
       showGraph();
     }
   };
