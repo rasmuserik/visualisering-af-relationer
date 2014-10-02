@@ -14,6 +14,16 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
+    <style>
+      .relvis-request {
+        display: none;
+      }
+      .relvis-disabled {
+        display: none;
+      }
+      .relvis-enabled {
+      }
+    </style>
   </head>
   <body>
     <!--[if lt IE 10]>
@@ -23,7 +33,7 @@
 
     <div class="hero-unit">
       <h1>Visualisering af relationer </h1>
-      <button id="relvis-button" style="font-size: 200%">Popup visualisering</button>
+      <button data-relvis-id="870970-basis:22331892'" class="relvis-request button" style="font-size: 200%">Popup visualisering</button>
     </div>
 
 
@@ -44,5 +54,13 @@
         <script src="scripts/graph-canvas.js"></script>
         <script src="scripts/main.js"></script>
         <!-- endbuild -->
+        <script>
+        $(function(){
+            relvis.init({
+                apiUrl: "https://api.vejlebib.dk/",
+                query: "some search string if applicable"
+            });
+        });
+        </script>
 </body>
 </html>

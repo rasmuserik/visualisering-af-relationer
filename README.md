@@ -68,10 +68,43 @@ _foreløbigt udkast_
 
 ## Indlejring/API
 
-Afklares/implementeres/dokumenteres i et kommende sprint.
+Tilføj css-klassen `relvis-request` til de elementer der skal få relationsbrowseren til at poppe op. Tilføj derudover dataproperty'en `data-relvis-id` med ting-id for det pågældende element, og optional `data-relvis-type` der angiver hvilken type view det skal referere til, eksempelvis:
+
+    <button class="relvis-request" data-relvis-type="external"
+        data-relvis-id="870970-basis:22331892"> 
+      click me
+    </button>
+
+Når siden loades, eller ændres skal `relvis.init({...});` kaldes. 
+Denne gør at elementer ændre klasse fra `relvis-request` til enten `relvis-enabled` eller `relvis-disabled` afhængigt af om klient-browseren understøtter relationsvisualiseringen. Samtidigt vil `relvis.init` også bind'e events til `relvis-enabled` elementer så relationsbrowseren popper op ved klik/touch af elementet.
+
+`relvis.init` tager et objekt med forskellige parametre som argument. Eksempler på parametre kan være `apiUrl` for url'en på det API widget'en skal tale med, eller `searchQuery`, hvis den nuværende side er en søgning.
+
+Et mere komplet eksempel er:
+
+    <style>
+      .relvis-request {
+        display: none;
+      }
+      .relvis-disabled {
+        display: none;
+      }
+      .relvis-enabled {
+      }
+    </style>
+    <button class="relvis-request" 
+        data-relvis-id="870970-basis:22331892"> 
+      click me
+    </button>
+    <script>
+    $(function() {
+      relvis.init({
+        apiUrl: '//api.vejlebib.dk/'
+      });
+    });
+    </script>
 
 # Applikationsarkitektur og teknologivalg
-
 ## Cross-component functions and properties
 
 - canvas-overlay
@@ -155,10 +188,10 @@ Indeværende sprint:
 # todo/backlog
 
 Indeværende sprint:
-- API for embedning
-  - afklar api for embedning
-  - implementér
-  - dokumentér
+- √API for embedning
+  - √afklar api for embedning
+  - √implementér
+  - √dokumentér
 - •refaktorér - gå mere i retning af arkitekturplan
   - √item-view som separat komponent
   - √util som separat komponent
