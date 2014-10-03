@@ -9,6 +9,9 @@
     // keep track of whether the element is shown
     relvis.overlayVisible = false;
 
+    // canvasUint
+    relvis.unit = 12 * (window.devicePixelRatio || 1);
+
     // resize canvas on screen resize
     $(window).scroll(function() {
       relvis.updateOverlayPosition();
@@ -54,6 +57,7 @@
     if (!this.overlayVisible) {
       return;
     }
+    relvis.unit = 12 * (window.devicePixelRatio || 1);
 
     // find the current size, to see if we need update canvas-size + redraw
     var originalWidth = this.canvas.width;

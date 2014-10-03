@@ -192,7 +192,7 @@ Indeværende sprint:
   - √afklar api for embedning
   - √implementér
   - √dokumentér
-- •refaktorér - gå mere i retning af arkitekturplan
+- √refaktorér - gå mere i retning af arkitekturplan
   - √item-view som separat komponent
   - √util som separat komponent
   - √fælles relvis scope
@@ -200,7 +200,7 @@ Indeværende sprint:
   - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
   - √graph-canvas som separat komponent
   - √mere dokumentation 
-  - mere test
+  - √mere test
 - klarere data model
   - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
   - single data object with all data
@@ -216,7 +216,7 @@ Indeværende sprint:
   - √korrekt placering af canvas i Internet Explorer
   - √opdater position ved scroll/zoom/skærm-rotation
   - abstraher touch/mouse-events
-  - skala/unit-information
+  - √skala/unit-information
   - √håndtér unsupported browsers
   - √Undersøg om vi kan køre på android 2, eller er bundet til android 4+ pga. canvas bugs.
     - android 2.1 virker ikke pga. https://code.google.com/p/android/issues/detail?id=5141

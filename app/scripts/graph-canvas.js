@@ -36,8 +36,7 @@
     visibleEdges.forEach(function(e) {
       relvis.drawEdge(ctx, e.source, e.target,
         e.source.vx, e.source.vy,
-        e.target.vx, e.target.vy,
-        window.devicePixelRatio || 1);
+        e.target.vx, e.target.vy);
     });
 
     // drawNodes
@@ -50,7 +49,7 @@
       var h = size * 2 / relvis.visualObjectRatio;
       var y = node.vy - h / 2;
 
-      relvis.drawNode(ctx, node, x, y, w, h, window.devicePixelRatio || 1);
+      relvis.drawNode(ctx, node, x, y, w, h);
     }
   }
 

@@ -56,9 +56,16 @@
   describe('util', function() {
     it('should run here few assertions', function() {
       assert(relvis.square(3) === 9);
-      var pts = [ {x:1,y:1},
-      {x:0, y:1},
-      {x:0, y:0}];
+      var pts = [{
+        x: 1,
+        y: 1
+      }, {
+        x: 0,
+        y: 1
+      }, {
+        x: 0,
+        y: 0
+      }];
       relvis.nearestPoints(pts, 'x', 'y');
       assert(pts[0].nearestNode === pts[1]);
       assert(relvis.findBoundaries(pts, 'x', 'y').range.x === 1);

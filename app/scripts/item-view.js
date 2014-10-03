@@ -4,15 +4,15 @@
   relvis.visualObjectRatio = 13 / 8;
   var images = {};
 
-  relvis.drawEdge = function drawEdge(ctx, node0, node1, x0, y0, x1, y1, unit) { //{{{1
-    ctx.lineWidth = unit * 1;
+  relvis.drawEdge = function drawEdge(ctx, node0, node1, x0, y0, x1, y1) { //{{{1
+    ctx.lineWidth = relvis.unit / 10;
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
     ctx.stroke();
   };
 
-  relvis.drawNode = function drawNode(ctx, node, x, y, w, h, unit) { //{{{1
+  relvis.drawNode = function drawNode(ctx, node, x, y, w, h) { //{{{1
     var boxSize = 1; // scale box up/down
     var x0 = x + w * (1 - boxSize) / 2;
     var y0 = y + h * (1 - boxSize) / 2;
@@ -29,7 +29,7 @@
 
     /*
     // draw superellipsis as text background
-    ctx.lineWidth = unit * 1;
+    ctx.lineWidth = unit /10 1;
     ctx.fillStyle = 'rgba(255,255,255,1)';
     ctx.beginPath();
     ctx.moveTo(x, y + h / 2);
@@ -43,7 +43,10 @@
 
     // draw background box with border
     ctx.fillStyle = '#000';
-    ctx.fillRect(x - unit, y - unit, w + unit * 2, h + unit * 2);
+    ctx.fillRect(x - relvis.unit / 10,
+      y - relvis.unit / 10,
+      w + relvis.unit / 10 * 2,
+      h + relvis.unit / 10 * 2);
     ctx.fillStyle = 'rgba(255,255,255,1)';
     ctx.fillRect(x, y, w, h);
 

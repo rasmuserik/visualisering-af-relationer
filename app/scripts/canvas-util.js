@@ -44,7 +44,7 @@
     var lines, i, maxLen;
 
     // repeatedly reduce font-size until text fits within box
-    var size = 60;
+    var size = 6 * relvis.unit;
     do {
       size = size * 0.9 | 0;
       ctx.font = size + 'px sans-serif';
@@ -53,7 +53,7 @@
       for (i = 0; i < lines.length; ++i) {
         maxLen = Math.max(maxLen, lines[i].len);
       }
-    } while (size > 13 && (maxLen > w || lines.length * size > h));
+    } while (size > relvis.unit && (maxLen > w || lines.length * size > h));
 
     // draw the lines of text
     for (i = 0; i < lines.length; ++i) {
