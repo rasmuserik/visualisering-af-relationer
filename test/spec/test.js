@@ -31,6 +31,7 @@
       assert(document.getElementsByClassName('CanvasOverlay').length === 1);
       ctx = relvis.canvas.getContext('2d');
       assert(ctx);
+      assert(typeof relvis.unit === 'number');
       // updateOverlayPosition - not easily testable
     });
   });
