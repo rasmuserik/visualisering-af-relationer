@@ -31,6 +31,16 @@ $(function() {
     relvis.createGraph();
     relvis.layoutGraph();
     relvis.showCanvasOverlay();
+
+    relvis.addEventListener("tapstart", function(e) {
+      console.log(e);
+    });
+    relvis.addEventListener("tapmove", function(e) {
+      console.log(e);
+    });
+    relvis.addEventListener("tapdone", function(e) {
+      console.log(e);
+    });
   }
 
   relvis.init = function() { //{{{1

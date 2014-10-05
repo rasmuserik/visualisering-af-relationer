@@ -2,6 +2,28 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
+  relvis.eventListeners = {}; //{{{1
+  relvis.addEventListener = function addEventListener(name, handler) { //{{{2
+    var listeners = relvis.eventListeners[name] || [];
+    relvis.eventListeners[name] = listeners;
+    for(var i = 0; i < listeners.length; ++i) {
+      if(listernes[i] === handler) {
+        return;
+      }
+    }
+    listeners.push(handler);
+    relvis.eventListeners[name].push(handler);
+  };
+  relvis.dispatchEvent = function dispatchEvent(name, value) {
+    var listeners = relvis.eventListeners[name] || [];
+    if(!listeners) {
+      return;
+    }
+    for(var i = 0; !done && i < listeners.length; ++i) {
+      listeners[i].call(this, value);
+    }
+  };
+
   relvis.square = function(a) { //{{{1
     return a * a;
   };
