@@ -17,7 +17,7 @@
       orig: e,
       x: x,
       y: y
-    }
+    };
     relvis.dispatchEvent('tapstart', obj);
   }
 
@@ -39,8 +39,8 @@
       relvis.updateOverlayPosition();
     });
 
-    canvas.addEventListener("touchstart", tapstart);
-    canvas.addEventListener("mousedown", tapstart);
+    canvas.addEventListener('touchstart', tapstart);
+    canvas.addEventListener('mousedown', tapstart);
   });
 
   relvis.showCanvasOverlay = function() { //{{{1 

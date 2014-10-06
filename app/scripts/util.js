@@ -7,7 +7,7 @@
     var listeners = relvis.eventListeners[name] || [];
     relvis.eventListeners[name] = listeners;
     for(var i = 0; i < listeners.length; ++i) {
-      if(listernes[i] === handler) {
+      if(listeners[i] === handler) {
         return;
       }
     }

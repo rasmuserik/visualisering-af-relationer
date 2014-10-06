@@ -224,6 +224,7 @@ Indeværende sprint:
 
 ## Later
 
+- sikr den kan køre asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - visualiserings-view: strukturelle relationer
