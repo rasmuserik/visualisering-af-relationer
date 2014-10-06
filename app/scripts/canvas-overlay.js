@@ -2,10 +2,11 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
+
   function tapstart(e) { //{{{1
     e.preventDefault();
     var x, y;
-    if(e.touches && e.touches[0]) {
+    if (e.touches && e.touches[0]) {
       x = e.touches[0].clientX;
       y = e.touches[0].clientY;
     } else {

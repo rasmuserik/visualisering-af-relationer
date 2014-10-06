@@ -31,19 +31,28 @@ $(function() {
     relvis.layoutGraph();
     relvis.showCanvasOverlay();
 
-    relvis.addEventListener('tapstart', function(e) {
+    function showStatus(text) {
       var ctx = relvis.canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, 500, 10);
       relvis.canvas.font = '10px sans-serif';
-      ctx.fillText('tapstart ' +  JSON.stringify({
-        x:e.x, y:e.y
-      }), 10, 10);
-      console.log(e);
+      ctx.fillStyle = '#000';
+      ctx.fillText(text, 10, 10);
+    }
+    relvis.addEventListener('tapstart', function(e) {
+      showStatus('tapstart ' + JSON.stringify({
+        x: e.x,
+        y: e.y
+      }));
     });
     relvis.addEventListener('tapmove', function(e) {
-      console.log(e);
+      showStatus('tapmove' + JSON.stringify({
+        x: e.x,
+        y: e.y
+      }));
     });
-    relvis.addEventListener('tapdone', function(e) {
-      console.log(e);
+    relvis.addEventListener('tapend', function(e) {
+      showStatus('tapend');
     });
   }
 

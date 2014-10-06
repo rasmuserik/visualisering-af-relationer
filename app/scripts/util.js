@@ -6,8 +6,8 @@
   relvis.addEventListener = function addEventListener(name, handler) { //{{{2
     var listeners = relvis.eventListeners[name] || [];
     relvis.eventListeners[name] = listeners;
-    for(var i = 0; i < listeners.length; ++i) {
-      if(listeners[i] === handler) {
+    for (var i = 0; i < listeners.length; ++i) {
+      if (listeners[i] === handler) {
         return;
       }
     }
@@ -15,10 +15,10 @@
   };
   relvis.dispatchEvent = function dispatchEvent(name, value) {
     var listeners = relvis.eventListeners[name] || [];
-    if(!listeners) {
+    if (!listeners) {
       return;
     }
-    for(var i = 0; i < listeners.length; ++i) {
+    for (var i = 0; i < listeners.length; ++i) {
       listeners[i].call(this, value);
     }
   };
