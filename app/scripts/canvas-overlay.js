@@ -3,23 +3,31 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
-  function tapstart(e) { //{{{1
-    e.preventDefault();
-    var x, y;
-    if (e.touches && e.touches[0]) {
-      x = e.touches[0].clientX;
-      y = e.touches[0].clientY;
-    } else {
-      x = e.clientX;
-      y = e.clientY;
-    }
+  var mousedown = false;
+  function taphandle(kind) { //{{{1
+    return function(e) {
+      e.preventDefault();
+      var o = {orig: e};
+      o.isTouch = !!e.touches;
 
-    var obj = {
-      orig: e,
-      x: x,
-      y: y
+      if (o.isTouch) {
+        o.x = e.touches[0].clientX;
+        o.y = e.touches[0].clientY;
+      } else {
+        o.x = e.clientX;
+        o.y = e.clientY;
+        if(kind === "start") {
+          mousedown = true;
+        }
+        if(kind === "end") {
+          mousedown = false;
+        }
+      }
+
+      if(e.isTouch || !(kind === "move" && mousedown === false)) {
+        relvis.dispatchEvent('tap' + kind, o);
+      }
     };
-    relvis.dispatchEvent('tapstart', obj);
   }
 
   $(function() { //{{{1
@@ -40,8 +48,12 @@
       relvis.updateOverlayPosition();
     });
 
-    canvas.addEventListener('touchstart', tapstart);
-    canvas.addEventListener('mousedown', tapstart);
+    canvas.addEventListener('touchstart', taphandle("start"));
+    canvas.addEventListener('mousedown', taphandle("start"));
+    canvas.addEventListener('touchmove', taphandle("move"));
+    canvas.addEventListener('mousemove', taphandle("move"));
+    canvas.addEventListener('touchend', taphandle("end"));
+    canvas.addEventListener('mouseup', taphandle("end"));
   });
 
   relvis.showCanvasOverlay = function() { //{{{1 
