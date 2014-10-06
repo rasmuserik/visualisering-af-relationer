@@ -12,14 +12,13 @@
       }
     }
     listeners.push(handler);
-    relvis.eventListeners[name].push(handler);
   };
   relvis.dispatchEvent = function dispatchEvent(name, value) {
     var listeners = relvis.eventListeners[name] || [];
     if(!listeners) {
       return;
     }
-    for(var i = 0; !done && i < listeners.length; ++i) {
+    for(var i = 0; i < listeners.length; ++i) {
       listeners[i].call(this, value);
     }
   };

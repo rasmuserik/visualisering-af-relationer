@@ -2,9 +2,28 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  $(function() {
-    relvis.canvas = document.createElement('canvas');
-    relvis.canvas.className = 'CanvasOverlay';
+  function tapstart(e) { //{{{1
+    e.preventDefault();
+    var x, y;
+    if(e.touches && e.touches[0]) {
+      x = e.touches[0].clientX;
+      y = e.touches[0].clientY;
+    } else {
+      x = e.clientX;
+      y = e.clientY;
+    }
+
+    var obj = {
+      orig: e,
+      x: x,
+      y: y
+    }
+    relvis.dispatchEvent('tapstart', obj);
+  }
+
+  $(function() { //{{{1
+    var canvas = relvis.canvas = document.createElement('canvas');
+    canvas.className = 'CanvasOverlay';
 
     // keep track of whether the element is shown
     relvis.overlayVisible = false;
@@ -19,6 +38,9 @@
     $(window).resize(function() {
       relvis.updateOverlayPosition();
     });
+
+    canvas.addEventListener("touchstart", tapstart);
+    canvas.addEventListener("mousedown", tapstart);
   });
 
   relvis.showCanvasOverlay = function() { //{{{1 

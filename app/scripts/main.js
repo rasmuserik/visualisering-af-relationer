@@ -2,7 +2,6 @@ $(function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
-
   function unsupportedPlatform() { //{{{1
     // check that canvas is supported
     var elem = document.createElement('canvas');
@@ -32,13 +31,18 @@ $(function() {
     relvis.layoutGraph();
     relvis.showCanvasOverlay();
 
-    relvis.addEventListener("tapstart", function(e) {
+    relvis.addEventListener('tapstart', function(e) {
+      var ctx = relvis.canvas.getContext('2d');
+      relvis.canvas.font = '10px sans-serif';
+      ctx.fillText('tapstart ' +  JSON.stringify({
+        x:e.x, y:e.y
+      }), 10, 10);
       console.log(e);
     });
-    relvis.addEventListener("tapmove", function(e) {
+    relvis.addEventListener('tapmove', function(e) {
       console.log(e);
     });
-    relvis.addEventListener("tapdone", function(e) {
+    relvis.addEventListener('tapdone', function(e) {
       console.log(e);
     });
   }
