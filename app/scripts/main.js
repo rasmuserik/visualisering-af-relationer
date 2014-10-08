@@ -37,7 +37,7 @@ $(function() {
       ctx.fillRect(0, 0, 500, 10);
       relvis.canvas.font = '10px sans-serif';
       ctx.fillStyle = '#000';
-      ctx.fillText(text + " " + Date.now(), 10, 10);
+      ctx.fillText(text + ' ' + Date.now(), 10, 10);
     }
     relvis.addEventListener('tapstart', function(e) {
       showStatus('tapstart ' + JSON.stringify({

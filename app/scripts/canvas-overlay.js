@@ -4,30 +4,33 @@
   var relvis = window.relvis = window.relvis || {};
 
   var touching = false;
+
   function taphandle(kind) { //{{{1
     return function(e) {
       e.preventDefault();
-      var o = {orig: e};
+      var o = {
+        orig: e
+      };
       o.isTouch = !!e.touches;
 
       if (e.touches && e.touches[0]) {
         o.x = e.touches[0].clientX;
         o.y = e.touches[0].clientY;
-      } 
+      }
 
-      if(!o.isTouch) {
+      if (!o.isTouch) {
         o.x = e.clientX;
         o.y = e.clientY;
       }
-      if(kind === 'start') {
+      if (kind === 'start') {
         touching = true;
       }
 
-      if(touching || kind === 'start') {
+      if (touching || kind === 'start') {
         relvis.dispatchEvent('tap' + kind, o);
       }
 
-      if(kind === 'end') {
+      if (kind === 'end') {
         touching = false;
       }
     };
