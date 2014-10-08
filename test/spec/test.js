@@ -44,8 +44,14 @@
   });
   describe('graph-canvas', function() {
     it('should run here few assertions', function() {
-      assert(relvis.toGraphCoord(relvis.toCanvasCoord({x: 5, y: 7})).x === 5);
-      assert(relvis.toGraphCoord(relvis.toCanvasCoord({x: 5, y: 7})).y === 7);
+      assert(relvis.toGraphCoord(relvis.toCanvasCoord({
+        x: 5,
+        y: 7
+      })).x === 5);
+      assert(relvis.toGraphCoord(relvis.toCanvasCoord({
+        x: 5,
+        y: 7
+      })).y === 7);
       // drawGraph - not easily testable
       // requestRedraw not easily testable
     });
