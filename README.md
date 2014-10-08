@@ -212,10 +212,10 @@ Indeværende sprint:
 - √visualisering
   - √forside som del af visning hvis tilgængelig
   - √kanter/linjer mellem relationer
-- •canvas-overlay
+- √canvas-overlay
   - √korrekt placering af canvas i Internet Explorer
   - √opdater position ved scroll/zoom/skærm-rotation
-  - abstraher touch/mouse-events
+  - √abstraher touch/mouse-events
   - √skala/unit-information
   - √håndtér unsupported browsers
   - √Undersøg om vi kan køre på android 2, eller er bundet til android 4+ pga. canvas bugs.
