@@ -159,10 +159,43 @@ Et mere komplet eksempel er:
   - travis-ci - service for continous integration - automatisk kørsel af test
   - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
 
-# done/releaselog
+# releaselog
 
-Indeværende sprint:
-- ...
+Indeværende sprint - todo and progress:
+- √API for embedning
+  - √afklar api for embedning
+  - √implementér
+  - √dokumentér
+- √refaktorér - gå mere i retning af arkitekturplan
+  - √item-view som separat komponent
+  - √util som separat komponent
+  - √fælles relvis scope
+  - √graph-layout som separat komponent
+  - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
+  - √graph-canvas som separat komponent
+  - √mere dokumentation 
+  - √mere test
+- klarere data model
+  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
+  - single data object with all data
+  - generering af graf-data fra triple-store-data
+  - data-model som separat komponent
+- •graph-canvas
+  - √to-vejs transformation mellem canvas-koordinater og graf-koordinater
+  - klik/touch element afklar hvilket
+- √visualisering
+  - √forside som del af visning hvis tilgængelig
+  - √kanter/linjer mellem relationer
+- √canvas-overlay
+  - √korrekt placering af canvas i Internet Explorer
+  - √opdater position ved scroll/zoom/skærm-rotation
+  - √abstraher touch/mouse-events
+  - √skala/unit-information
+  - √håndtér unsupported browsers
+  - √Undersøg om vi kan køre på android 2, eller er bundet til android 4+ pga. canvas bugs.
+    - android 2.1 virker ikke pga. https://code.google.com/p/android/issues/detail?id=5141
+    - android 2.2 ser ud til at virke
+
 
 ## Version 0.1.0, released 27/9, sprint "Projektstart"
 
@@ -185,44 +218,7 @@ Indeværende sprint:
   - udkast til release og test-strategi
   - udkast til produktmål
 
-# todo/backlog
-
-Indeværende sprint:
-- √API for embedning
-  - √afklar api for embedning
-  - √implementér
-  - √dokumentér
-- √refaktorér - gå mere i retning af arkitekturplan
-  - √item-view som separat komponent
-  - √util som separat komponent
-  - √fælles relvis scope
-  - √graph-layout som separat komponent
-  - √graph-model som separat komponent, både kant-liste og også pseudo-nodes for forfatter/anmeldels/struktur/cirkulær
-  - √graph-canvas som separat komponent
-  - √mere dokumentation 
-  - √mere test
-- klarere data model
-  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
-  - single data object with all data
-  - generering af graf-data fra triple-store-data
-  - data-model som separat komponent
-- graph-canvas
-  - to-vejs transformation mellem canvas-koordinater og graf-koordinater
-  - klik/touch element afklar hvilket
-- √visualisering
-  - √forside som del af visning hvis tilgængelig
-  - √kanter/linjer mellem relationer
-- √canvas-overlay
-  - √korrekt placering af canvas i Internet Explorer
-  - √opdater position ved scroll/zoom/skærm-rotation
-  - √abstraher touch/mouse-events
-  - √skala/unit-information
-  - √håndtér unsupported browsers
-  - √Undersøg om vi kan køre på android 2, eller er bundet til android 4+ pga. canvas bugs.
-    - android 2.1 virker ikke pga. https://code.google.com/p/android/issues/detail?id=5141
-    - android 2.2 ser ud til at virke
-
-## Later
+# backlog
 
 - sikr den kan køre asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
