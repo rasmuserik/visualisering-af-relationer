@@ -2,6 +2,11 @@
 
 (function() {
   'use strict';
+
+  function floatEq(a, b) {
+    var epsilon = Math.max(Math.abs(a), Math.abs(b)) * 0.0000000001;
+    return a <= b + epsilon && b <= a + epsilon;
+  }
   var ctx;
   describe('graph-model', function() {
     it('should create af graph on the relvis-object', function() {
@@ -44,14 +49,18 @@
   });
   describe('graph-canvas', function() {
     it('should run here few assertions', function() {
-      assert(relvis.toGraphCoord(relvis.toCanvasCoord({
+      assert(floatEq(relvis.toGraphCoord(relvis.toCanvasCoord({
+          x: 5,
+          y: 7
+        })).x, 5),
+        relvis.toGraphCoord(relvis.toCanvasCoord({
+          x: 5,
+          y: 7
+        })));
+      assert(floatEq(relvis.toGraphCoord(relvis.toCanvasCoord({
         x: 5,
         y: 7
-      })).x === 5);
-      assert(relvis.toGraphCoord(relvis.toCanvasCoord({
-        x: 5,
-        y: 7
-      })).y === 7);
+      })).y, 7));
       // drawGraph - not easily testable
       // requestRedraw not easily testable
     });
