@@ -22,7 +22,7 @@
         o.x = e.clientX;
         o.y = e.clientY;
       }
-      if(typeof o.x === 'number') {
+      if (typeof o.x === 'number') {
         o.node = relvis.nodeAt(o.x, o.y);
       }
       if (kind === 'start') {

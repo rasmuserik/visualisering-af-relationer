@@ -7,7 +7,7 @@
   relvis.offset = { // odd start offset for testing
     x: 123,
     y: 456
-  }; 
+  };
   relvis.scale = { // odd start offset for testing
     x: 7,
     y: 8
@@ -19,15 +19,16 @@
     return xy.add(xy.mul(p, xy.inv(relvis.scale)), relvis.offset);
   };
   relvis.nodeAt = function(x, y) { //{{{1
-    for(var i = 0; i < relvis.nodes.length; ++i) {
+    for (var i = 0; i < relvis.nodes.length; ++i) {
       var node = relvis.nodes[i];
-      if(Math.abs(node.vx - x) <= node.xsize &&
-          Math.abs(node.vy - y) <= node.ysize) {
-            return node;
+      if (Math.abs(node.vx - x) <= node.xsize &&
+        Math.abs(node.vy - y) <= node.ysize) {
+        return node;
       }
     }
     return undefined;
   };
+
   function drawGraph() { //{{{1
     if (!relvis.nodes || !relvis.overlayVisible) {
       return;
