@@ -62,7 +62,7 @@ Kommentarer indeholder desuden fold markers til at navigere i filen med editorer
   - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
   - På Android og iOS enheder, både tablet og telefon.
   - Bugs, ændringer etc. tilføjes på https://github.com/solsort/visualisering-af-relationer/issues/new
-- Efter test kan den minifiserede udgave inkluderes i https://github.com/vejlebib/navn-på-repositorie-for-drupal-modulet
+- Efter test kan den minifiserede udgave inkluderes i https://github.com/vejlebib/ting_visual_relation og https://github.com/vejlebib/visual_relation
 
 ## Indlejring/API
 
