@@ -114,6 +114,9 @@ Et mere komplet eksempel er:
 - canvas-util
   - writeBox(...)
 - graph-canvas
+  - nodeAt(x, y)
+  - `toCanvasCoord({x:..,y:..})`
+  - `toGraphCoord({x:..,y:..})`
   - requestRedraw()
 - item-view
   - visualObjectRatio
@@ -182,9 +185,9 @@ Indeværende sprint - todo and progress:
   - single data object with all data
   - generering af graf-data fra triple-store-data
   - data-model som separat komponent
-- •graph-canvas
+- √graph-canvas
   - √to-vejs transformation mellem canvas-koordinater og graf-koordinater
-  - klik/touch element afklar hvilket
+  - √klik/touch element afklar hvilket
 - √visualisering
   - √forside som del af visning hvis tilgængelig
   - √kanter/linjer mellem relationer

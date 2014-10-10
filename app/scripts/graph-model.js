@@ -2,6 +2,7 @@
   'use strict';
   // This is temporary dummy code - will be rewritten and split up into data-model and graph-model when we got the webservice
   var relvis = window.relvis = window.relvis || {};
+  relvis.nodes = [];
   var categoryNodeList = [];
   var sampleItem = [{ //{{{1 - graph-model
     property: 'Cover',

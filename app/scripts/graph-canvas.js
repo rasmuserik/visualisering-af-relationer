@@ -1,9 +1,9 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  var xy = relvis.xy;
   // {{{1 coordinate transformations
   // transformations to/from canvas coordinates
+  var xy = relvis.xy;
   relvis.offset = { // odd start offset for testing
     x: 123,
     y: 456
@@ -12,13 +12,22 @@
     x: 7,
     y: 8
   };
-  relvis.toCanvasCoord = function(p) {
+  relvis.toCanvasCoord = function(p) { //{{{1
     return xy.mul(xy.sub(p, relvis.offset), relvis.scale);
   };
-  relvis.toGraphCoord = function(p) {
+  relvis.toGraphCoord = function(p) { //{{{1
     return xy.add(xy.mul(p, xy.inv(relvis.scale)), relvis.offset);
   };
-
+  relvis.nodeAt = function(x, y) { //{{{1
+    for(var i = 0; i < relvis.nodes.length; ++i) {
+      var node = relvis.nodes[i];
+      if(Math.abs(node.vx - x) <= node.xsize &&
+          Math.abs(node.vy - y) <= node.ysize) {
+            return node;
+      }
+    }
+    return undefined;
+  };
   function drawGraph() { //{{{1
     if (!relvis.nodes || !relvis.overlayVisible) {
       return;
@@ -55,6 +64,12 @@
       node.vy = p.y;
     });
     relvis.nearestPoints(visibleNodes, 'vx', 'vy');
+    visibleNodes.forEach(function(node) {
+      // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
+      var size = node.nearestDist * 0.7 - 0.30 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+      node.xsize = size;
+      node.ysize = size / relvis.visualObjectRatio;
+    });
 
     // Draw edges
     var visibleEdges = relvis.edges.filter(function(e) {
@@ -70,14 +85,10 @@
     // drawNodes
     for (var i = 0; i < visibleNodes.length; ++i) {
       var node = visibleNodes[i];
-      // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
-      var size = node.nearestDist * 0.7 - 0.30 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
-      var w = size * 2;
-      var x = node.vx - w / 2;
-      var h = size * 2 / relvis.visualObjectRatio;
-      var y = node.vy - h / 2;
+      var x = node.vx - node.xsize;
+      var y = node.vy - node.ysize;
 
-      relvis.drawNode(ctx, node, x, y, w, h);
+      relvis.drawNode(ctx, node, x, y, node.xsize * 2, node.ysize * 2);
     }
   }
 

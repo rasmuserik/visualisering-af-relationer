@@ -42,13 +42,15 @@ $(function() {
     relvis.addEventListener('tapstart', function(e) {
       showStatus('tapstart ' + JSON.stringify({
         x: e.x,
-        y: e.y
+        y: e.y,
+        node: (e.node || {}).label
       }));
     });
     relvis.addEventListener('tapmove', function(e) {
       showStatus('tapmove' + JSON.stringify({
         x: e.x,
-        y: e.y
+        y: e.y,
+        node: (e.node || {}).label
       }));
     });
     relvis.addEventListener('tapend', function(e) {
