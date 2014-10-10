@@ -1,50 +1,17 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-
-  // vector math, - maybe move this into util
-  var xy = {};
-
-  xy.mul = function(p1, p2) {
-    return {
-      x: p1.x * p2.x,
-      y: p1.y * p2.y,
-    };
-  };
-  xy.add = function(p1, p2) {
-    return {
-      x: p1.x + p2.x,
-      y: p1.y + p2.y,
-    };
-  };
-  xy.sub = function(p1, p2) {
-    return {
-      x: p1.x - p2.x,
-      y: p1.y - p2.y,
-    };
-  };
-  xy.scale = function(p, a) {
-    return {
-      x: p.x * a,
-      y: p.y * a,
-    };
-  };
-  xy.inv = function(p) {
-    return {
-      x: 1 / p.x,
-      y: 1 / p.y
-    };
-  };
-
+  var xy = relvis.xy;
+  // {{{1 coordinate transformations
   // transformations to/from canvas coordinates
-  relvis.offset = {
+  relvis.offset = { // odd start offset for testing
     x: 123,
     y: 456
-  }; // odd start offset for testing
-  relvis.scale = {
+  }; 
+  relvis.scale = { // odd start offset for testing
     x: 7,
     y: 8
-  }; // odd start offset for testing
+  };
   relvis.toCanvasCoord = function(p) {
     return xy.mul(xy.sub(p, relvis.offset), relvis.scale);
   };

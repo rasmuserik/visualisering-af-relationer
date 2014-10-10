@@ -161,6 +161,8 @@ Et mere komplet eksempel er:
 
 # releaselog
 
+## Version 0.2.0, released 10/10, sprint 2
+
 Indeværende sprint - todo and progress:
 - √API for embedning
   - √afklar api for embedning
@@ -197,7 +199,7 @@ Indeværende sprint - todo and progress:
     - android 2.2 ser ud til at virke
 
 
-## Version 0.1.0, released 27/9, sprint "Projektstart"
+## Version 0.1.0, released 27/9, sprint 1
 
 - Infrastruktur udvikling af HTML5 relationsbrowseren
   - oprettelse af github-repositorie http://github.com/solsort/visualisering-af-relationer så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med

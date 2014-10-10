@@ -2,6 +2,39 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
+  var xy = relvis.xy = {}; // vector math {{{1
+
+  xy.mul = function(p1, p2) {
+    return {
+      x: p1.x * p2.x,
+      y: p1.y * p2.y,
+    };
+  };
+  xy.add = function(p1, p2) {
+    return {
+      x: p1.x + p2.x,
+      y: p1.y + p2.y,
+    };
+  };
+  xy.sub = function(p1, p2) {
+    return {
+      x: p1.x - p2.x,
+      y: p1.y - p2.y,
+    };
+  };
+  xy.scale = function(p, a) {
+    return {
+      x: p.x * a,
+      y: p.y * a,
+    };
+  };
+  xy.inv = function(p) {
+    return {
+      x: 1 / p.x,
+      y: 1 / p.y
+    };
+  };
+
   relvis.eventListeners = {}; //{{{1
   relvis.addEventListener = function addEventListener(name, handler) { //{{{2
     var listeners = relvis.eventListeners[name] || [];
