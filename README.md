@@ -164,6 +164,27 @@ Et mere komplet eksempel er:
 
 Indeværende sprint - todo and progress:
 
+- klarere data model
+  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
+  - single data object with all data
+  - generering af graf-data fra triple-store-data
+  - data-model som separat komponent
+- kommunikation med APIet
+  - served api-dummy-data for test
+  - event ala need-update efter asynkron data opdatering
+- interaktion - træk elementer rundt på skærmen
+  - pinned option på node
+- sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
+- sample server for cirkulære relationer (baseret på ADHL)
+  - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
+  - script der skaber database
+  - api-server
+- visualisering af cirkulære relationer 
+  - indhentning af data fra api-server
+  - graph-walk, og identifikation af hvilke nodes der skal vises
+  - tegning af relationer
+  - knap til aktivering
+
 
 ## Version 0.2.0, released 10/10, sprint 2
 
@@ -219,19 +240,6 @@ Indeværende sprint - todo and progress:
 
 # backlog
 
-- klarere data model
-  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
-  - single data object with all data
-  - generering af graf-data fra triple-store-data
-  - data-model som separat komponent
-- interaktion - træk+pin elementer rundt på skærmen
-- visualisering af cirkulære relationer udfra adhl
-  - adhl-databehandling
-    - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
-    - python-script der skaber database
-  - sample webservice
-    - api-server
-- sikr den kan køre asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - visualiserings-view: strukturelle relationer
