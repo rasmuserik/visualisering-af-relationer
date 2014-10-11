@@ -164,6 +164,7 @@ Et mere komplet eksempel er:
 
 Indeværende sprint - todo and progress:
 
+
 ## Version 0.2.0, released 10/10, sprint 2
 
 - API for embedning
@@ -223,6 +224,13 @@ Indeværende sprint - todo and progress:
   - single data object with all data
   - generering af graf-data fra triple-store-data
   - data-model som separat komponent
+- interaktion - træk+pin elementer rundt på skærmen
+- visualisering af cirkulære relationer udfra adhl
+  - adhl-databehandling
+    - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
+    - python-script der skaber database
+  - sample webservice
+    - api-server
 - sikr den kan køre asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
