@@ -3,6 +3,7 @@
   // This is temporary dummy code - will be rewritten and split up into data-model and graph-model when we got the webservice
   var relvis = window.relvis = window.relvis || {};
   relvis.nodes = [];
+  relvis.edges = [];
   var categoryNodeList = [];
   var sampleItem = [{ //{{{1 - graph-model
     property: 'Cover',
@@ -141,7 +142,8 @@
     structure: ['Serie', 'Udgave', 'Collection']
   };
 
-  function createNodesExternal(item) { //{{{1
+  relvis.createGraph = function() { //{{{1
+    var item = sampleItem;
     var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node;
 
     // {{{3 graph definition and root nodes
@@ -152,7 +154,6 @@
     };
     nodes = [root];
     edges = [];
-
 
     // {{{3 create nodes for categories to get clouds
     categoryNodes = {};
@@ -224,8 +225,5 @@
       nodes: nodes,
       edges: edges
     };
-  }
-  relvis.createGraph = function() { //{{{1
-    return createNodesExternal(sampleItem);
   };
 })();
