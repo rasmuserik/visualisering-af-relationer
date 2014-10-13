@@ -12,13 +12,13 @@
 
   relvis.createGraph = function() { //{{{1
     var id = 'ting:870970-basis%3A23243431';
-    var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node, categoryNodeList;
+    var root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
 
     function createCategoryNodes() { // {{{2
       categoryNodes = {};
       categoryMap = {};
       categoryNodeList = [];
-      for (category in categories) {
+      for (var category in categories) {
         if (categories.hasOwnProperty(category)) {
           categoryNodes[category] = {
             label: category,
