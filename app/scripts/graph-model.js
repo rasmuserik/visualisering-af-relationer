@@ -1,10 +1,8 @@
 (function() {
   'use strict';
-  // This is temporary dummy code - will be rewritten and split up into data-model and graph-model when we got the webservice
   var relvis = window.relvis = window.relvis || {};
   relvis.nodes = [];
   relvis.edges = [];
-  var categoryNodeList = [];
   //{{{1 triple store
   var triples = {};
   relvis.addTriple = function(obj, prop, val) { //{{{2
@@ -183,8 +181,7 @@
 
   relvis.createGraph = function() { //{{{1
     var id = 'ting:870970-basis%3A23243431';
-    var item = sampleItem;
-    var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node;
+    var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node, categoryNodeList;
 
     // {{{3 graph definition and root nodes
     root = {
@@ -243,7 +240,7 @@
             visible: true
           };
           if (node.label.slice(0, 5) === 'ting:') {
-            node.label = relvis.getValues(node.label, 'Titel')[0] || node.label;
+            node.label = relvis.getValues(node.label, 'Titel')[0] || '...';
           }
           nodes.push(node);
           edges.push({
