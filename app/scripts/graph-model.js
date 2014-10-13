@@ -9,23 +9,23 @@
   var triples = {};
   relvis.addTriple = function(obj, prop, val) { //{{{2
     var arr = relvis.getValues(obj, prop);
-    if(!(val in arr)) {
+    if (!(val in arr)) {
       arr.push(val);
     }
   };
   relvis.removeTriple = function(obj, prop, val) { //{{{2
     var arr = relvis.getValues(obj, prop);
     var pos = arr.indexOf(val);
-    if(pos !== -1) {
+    if (pos !== -1) {
       arr[pos] = arr[arr.length - 1];
       arr.pop();
     }
   };
   relvis.getValues = function(obj, prop) { //{{{2
-    if(!triples[obj]) {
+    if (!triples[obj]) {
       triples[obj] = {};
     }
-    if(!triples[obj][prop]) {
+    if (!triples[obj][prop]) {
       triples[obj][prop] = [];
     }
     return triples[obj][prop];
@@ -33,7 +33,7 @@
 
   //{{{1 sampleItem
   var sampleId = 'ting:870970-basis%3A23243431'; //{{{2
-  var sampleItem = [{ 
+  var sampleItem = [{
     property: 'Cover',
     // as forside from vejlebib expires, we temporarily use a link for the frontpage of goodreads during development
     value: 'http://d.gr-assets.com/books/1394861337l/52036.jpg'
@@ -165,15 +165,15 @@
   }];
   // Move data into triple store {{{2
   (function() {
-    for(var i = 0; i < sampleItem.length; ++i) {
+    for (var i = 0; i < sampleItem.length; ++i) {
       var obj = sampleItem[i];
       relvis.addTriple(sampleId, obj.property, obj.value);
-      if(obj.value.slice(0,5) === 'ting:' && obj.title) {
+      if (obj.value.slice(0, 5) === 'ting:' && obj.title) {
         relvis.addTriple(obj.value, 'Titel', obj.title);
       }
     }
   })();
-  
+
   var categories = { //{{{1
     authorInfo: ['Om forfatteren', 'Creator'],
     review: ['Anmeldelse', 'Lektørudtalelse'],
@@ -233,27 +233,27 @@
     // {{{3 nodes for individual relations
     root.imgSrc = relvis.getValues(id, 'Cover')[0];
     root.label = relvis.getValues(id, 'Titel')[0];
-    Object.keys(categories).forEach(function(category){
+    Object.keys(categories).forEach(function(category) {
       categories[category].forEach(function(property) {
-        relvis.getValues(id, property).forEach(function(value){
-        node = {
-          label: value,
-          property: property,
-          value: value,
-          visible: true
-        };
-        if(node.label.slice(0,5) === 'ting:') {
-          node.label = relvis.getValues(node.label, 'Titel')[0] || node.label;
-        }
-        nodes.push(node);
-        edges.push({
-          source: categoryNodes[category],
-          target: node
-        });
-        edges.push({
-          source: root,
-          target: node
-        });
+        relvis.getValues(id, property).forEach(function(value) {
+          node = {
+            label: value,
+            property: property,
+            value: value,
+            visible: true
+          };
+          if (node.label.slice(0, 5) === 'ting:') {
+            node.label = relvis.getValues(node.label, 'Titel')[0] || node.label;
+          }
+          nodes.push(node);
+          edges.push({
+            source: categoryNodes[category],
+            target: node
+          });
+          edges.push({
+            source: root,
+            target: node
+          });
         });
       });
     });
