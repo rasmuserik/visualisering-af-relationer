@@ -14,16 +14,7 @@
     var id = 'ting:870970-basis%3A23243431';
     var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node, categoryNodeList;
 
-    // {{{3 graph definition and root nodes
-    root = {
-      label: 'root',
-      type: 'root',
-      visible: true
-    };
-    nodes = [root];
-    edges = [];
-
-    // {{{3 create nodes for categories to get clouds
+    function createCategoryNodes() { // {{{2
     categoryNodes = {};
     categoryMap = {};
     categoryNodeList = [];
@@ -57,10 +48,9 @@
       x: 1,
       y: 1
     };
+    }
 
-    // {{{3 nodes for individual relations
-    root.imgSrc = relvis.getValues(id, 'Cover')[0];
-    root.label = relvis.getValues(id, 'Titel')[0];
+    function createRelationNodes() { //{{{2
     Object.keys(categories).forEach(function(category) {
       categories[category].forEach(function(property) {
         relvis.getValues(id, property).forEach(function(value) {
@@ -85,11 +75,26 @@
         });
       });
     });
-    relvis.nodes = nodes;
-    relvis.edges = edges;
+    }
+    function createRootNode() { //{{{2
+    root = {
+      label: 'root',
+      type: 'root',
+      visible: true
+    };
+    root.imgSrc = relvis.getValues(id, 'Cover')[0];
+    root.label = relvis.getValues(id, 'Titel')[0];
+    nodes.push(root);
+    }
+
+    nodes = relvis.nodes = []; //{{{2
+    edges = relvis.edges = [];
+    createRootNode();
+    createCategoryNodes();
+    createRelationNodes();
     return {
       nodes: nodes,
       edges: edges
     };
   };
-})();
+})(); //{{{1
