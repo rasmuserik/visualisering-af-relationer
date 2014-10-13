@@ -166,14 +166,22 @@ Indeværende sprint - todo and progress:
 
 - •klarere data model
   - √triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
-  - single data object with all data
-  - generering af graf-data fra triple-store-data
-  - data-model som separat komponent
+  - √generering af graf-data fra triple-store-data
+  - √data-model som separat komponent
+  - events for requests
+  - data-changed event + regen-graf
+  - throttled events
 - kommunikation med APIet
   - served api-dummy-data for test
   - event ala need-update efter asynkron data opdatering
+  - object get queue
+  - get the data from the API
 - interaktion - træk elementer rundt på skærmen
   - pinned option på node
+  - lock view during interactoin
+  - handle tap-down
+  - handle move
+  - handle release
 - sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - sample server for cirkulære relationer (baseret på ADHL)
   - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
