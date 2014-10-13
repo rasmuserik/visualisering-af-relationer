@@ -168,6 +168,9 @@
     for(var i = 0; i < sampleItem.length; ++i) {
       var obj = sampleItem[i];
       relvis.addTriple(sampleId, obj.property, obj.value);
+      if(obj.value.slice(0,5) === 'ting:' && obj.title) {
+        relvis.addTriple(obj.value, 'Titel', obj.title);
+      }
     }
   })();
   
@@ -179,6 +182,7 @@
   };
 
   relvis.createGraph = function() { //{{{1
+    var id = 'ting:870970-basis%3A23243431';
     var item = sampleItem;
     var root, nodes, edges, i, rel, categoryMap, categoryNodes, category, property, node;
 
@@ -227,23 +231,20 @@
     };
 
     // {{{3 nodes for individual relations
-    for (i = 0; i < item.length; ++i) {
-      rel = item[i];
-      property = rel.property;
-      if (property === 'Cover') {
-        root.imgSrc = rel.value;
-      }
-      if (property === 'Titel') {
-        root.label = rel.value;
-      }
-      category = categoryMap[property];
-      if (category) {
+    root.imgSrc = relvis.getValues(id, 'Cover')[0];
+    root.label = relvis.getValues(id, 'Titel')[0];
+    Object.keys(categories).forEach(function(category){
+      categories[category].forEach(function(property) {
+        relvis.getValues(id, property).forEach(function(value){
         node = {
-          label: /* property + '\n' + */ (rel.title || rel.value),
+          label: value,
           property: property,
-          value: rel.value,
+          value: value,
           visible: true
         };
+        if(node.label.slice(0,5) === 'ting:') {
+          node.label = relvis.getValues(node.label, 'Titel')[0] || node.label;
+        }
         nodes.push(node);
         edges.push({
           source: categoryNodes[category],
@@ -253,8 +254,9 @@
           source: root,
           target: node
         });
-      }
-    }
+        });
+      });
+    });
     relvis.nodes = nodes;
     relvis.edges = edges;
     return {

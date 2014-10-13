@@ -164,8 +164,8 @@ Et mere komplet eksempel er:
 
 Indeværende sprint - todo and progress:
 
-- klarere data model
-  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
+- •klarere data model
+  - √triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
   - single data object with all data
   - generering af graf-data fra triple-store-data
   - data-model som separat komponent
