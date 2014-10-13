@@ -8,6 +8,17 @@
     return a <= b + epsilon && b <= a + epsilon;
   }
   var ctx;
+  describe('data-model', function() {
+    it('have a triple store', function() {
+      assert(relvis.getValues('foo', 'bar').length === 0, JSON.stringify(relvis.getValues('foo', 'bar')));
+      relvis.addTriple('foo', 'bar', 'baz');
+      relvis.addTriple('foo', 'bar', 'quux');
+      assert(relvis.getValues('foo', 'bar').length === 2);
+      relvis.removeTriple('foo', 'bar', 'baz');
+      assert(relvis.getValues('foo', 'bar')[0] === 'quux');
+      relvis.removeTriple('foo', 'bar', 'quux');
+    });
+  });
   describe('graph-model', function() {
     it('should create af graph on the relvis-object', function() {
       relvis.createGraph();

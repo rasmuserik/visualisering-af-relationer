@@ -5,6 +5,31 @@
   relvis.nodes = [];
   relvis.edges = [];
   var categoryNodeList = [];
+  //{{{1 triple store
+  var triples = {};
+  relvis.addTriple = function(obj, prop, val) { //{{{2
+    var arr = relvis.getValues(obj, prop);
+    if(!(val in arr)) {
+      arr.push(val);
+    }
+  };
+  relvis.removeTriple = function(obj, prop, val) { //{{{2
+    var arr = relvis.getValues(obj, prop);
+    var pos = arr.indexOf(val);
+    if(pos !== -1) {
+      arr[pos] = arr[arr.length - 1];
+      arr.pop();
+    }
+  };
+  relvis.getValues = function(obj, prop) { //{{{2
+    if(!triples[obj]) {
+      triples[obj] = {};
+    }
+    if(!triples[obj][prop]) {
+      triples[obj][prop] = [];
+    }
+    return triples[obj][prop];
+  };
   var sampleItem = [{ //{{{1 - graph-model
     property: 'Cover',
     // as forside from vejlebib expires, we temporarily use a link for the frontpage of goodreads during development
