@@ -30,7 +30,10 @@
     }
     return triples[obj][prop];
   };
-  var sampleItem = [{ //{{{1 - graph-model
+
+  //{{{1 sampleItem
+  var sampleId = 'ting:870970-basis%3A23243431'; //{{{2
+  var sampleItem = [{ 
     property: 'Cover',
     // as forside from vejlebib expires, we temporarily use a link for the frontpage of goodreads during development
     value: 'http://d.gr-assets.com/books/1394861337l/52036.jpg'
@@ -51,7 +54,7 @@
     value: 'Gyldendals paperbacks'
   }, {
     property: 'Id',
-    value: 'ting:870970-basis%3A23243431'
+    value: sampleId
   }, {
     property: 'Type',
     value: 'Bog'
@@ -160,6 +163,14 @@
     value: 'ting:870970-basis%3A15153431',
     title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
   }];
+  // Move data into triple store {{{2
+  (function() {
+    for(var i = 0; i < sampleItem.length; ++i) {
+      var obj = sampleItem[i];
+      relvis.addTriple(sampleId, obj.property, obj.value);
+    }
+  })();
+  
   var categories = { //{{{1
     authorInfo: ['Om forfatteren', 'Creator'],
     review: ['Anmeldelse', 'Lektørudtalelse'],
