@@ -2,7 +2,7 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
-  relvis.initUI = function() {//{{{1
+  relvis.initUI = function() { //{{{1
     var info = '';
     relvis.addEventListener('redraw', function() {
       var ctx = relvis.canvas.getContext('2d');
@@ -12,6 +12,7 @@
       ctx.fillStyle = '#000';
       ctx.fillText(info + ' ' + Date.now(), 10, 10);
     });
+
     function showStatus(text) {
       info = text;
     }

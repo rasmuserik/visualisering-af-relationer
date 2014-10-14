@@ -133,8 +133,9 @@
   relvis.throttle = function(fn, timeout) { //{{{1
     var needRun = false;
     var throttled = false;
+
     function exec() {
-      if(needRun)  {
+      if (needRun) {
         fn();
         needRun = false;
       }
@@ -142,7 +143,7 @@
     }
     return function() {
       needRun = true;
-      if(!throttled) {
+      if (!throttled) {
         exec();
         throttled = true;
         window.setTimeout(exec, timeout || 100);
@@ -150,4 +151,4 @@
     };
   };
 
-})();//{{{1
+})(); //{{{1

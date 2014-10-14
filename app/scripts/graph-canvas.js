@@ -93,7 +93,7 @@
     }
   });
 
- 
+
   relvis.requestRedraw = relvis.throttle(function() { //{{{1
     relvis.nextTick(function() {
       relvis.dispatchEvent('redraw', {});

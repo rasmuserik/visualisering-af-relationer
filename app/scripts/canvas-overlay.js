@@ -40,7 +40,7 @@
   }
 
   relvis.initCanvas = function() { //{{{1
-    if(relvis.canvas) {
+    if (relvis.canvas) {
       return;
     }
     var canvas = relvis.canvas = document.createElement('canvas');
