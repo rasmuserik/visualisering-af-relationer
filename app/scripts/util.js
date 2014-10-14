@@ -145,9 +145,9 @@
       if(!throttled) {
         exec();
         throttled = true;
-        setTimeout(timeout || 100, exec);
+        window.setTimeout(exec, timeout || 100);
       }
     };
   };
 
-})();
+})();//{{{1

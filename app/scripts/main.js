@@ -27,39 +27,13 @@
     if (unsupportedPlatform()) {
       window.alert('Warning unsupported platform.\n' + unsupportedPlatform());
     }
+    relvis.initCanvas();
     relvis.createGraph();
     relvis.layoutGraph();
     relvis.showCanvasOverlay();
-
-    function showStatus(text) {
-      var ctx = relvis.canvas.getContext('2d');
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0, 0, 500, 10);
-      relvis.canvas.font = '10px sans-serif';
-      ctx.fillStyle = '#000';
-      ctx.fillText(text + ' ' + Date.now(), 10, 10);
-    }
-    relvis.addEventListener('tapstart', function(e) {
-      showStatus('tapstart ' + JSON.stringify({
-        x: e.x,
-        y: e.y,
-        node: (e.node || {}).label
-      }));
-    });
-    relvis.addEventListener('tapmove', function(e) {
-      showStatus('tapmove' + JSON.stringify({
-        x: e.x,
-        y: e.y,
-        node: (e.node || {}).label
-      }));
-    });
-    relvis.addEventListener('tapend', function(e) {
-      showStatus('tapend');
-    });
+    relvis.initUI();
   }
-
   relvis.init = function() { //{{{1
-    relvis.initCanvas();
     // button on sample page pops up visualisation
     $('#relvis-button').click(showGraph);
     var elems = document.getElementsByClassName('relvis-request');
@@ -89,4 +63,4 @@
       showGraph();
     }
   };
-})();
+})(); //{{{1

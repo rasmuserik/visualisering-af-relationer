@@ -130,8 +130,18 @@ Et mere komplet eksempel er:
 - util
   - nearestPoints(...)
   - findBoundaries(...)
-  - throttle(fn, maxrate=100ms)0
+  - xy.add, xy.mul, xy.sub, xy.scale, xy.inv
+  - addEventListener(name, fn), dispatchEvent(name, event-object), 
+  - throttle(fn, maxrate=100ms)
   - nextTick(fn)
+- ui
+  - initUI()
+
+## Events
+
+- tapstart
+- tapmove
+- tapend
 
 ## Mind map
 - Nuværende arkitektur
@@ -181,7 +191,7 @@ Indeværende sprint - todo and progress:
   - get the data from the API
 - interaktion - træk elementer rundt på skærmen
   - pinned option på node
-  - lock view during interactoin
+  - lock view during interaction
   - handle tap-down
   - handle move
   - handle release

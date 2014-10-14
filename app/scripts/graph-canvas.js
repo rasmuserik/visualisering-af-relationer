@@ -93,9 +93,11 @@
     }
   }
 
-  relvis.requestRedraw = function() { //{{{1 
-    // TODO: throttle this function, and make it async
-    drawGraph();
-  };
+ 
+  relvis.requestRedraw = relvis.throttle(function() { //{{{1
+    relvis.nextTick(function() {
+      drawGraph();
+    });
+  }, 50);
 
 })(); //{{{1
