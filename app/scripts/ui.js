@@ -17,11 +17,13 @@
       info = text;
     }
     relvis.addEventListener('tapstart', function(e) {
+      var node = (e.node || {});
       showStatus('tapstart ' + JSON.stringify({
         x: e.x,
         y: e.y,
-        node: (e.node || {}).label
+        node: node.label
       }));
+      node.fixed = true;
       relvis.fixedViewport = true;
       relvis.requestRedraw();
     });

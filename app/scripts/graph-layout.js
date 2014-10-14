@@ -1,15 +1,17 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  relvis.layoutGraph = function layoutGraph() { //{{{1
+  relvis.d3force = undefined;
+  relvis.layoutGraph = relvis.throttle(function() { //{{{1
+    var force = relvis.d3force;
+    if(!force) {
     // Create forcegraph
     var force = window.d3.layout.force()
       .size([window.innerWidth, window.innerHeight])
+      .charge(-120)
       .nodes(relvis.nodes)
       .links(relvis.edges)
-      .charge(-120)
-      .linkDistance(30)
-      .start();
+      .linkDistance(30);
 
     // handle each frame
     force.on('tick', function() {
@@ -28,5 +30,8 @@
       //redraw
       relvis.requestRedraw();
     });
-  };
+    relvis.d3force = force;
+    }
+    force.start();
+  }, 1000);
 })();
