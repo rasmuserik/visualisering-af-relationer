@@ -29,7 +29,7 @@
   describe('graph-layout', function() {
     it('should run here few assertions', function() {
       relvis.layoutGraph();
-      assert(relvis.nodes[0].x !== undefined);
+      setTimeout(function() { assert(relvis.nodes[0].x !== undefined);}, 100);
     });
   });
   describe('canvas-overlay', function() {
