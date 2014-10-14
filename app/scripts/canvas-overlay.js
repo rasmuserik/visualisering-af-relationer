@@ -39,7 +39,10 @@
     };
   }
 
-  $(function() { //{{{1
+  relvis.initCanvas = function() { //{{{1
+    if(relvis.canvas) {
+      return;
+    }
     var canvas = relvis.canvas = document.createElement('canvas');
     canvas.className = 'CanvasOverlay';
 
@@ -64,7 +67,7 @@
     canvas.addEventListener('touchend', taphandle('end'));
     canvas.addEventListener('mouseup', taphandle('end'));
     canvas.addEventListener('mouseleave', taphandle('end'));
-  });
+  };
 
   relvis.showCanvasOverlay = function() { //{{{1 
     // do nothing if already visible

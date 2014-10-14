@@ -109,6 +109,7 @@ Et mere komplet eksempel er:
   - overlayVisible
   - showCanvasOverlay()
   - hideCanvasOverlay() 
+  - initCanvas()
 - canvas-util
   - writeBox(...)
 - graph-canvas

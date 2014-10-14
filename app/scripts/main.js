@@ -1,4 +1,4 @@
-$(function() {
+(function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
@@ -59,6 +59,7 @@ $(function() {
   }
 
   relvis.init = function() { //{{{1
+    relvis.initCanvas();
     // button on sample page pops up visualisation
     $('#relvis-button').click(showGraph);
     var elems = document.getElementsByClassName('relvis-request');
@@ -88,4 +89,4 @@ $(function() {
       showGraph();
     }
   };
-});
+})();
