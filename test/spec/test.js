@@ -28,14 +28,13 @@
   });
   describe('graph-layout', function() {
     it('should run here few assertions', function() {
-      assert(relvis.nodes[0].x === undefined);
       relvis.layoutGraph();
       assert(relvis.nodes[0].x !== undefined);
     });
   });
   describe('canvas-overlay', function() {
     it('should run here few assertions', function() {
-      relvis.initCanvas();
+      ctx = relvis.canvas.getContext('2d');
       relvis.hideCanvasOverlay();
       assert(document.getElementsByClassName('CanvasOverlay').length === 0, 'no canvas after hide canvas overlay');
       relvis.showCanvasOverlay();
@@ -45,7 +44,6 @@
       relvis.showCanvasOverlay();
       relvis.showCanvasOverlay();
       assert(document.getElementsByClassName('CanvasOverlay').length === 1);
-      ctx = relvis.canvas.getContext('2d');
       assert(ctx);
       assert(typeof relvis.unit === 'number');
       // updateOverlayPosition - not easily testable
@@ -53,6 +51,7 @@
   });
   describe('canvas-util', function() {
     it('should run here few assertions', function() {
+      var ctx = relvis.canvas.getContext('2d');
       assert(relvis.textLayout(ctx, 'a b c', 1000, 30).length === 1);
       assert(relvis.textLayout(ctx, 'a b c', 1, 30).length === 3);
       // writeBox - not easily testable

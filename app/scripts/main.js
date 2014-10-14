@@ -20,7 +20,7 @@
     return false;
   }
 
-  function showGraph() { //{{{1
+  relvis.show = function() { //{{{1
     if (relvis.overlayVisible) {
       return;
     }
@@ -32,17 +32,17 @@
     relvis.layoutGraph();
     relvis.showCanvasOverlay();
     relvis.initUI();
-  }
+  };
   relvis.init = function() { //{{{1
     // button on sample page pops up visualisation
-    $('#relvis-button').click(showGraph);
+    $('#relvis-button').click(relvis.show);
     var elems = document.getElementsByClassName('relvis-request');
 
     function makeHandler(elem) {
       return function() {
         var id = elem.getAttribute('data-relvis-id');
         console.log('external view for', id);
-        showGraph();
+        relvis.show();
       };
     }
     for (var i = 0; i < elems.length; ++i) {
@@ -60,7 +60,7 @@
 
     // show visualisation on load if we have #relvis hash
     if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform()) {
-      showGraph();
+      relvis.show();
     }
   };
 })(); //{{{1

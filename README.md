@@ -136,6 +136,9 @@ Et mere komplet eksempel er:
   - nextTick(fn)
 - ui
   - initUI()
+- main
+  - init(...)
+  - show(...)
 
 ## Events
 
@@ -183,14 +186,14 @@ Indeværende sprint - todo and progress:
   - √generering af graf-data fra triple-store-data
   - √data-model som separat komponent
   - events for requests
-  - data-changed event + regen-graf
+  - data-changed event + regenerer-graf
   - √throttled function
 - kommunikation med APIet
   - served api-dummy-data for test
   - event ala need-update efter asynkron data opdatering
   - object get queue
   - get the data from the API
-- interaktion - træk elementer rundt på skærmen
+- •interaktion - træk elementer rundt på skærmen
   - pinned option på node
   - lock view during interaction
   - handle tap-down
@@ -262,6 +265,7 @@ Indeværende sprint - todo and progress:
 
 # backlog
 
+- ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - visualiserings-view: strukturelle relationer

@@ -36,6 +36,15 @@
     <!-- include spec files here... -->
     <script src="spec/test.js"></script>
 
-    <script>mocha.run()</script>
+        <script>
+        $(function(){
+          relvis.init({
+            apiUrl: "https://api.vejlebib.dk/",
+            query: "some search string if applicable"
+          });
+          relvis.show();
+          mocha.run();
+        });
+        </script>
 </body>
 </html>
