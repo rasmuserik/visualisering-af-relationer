@@ -142,6 +142,7 @@ Et mere komplet eksempel er:
 - tapstart
 - tapmove
 - tapend
+- redraw
 
 ## Mind map
 - Nuværende arkitektur

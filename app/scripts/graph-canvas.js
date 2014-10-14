@@ -29,7 +29,7 @@
     return undefined;
   };
 
-  function drawGraph() { //{{{1
+  relvis.addEventListener('redraw', function() { //{{{1
     if (!relvis.nodes || !relvis.overlayVisible) {
       return;
     }
@@ -91,12 +91,12 @@
 
       relvis.drawNode(ctx, node, x, y, node.xsize * 2, node.ysize * 2);
     }
-  }
+  });
 
  
   relvis.requestRedraw = relvis.throttle(function() { //{{{1
     relvis.nextTick(function() {
-      drawGraph();
+      relvis.dispatchEvent("redraw", {});
     });
   }, 50);
 
