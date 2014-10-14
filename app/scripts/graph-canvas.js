@@ -1,6 +1,7 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
+  relvis.fixedViewport = false;
   // {{{1 coordinate transformations
   // transformations to/from canvas coordinates
   var xy = relvis.xy;
@@ -46,6 +47,7 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Find coordinate transformation
+    if(!relvis.fixedViewport) {
     var margin = 0.05;
     var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
 
@@ -57,6 +59,7 @@
         y: canvas.height
       },
       xy.inv(relvis.scale));
+    }
 
     // Calculate view coordinates for all points
     visibleNodes.forEach(function(node) {

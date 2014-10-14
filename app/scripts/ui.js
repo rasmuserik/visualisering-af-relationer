@@ -22,6 +22,7 @@
         y: e.y,
         node: (e.node || {}).label
       }));
+      relvis.fixedViewport = true;
       relvis.requestRedraw();
     });
     relvis.addEventListener('tapmove', function(e) {
@@ -34,6 +35,7 @@
     });
     relvis.addEventListener('tapend', function(e) {
       showStatus('tapend');
+      relvis.fixedViewport = false;
       relvis.requestRedraw();
     });
   };

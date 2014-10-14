@@ -113,6 +113,7 @@ Et mere komplet eksempel er:
 - canvas-util
   - writeBox(...)
 - graph-canvas
+  - fixedViewport = true | false
   - nodeAt(x, y)
   - `toCanvasCoord({x:..,y:..})`
   - `toGraphCoord({x:..,y:..})`
@@ -195,7 +196,7 @@ Indeværende sprint - todo and progress:
   - get the data from the API
 - •interaktion - træk elementer rundt på skærmen
   - pinned option på node
-  - lock view during interaction
+  - √lock view during interaction
   - handle tap-down
   - handle move
   - handle release
