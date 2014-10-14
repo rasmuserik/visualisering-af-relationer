@@ -35,9 +35,9 @@
   });
   describe('canvas-overlay', function() {
     it('should run here few assertions', function() {
-      assert(document.getElementsByClassName('CanvasOverlay').length === 0);
+      relvis.initCanvas();
       relvis.hideCanvasOverlay();
-      assert(document.getElementsByClassName('CanvasOverlay').length === 0);
+      assert(document.getElementsByClassName('CanvasOverlay').length === 0, 'no canvas after hide canvas overlay');
       relvis.showCanvasOverlay();
       assert(document.getElementsByClassName('CanvasOverlay').length === 1);
       relvis.hideCanvasOverlay();
