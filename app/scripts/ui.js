@@ -1,11 +1,9 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-
-  var x0, y0;
-
   var info = '';
-
+  var graphTouchCoord = {};
+  var node;
 
   function redraw() { //{{{1
     var ctx = relvis.canvas.getContext('2d');
@@ -20,9 +18,11 @@
     info = text;
   }
 
-  relvis.addEventListener('tapstart', function(e) {
-    var node = (e.node || {});
+  relvis.addEventListener('tapstart', function(e) { //{{{1
+    node = (e.node || {});
+    graphTouchCoord = relvis.toGraphCoord(e);
     showStatus('tapstart ' + JSON.stringify({
+      pos: graphTouchCoord,
       x: e.x,
       y: e.y,
       node: node.label
@@ -31,16 +31,23 @@
     relvis.fixedViewport = true;
     relvis.requestRedraw();
   });
-  relvis.addEventListener('tapmove', function(e) {
+  relvis.addEventListener('tapmove', function(e) { //{{{1
+    var coord = relvis.toGraphCoord(e);
+    var dpos = relvis.xy.sub(coord, graphTouchCoord);
     showStatus('tapmove' + JSON.stringify({
+      dpos: dpos,
       x: e.x,
       y: e.y,
-      node: (e.node || {}).label
+      node: node.label
     }));
+    relvis.xy.assign(node, relvis.xy.add(node,dpos));
+    relvis.xy.assign(node, coord);
+    graphTouchCoord = relvis.toGraphCoord(e);
     relvis.requestRedraw();
   });
-  relvis.addEventListener('tapend', function(e) {
+  relvis.addEventListener('tapend', function(e) {//{{{1
     showStatus('tapend');
+    node.fixed = false;
     relvis.fixedViewport = false;
     relvis.requestRedraw();
     relvis.layoutGraph();

@@ -5,7 +5,12 @@
 
   var touching = false;
 
-  function taphandle(kind) { //{{{1
+  //taphandling{{{1
+  var tapStartX;
+  var tapStartY;
+  var tapPrevX;
+  var tapPrevY;
+  function taphandle(kind) { 
     return function(e) {
       e.preventDefault();
       var o = {
@@ -22,11 +27,21 @@
         o.x = e.clientX;
         o.y = e.clientY;
       }
-      if (typeof o.x === 'number') {
-        o.node = relvis.nodeAt(o.x, o.y);
-      }
+
       if (kind === 'start') {
         touching = true;
+        tapPrevX = tapStartX = o.x;
+        tapPrevY = tapStartY = o.y;
+      }
+
+      if (typeof o.x === 'number') {
+        o.node = relvis.nodeAt(o.x, o.y);
+        o.dx = o.x - tapStartX;
+        o.dy = o.y - tapStartY;
+        o.ddx = o.x - tapPrevX;
+        o.ddy = o.y - tapPrevY;
+        tapPrevX = o.x;
+        tapPrevY = o.y;
       }
 
       if (touching || kind === 'start') {
