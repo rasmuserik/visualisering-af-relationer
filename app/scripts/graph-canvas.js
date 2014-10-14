@@ -47,18 +47,18 @@
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Find coordinate transformation
-    if(!relvis.fixedViewport) {
-    var margin = 0.05;
-    var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
+    if (!relvis.fixedViewport) {
+      var margin = 0.05;
+      var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
 
-    relvis.offset = xy.sub(boundaries.min,
-      xy.scale(boundaries.range, margin));
-    relvis.scale = xy.scale(boundaries.range, 1 + 2 * margin);
-    relvis.scale = xy.mul({
-        x: canvas.width,
-        y: canvas.height
-      },
-      xy.inv(relvis.scale));
+      relvis.offset = xy.sub(boundaries.min,
+        xy.scale(boundaries.range, margin));
+      relvis.scale = xy.scale(boundaries.range, 1 + 2 * margin);
+      relvis.scale = xy.mul({
+          x: canvas.width,
+          y: canvas.height
+        },
+        xy.inv(relvis.scale));
     }
 
     // Calculate view coordinates for all points
