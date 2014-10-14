@@ -130,6 +130,8 @@ Et mere komplet eksempel er:
 - util
   - nearestPoints(...)
   - findBoundaries(...)
+  - throttle(fn, maxrate=100ms)0
+  - nextTick(fn)
 
 ## Mind map
 - Nuværende arkitektur
@@ -171,7 +173,7 @@ Indeværende sprint - todo and progress:
   - √data-model som separat komponent
   - events for requests
   - data-changed event + regen-graf
-  - throttled events
+  - √throttled function
 - kommunikation med APIet
   - served api-dummy-data for test
   - event ala need-update efter asynkron data opdatering
@@ -183,7 +185,7 @@ Indeværende sprint - todo and progress:
   - handle tap-down
   - handle move
   - handle release
-- sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
+- √sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - sample server for cirkulære relationer (baseret på ADHL)
   - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
   - script der skaber database

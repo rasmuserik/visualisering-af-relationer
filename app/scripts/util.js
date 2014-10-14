@@ -127,5 +127,27 @@
       }
     };
   };
+  relvis.nextTick = function(fn) { //{{{1
+    setTimeout(fn, 0);
+  };
+  relvis.throttle = function(fn, timeout) { //{{{1
+    var needRun = false;
+    var throttled = false;
+    function exec() {
+      if(needRun)  {
+        fn();
+        needRun = false;
+      }
+      throttled = false;
+    }
+    return function() {
+      needRun = true;
+      if(!throttled) {
+        exec();
+        throttled = true;
+        setTimeout(timeout || 100, exec);
+      }
+    };
+  };
 
 })();
