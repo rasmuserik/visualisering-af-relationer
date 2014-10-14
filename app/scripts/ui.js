@@ -3,7 +3,7 @@
   var relvis = window.relvis = window.relvis || {};
 
   relvis.initUI = function() {//{{{1
-    var info = "";
+    var info = '';
     relvis.addEventListener('redraw', function() {
       var ctx = relvis.canvas.getContext('2d');
       ctx.fillStyle = '#fff';
