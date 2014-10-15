@@ -102,6 +102,10 @@ Et mere komplet eksempel er:
     });
     </script>
 
+## ADHL test services
+
+A development/sample data source for circular relations are generated. This is the python scripts in `adhl/`. to run them leveldb for python has to be installed `pip install leveldb` and the adhl dataset has to be available in the parent directory as `final_adhl.csv`. The adhl-dataset is the one DBC released on hack4dk 2014, with the fields `user,library,gender,birthyear,id,localid,clusterid,loan_date,title,authors,type`.
+
 # Applikationsarkitektur og teknologivalg
 ## Cross-component functions and properties
 
@@ -194,16 +198,16 @@ Indeværende sprint - todo and progress:
   - event ala need-update efter asynkron data opdatering
   - object get queue
   - get the data from the API
-- •interaktion - træk elementer rundt på skærmen
-  - pinned option på node
+- √interaktion - træk elementer rundt på skærmen
+  - √pinned option på node
   - √lock view during interaction
-  - handle tap-down
-  - handle move
-  - handle release
+  - √handle tap-down
+  - √handle move
+  - √handle release
 - √sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
-- sample server for cirkulære relationer (baseret på ADHL)
-  - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
-  - script der skaber database
+- •sample server for cirkulære relationer (baseret på ADHL)
+  - √undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
+  - •script der skaber database
   - api-server
 - visualisering af cirkulære relationer 
   - indhentning af data fra api-server
