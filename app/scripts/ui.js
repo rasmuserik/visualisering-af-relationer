@@ -42,8 +42,11 @@
     }));
     relvis.xy.assign(node, relvis.xy.add(node,dpos));
     relvis.xy.assign(node, coord);
+    node.px = node.x;
+    node.py = node.y;
     graphTouchCoord = relvis.toGraphCoord(e);
     relvis.requestRedraw();
+    relvis.layoutGraph();
   });
   relvis.addEventListener('tapend', function(e) {//{{{1
     showStatus('tapend');
