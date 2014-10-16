@@ -2,7 +2,18 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
-  function unsupportedPlatform() { //{{{1
+
+  relvis.show = function() { //{{{1
+    if (relvis.overlayVisible) {
+      return;
+    }
+    relvis.initData();
+    relvis.initCanvas();
+    relvis.showCanvasOverlay();
+    relvis.initUI();
+  };
+  relvis.init = function() { //{{{1
+  var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
     // check that canvas is supported
     var elem = document.createElement('canvas');
     if (!elem.getContext) {
@@ -18,35 +29,27 @@
 
     // everything is ok
     return false;
-  }
-
-  relvis.show = function() { //{{{1
-    if (relvis.overlayVisible) {
-      return;
-    }
-    if (unsupportedPlatform()) {
-      window.alert('Warning unsupported platform.\n' + unsupportedPlatform());
-    }
-    relvis.initData();
-    relvis.initCanvas();
-    relvis.showCanvasOverlay();
-    relvis.initUI();
-  };
-  relvis.init = function() { //{{{1
-    // button on sample page pops up visualisation
+  })();
+    // button on sample page pops up visualisation //{{{{2
     $('#relvis-button').click(relvis.show);
-    var elems = document.getElementsByClassName('relvis-request');
+    var elemsSel = document.getElementsByClassName('relvis-request');
+    var elems = [];
+    for (var i = 0; i < elemsSel.length; ++i) {
+      elems.push(elemsSel[i]);
+    }
+
 
     function makeHandler(elem) {
       return function() {
         var id = elem.getAttribute('data-relvis-id');
-        console.log('external view for', id);
+        relvis.visualisation = 'ext'+id;
+        location.hash = '#relvis' + relvis.visualisation;
         relvis.show();
       };
     }
-    for (var i = 0; i < elems.length; ++i) {
+    for (i = 0; i < elems.length; ++i) {
       var elem = elems[i];
-      if (unsupportedPlatform()) {
+      if (unsupportedPlatform) {
         elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
       } else {
         var handler = makeHandler(elem);
@@ -58,7 +61,8 @@
     }
 
     // show visualisation on load if we have #relvis hash
-    if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform()) {
+    if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
+      relvis.visualisation = location.hash.slice(7);
       relvis.show();
     }
   };

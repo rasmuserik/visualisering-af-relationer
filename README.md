@@ -131,7 +131,7 @@ A development/sample data source for circular relations are generated. This is t
 - graph-model
   - edges
   - nodes
-  - createGraph()
+  - reacts on `data-update`
 - util
   - nearestPoints(...)
   - findBoundaries(...)
@@ -195,12 +195,9 @@ Indeværende sprint - todo and progress:
   - √events for requests
   - √data-update event, og regenerer-graf on event
   - √throttled function
-- •kommunikation med APIet
-  - •jsonp
-  - served api-dummy-data for test
-  - event ala need-update efter asynkron data opdatering
-  - object get queue
-  - get the data from the API
+- √kommunikation med APIet
+  - √get the data from the API
+  - √sample api-button
 - √interaktion - træk elementer rundt på skærmen
   - √pinned option på node
   - √lock view during interaction
@@ -273,6 +270,8 @@ Indeværende sprint - todo and progress:
 
 # backlog
 
+- margin fit size of objects
+- zoom/dpi-bug when interacting
 - ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad

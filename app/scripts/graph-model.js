@@ -11,7 +11,10 @@
   };
 
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
-    var id = 'ting:870970-basis%3A23243431';
+
+    var type = relvis.visualisation.slice(0,3);
+    var id = relvis.visualisation.slice(3);
+
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
 
     function createNode(node) { //{{{2
@@ -76,7 +79,7 @@
               value: value,
               visible: true
             });
-            if (node.label.slice(0, 5) === 'ting:') {
+            if(node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
               node.label = relvis.getValues(node.label, 'title')[0] || '...';
             }
             nodes.push(node);

@@ -48,7 +48,7 @@
 
     // Find coordinate transformation
     if (!relvis.fixedViewport) {
-      var margin = 0.05;
+      var margin = 0.35;
       var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
 
       relvis.offset = xy.sub(boundaries.min,
@@ -71,7 +71,7 @@
     visibleNodes.forEach(function(node) {
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
       if (node.nearestNode) {
-        var size = node.nearestDist * 0.7 - 0.30 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
+        var size = (node.nearestDist * 0.7 - 0.20 * node.nearestNode.nearestDist) * Math.SQRT1_2;
         node.xsize = size;
         node.ysize = size / relvis.visualObjectRatio;
       }

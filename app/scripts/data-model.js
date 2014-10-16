@@ -2,11 +2,14 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
   //{{{1 triple store
-  var triples = {};
+  var triples = relvis.triples = {};
   var dataupdate = relvis.throttle(100, function() {
     relvis.dispatchEvent('data-update');
   });
   relvis.addTriple = function(obj, prop, val) { //{{{2
+    if(!val) {
+      return;
+    }
     var arr = relvis.getValues(obj, prop);
     if (!(val in arr)) {
       arr.push(val);
@@ -37,7 +40,7 @@
   };
 
   function addSampleItem() { //{{{1 sampleItem
-    var sampleId = 'ting:870970-basis%3A23243431'; //{{{2
+    var sampleId = '870970-basis:23243431'; //{{{2
     var sampleItem = [{
       property: 'Cover',
       // as forside from vejlebib expires, we temporarily use a link for the frontpage of goodreads during development
@@ -47,7 +50,7 @@
       value: 'Siddhartha - en indisk legende'
     }, {
       property: 'Collection',
-      value: 'ting:870970-basis%3A22331892'
+      value: '870970-basis:22331892'
     }, {
       property: 'creator',
       value: 'Hermann Hesse (2012)'
@@ -101,71 +104,71 @@
       value: '1/1 eksemplar hjemme på Jelling > Voksen > Magasin > Skøn > > Hesse'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A12543431',
+      value: '870970-basis:12543431',
       title: 'Hermann Hesse : Leben und Werk im Bild : mit dem Kurzgefassten Lebenslauf von Hermann Hesse'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A85143431',
+      value: '870970-basis:85143431',
       title: 'Hermann Hesse : pilgrim of crisis : a biography'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A14943431',
+      value: '870970-basis:14943431',
       title: 'Hermann Hesse : life and art'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A91483431',
+      value: '870970-basis:91483431',
       title: 'Hermann Hesse'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A19898431',
+      value: '870970-basis:19898431',
       title: 'Hermann Hesse : sein Leben und sein Werk (Ved Anni Carlsson, Otto Basler)\nAf indholdet: Anni Carlsson: Vom Steppenwolf zur Morgenlandfahrt ; Otto Basler: Der Weg zum Glasperlenspiel'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A87875131',
+      value: '870970-basis:87875131',
       title: 'Hermann Hesse : sein Leben und sein Werk'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A91431241',
+      value: '870970-basis:91431241',
       title: 'Hermann Hesse : a pictorial biography'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A57873431',
+      value: '870970-basis:57873431',
       title: 'Hermann Hesse : sein Leben und sein Werk (Ved Anni Carlsson)\nSide 236-256: Anni Carlsson: Vom Steppenwolf zur Morgenlandfahrt ; Side 257-300: Anni Carlsson: Hermann Hesses \'Glasperlenspiel\' in seinen Wesensgesetzen'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A48143431',
+      value: '870970-basis:48143431',
       title: 'Hermann Hesse : die Bilderwelt seines Lebens'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A48178431',
+      value: '870970-basis:48178431',
       title: 'Hermann Hesse : Werk und Leben : ein Dichterbildnis'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A14787431',
+      value: '870970-basis:14787431',
       title: 'Hermann Hesse : Leben und Werk (Ved Hermann Hesse ...)'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A95145731',
+      value: '870970-basis:95145731',
       title: 'Hermann Hesse : eine Chronik in Bildern'
     }, {
       property: 'Om forfatteren',
-      value: 'ting:870970-basis%3A41573431',
+      value: '870970-basis:41573431',
       title: 'Hermann Hesse : biography and bibliography. Volume 1'
     }, {
       property: 'Anmeldelse',
-      value: 'ting:870970-basis%3A14853431',
+      value: '870970-basis:14853431',
       title: 'Berlingske tidende, 2013-01-24'
     }, {
       property: 'Anmeldelse',
-      value: 'ting:870970-basis%3A14878731',
+      value: '870970-basis:14878731',
       title: 'Politiken, 2013-02-09'
     }, {
       property: 'Anmeldelse',
-      value: 'ting:870970-basis%3A48588431',
+      value: '870970-basis:48588431',
       title: 'Weekendavisen, 2013-01-25'
     }, {
       property: 'Lektørudtalelse',
-      value: 'ting:870970-basis%3A15153431',
+      value: '870970-basis:15153431',
       title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
     }];
 
@@ -173,7 +176,7 @@
     for (var i = 0; i < sampleItem.length; ++i) {
       var obj = sampleItem[i];
       relvis.addTriple(sampleId, obj.property, obj.value);
-      if (obj.value.slice(0, 5) === 'ting:' && obj.title) {
+      if (obj.title) {
         relvis.addTriple(obj.value, 'title', obj.title);
       }
     }
@@ -181,15 +184,24 @@
 
   relvis.initData = function() { //{{{1 
     addSampleItem();
-    $.ajax('https://dev.vejlebib.dk/ting-visual-relation/get-ting-object/870970-basis:26917921?callback=?', {
-      cache: false,
-      dataType: 'jsonp',
-      success: function(a, b, c) {
-        console.log('ajax', this, a, b, c);
-      },
-      error: function(a, b, c) {
-        console.log('ajax error', this, a, b, c);
-      }
-    });
+    dataupdate();
   };
+  var loadedObjects = {};
+  relvis.addEventListener('get-triple', function(obj) {
+    if(loadedObjects[obj.object]) {
+      return;
+    }
+    loadedObjects[obj.object] = true;
+    var id = obj.object;
+    $.ajax('https://dev.vejlebib.dk/ting-visual-relation/get-ting-object/' + id + '?callback=?', {
+      cache: true,
+      dataType: 'jsonp',
+      success: function(data) {
+        data.forEach(function(obj) {
+          relvis.addTriple(id, obj.property, obj.value);
+        });
+      },
+      error: function() {
+      }});
+  });
 })(); //{{{1
