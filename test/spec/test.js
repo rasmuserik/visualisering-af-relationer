@@ -21,7 +21,6 @@
   });
   describe('graph-model', function() {
     it('should create af graph on the relvis-object', function() {
-      relvis.createGraph();
       assert(Array.isArray(relvis.nodes));
       assert(Array.isArray(relvis.edges));
     });

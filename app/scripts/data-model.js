@@ -43,13 +43,13 @@
       // as forside from vejlebib expires, we temporarily use a link for the frontpage of goodreads during development
       value: 'http://d.gr-assets.com/books/1394861337l/52036.jpg'
     }, {
-      property: 'Titel',
+      property: 'title',
       value: 'Siddhartha - en indisk legende'
     }, {
       property: 'Collection',
       value: 'ting:870970-basis%3A22331892'
     }, {
-      property: 'Creator',
+      property: 'creator',
       value: 'Hermann Hesse (2012)'
     }, {
       property: 'Description',
@@ -67,10 +67,10 @@
       property: 'Sprog',
       value: 'Dansk'
     }, {
-      property: 'Emne',
+      property: 'subject',
       value: 'religiøse bøger'
     }, {
-      property: 'Emne',
+      property: 'subject',
       value: 'siddhartha'
     }, {
       property: 'Bidrag af',
@@ -174,7 +174,7 @@
       var obj = sampleItem[i];
       relvis.addTriple(sampleId, obj.property, obj.value);
       if (obj.value.slice(0, 5) === 'ting:' && obj.title) {
-        relvis.addTriple(obj.value, 'Titel', obj.title);
+        relvis.addTriple(obj.value, 'title', obj.title);
       }
     }
   }

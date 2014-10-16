@@ -4,9 +4,9 @@
   relvis.nodes = [];
   relvis.edges = [];
   var categories = { //{{{1
-    authorInfo: ['Om forfatteren', 'Creator'],
+    authorInfo: ['Om forfatteren', 'creator'],
     review: ['Anmeldelse', 'Lektørudtalelse'],
-    circular: ['Publikum', 'Emne', 'Sprog'],
+    circular: ['Publikum', 'subject', 'Sprog'],
     structure: ['Serie', 'Udgave', 'Collection']
   };
 
@@ -77,7 +77,7 @@
               visible: true
             });
             if (node.label.slice(0, 5) === 'ting:') {
-              node.label = relvis.getValues(node.label, 'Titel')[0] || '...';
+              node.label = relvis.getValues(node.label, 'title')[0] || '...';
             }
             nodes.push(node);
             edges.push({
@@ -101,7 +101,7 @@
         visible: true
       });
       root.imgSrc = relvis.getValues(id, 'Cover')[0];
-      root.label = relvis.getValues(id, 'Titel')[0] || '...';
+      root.label = relvis.getValues(id, 'title')[0] || '...';
       nodes.push(root);
     }
 
