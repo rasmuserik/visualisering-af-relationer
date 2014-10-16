@@ -151,7 +151,8 @@ A development/sample data source for circular relations are generated. This is t
 - tapmove
 - tapend
 - redraw
-- data-change
+- data-update
+- get-triple
 
 ## Mind map
 - Nuværende arkitektur
@@ -187,14 +188,15 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint - todo and progress:
 
-- •klarere data model
+- √klarere data model
   - √triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
   - √generering af graf-data fra triple-store-data
   - √data-model som separat komponent
-  - events for requests
-  - √data-changed regenerer-graf
+  - √events for requests
+  - √data-update event, og regenerer-graf on event
   - √throttled function
-- kommunikation med APIet
+- •kommunikation med APIet
+  - •jsonp
   - served api-dummy-data for test
   - event ala need-update efter asynkron data opdatering
   - object get queue

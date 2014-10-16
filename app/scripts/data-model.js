@@ -3,11 +3,14 @@
   var relvis = window.relvis = window.relvis || {};
   //{{{1 triple store
   var triples = {};
+  var dataupdate = relvis.throttle(100, function() {
+    relvis.dispatchEvent('data-update');
+  });
   relvis.addTriple = function(obj, prop, val) { //{{{2
     var arr = relvis.getValues(obj, prop);
     if (!(val in arr)) {
       arr.push(val);
-      relvis.createGraph();
+      dataupdate();
     }
   };
   relvis.removeTriple = function(obj, prop, val) { //{{{2
@@ -16,7 +19,7 @@
     if (pos !== -1) {
       arr[pos] = arr[arr.length - 1];
       arr.pop();
-      relvis.createGraph();
+      dataupdate();
     }
   };
   relvis.getValues = function(obj, prop) { //{{{2
@@ -25,7 +28,8 @@
     }
     if (!triples[obj][prop]) {
       triples[obj][prop] = [];
-    }
+      relvis.dispatchEvent('get-triple', {object: obj, property: prop});
+    } 
     return triples[obj][prop];
   };
 

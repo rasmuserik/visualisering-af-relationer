@@ -10,7 +10,7 @@
     structure: ['Serie', 'Udgave', 'Collection']
   };
 
-  relvis.createGraph = relvis.throttle(300, function() { //{{{1
+  relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
     var id = 'ting:870970-basis%3A23243431';
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
     function createNode(node) { //{{{2
@@ -117,5 +117,5 @@
       nodes: nodes,
       edges: edges
     };
-  });
+  }));
 })(); //{{{1
