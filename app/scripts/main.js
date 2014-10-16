@@ -13,23 +13,23 @@
     relvis.initUI();
   };
   relvis.init = function() { //{{{1
-  var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
-    // check that canvas is supported
-    var elem = document.createElement('canvas');
-    if (!elem.getContext) {
-      return 'Missing canvas support';
-    }
+    var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
+      // check that canvas is supported
+      var elem = document.createElement('canvas');
+      if (!elem.getContext) {
+        return 'Missing canvas support';
+      }
 
-    // check that android version > 2.1 due to canvas bugs in version 2.1 and earlier 
-    var android = navigator.userAgent.match(/android.*?([12]\.[0-9])/i);
-    if (android && (+android[1] < 2.2) &&
-      !navigator.userAgent.match(/(firefox|chrome|opera)/i)) {
-      return 'Buggy android version:\n' + navigator.userAgent;
-    }
+      // check that android version > 2.1 due to canvas bugs in version 2.1 and earlier 
+      var android = navigator.userAgent.match(/android.*?([12]\.[0-9])/i);
+      if (android && (+android[1] < 2.2) &&
+        !navigator.userAgent.match(/(firefox|chrome|opera)/i)) {
+        return 'Buggy android version:\n' + navigator.userAgent;
+      }
 
-    // everything is ok
-    return false;
-  })();
+      // everything is ok
+      return false;
+    })();
     // button on sample page pops up visualisation //{{{{2
     $('#relvis-button').click(relvis.show);
     var elemsSel = document.getElementsByClassName('relvis-request');
@@ -42,7 +42,7 @@
     function makeHandler(elem) {
       return function() {
         var id = elem.getAttribute('data-relvis-id');
-        relvis.visualisation = 'ext'+id;
+        relvis.visualisation = 'ext' + id;
         location.hash = '#relvis' + relvis.visualisation;
         relvis.show();
       };

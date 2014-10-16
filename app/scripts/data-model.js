@@ -7,7 +7,7 @@
     relvis.dispatchEvent('data-update');
   });
   relvis.addTriple = function(obj, prop, val) { //{{{2
-    if(!val) {
+    if (!val) {
       return;
     }
     var arr = relvis.getValues(obj, prop);
@@ -188,7 +188,7 @@
   };
   var loadedObjects = {};
   relvis.addEventListener('get-triple', function(obj) {
-    if(loadedObjects[obj.object]) {
+    if (loadedObjects[obj.object]) {
       return;
     }
     loadedObjects[obj.object] = true;
@@ -201,7 +201,7 @@
           relvis.addTriple(id, obj.property, obj.value);
         });
       },
-      error: function() {
-      }});
+      error: function() {}
+    });
   });
 })(); //{{{1

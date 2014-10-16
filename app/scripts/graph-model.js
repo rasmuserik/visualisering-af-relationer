@@ -12,7 +12,7 @@
 
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
 
-    var type = relvis.visualisation.slice(0,3);
+    var type = relvis.visualisation.slice(0, 3);
     var id = relvis.visualisation.slice(3);
 
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
@@ -79,7 +79,7 @@
               value: value,
               visible: true
             });
-            if(node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
+            if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
               node.label = relvis.getValues(node.label, 'title')[0] || '...';
             }
             nodes.push(node);
