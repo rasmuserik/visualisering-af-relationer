@@ -27,9 +27,8 @@
     if (unsupportedPlatform()) {
       window.alert('Warning unsupported platform.\n' + unsupportedPlatform());
     }
+    relvis.initData();
     relvis.initCanvas();
-    relvis.createGraph();
-    relvis.layoutGraph();
     relvis.showCanvasOverlay();
     relvis.initUI();
   };

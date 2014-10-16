@@ -7,6 +7,7 @@
     var arr = relvis.getValues(obj, prop);
     if (!(val in arr)) {
       arr.push(val);
+      relvis.createGraph();
     }
   };
   relvis.removeTriple = function(obj, prop, val) { //{{{2
@@ -15,6 +16,7 @@
     if (pos !== -1) {
       arr[pos] = arr[arr.length - 1];
       arr.pop();
+      relvis.createGraph();
     }
   };
   relvis.getValues = function(obj, prop) { //{{{2
@@ -27,7 +29,7 @@
     return triples[obj][prop];
   };
 
-  //{{{1 sampleItem
+  function addSampleItem() { //{{{1 sampleItem
   var sampleId = 'ting:870970-basis%3A23243431'; //{{{2
   var sampleItem = [{
     property: 'Cover',
@@ -159,8 +161,8 @@
     value: 'ting:870970-basis%3A15153431',
     title: 'Skønt Siddhartha, med skiftende tider har mistet sin kultstatus, er temaet: jeg\'ets søgen efter meningen med tilværelsen, dog evigt aktuelt, og Hesses kendte roman skal selvfølgelig også fremover være at finde på biblioteket. Den egner sig godt til læsning i studiekredse'
   }];
-  // Move data into triple store {{{2
-  (function() {
+
+    // Move data into triple store {{{2
     for (var i = 0; i < sampleItem.length; ++i) {
       var obj = sampleItem[i];
       relvis.addTriple(sampleId, obj.property, obj.value);
@@ -168,6 +170,19 @@
         relvis.addTriple(obj.value, 'Titel', obj.title);
       }
     }
-  })();
+  }
 
+  relvis.initData = function() { //{{{1 
+    addSampleItem();
+    $.ajax('https://dev.vejlebib.dk/ting-visual-relation/get-ting-object/870970-basis:26917921?callback=?', {
+        cache: false,
+        dataType: 'jsonp',
+        success: function(a,b,c ) {
+          console.log('ajax', this, a,b,c);
+        },
+        error: function(a,b,c) {
+          console.log('ajax error', this, a,b,c);
+        }
+    });
+  };
 })(); //{{{1

@@ -2,15 +2,13 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
   relvis.d3force = undefined;
-  relvis.layoutGraph = relvis.throttle(function() { //{{{1
+  relvis.layoutGraph = relvis.throttle(300, function() { //{{{1
     var force = relvis.d3force;
     if (!force) {
       // Create forcegraph
       force = window.d3.layout.force()
         .size([window.innerWidth, window.innerHeight])
         .charge(-120)
-        .nodes(relvis.nodes)
-        .links(relvis.edges)
         .linkDistance(30);
 
       // handle each frame
@@ -32,6 +30,9 @@
       });
       relvis.d3force = force;
     }
-    force.start();
-  }, 1000);
+    force
+      .nodes(relvis.nodes)
+      .links(relvis.edges)
+      .start();
+  });
 })();

@@ -137,7 +137,7 @@ A development/sample data source for circular relations are generated. This is t
   - findBoundaries(...)
   - xy.add, xy.mul, xy.sub, xy.scale, xy.inv
   - addEventListener(name, fn), dispatchEvent(name, event-object), 
-  - throttle(fn, maxrate=100ms)
+  - throttle(maxrate ie. 100ms, fn)
   - nextTick(fn)
 - ui
   - initUI()
@@ -151,6 +151,7 @@ A development/sample data source for circular relations are generated. This is t
 - tapmove
 - tapend
 - redraw
+- data-change
 
 ## Mind map
 - Nuværende arkitektur
@@ -191,7 +192,7 @@ Indeværende sprint - todo and progress:
   - √generering af graf-data fra triple-store-data
   - √data-model som separat komponent
   - events for requests
-  - data-changed event + regenerer-graf
+  - √data-changed regenerer-graf
   - √throttled function
 - kommunikation med APIet
   - served api-dummy-data for test

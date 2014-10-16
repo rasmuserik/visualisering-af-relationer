@@ -134,7 +134,7 @@
   relvis.nextTick = function(fn) { //{{{1
     setTimeout(fn, 0);
   };
-  relvis.throttle = function(fn, timeout) { //{{{1
+  relvis.throttle = function(timeout, fn) { //{{{1
     var needRun = false;
     var throttled = false;
 
@@ -150,9 +150,10 @@
       if (!throttled) {
         exec();
         throttled = true;
-        window.setTimeout(exec, timeout || 100);
+        window.setTimeout(exec, timeout);
       }
     };
   };
+
 
 })(); //{{{1

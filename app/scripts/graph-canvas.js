@@ -70,9 +70,11 @@
     relvis.nearestPoints(visibleNodes, 'vx', 'vy');
     visibleNodes.forEach(function(node) {
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
+      if(node.nearestNode) {
       var size = node.nearestDist * 0.7 - 0.30 * node.nearestNode.nearestDist; // * Math.SQRT1_2;
       node.xsize = size;
       node.ysize = size / relvis.visualObjectRatio;
+      }
     });
 
     // Draw edges
@@ -97,10 +99,10 @@
   });
 
 
-  relvis.requestRedraw = relvis.throttle(function() { //{{{1
+  relvis.requestRedraw = relvis.throttle(50, function() { //{{{1
     relvis.nextTick(function() {
       relvis.dispatchEvent('redraw', {});
     });
-  }, 50);
+  });
 
 })(); //{{{1

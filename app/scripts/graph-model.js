@@ -10,9 +10,20 @@
     structure: ['Serie', 'Udgave', 'Collection']
   };
 
-  relvis.createGraph = function() { //{{{1
+  relvis.createGraph = relvis.throttle(300, function() { //{{{1
     var id = 'ting:870970-basis%3A23243431';
-    var root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
+    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
+    function createNode(node) { //{{{2
+      var prev = prevNodes[node.id];
+      if(prev) {
+        for(var key in node) { if(node.hasOwnProperty(key)) {
+          prev[key] = node[key];
+        }}
+        return prev;
+      } else {
+        return node;
+      }
+    }
 
     function createCategoryNodes() { // {{{2
       categoryNodes = {};
@@ -20,11 +31,12 @@
       categoryNodeList = [];
       for (var category in categories) {
         if (categories.hasOwnProperty(category)) {
-          categoryNodes[category] = {
+          categoryNodes[category] = createNode({
+            id: 'category:' + category,
             label: category,
             type: 'category',
             visible: false
-          };
+          });
           categoryNodeList.push(categoryNodes[category]);
           nodes.push(categoryNodes[category]);
           for (i = 0; i < categories[category].length; ++i) {
@@ -54,12 +66,13 @@
       Object.keys(categories).forEach(function(category) {
         categories[category].forEach(function(property) {
           relvis.getValues(id, property).forEach(function(value) {
-            node = {
+            node = createNode({
+              id: id + '-' + property + '-' + value,
               label: value,
               property: property,
               value: value,
               visible: true
-            };
+            });
             if (node.label.slice(0, 5) === 'ting:') {
               node.label = relvis.getValues(node.label, 'Titel')[0] || '...';
             }
@@ -78,24 +91,31 @@
     }
 
     function createRootNode() { //{{{2
-      root = {
+      root = createNode({
+        id: id,
         label: 'root',
         type: 'root',
         visible: true
-      };
+      });
       root.imgSrc = relvis.getValues(id, 'Cover')[0];
-      root.label = relvis.getValues(id, 'Titel')[0];
+      root.label = relvis.getValues(id, 'Titel')[0] || '...';
       nodes.push(root);
     }
 
-    nodes = relvis.nodes = []; //{{{2
+    //actual execution {{{2
+    prevNodes = {};
+    relvis.nodes.forEach(function(node) {
+      prevNodes[node.id] = node;
+    });
+    nodes = relvis.nodes = []; 
     edges = relvis.edges = [];
     createRootNode();
     createCategoryNodes();
     createRelationNodes();
+    relvis.layoutGraph();
     return {
       nodes: nodes,
       edges: edges
     };
-  };
+  });
 })(); //{{{1
