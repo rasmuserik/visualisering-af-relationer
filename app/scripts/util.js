@@ -154,25 +154,4 @@
       }
     };
   };
-
-
-  relvis.jsonp = function(url, fn) {
-    var cbname;
-    var script = document.createElement('script');
-    var i = 0;
-    do {
-      ++i;
-      cbname = 'relviscallback' + i;
-    } while (window[cbname]);
-
-    script.src = url.replace('=?', '=' + cbname);
-    window[cbname] = function(data) {
-      console.log('here', data);
-      fn(null, data);
-      script.remove();
-      window[cbname] = undefined;
-    };
-
-    document.head.appendChild(script);
-  };
 })(); //{{{1
