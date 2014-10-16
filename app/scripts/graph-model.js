@@ -13,12 +13,15 @@
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
     var id = 'ting:870970-basis%3A23243431';
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
+
     function createNode(node) { //{{{2
       var prev = prevNodes[node.id];
-      if(prev) {
-        for(var key in node) { if(node.hasOwnProperty(key)) {
-          prev[key] = node[key];
-        }}
+      if (prev) {
+        for (var key in node) {
+          if (node.hasOwnProperty(key)) {
+            prev[key] = node[key];
+          }
+        }
         return prev;
       } else {
         return node;
@@ -107,7 +110,7 @@
     relvis.nodes.forEach(function(node) {
       prevNodes[node.id] = node;
     });
-    nodes = relvis.nodes = []; 
+    nodes = relvis.nodes = [];
     edges = relvis.edges = [];
     createRootNode();
     createCategoryNodes();

@@ -40,7 +40,7 @@
       y: e.y,
       node: node.label
     }));
-    relvis.xy.assign(node, relvis.xy.add(node,dpos));
+    relvis.xy.assign(node, relvis.xy.add(node, dpos));
     relvis.xy.assign(node, coord);
     node.px = node.x;
     node.py = node.y;
@@ -48,7 +48,7 @@
     relvis.requestRedraw();
     relvis.layoutGraph();
   });
-  relvis.addEventListener('tapend', function(e) {//{{{1
+  relvis.addEventListener('tapend', function(e) { //{{{1
     showStatus('tapend');
     node.fixed = false;
     relvis.fixedViewport = false;

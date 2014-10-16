@@ -10,7 +10,8 @@
   var tapStartY;
   var tapPrevX;
   var tapPrevY;
-  function taphandle(kind) { 
+
+  function taphandle(kind) {
     return function(e) {
       e.preventDefault();
       var o = {

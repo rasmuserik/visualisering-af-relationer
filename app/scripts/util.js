@@ -163,8 +163,8 @@
     do {
       ++i;
       cbname = 'relviscallback' + i;
-    } while(window[cbname]);
-    
+    } while (window[cbname]);
+
     script.src = url.replace('=?', '=' + cbname);
     window[cbname] = function(data) {
       console.log('here', data);
