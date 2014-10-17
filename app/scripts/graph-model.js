@@ -5,7 +5,7 @@
   relvis.edges = [];
   var categories = { //{{{1
     authorInfo: ['Om forfatteren', 'creator'],
-    review: ['Anmeldelse', 'Lektørudtalelse'],
+    review: ['Anmeldelse', 'Lektørudtalelse', 'relation'],
     circular: ['Publikum', 'subject', 'Sprog'],
     structure: ['Serie', 'Udgave', 'Collection']
   };
