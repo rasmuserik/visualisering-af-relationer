@@ -1,0 +1,15 @@
+{
+  "name": "adhl-data",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/solsort/visualisering-af-relationer.git"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "leveldown": "^1.0.0",
+    "levelup": "^0.19.0",
+    "line-reader": "^0.2.4"
+  }
+}

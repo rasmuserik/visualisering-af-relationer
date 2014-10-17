@@ -184,7 +184,7 @@ A development/sample data source for circular relations are generated. This is t
   - travis-ci - service for continous integration - automatisk kørsel af test
   - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
 
-# releaselog
+# Releaselog
 
 Indeværende sprint - todo and progress:
 
@@ -268,7 +268,7 @@ Indeværende sprint - todo and progress:
   - udkast til release og test-strategi
   - udkast til produktmål
 
-# backlog
+# Backlog
 
 - margin fit size of objects
 - zoom/dpi-bug when interacting
