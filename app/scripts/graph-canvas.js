@@ -48,7 +48,7 @@
 
     // Find coordinate transformation
     if (!relvis.fixedViewport) {
-      var margin = 0.35;
+      var margin = 3 * relvis.avgSize / (relvis.canvas.height + relvis.canvas.width) || 0;
       var boundaries = relvis.findBoundaries(visibleNodes);
 
       relvis.offset = xy.sub(boundaries.min,
@@ -68,14 +68,21 @@
       node.vy = p.y;
     });
     relvis.nearestPoints(visibleNodes, 'vx', 'vy');
+
+    var statCount = 0;
+    relvis.avgSize = 0;
+
     visibleNodes.forEach(function(node) {
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
       if (node.nearestNode) {
         var size = (node.nearestDist * 0.7 - 0.20 * node.nearestNode.nearestDist) * Math.SQRT1_2;
         node.xsize = size;
         node.ysize = size / relvis.visualObjectRatio;
+        ++statCount;
+        relvis.avgSize += size;
       }
     });
+    relvis.avgSize /= statCount;
 
     // Draw edges
     var visibleEdges = relvis.edges.filter(function(e) {
