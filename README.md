@@ -188,23 +188,6 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint - todo and progress:
 
-- √klarere data model
-  - √triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
-  - √generering af graf-data fra triple-store-data
-  - √data-model som separat komponent
-  - √events for requests
-  - √data-update event, og regenerer-graf on event
-  - √throttled function
-- √kommunikation med APIet
-  - √get the data from the API
-  - √sample api-button
-- √interaktion - træk elementer rundt på skærmen
-  - √pinned option på node
-  - √lock view during interaction
-  - √handle tap-down
-  - √handle move
-  - √handle release
-- √sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
 - •sample server for cirkulære relationer (baseret på ADHL)
   - √undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
   - •script der skaber database
@@ -215,6 +198,26 @@ Indeværende sprint - todo and progress:
   - tegning af relationer
   - knap til aktivering
 
+## Version 0.3.0, released 18/10, sprint 3
+
+- klarere data model
+  - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
+  - generering af graf-data fra triple-store-data
+  - data-model som separat komponent
+  - events for requests
+  - data-update event, og regenerer-graf on event
+  - throttled function
+- kommunikation med APIet
+  - get the data from the API
+  - sample api-button
+  - better scaling of viewport realised needed when having elements with few data
+- interaktion - træk elementer rundt på skærmen
+  - pinned option på node
+  - lock view during interaction
+  - handle tap-down
+  - handle move
+  - handle release
+- sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
 
 ## Version 0.2.0, released 10/10, sprint 2
 
