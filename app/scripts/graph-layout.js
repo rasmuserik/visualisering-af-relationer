@@ -17,7 +17,7 @@
         var visibleNodes = relvis.nodes.filter(function(o) {
           return o.visible;
         });
-        var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
+        var boundaries = relvis.findBoundaries(visibleNodes);
         relvis.nodes.forEach(function(node) {
           if (node.fixedPosition) {
             node.x = node.fixedPosition.x * boundaries.range.x + boundaries.min.x;

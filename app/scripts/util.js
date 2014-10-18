@@ -92,41 +92,42 @@
     }
   };
 
-  relvis.findBoundaries = function findBoundaries(list, keys) { //{{{1
-    // given a list of objects and keys to look at, this function
+  relvis.findBoundaries = function findBoundaries(list) { //{{{1
     // returns an object telling the min/max/range of each of the keys
     // and a function to normalise another object to the range
-    var i, j, item, key;
+    var i, j, item;
     var min = {};
     var max = {};
     var range = {};
-    for (i = 0; i < keys.length; ++i) {
-      min[keys[i]] = Number.POSITIVE_INFINITY;
-      max[keys[i]] = Number.NEGATIVE_INFINITY;
-    }
+
+    min.x = Number.POSITIVE_INFINITY;
+    max.x = Number.NEGATIVE_INFINITY;
+    min.y = Number.POSITIVE_INFINITY;
+    max.y = Number.NEGATIVE_INFINITY;
+
     for (i = 0; i < list.length; ++i) {
       item = list[i];
-      for (j = 0; j < keys.length; ++j) {
-        key = keys[j];
-        if (typeof item[key] === 'number') {
-          min[key] = Math.min(item[key], min[key]);
-          max[key] = Math.max(item[key], max[key]);
+        if (typeof item.x === 'number') {
+          min.x = Math.min(item.x, min.x);
+          max.x = Math.max(item.x, max.x);
         }
-      }
+        if (typeof item.y === 'number') {
+          min.y = Math.min(item.y, min.y);
+          max.y = Math.max(item.y, max.y);
+        }
     }
-    for (i = 0; i < keys.length; ++i) {
-      range[keys[i]] = max[keys[i]] - min[keys[i]];
-    }
+
+    range.x = max.x - min.x;
+    range.y = max.y - min.y;
+
     return {
       min: min,
       max: max,
       range: range,
       zeroOne: function(item) {
         var result = {};
-        for (var i = 0; i < keys.length; ++i) {
-          var key = keys[i];
-          result[key] = (item[key] - this.min[key]) / this.range[key];
-        }
+        result.y = (item.y - this.min.y) / this.range.y;
+        result.x = (item.x - this.min.x) / this.range.x;
         return result;
       }
     };

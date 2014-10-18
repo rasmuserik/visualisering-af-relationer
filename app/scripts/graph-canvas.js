@@ -49,7 +49,7 @@
     // Find coordinate transformation
     if (!relvis.fixedViewport) {
       var margin = 0.35;
-      var boundaries = relvis.findBoundaries(visibleNodes, ['x', 'y']);
+      var boundaries = relvis.findBoundaries(visibleNodes);
 
       relvis.offset = xy.sub(boundaries.min,
         xy.scale(boundaries.range, margin));
