@@ -107,14 +107,14 @@
 
     for (i = 0; i < list.length; ++i) {
       item = list[i];
-        if (typeof item.x === 'number') {
-          min.x = Math.min(item.x, min.x);
-          max.x = Math.max(item.x, max.x);
-        }
-        if (typeof item.y === 'number') {
-          min.y = Math.min(item.y, min.y);
-          max.y = Math.max(item.y, max.y);
-        }
+      if (typeof item.x === 'number') {
+        min.x = Math.min(item.x, min.x);
+        max.x = Math.max(item.x, max.x);
+      }
+      if (typeof item.y === 'number') {
+        min.y = Math.min(item.y, min.y);
+        max.y = Math.max(item.y, max.y);
+      }
     }
 
     range.x = max.x - min.x;
