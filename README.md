@@ -188,8 +188,6 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint - todo and progress:
 
-- kommunikation med APIet
-  - make sure we use the supplied api-url instead of the hard-coded one during development
 - •sample server for cirkulære relationer (baseret på ADHL)
   - √undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
   - •script der skaber database
@@ -199,6 +197,11 @@ Indeværende sprint - todo and progress:
   - graph-walk, og identifikation af hvilke nodes der skal vises
   - tegning af relationer
   - knap til aktivering
+
+## Version 0.3.1, released 19/10, sprint 3
+
+- kommunikation med APIet
+  - make sure we use the supplied api-url instead of the hard-coded one during development
 
 ## Version 0.3.0, released 18/10, sprint 3
 
