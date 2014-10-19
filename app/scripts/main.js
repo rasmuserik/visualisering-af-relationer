@@ -12,13 +12,15 @@
     relvis.showCanvasOverlay();
     relvis.initUI();
   };
-  relvis.init = function() { //{{{1
+  relvis.init = function(obj) { //{{{1
     var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
       if (!elem.getContext) {
         return 'Missing canvas support';
       }
+
+      relvis.apiUrl = obj.apiUrl;
 
       // check that android version > 2.1 due to canvas bugs in version 2.1 and earlier 
       var android = navigator.userAgent.match(/android.*?([12]\.[0-9])/i);

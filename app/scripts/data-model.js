@@ -193,7 +193,7 @@
     }
     loadedObjects[obj.object] = true;
     var id = obj.object;
-    $.ajax('https://dev.vejlebib.dk/ting-visual-relation/get-ting-object/' + id + '?callback=?', {
+    $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
       cache: true,
       dataType: 'jsonp',
       success: function(data) {

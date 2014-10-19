@@ -75,7 +75,7 @@
     visibleNodes.forEach(function(node) {
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
       if (node.nearestNode) {
-        var size = (node.nearestDist * 0.7 - 0.20 * node.nearestNode.nearestDist) * Math.SQRT1_2;
+        var size = (node.nearestDist * 0.8 - 0.2 * node.nearestNode.nearestDist) * Math.SQRT1_2;
         node.xsize = size;
         node.ysize = size / relvis.visualObjectRatio;
         ++statCount;
