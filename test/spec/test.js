@@ -61,9 +61,9 @@
   describe('graph-canvas', function() {
     it('should run here few assertions', function() {
       assert(floatEq(relvis.toGraphCoord(relvis.toCanvasCoord({
-          x: 5,
-          y: 7
-        })).x, 5));
+        x: 5,
+        y: 7
+      })).x, 5));
       assert(floatEq(relvis.toGraphCoord(relvis.toCanvasCoord({
         x: 5,
         y: 7

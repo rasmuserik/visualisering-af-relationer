@@ -24,68 +24,71 @@
   var limit;
   limit = 47196844;
   limit = 100000;
-  function stat() {
-  }
+
+  function stat() {}
 
   pass1();
+
   function pass1() {
-  lineReader.eachLine('../../final_adhl.sorted.csv', function(line, last, cb) {
-    if (++count % statStep === 0) {
-      console.log('pass1', count + '/' + limit, (Date.now() - t0)+ 'ms', ((limit- count) * (Date.now() - t0)/1000/60/statStep | 0) + 'remaining-minutes');
-      t0 = Date.now();
-    }
-
-    var fields = line.split(',');
-    var patron = fields[0];
-    var lid = fields[5];
-    var title = fields[8];
-    var author = fields[9];
-    var kind = fields[10];
-
-    lidInfoDB.get(lid, function(err, obj) {
-      if(err) {
-        obj = {
-          title: title,
-          author: author,
-          kind: kind,
-          count: 1
-        };
-      } else {
-        obj = JSON.parse(obj);
-        ++obj.count;
+    lineReader.eachLine('../../final_adhl.sorted.csv', function(line, last, cb) {
+      if (++count % statStep === 0) {
+        console.log('pass1', count + '/' + limit, (Date.now() - t0) + 'ms', ((limit - count) * (Date.now() - t0) / 1000 / 60 / statStep | 0) + 'remaining-minutes');
+        t0 = Date.now();
       }
-      lidInfoDB.put(lid, JSON.stringify(obj), function(err) { if(err) {console.log(err);}})
-    });
 
-    if(patron === prevPatron) {
-      if(!(lid in lendlist)) {
-        lendlist.push(lid);
-      }
-    } else {
-      lendlist.sort();
-      if(lendlist.length < 3000 && lendlist.length > 1) {
-        for(var i = 0; i < lendlist.length; ++i) {
+      var fields = line.split(',');
+      var patron = fields[0];
+      var lid = fields[5];
+      var title = fields[8];
+      var author = fields[9];
+      var kind = fields[10];
+
+      lidInfoDB.get(lid, function(err, obj) {
+        if (err) {
+          obj = {
+            title: title,
+            author: author,
+            kind: kind,
+            count: 1
+          };
+        } else {
+          obj = JSON.parse(obj);
+          ++obj.count;
         }
-        coloansDB.put(patron, String(lendlist));
-        ++coloanCount;
-      }
-      prevPatron = patron;
-      lendlist = [];
-    }
+        lidInfoDB.put(lid, JSON.stringify(obj), function(err) {
+          if (err) {
+            console.log(err);
+          }
+        })
+      });
 
-    if (count > limit || last) {
-      pass2();
-    } else {
-      cb();
-    }
-  });
+      if (patron === prevPatron) {
+        if (!(lid in lendlist)) {
+          lendlist.push(lid);
+        }
+      } else {
+        lendlist.sort();
+        if (lendlist.length < 3000 && lendlist.length > 1) {
+          for (var i = 0; i < lendlist.length; ++i) {}
+          coloansDB.put(patron, String(lendlist));
+          ++coloanCount;
+        }
+        prevPatron = patron;
+        lendlist = [];
+      }
+
+      if (count > limit || last) {
+        pass2();
+      } else {
+        cb();
+      }
+    });
   }
 
-    function pass2() {
-    }
+  function pass2() {}
 
 
-    /*
+  /*
     function inccooccur(a, b, cb) {
       a = +a;
       b = +b;
