@@ -13,6 +13,7 @@
 
   function taphandle(kind) {
     return function(e) {
+      var canvas = relvis.canvas;
       e.preventDefault();
       var o = {
         orig: e
@@ -36,8 +37,8 @@
       }
 
       if (typeof o.x === 'number') {
-        o.x = o.x * window.devicePixelRatio || 1;
-        o.y = o.y * window.devicePixelRatio || 1;
+        o.x = o.x * canvas.width / canvas.clientWidth;
+        o.y = o.y * canvas.height / canvas.clientHeight;
         o.node = relvis.nodeAt(o.x, o.y);
         o.dx = o.x - tapStartX;
         o.dy = o.y - tapStartY;
