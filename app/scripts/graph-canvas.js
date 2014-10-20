@@ -48,7 +48,7 @@
 
     // Find coordinate transformation
     if (!relvis.fixedViewport && visibleNodes.length && typeof visibleNodes[0].x === 'number') {
-      var margin = 3 * relvis.avgSize / (relvis.canvas.height + relvis.canvas.width) || 0;
+      var margin = 5 * relvis.avgSize / (relvis.canvas.height + relvis.canvas.width) || 0;
       var boundaries = relvis.findBoundaries(visibleNodes);
 
       relvis.offset = xy.sub(boundaries.min,
