@@ -103,7 +103,7 @@
         type: 'root',
         visible: true
       });
-      root.imgSrc = relvis.getValues(id, 'Cover')[0];
+      root.imgSrc = relvis.getValues(id, 'cover')[0];
       root.label = relvis.getValues(id, 'title')[0] || '...';
       nodes.push(root);
     }
