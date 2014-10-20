@@ -9,17 +9,29 @@
     console.log('done');
   }
 
-  var lends = levelup('lends.leveldb');
-  var cooccurDB = levelup('cooccur.leveldb');
-  var lidInfo = levelup('lid-info.leveldb');
+  var coloansDB = levelup('coloans.leveldb');
+  var lidInfoDB = levelup('lid-info.leveldb');
 
   var t0 = Date.now();
-  var statStep = 30000;
-  lineReader.eachLine('../../final_adhl.csv', function(line, last, cb) {
+  var statStep = 25000;
+  var prevPatron;
+  var lendlist = [];
+  var patrons = [];
+  var lids = {};
+  var nextId = 0;
+  var coloanCount = 0;
+
+  var limit;
+  limit = 47196844;
+  limit = 100000;
+  function stat() {
+  }
+
+  pass1();
+  function pass1() {
+  lineReader.eachLine('../../final_adhl.sorted.csv', function(line, last, cb) {
     if (++count % statStep === 0) {
-      var total = 47196844;
-      var time = Date.now() - t0;
-      console.log(count + '/' + total, time + 'ms', ((total - count) * time /1000/60/statStep | 0) + 'remaining-minutes');
+      console.log('pass1', count + '/' + limit, (Date.now() - t0)+ 'ms', ((limit- count) * (Date.now() - t0)/1000/60/statStep | 0) + 'remaining-minutes');
       t0 = Date.now();
     }
 
@@ -30,6 +42,50 @@
     var author = fields[9];
     var kind = fields[10];
 
+    lidInfoDB.get(lid, function(err, obj) {
+      if(err) {
+        obj = {
+          title: title,
+          author: author,
+          kind: kind,
+          count: 1
+        };
+      } else {
+        obj = JSON.parse(obj);
+        ++obj.count;
+      }
+      lidInfoDB.put(lid, JSON.stringify(obj), function(err) { if(err) {console.log(err);}})
+    });
+
+    if(patron === prevPatron) {
+      if(!(lid in lendlist)) {
+        lendlist.push(lid);
+      }
+    } else {
+      lendlist.sort();
+      if(lendlist.length < 3000 && lendlist.length > 1) {
+        for(var i = 0; i < lendlist.length; ++i) {
+        }
+        coloansDB.put(patron, String(lendlist));
+        ++coloanCount;
+      }
+      prevPatron = patron;
+      lendlist = [];
+    }
+
+    if (count > limit || last) {
+      pass2();
+    } else {
+      cb();
+    }
+  });
+  }
+
+    function pass2() {
+    }
+
+
+    /*
     function inccooccur(a, b, cb) {
       a = +a;
       b = +b;
@@ -55,22 +111,24 @@
       });
     }
 
+    /// OLD VERSION
+
     lends.get(patron, function(err, val) {
       if (err) {
         val = [];
       } else {
         val = JSON.parse(val);
       }
-      if ((val.length < 10000) && !(lid in val)) {
+      if ((val.length < 3000) && !(lid in val)) {
         val.push(lid);
         lends.put(patron, JSON.stringify(val), function(err) {
           if (err) {
             console.log(err);
           }
         });
-        if (val.length > 3000) {
-          val.shift();
-        }
+        //if (val.length > 3000) {
+          //val.shift();
+        //}
         for (var i = 0; i < val.length; ++i) {
           inccooccur(val[i], lid);
         }
@@ -90,5 +148,5 @@
         cb();
       }
     });
-  });
+    */
 })();
