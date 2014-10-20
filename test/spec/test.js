@@ -63,11 +63,7 @@
       assert(floatEq(relvis.toGraphCoord(relvis.toCanvasCoord({
           x: 5,
           y: 7
-        })).x, 5),
-        relvis.toGraphCoord(relvis.toCanvasCoord({
-          x: 5,
-          y: 7
-        })));
+        })).x, 5));
       assert(floatEq(relvis.toGraphCoord(relvis.toCanvasCoord({
         x: 5,
         y: 7
