@@ -7,15 +7,14 @@ count = 0;
 for line in file("../../final_adhl.csv"):
 
     count = count + 1
-    if count % 10000 == 0:
+    if count % 100000 == 0:
         print count
 
     fields = line.split(",")
 
-    patron = fields[0]
-    lid = fields[5]
-    title = fields[8]
-    author = fields[9]
-    kind = fields[10]
-
-    print patron, lid, title, author, kind
+    if len(fields) > 10:
+        patron = fields[0]
+        lid = fields[5]
+        title = fields[8]
+        author = fields[9]
+        kind = fields[10]
