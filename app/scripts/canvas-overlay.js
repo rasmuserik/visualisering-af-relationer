@@ -36,6 +36,8 @@
       }
 
       if (typeof o.x === 'number') {
+        o.x = o.x * window.devicePixelRatio || 1;
+        o.y = o.y * window.devicePixelRatio || 1;
         o.node = relvis.nodeAt(o.x, o.y);
         o.dx = o.x - tapStartX;
         o.dy = o.y - tapStartY;

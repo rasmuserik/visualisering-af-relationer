@@ -7,7 +7,7 @@ count = 0;
 for line in file("../../final_adhl.csv"):
 
     count = count + 1
-    if count % 1000 == 0:
+    if count % 10000 == 0:
         print count
 
     fields = line.split(",")
