@@ -14,9 +14,12 @@
   var lidInfo = levelup('lid-info.leveldb');
 
   var t0 = Date.now();
+  var statStep = 30000;
   lineReader.eachLine('../../final_adhl.csv', function(line, last, cb) {
-    if (++count % 10000 === 0) {
-      console.log(count, Date.now() - t0);
+    if (++count % statStep === 0) {
+      var total = 47196844;
+      var time = Date.now() - t0;
+      console.log(count + '/' + total, time + 'ms', ((total - count) * time /1000/60/statStep | 0) + 'remaining-minutes');
       t0 = Date.now();
     }
 
