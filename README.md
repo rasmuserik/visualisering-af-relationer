@@ -188,6 +188,9 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint - todo and progress:
 
+- visualisation
+  - √zoom/dpi-bug when interacting
+  - √margin fit size of objects
 - •sample server for cirkulære relationer (baseret på ADHL)
   - √undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
   - •script der skaber database
@@ -278,8 +281,6 @@ Indeværende sprint - todo and progress:
 
 # Backlog
 
-- margin fit size of objects
-- zoom/dpi-bug when interacting
 - ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
