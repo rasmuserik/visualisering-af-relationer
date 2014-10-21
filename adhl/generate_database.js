@@ -16,7 +16,9 @@
   var limit;
   limit = 100000;
   limit = 47196844;
-  var commitSize = 250000;
+  var commitSize;
+  commitSize = 25000;
+  commitSize = 250000;
 
   (function() {
     process.nextTick(pass1);
@@ -58,8 +60,8 @@
       var patron = fields[0];
       var lid = fields[5];
       lidCount[lid] = 0;
-      var title = fields[8];
-      var author = fields[9];
+      var title = (fields[8]||'').slice(1,-1);
+      var author = (fields[9]||'').slice(1,-1);
       var kind = fields[10];
       lidBatch.put(lid + ',' + patron, '1');
       patronBatch.put(patron + ',' + lid, '1');
@@ -146,11 +148,12 @@
         current = key;
         content = [];
       }
-      lidpatronDB.createReadStream()
+      sourceDB.createReadStream()
         .on('data', function(data) {
           if (++count % commitSize === 0) {
             logStatus('pass3' + targetDB.location, count, limit);
           }
+
           var key = data.key.split(',')[0];
           var val = data.key.split(',')[1];
 
