@@ -80,7 +80,7 @@
               visible: true
             });
             if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
-              node.label = relvis.getValues(node.label, 'title')[0] || '...';
+              node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
             }
             nodes.push(node);
             edges.push({
@@ -104,7 +104,7 @@
         visible: true
       });
       root.imgSrc = relvis.getValues(id, 'cover')[0];
-      root.label = relvis.getValues(id, 'title')[0] || '...';
+      root.label = relvis.getValues(id, 'title')[0] || 'Loading...';
       nodes.push(root);
     }
 

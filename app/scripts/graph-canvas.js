@@ -50,9 +50,16 @@
     if (!relvis.fixedViewport && visibleNodes.length && typeof visibleNodes[0].x === 'number') {
       var margin = 5 * relvis.avgSize / (relvis.canvas.height + relvis.canvas.width) || 0;
       var boundaries = relvis.findBoundaries(visibleNodes);
+      if(boundaries.range.x === 0) {
+        boundaries.min.x -= 1;
+        boundaries.min.y -= 1;
+        boundaries.max.x -= 1;
+        boundaries.max.y -= 1;
+        boundaries.range.x = 2;
+        boundaries.range.y = 2;
+      }
 
-      relvis.offset = xy.sub(boundaries.min,
-        xy.scale(boundaries.range, margin));
+      relvis.offset = xy.sub(boundaries.min, xy.scale(boundaries.range, margin));
       relvis.scale = xy.scale(boundaries.range, 1 + 2 * margin);
       relvis.scale = xy.mul({
           x: canvas.width,
@@ -76,11 +83,13 @@
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
       if (node.nearestNode) {
         var size = (node.nearestDist * 0.8 - 0.2 * node.nearestNode.nearestDist) * Math.SQRT1_2;
-        node.xsize = size;
-        node.ysize = size / relvis.visualObjectRatio;
-        ++statCount;
-        relvis.avgSize += size;
+      } else {
+        size = Math.min(relvis.canvas.height, relvis.canvas.width) / 2;
       }
+      node.xsize = size;
+      node.ysize = size / relvis.visualObjectRatio;
+      ++statCount;
+      relvis.avgSize += size;
     });
     relvis.avgSize /= statCount;
 
