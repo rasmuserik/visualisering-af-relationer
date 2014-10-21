@@ -4,10 +4,10 @@
   relvis.nodes = [];
   relvis.edges = [];
   var categories = { //{{{1
-    authorInfo: ['Om forfatteren', 'creator'],
-    review: ['Anmeldelse', 'Lektørudtalelse', 'relation'],
-    circular: ['Publikum', 'subject', 'Sprog'],
-    structure: ['Serie', 'Udgave', 'Collection']
+    authorInfo: ['Om forfatteren', 'creator', 'dbcaddi:hasCreatorDescription'],
+    review: ['Anmeldelse', 'Lektørudtalelse', 'dbcaddi:hasReview', 'dbcaddi:hasAnalysis'],
+    circular: ['Publikum', 'subject', 'Sprog', 'dbcaddi:hasAdaption'],
+    structure: ['Serie', 'Udgave', 'Collection', 'dbcaddi:hasOnlineAccess', 'dbcaddi:isPartOfManifestation', 'dbcaddi:isReviewOf']
   };
 
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1

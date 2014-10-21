@@ -67,5 +67,13 @@
       relvis.visualisation = location.hash.slice(7);
       relvis.show();
     }
+    $(window).on('hashchange', function() {
+    if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
+      relvis.visualisation = location.hash.slice(7);
+      relvis.show();
+    } else {
+      relvis.hideCanvasOverlay();
+    }
+    });
   };
 })(); //{{{1
