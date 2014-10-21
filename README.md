@@ -198,21 +198,23 @@ Indeværende sprint - todo and progress:
   - tegning af relationer
   - knap til aktivering
 
-## Version 0.3.2, released 21/10, sprint 3
+## Version 0.3.?
+### Version 0.3.2, released 21/10, sprint 3
 
 - visualisation polish
   - fixed zoom/dpi-bug when interacting
   - margin fit size of objects
-  - handle different relation types from api
+  - handle different relation types from api, inkl. cover
   - better handling of graphs with single element
   - more sample queries in demo page
+  - hashchange support, ie. forward/back button moves to and from visualisation
 
-## Version 0.3.1, released 19/10, sprint 3
+### Version 0.3.1, released 19/10, sprint 3
 
 - kommunikation med APIet
   - make sure we use the supplied api-url instead of the hard-coded one during development
 
-## Version 0.3.0, released 18/10, sprint 3
+### Version 0.3.0, released 18/10, sprint 3
 
 - klarere data model
   - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
