@@ -50,7 +50,7 @@
     if (!relvis.fixedViewport && visibleNodes.length && typeof visibleNodes[0].x === 'number') {
       var margin = 5 * relvis.avgSize / (relvis.canvas.height + relvis.canvas.width) || 0;
       var boundaries = relvis.findBoundaries(visibleNodes);
-      if(boundaries.range.x === 0) {
+      if (boundaries.range.x === 0) {
         boundaries.min.x -= 1;
         boundaries.min.y -= 1;
         boundaries.max.x -= 1;

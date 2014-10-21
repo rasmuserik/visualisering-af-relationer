@@ -188,9 +188,6 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint - todo and progress:
 
-- visualisation
-  - √zoom/dpi-bug when interacting
-  - √margin fit size of objects
 - •sample server for cirkulære relationer (baseret på ADHL)
   - √undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
   - •script der skaber database
@@ -200,6 +197,15 @@ Indeværende sprint - todo and progress:
   - graph-walk, og identifikation af hvilke nodes der skal vises
   - tegning af relationer
   - knap til aktivering
+
+## Version 0.3.2, released 21/10, sprint 3
+
+- visualisation polish
+  - fixed zoom/dpi-bug when interacting
+  - margin fit size of objects
+  - handle different relation types from api
+  - better handling of graphs with single element
+  - more sample queries in demo page
 
 ## Version 0.3.1, released 19/10, sprint 3
 

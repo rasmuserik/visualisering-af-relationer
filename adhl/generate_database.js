@@ -15,7 +15,7 @@
   var patronDB = levelup('patron.leveldb');
 
   var t0 = Date.now();
-  var statStep =  2500;
+  var statStep = 2500;
   var prevPatron;
   var lendlist = [];
   var patrons = [];
@@ -52,24 +52,24 @@
       function update(db, key, val, cb) {
         db.get(key, function(err, data) {
           var elems;
-          if(err) {
+          if (err) {
             elems = [];
           } else {
             elems = data.split(',');
           }
-          if(elems.length < maxSize && !(val in elems)) {
+          if (elems.length < maxSize && !(val in elems)) {
             elems.push(val);
-            db.put(key, String(elems), cb); 
+            db.put(key, String(elems), cb);
           } else {
             cb();
           }
         });
 
-      update(lidDB, lid, patron, function() {
-        update(patronDB, patron, lid, function() {
-          next();
+        update(lidDB, lid, patron, function() {
+          update(patronDB, patron, lid, function() {
+            next();
+          });
         });
-      });
       }
 
       lidStat[lid] = (lidStat[lid] || 0) + 1;
@@ -110,24 +110,25 @@
       .on('data', function(data) {
         var lid = data.key;
         lidDB.get(lid, function(err, data) {
-          if(err) {
+          if (err) {
             console.log(err);
           }
           var patrons = data.split(',').slice(0, sampleSize);
           var sampleCount = patrons.length;
           var borrows = {};
+
           function handlePatrons() {
-            if(!patrons.length) {
+            if (!patrons.length) {
               return chooseColoans();
             }
             var patron = patrons.pop();
             patronDB.get(patron, function(err, data) {
-              if(err) {
+              if (err) {
                 console.log(err);
               }
               var lids = data.split(',');
               lids.forEach(function(lid) {
-                if(!borrows[lid]) {
+                if (!borrows[lid]) {
                   borrows[lid] = 1;
                 } else {
                   ++borrows[lid];
@@ -137,6 +138,7 @@
             });
           }
           handlePatrons();
+
           function chooseColoans() {
             var coloans = [];
             Object.keys(borrows).forEach(function(lid) {
@@ -146,19 +148,20 @@
                 total: lidStat[lid]
               });
             });
-            coloans.sort(function(a,b) {
+            coloans.sort(function(a, b) {
               return a.coloans < b.coloans;
             });
-            if(sampleCount > 1) {
+            if (sampleCount > 1) {
               console.log(lid, JSON.stringify(coloans.slice(0, 30)));
             }
           }
         });
-    }).on('end', function() {
-      setTimeout(pass3, 3000);
-    });
+      }).on('end', function() {
+        setTimeout(pass3, 3000);
+      });
 
   }
+
   function pass3() {
     console.log('pass3');
   }
