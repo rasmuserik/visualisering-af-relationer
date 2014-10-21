@@ -80,9 +80,10 @@
     relvis.avgSize = 0;
 
     visibleNodes.forEach(function(node) {
+      var size;
       // size should be 1/2 distance to nearest (or if neares is smaller, a bit larger, which is why we make the size of the nearest node factor in)
       if (node.nearestNode) {
-        var size = (node.nearestDist * 0.8 - 0.2 * node.nearestNode.nearestDist) * Math.SQRT1_2;
+        size = (node.nearestDist * 0.8 - 0.2 * node.nearestNode.nearestDist) * Math.SQRT1_2;
       } else {
         size = Math.min(relvis.canvas.height, relvis.canvas.width) / 2;
       }

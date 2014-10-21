@@ -33,7 +33,6 @@
 
   function stat() {}
 
-  pass1();
   var lidCount = 0;
 
   function pass1() {
@@ -50,16 +49,11 @@
       var author = fields[9];
       var kind = fields[10];
 
-      update(lidDB, lid, patron, function() {
-        update(patronDB, patron, lid, function() {
-          next();
-        });
-      });
-
       function update(db, key, val, cb) {
         db.get(key, function(err, data) {
+          var elems;
           if(err) {
-            var elems = [];
+            elems = [];
           } else {
             elems = data.split(',');
           }
@@ -70,6 +64,12 @@
             cb();
           }
         });
+
+      update(lidDB, lid, patron, function() {
+        update(patronDB, patron, lid, function() {
+          next();
+        });
+      });
       }
 
       lidStat[lid] = (lidStat[lid] || 0) + 1;
@@ -90,7 +90,7 @@
           if (err) {
             console.log(err);
           }
-        })
+        });
       });
 
 
@@ -116,7 +116,6 @@
           var patrons = data.split(',').slice(0, sampleSize);
           var sampleCount = patrons.length;
           var borrows = {};
-          handlePatrons();
           function handlePatrons() {
             if(!patrons.length) {
               return chooseColoans();
@@ -137,6 +136,7 @@
               handlePatrons();
             });
           }
+          handlePatrons();
           function chooseColoans() {
             var coloans = [];
             Object.keys(borrows).forEach(function(lid) {
@@ -163,6 +163,7 @@
     console.log('pass3');
   }
 
+  pass1();
 
   /*
     function inccooccur(a, b, cb) {
