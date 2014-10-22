@@ -12,7 +12,9 @@
   function related(lid, res) {
     var t0 = Date.now();
     relatedDB.get(lid, function(err, data) {
-      if (err || !data) {
+      if (data && !err) {
+        return res.end(data);
+      }
         lidDB.get(lid, function(err, patrons) {
           if (err) {
             return res.end('{"error":"local id not found"}');
@@ -56,9 +58,6 @@
             return res.end(result);
           }
         });
-      } else {
-        return res.end(data);
-      }
     });
   }
 
