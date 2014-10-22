@@ -60,8 +60,8 @@
       var patron = fields[0];
       var lid = fields[5];
       lidCount[lid] = 0;
-      var title = (fields[8]||'').slice(1,-1);
-      var author = (fields[9]||'').slice(1,-1);
+      var title = (fields[8] || '').slice(1, -1);
+      var author = (fields[9] || '').slice(1, -1);
       var kind = fields[10];
       lidBatch.put(lid + ',' + patron, '1');
       patronBatch.put(patron + ',' + lid, '1');
@@ -160,7 +160,7 @@
           if (current !== key) {
             next(key);
           }
-          if(infoMap) {
+          if (infoMap) {
             val = [val, infoMap[val]];
           }
           content.push(val);

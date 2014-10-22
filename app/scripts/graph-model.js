@@ -9,7 +9,7 @@
     circular: ['subject'],
     structure: ['dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack']
   };
-//'dbcaddi:hasOnlineAccess', 'dbcaddi:hasSoundClip'
+  //'dbcaddi:hasOnlineAccess', 'dbcaddi:hasSoundClip'
 
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
 
