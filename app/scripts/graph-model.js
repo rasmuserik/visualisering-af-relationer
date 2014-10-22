@@ -4,11 +4,12 @@
   relvis.nodes = [];
   relvis.edges = [];
   var categories = { //{{{1
-    authorInfo: ['Om forfatteren', 'creator', 'dbcaddi:hasCreatorDescription'],
-    review: ['Anmeldelse', 'Lektørudtalelse', 'dbcaddi:hasReview', 'dbcaddi:hasAnalysis'],
-    circular: ['Publikum', 'subject', 'Sprog', 'dbcaddi:hasAdaption'],
-    structure: ['Serie', 'Udgave', 'Collection', 'dbcaddi:hasOnlineAccess', 'dbcaddi:isPartOfManifestation', 'dbcaddi:isReviewOf']
+    authorInfo: ['creator', 'dbcaddi:hasCreatorDescription'],
+    review: ['dbcaddi:hasReview', 'dbcaddi:hasAnalysis', 'dbcaddi:hasDescriptionFromPublisher', 'dbcaddi:discussedIn'],
+    circular: ['subject'],
+    structure: ['dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack']
   };
+//'dbcaddi:hasOnlineAccess', 'dbcaddi:hasSoundClip'
 
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
 
