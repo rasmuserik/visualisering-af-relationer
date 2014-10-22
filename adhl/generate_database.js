@@ -17,8 +17,10 @@
   limit = 100000;
   limit = 47196844;
   var commitSize;
-  commitSize = 25000;
   commitSize = 250000;
+  commitSize = 20000;
+  var skipSaveLidCount = false;
+  var skipPass3lid = false;
 
   (function() {
     process.nextTick(pass1);
@@ -95,14 +97,20 @@
           }
           ++lidCount[data.key.split(',')[0]];
         })
-        .on('end', writeLidCount);
+        .on('error', function(err) {
+          console.log(err);
+        })
+        .on('end', skipSaveLidCount?pass3:writeLidCount);
     }
 
     function writeLidCount() {
       var lids = Object.keys(lidCount);
       var totalCount = lids.length;
       var count = 0;
-      (function handleLids() {
+      (function handleLids(err) {
+        if(err) {
+          console.log(err);
+        }
         if (lids.length === 0) {
           return pass3();
         }
@@ -130,6 +138,7 @@
   var patronDB = levelup('patron.leveldb');
 
   function pass3() { //{{{2
+    console.log('pass3');
 
     function process(sourceDB, targetDB, infoMap, cb) {
       var n = 0;
@@ -137,18 +146,21 @@
       var current;
       var content = [];
 
-      function next(key) {
+      function next(key, done) {
         if (current) {
           targetDB.put(current, JSON.stringify(content), function(err) {
             if (err) {
               console.log(err);
             }
+            done();
           });
+        } else {
+          done();
         }
         current = key;
         content = [];
       }
-      sourceDB.createReadStream()
+      var stream =  sourceDB.createReadStream()
         .on('data', function(data) {
           if (++count % commitSize === 0) {
             logStatus('pass3' + targetDB.location, count, limit);
@@ -158,21 +170,28 @@
           var val = data.key.split(',')[1];
 
           if (current !== key) {
-            next(key);
+            stream.pause();
+            next(key, function() {stream.resume();});
           }
           if (infoMap) {
             val = [val, infoMap[val]];
           }
           content.push(val);
         })
+        .on('error', function(err) {
+          console.log(err);
+        })
         .on('end', function() {
-          cb();
-          next();
+          next(undefined, cb);
         });
     }
+    if(skipPass3lid) {
+      process(patronlidDB, patronDB, lidCount, done);
+    } else {
     process(lidpatronDB, lidDB, false, function() {
       process(patronlidDB, patronDB, lidCount, done);
     });
+    }
   }
 
   //pass4{{{1
