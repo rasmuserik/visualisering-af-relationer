@@ -289,6 +289,7 @@ Indeværende sprint - todo and progress:
 
 # Backlog
 
+- jsonp in adhl-server
 - ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
