@@ -186,20 +186,36 @@ A development/sample data source for circular relations are generated. This is t
 
 # Releaselog
 
-Indeværende sprint - todo and progress:
+Indeværende sprint (sprint 4) - todo and progress:
 
-- √sample server for cirkulære relationer (baseret på ADHL)
-  - √undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
-  - √script der skaber database
-  - √api-server
 - visualisering af cirkulære relationer 
   - indhentning af data fra api-server
   - graph-walk, og identifikation af hvilke nodes der skal vises
   - tegning af relationer
   - knap til aktivering
+- visualisations on ting-collections
+  - talk with ting-collection-webservice
+  - generate+visualise graph for collections
+    - hidden edges between elements in collection
+- interaction
+  - add click-detection/support to tap-handler abstraction
+  - close relation browser on click on background
+  - handle click on ting-object
+    - optional handling function as parameter
+  - click on element
+    - click-handler
+    - click outside of element closes browser
 
-## Version 0.3..
-### Version 0.3.2, released 21/10, sprint 3
+## Version 0.3 sprint 3
+### Version 0.3.3, released 24/10
+
+- sample server for cirkulære relationer (baseret på ADHL)
+  - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
+  - script der skaber database
+  - api-server
+- handling of relation types listed on http://oss.dbc.dk/services/open-search-web-service
+
+### Version 0.3.2, released 21/10
 
 - visualisation polish
   - fixed zoom/dpi-bug when interacting
@@ -209,12 +225,12 @@ Indeværende sprint - todo and progress:
   - more sample queries in demo page
   - hashchange support, ie. forward/back button moves to and from visualisation
 
-### Version 0.3.1, released 19/10, sprint 3
+### Version 0.3.1, released 19/10
 
 - kommunikation med APIet
   - make sure we use the supplied api-url instead of the hard-coded one during development
 
-### Version 0.3.0, released 18/10, sprint 3
+### Version 0.3.0, released 18/10
 
 - klarere data model
   - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
