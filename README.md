@@ -193,6 +193,7 @@ Indeværende sprint (sprint 4) - todo and progress:
   - graph-walk, og identifikation af hvilke nodes der skal vises
   - tegning af relationer
   - knap til aktivering
+  - jsonp in adhl-server
 - visualisations on ting-collections
   - talk with ting-collection-webservice
   - generate+visualise graph for collections
@@ -305,7 +306,6 @@ Indeværende sprint (sprint 4) - todo and progress:
 
 # Backlog
 
-- jsonp in adhl-server
 - ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
