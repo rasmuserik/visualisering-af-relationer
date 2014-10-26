@@ -308,13 +308,10 @@ Indeværende sprint (sprint 4) - todo and progress:
 
 - ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
-- visualiserings-view: addi/eksterne relationer - relationer der vender ind ad
 - visualiserings-view: strukturelle relationer
-- visualiserings-view: cirkulære relationer - relationer der vender ud ad
 - evt. sky/graf-agtig
 - evt. tile/mesh-visualisering
 - træstruktur-visualisering rettet mod små skærme
-- mulighed for at dele link til visualisering, samt virkende tilbageknap til visualisering i browseren. Teknisk: indkodning af visualiseringen i #-fragment i urlen, og brug af history-apiet.
 - storskærmsapplikation (evt. via node-webkit)
 - opsamling af statistik / måling af anvendelse
 - forbedring/optimering ud fra indsamlet statistik - logger modul
