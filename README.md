@@ -197,15 +197,12 @@ Indeværende sprint (sprint 4) - todo and progress:
 - visualisations on ting-collections
   - talk with ting-collection-webservice
   - generate+visualise graph for collections
-    - hidden edges between elements in collection
+  - hidden edges between elements in collection
 - interaction
   - add click-detection/support to tap-handler abstraction
   - close relation browser on click on background
   - handle click on ting-object
     - optional handling function as parameter
-  - click on element
-    - click-handler
-    - click outside of element closes browser
 
 ## Version 0.3 sprint 3
 ### Version 0.3.3, released 24/10
