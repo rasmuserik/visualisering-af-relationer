@@ -77,5 +77,5 @@
     } else {
       res.end('{"error":"unsupported method"}');
     }
-  }).listen(process.env.PORT || 1337, '0.0.0.0');
+  }).listen(process.env.PORT || 8001, '0.0.0.0');
 })();
