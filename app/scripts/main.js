@@ -44,7 +44,8 @@
     function makeHandler(elem) {
       return function() {
         var id = elem.getAttribute('data-relvis-id');
-        relvis.visualisation = 'ext' + id;
+        var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0,3);
+        relvis.visualisation = type + id;
         location.hash = '#relvis' + relvis.visualisation;
         relvis.show();
       };

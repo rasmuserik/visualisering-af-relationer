@@ -188,12 +188,13 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 4) - todo and progress:
 
-- visualisering af cirkulære relationer 
-  - indhentning af data fra api-server
+- •visualisering af cirkulære relationer 
+  - √indhentning af data fra api-server
   - graph-walk, og identifikation af hvilke nodes der skal vises
   - tegning af relationer
   - knap til aktivering
-  - jsonp in adhl-server
+  - √jsonp in adhl-server
+  - √adhl-server pre-calculate related elements
 - visualisations on ting-collections
   - talk with ting-collection-webservice
   - generate+visualise graph for collections
