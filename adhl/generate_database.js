@@ -19,11 +19,12 @@
   var commitSize;
   commitSize = 250000;
   commitSize = 20000;
+  var skipPass1 = false;
   var skipSaveLidCount = false;
   var skipPass3lid = false;
 
   (function() {
-    process.nextTick(pass1);
+    process.nextTick(skipPass1?pass2:pass1);
   })();
 
   //pass1{{{1
@@ -61,7 +62,6 @@
       var fields = line.split(',');
       var patron = fields[0];
       var lid = fields[5];
-      lidCount[lid] = 0;
       var title = (fields[8] || '').slice(1, -1);
       var author = (fields[9] || '').slice(1, -1);
       var kind = fields[10];
@@ -85,7 +85,6 @@
   //pass2{{{1
   function pass2() { //{{{2
     console.log('pass2');
-    var numEntries = Object.keys(lidCount).length;
     var n = 0;
     var count = 0;
 
@@ -95,7 +94,8 @@
           if (++count % commitSize === 0) {
             logStatus('pass2a', count, limit);
           }
-          ++lidCount[data.key.split(',')[0]];
+          var lid = data.key.split(',')[0];
+          lidCount[lid] = (lidCount[lid] || 0) + 1;
         })
         .on('error', function(err) {
           console.log(err);

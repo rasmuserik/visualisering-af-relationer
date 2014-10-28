@@ -9,15 +9,15 @@
   var maxSamples = 1000;
   var relatedCount = 100;
 
-  function related(lid, res) {
+  function related(lid, returnData) {
     var t0 = Date.now();
     relatedDB.get(lid, function(err, data) {
       if (data && !err) {
-        return res.end(data);
+        return returnData(data);
       }
         lidDB.get(lid, function(err, patrons) {
           if (err) {
-            return res.end('{"error":"local id not found"}');
+            return returnData('{"error":"local id not found"}');
           }
           patrons = JSON.parse(patrons);
           patrons = patrons.slice(0, maxSamples);
@@ -52,14 +52,21 @@
             result.sort(function(a, b) {
               return b[1] - a[1];
             });
+            result = result.map(function(elem) {
+              return {
+                lid: elem[0],
+                weight: elem[1]
+              };
+            });
             console.log('time:', (Date.now() - t0) / 1000);
             result = JSON.stringify(result.slice(0, relatedCount));
             relatedDB.put(lid, result);
-            return res.end(result);
+            return returnData(result);
           }
         });
     });
   }
+
 
   http.createServer(function(req, res) {
     res.writeHead(200, {
@@ -68,14 +75,31 @@
     });
 
     var urlParts = req.url.split('/');
+    var lid, params;
+    if(urlParts[2]) {
+      lid = urlParts[2].split('?')[0];
+      params = urlParts[2].split('?')[1];
+    }
+    function returnData(data) {
+      if(params) {
+        params = params.split('=');
+        if(params.length === 2 && params[0] === 'callback' && params[1].match(/^[a-zA-Z_0-9]*$/)) {
+          res.end(params[1] + '(' + data + ')');
+        } else {
+          res.end(JSON.stringify({error: 'wrong parameters to url'}));
+        }
+      } else {
+        res.end(data);
+      }
+    }
     if (urlParts[1] === 'info') {
-      lidInfoDB.get(urlParts[2], function(err, data) {
-        res.end(err ? '{"error":"local id not found"}' : data);
+      lidInfoDB.get(lid, function(err, data) {
+        returnData(err ? '{"error":"local id not found"}' : data);
       });
     } else if (urlParts[1] === 'related') {
-      related(urlParts[2], res);
+      related(lid, returnData);
     } else {
-      res.end('{"error":"unsupported method"}');
+      returnData('{"error":"unsupported method"}');
     }
   }).listen(process.env.PORT || 8001, '0.0.0.0');
 })();
