@@ -8,6 +8,7 @@
   var relatedDB = levelup('related.leveldb');
   var maxSamples = 1000;
   var relatedCount = 100;
+  var port = process.env.PORT || 8001;
 
   function related(lid, returnData) {
     var t0 = Date.now();
@@ -46,7 +47,7 @@
             var result = Object.keys(coloans).map(function(coloan) {
               var n = coloans[coloan];
               var total = +coloan.split(',')[1];
-              var weight = n / Math.log(total + 10) * 1000 | 0;
+              var weight = n / Math.sqrt(total + 10) * 1000 | 0;
               return [coloan.split(',')[0], weight];
             });
             result.sort(function(a, b) {
@@ -58,7 +59,6 @@
                 weight: elem[1]
               };
             });
-            console.log('time:', (Date.now() - t0) / 1000);
             result = JSON.stringify(result.slice(0, relatedCount));
             relatedDB.put(lid, result);
             return returnData(result);
@@ -101,5 +101,24 @@
     } else {
       returnData('{"error":"unsupported method"}');
     }
-  }).listen(process.env.PORT || 8001, '0.0.0.0');
+  }).listen(port, '0.0.0.0');
+
+  function genCache() {
+     var stream =  lidDB.createReadStream()
+        .on('data', function(data) {
+          stream.pause();
+          related(data.key, function() {
+            stream.resume();
+          });
+        })
+        .on('error', function(err) {
+          console.log(err);
+        })
+        .on('end', function() {
+          console.log('caching done');
+        });
+  }
+  genCache();
+  
+  console.log('started adhl-api-server on port', port);
 })();

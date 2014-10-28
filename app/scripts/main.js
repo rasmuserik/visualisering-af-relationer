@@ -13,14 +13,14 @@
     relvis.initUI();
   };
   relvis.init = function(obj) { //{{{1
+    relvis.apiUrl = obj.apiUrl;
+    relvis.relatedApiUrl = obj.relatedUrl || obj.apiUrl + '/related';
     var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
       if (!elem.getContext) {
         return 'Missing canvas support';
       }
-
-      relvis.apiUrl = obj.apiUrl;
 
       // check that android version > 2.1 due to canvas bugs in version 2.1 and earlier 
       var android = navigator.userAgent.match(/android.*?([12]\.[0-9])/i);
@@ -32,7 +32,7 @@
       // everything is ok
       return false;
     })();
-    // button on sample page pops up visualisation //{{{{2
+    // button on sample page pops up visualisation //{{{2
     $('#relvis-button').click(relvis.show);
     var elemsSel = document.getElementsByClassName('relvis-request');
     var elems = [];
@@ -62,7 +62,7 @@
       }
     }
 
-    // show visualisation on load if we have #relvis hash
+    // show visualisation on load if we have #relvis hash //{{{2
     if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
       relvis.visualisation = location.hash.slice(7);
       relvis.show();

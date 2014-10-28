@@ -49,6 +49,23 @@
     }
     loadedObjects[obj.object] = true;
     var id = obj.object;
+    relvis.nextTick(function() {
+      var lid = id.split(/(:|%3A)/)[2];
+      $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
+      cache: true,
+      dataType: 'jsonp',
+      success: function(data) {
+        if(Array.isArray(data)) {
+          data = data.map(function(obj) {
+            obj.id = '870970-basis:' + obj.lid;
+            return obj;
+          });
+          relvis.addTriple(id, 'related', data);
+        }
+      },
+      error: function() {}
+      });
+    });
     $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
       cache: true,
       dataType: 'jsonp',

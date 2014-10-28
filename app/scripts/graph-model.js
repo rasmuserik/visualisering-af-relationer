@@ -18,6 +18,21 @@
 
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
 
+    //log related {{{2
+    var related = relvis.getValues(id, 'related');
+    var relatedList = [];
+    if(related.length) {
+      related = related[0].slice(0,10);
+      console.log(related.length, 'related to', relvis.getValues(id, 'title')[0]);
+      for(i = 0; i < related.length; ++i) {
+        var relatedName = relvis.getValues(related[i].id, 'title')[0];
+        if(relatedName) {
+          relatedList.push(relatedName);
+        }
+      }
+    console.log(relatedList.join(',  '));
+    }
+
     function createNode(node) { //{{{2
       var prev = prevNodes[node.id];
       if (prev) {

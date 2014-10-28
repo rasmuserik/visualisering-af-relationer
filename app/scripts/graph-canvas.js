@@ -39,14 +39,14 @@
       return o.visible;
     });
 
-    // get and clear drawing context
+    // get and clear drawing context {{{2
     var canvas = relvis.canvas;
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.fillStyle = 'rgba(0,0,0,0.2)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Find coordinate transformation
+    // Find coordinate transformation {{{2
     if (!relvis.fixedViewport && visibleNodes.length && typeof visibleNodes[0].x === 'number') {
       var margin = 5 * relvis.avgSize / (relvis.canvas.height + relvis.canvas.width) || 0;
       var boundaries = relvis.findBoundaries(visibleNodes);
@@ -68,7 +68,7 @@
         xy.inv(relvis.scale));
     }
 
-    // Calculate view coordinates for all points
+    // Calculate view coordinates for all points {{{2
     visibleNodes.forEach(function(node) {
       var p = relvis.toCanvasCoord(node);
       node.vx = p.x;
@@ -94,7 +94,7 @@
     });
     relvis.avgSize /= statCount;
 
-    // Draw edges
+    // Draw edges {{{2
     var visibleEdges = relvis.edges.filter(function(e) {
       return e.source.visible && e.target.visible;
     });
@@ -105,7 +105,7 @@
         e.target.vx, e.target.vy);
     });
 
-    // drawNodes
+    // drawNodes {{{2
     for (var i = 0; i < visibleNodes.length; ++i) {
       var node = visibleNodes[i];
       var x = node.vx - node.xsize;
