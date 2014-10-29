@@ -76,6 +76,9 @@
 
     var urlParts = req.url.split('/');
     var lid, params;
+    if(urlParts.length > 3) {
+      urlParts = urlParts.slice(urlParts.length - 3);
+    }
     if(urlParts[2]) {
       lid = urlParts[2].split('?')[0];
       params = urlParts[2].split('?')[1];
