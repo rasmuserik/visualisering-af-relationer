@@ -30,7 +30,7 @@
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
-      <h1>Cirkulære relationer</h1>
+    <h1>Cirkulære relationer</h1> 
       <button data-relvis-type="circular" data-relvis-id="870970-basis%3A50975363" class="relvis-request button" style="font-size: 200%">Koncert for klaver og orkester</button>
       <button data-relvis-type="circular" data-relvis-id="870970-basis:23243431" class="relvis-request button" style="font-size: 200%">steppeulven</button>
       <button data-relvis-type="circular" data-relvis-id="870970-basis:26917921", class="relvis-request button" style="font-size: 200%">harry potter</button>
@@ -72,6 +72,14 @@
       <button data-relvis-type="external" data-relvis-id="870970-basis%3A29870535" class="relvis-request button" style="font-size: 200%">une cantate imaginaire</button>
       <button data-relvis-type="external" data-relvis-id="870970-basis%3A24221067" class="relvis-request button" style="font-size: 200%">matematik a</button>
       <button data-relvis-type="external" data-relvis-id="870971-avis%3A80931301" class="relvis-request button" style="font-size: 200%">biblen og storbyen</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A23292491" class="relvis-request button" style="font-size: 200%">unix</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A26080118" class="relvis-request button" style="font-size: 200%">spis naturen</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A29847193" class="relvis-request button" style="font-size: 200%">min første bog om pattedyr</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A25255119" class="relvis-request button" style="font-size: 200%">kyststier på bornholm</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A02231336" class="relvis-request button" style="font-size: 200%">vi unge</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A26394155" class="relvis-request button" style="font-size: 200%">vejen til frihed</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A41191414" class="relvis-request button" style="font-size: 200%">rolling stones</button>
+      <button data-relvis-type="external" data-relvis-id="870970-basis%3A27930921" class="relvis-request button" style="font-size: 200%">følelsernes alkymi</button>
 
 
         <!-- build:js({app,.tmp}) scripts/main.js -->
@@ -98,7 +106,8 @@
         $(function(){
             relvis.init({
                 apiUrl: 'https://dev.vejlebib.dk/ting-visual-relation',
-                relatedUrl: 'http://' + location.hostname + ':8001',
+                //relatedUrl: 'http://' + location.hostname + ':8001',
+                relatedUrl: 'http://relvis.solsort.com/relvis-api',
                 query: 'some search string if applicable'
             });
         });
