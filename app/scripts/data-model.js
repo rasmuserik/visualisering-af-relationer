@@ -66,6 +66,10 @@
       error: function() {}
       });
     });
+    function tryGet(count) {
+      if(count < 1) {
+        return;
+      }
     $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
       cache: true,
       dataType: 'jsonp',
@@ -74,7 +78,12 @@
           relvis.addTriple(id, obj.type || obj.property, obj.value);
         });
       },
-      error: function() {}
+      error: function(err) {
+        console.log(err);
+        tryGet(count - 1);
+      }
     });
+    }
+    tryGet(3);
   });
 })(); //{{{1
