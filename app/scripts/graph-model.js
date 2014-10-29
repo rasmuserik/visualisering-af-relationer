@@ -28,7 +28,8 @@
     });
     nodes = relvis.nodes = [];
     edges = relvis.edges = [];
-    function createNode(node) { 
+
+    function createNode(node) {
       var prev = prevNodes[node.id];
       if (prev) {
         for (var key in node) {
@@ -43,10 +44,10 @@
     }
 
     //circular relations {{{2
-    
+
     function traverseRelatedGraph(id, branchout) {
       var i;
-      if(nodeMap[id]) {
+      if (nodeMap[id]) {
         return nodeMap[id];
       }
       var node = createNode({
@@ -57,22 +58,22 @@
       node.visible = !!node.label;
       nodeMap[id] = node;
 
-      if(branchout.length && node.visible) {
+      if (branchout.length && node.visible) {
         var branchCount = branchout[0];
-        var branchout = branchout.slice(1);
+        branchout = branchout.slice(1);
         var related = relvis.getValues(id, 'related');
-        if(related.length) {
+        if (related.length) {
           related = related[0];
           var count = 0;
-          for(i = 0; count < branchCount && i < related.length; ++i) {
+          for (i = 0; count < branchCount && i < related.length; ++i) {
             var branchId = related[i].id;
-            if(!nodeMap[branchId]) {
+            if (!nodeMap[branchId]) {
               ++count;
-            var branchNode = traverseRelatedGraph(related[i].id, branchout);
-            edges.push({
-              source: node,
-              target: branchNode
-            });
+              var branchNode = traverseRelatedGraph(related[i].id, branchout);
+              edges.push({
+                source: node,
+                target: branchNode
+              });
             }
           }
         }
@@ -97,7 +98,7 @@
     }
     */
 
-    
+
     //{{{2 external relations
     function createCategoryNodes() { // {{{3
       categoryNodes = {};
@@ -177,14 +178,14 @@
     }
 
     //actual execution {{{2
-    if(type === 'ext') {
+    if (type === 'ext') {
       createRootNode();
       createCategoryNodes();
       createRelationNodes();
     } else {
-      traverseRelatedGraph(id, [6, 3 /*, 2 */]);
-      for(key in nodeMap) {
-        if(nodeMap.hasOwnProperty(key)) {
+      traverseRelatedGraph(id, [6, 3 /*, 2 */ ]);
+      for (key in nodeMap) {
+        if (nodeMap.hasOwnProperty(key)) {
           nodes.push(nodeMap[key]);
         }
       }
