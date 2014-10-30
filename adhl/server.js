@@ -25,24 +25,24 @@
           patrons = patrons.slice(0, maxSamples);
           var coloans = {};
 
-          function traverse() {
-            if (patrons.length === 0) {
-              return summariseResult();
-            }
-            var patron = patrons.pop();
-            patronDB.get(patron, function(err, data) {
-              if (err || !data) {
-                console.log(err, data);
-                return traverse();
-              }
-              var books = JSON.parse(data);
-              for (var i = 0; i < books.length; ++i) {
-                coloans[books[i]] = (coloans[books[i]] || 0) + 1;
-              }
-              traverse();
-            });
+        function traverse() {
+          if (patrons.length === 0) {
+            return summariseResult();
           }
-          traverse();
+          var patron = patrons.pop();
+          patronDB.get(patron, function(err, data) {
+            if (err || !data) {
+              console.log(err, data);
+              return traverse();
+            }
+            var books = JSON.parse(data);
+            for (var i = 0; i < books.length; ++i) {
+              coloans[books[i]] = (coloans[books[i]] || 0) + 1;
+            }
+            traverse();
+          });
+        }
+        traverse();
 
           function summariseResult() {
             var result = Object.keys(coloans).map(function(coloan) {
@@ -77,20 +77,22 @@
 
     var urlParts = req.url.split('/');
     var lid, params;
-    if(urlParts.length > 3) {
+    if (urlParts.length > 3) {
       urlParts = urlParts.slice(urlParts.length - 3);
     }
-    if(urlParts[2]) {
+    if (urlParts[2]) {
       lid = urlParts[2].split('?')[0];
       params = urlParts[2].split('?')[1];
     }
     function returnData(data, info) {
       if(params) {
         params = params.split('=');
-        if(params.length === 2 && params[0] === 'callback' && params[1].match(/^[a-zA-Z_0-9]*$/)) {
+        if (params.length === 2 && params[0] === 'callback' && params[1].match(/^[a-zA-Z_0-9]*$/)) {
           res.end(params[1] + '(' + data + ')');
         } else {
-          res.end(JSON.stringify({error: 'wrong parameters to url'}));
+          res.end(JSON.stringify({
+            error: 'wrong parameters to url'
+          }));
         }
       } else {
         res.end(data);
@@ -122,8 +124,15 @@
         .on('end', function() {
           console.log('caching done');
         });
+      })
+      .on('error', function(err) {
+        console.log(err);
+      })
+      .on('end', function() {
+        console.log('caching done');
+      });
   }
   genCache();
-  
+
   console.log('started adhl-api-server on port', port);
 })();

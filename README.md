@@ -190,9 +190,9 @@ Indeværende sprint (sprint 4) - todo and progress:
 
 - •visualisering af cirkulære relationer 
   - √indhentning af data fra api-server
-  - graph-walk, og identifikation af hvilke nodes der skal vises
-  - tegning af relationer
-  - knap til aktivering
+  - •graph-walk, og identifikation af hvilke nodes der skal vises
+  - √tegning af relationer
+  - √knap til aktivering
   - √jsonp in adhl-server
   - √adhl-server pre-calculate related elements
 - visualisations on ting-collections

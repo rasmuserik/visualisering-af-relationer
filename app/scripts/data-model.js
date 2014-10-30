@@ -52,37 +52,38 @@
     relvis.nextTick(function() {
       var lid = id.split(/(:|%3A)/)[2];
       $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
-      cache: true,
-      dataType: 'jsonp',
-      success: function(data) {
-        if(Array.isArray(data)) {
-          data = data.map(function(obj) {
-            obj.id = '870970-basis:' + obj.lid;
-            return obj;
-          });
-          relvis.addTriple(id, 'related', data);
-        }
-      },
-      error: function() {}
+        cache: true,
+        dataType: 'jsonp',
+        success: function(data) {
+          if (Array.isArray(data)) {
+            data = data.map(function(obj) {
+              obj.id = '870970-basis:' + obj.lid;
+              return obj;
+            });
+            relvis.addTriple(id, 'related', data);
+          }
+        },
+        error: function() {}
       });
     });
+
     function tryGet(count) {
-      if(count < 1) {
+      if (count < 1) {
         return;
       }
-    $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
-      cache: true,
-      dataType: 'jsonp',
-      success: function(data) {
-        data.forEach(function(obj) {
-          relvis.addTriple(id, obj.type || obj.property, obj.value);
-        });
-      },
-      error: function(err) {
-        console.log(err);
-        tryGet(count - 1);
-      }
-    });
+      $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
+        cache: true,
+        dataType: 'jsonp',
+        success: function(data) {
+          data.forEach(function(obj) {
+            relvis.addTriple(id, obj.type || obj.property, obj.value);
+          });
+        },
+        error: function(err) {
+          console.log(err);
+          tryGet(count - 1);
+        }
+      });
     }
     tryGet(3);
   });

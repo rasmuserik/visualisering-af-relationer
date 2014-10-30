@@ -24,7 +24,7 @@
   var skipPass3lid = false;
 
   (function() {
-    process.nextTick(skipPass1?pass2:pass1);
+    process.nextTick(skipPass1 ? pass2 : pass1);
   })();
 
   //pass1{{{1
@@ -100,7 +100,7 @@
         .on('error', function(err) {
           console.log(err);
         })
-        .on('end', skipSaveLidCount?pass3:writeLidCount);
+        .on('end', skipSaveLidCount ? pass3 : writeLidCount);
     }
 
     function writeLidCount() {
@@ -108,7 +108,7 @@
       var totalCount = lids.length;
       var count = 0;
       (function handleLids(err) {
-        if(err) {
+        if (err) {
           console.log(err);
         }
         if (lids.length === 0) {
@@ -160,7 +160,7 @@
         current = key;
         content = [];
       }
-      var stream =  sourceDB.createReadStream()
+      var stream = sourceDB.createReadStream()
         .on('data', function(data) {
           if (++count % commitSize === 0) {
             logStatus('pass3' + targetDB.location, count, limit);
@@ -171,7 +171,9 @@
 
           if (current !== key) {
             stream.pause();
-            next(key, function() {stream.resume();});
+            next(key, function() {
+              stream.resume();
+            });
           }
           if (infoMap) {
             val = [val, infoMap[val]];
@@ -185,12 +187,12 @@
           next(undefined, cb);
         });
     }
-    if(skipPass3lid) {
+    if (skipPass3lid) {
       process(patronlidDB, patronDB, lidCount, done);
     } else {
-    process(lidpatronDB, lidDB, false, function() {
-      process(patronlidDB, patronDB, lidCount, done);
-    });
+      process(lidpatronDB, lidDB, false, function() {
+        process(patronlidDB, patronDB, lidCount, done);
+      });
     }
   }
 
