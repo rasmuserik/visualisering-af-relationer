@@ -4,8 +4,16 @@
   relvis.visualObjectRatio = 13 / 8;
   var images = {};
 
-  relvis.drawEdge = function drawEdge(ctx, node0, node1, x0, y0, x1, y1) { //{{{1
-    ctx.lineWidth = relvis.unit / 10;
+  relvis.drawEdge = function drawEdge(ctx, edge, x0, y0, x1, y1) { //{{{1
+    if(edge.type === 'collection') {
+      ctx.lineWidth = relvis.unit * 10;
+      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.lineCap = 'round';
+    } else {
+      ctx.lineWidth = relvis.unit / 5;
+      ctx.strokeStyle = 'rgba(0,0,0,0.6)';
+      ctx.lineCap = 'butt';
+    }
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);

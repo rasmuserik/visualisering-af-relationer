@@ -14,7 +14,7 @@
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
 
     var type = relvis.visualisation.slice(0, 3);
-    var id = relvis.visualisation.slice(3);
+    var ids = relvis.visualisation.slice(3).split(',');
 
     var key;
     var nodeMap = {};
@@ -30,17 +30,17 @@
     edges = relvis.edges = [];
 
     function createNode(node) {
-      var prev = prevNodes[node.id];
+      var prev = nodeMap[node.id] || prevNodes[node.id];
       if (prev) {
         for (var key in node) {
           if (node.hasOwnProperty(key)) {
             prev[key] = node[key];
           }
         }
-        return prev;
-      } else {
-        return node;
+        node = prev;
       }
+      nodeMap[node.id] = node;
+      return node;
     }
 
     //circular relations {{{2
@@ -54,7 +54,7 @@
         id: id,
       });
       node.imgSrc = relvis.getValues(id, 'cover')[0];
-      node.label = relvis.getValues(id, 'title')[0];
+      node.label = relvis.getValues(id, 'title')[0] || '...';
       node.visible = !!node.label;
       nodeMap[id] = node;
 
@@ -100,7 +100,9 @@
 
 
     //{{{2 external relations
+    function createExternalRelations(id, group) {
     function createCategoryNodes() { // {{{3
+      var i;
       categoryNodes = {};
       categoryMap = {};
       categoryNodeList = [];
@@ -113,7 +115,6 @@
             visible: false
           });
           categoryNodeList.push(categoryNodes[category]);
-          nodes.push(categoryNodes[category]);
           for (i = 0; i < categories[category].length; ++i) {
             categoryMap[categories[category][i]] = category;
           }
@@ -142,7 +143,7 @@
         categories[category].forEach(function(property) {
           relvis.getValues(id, property).forEach(function(value) {
             node = createNode({
-              id: id + '-' + property + '-' + value,
+              id: group + '-' + property + '-' + value,
               label: value,
               property: property,
               value: value,
@@ -151,7 +152,6 @@
             if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
               node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
             }
-            nodes.push(node);
             edges.push({
               source: categoryNodes[category],
               target: node
@@ -174,22 +174,37 @@
       });
       root.imgSrc = relvis.getValues(id, 'cover')[0];
       root.label = relvis.getValues(id, 'title')[0] || 'Loading...';
-      nodes.push(root);
     }
 
-    //actual execution {{{2
-    if (type === 'ext') {
       createRootNode();
       createCategoryNodes();
       createRelationNodes();
+    }
+    //actual execution {{{2
+    if (type === 'ext') {
+      console.log(ids);
+      for(i=0;i<ids.length;++i) {
+        createExternalRelations(ids[i], ids);
+        for(var j = 0; j < i; ++j) {
+          console.log(nodeMap[ids[i]], nodeMap[ids[j]]);
+          console.log(ids[i], ids[j]);
+          edges.push({
+            source: nodeMap[ids[i]],
+            target: nodeMap[ids[j]],
+            type: 'collection'
+          });
+        }
+      }
     } else {
-      traverseRelatedGraph(id, [6, 3 /*, 2 */ ]);
+      //traverseRelatedGraph(ids[0], [6, 3, 2]);
+      //traverseRelatedGraph(ids[0], [6, 4]);
+      traverseRelatedGraph(ids[0], [9, 3]);
+    }
       for (key in nodeMap) {
         if (nodeMap.hasOwnProperty(key)) {
           nodes.push(nodeMap[key]);
         }
       }
-    }
 
     relvis.layoutGraph();
     return {

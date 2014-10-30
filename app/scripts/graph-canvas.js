@@ -43,7 +43,7 @@
     var canvas = relvis.canvas;
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = 'rgba(0,0,0,0.2)';
+    ctx.fillStyle = 'rgba(150,150,150,0.7)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Find coordinate transformation {{{2
@@ -100,9 +100,11 @@
     });
 
     visibleEdges.forEach(function(e) {
-      relvis.drawEdge(ctx, e.source, e.target,
+      if(e.visible !== false) {
+      relvis.drawEdge(ctx, e,
         e.source.vx, e.source.vy,
         e.target.vx, e.target.vy);
+      }
     });
 
     // drawNodes {{{2
