@@ -124,13 +124,6 @@
         .on('end', function() {
           console.log('caching done');
         });
-      })
-      .on('error', function(err) {
-        console.log(err);
-      })
-      .on('end', function() {
-        console.log('caching done');
-      });
   }
   genCache();
 
