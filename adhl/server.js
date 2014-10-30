@@ -12,13 +12,14 @@
 
   function related(lid, returnData) {
     var t0 = Date.now();
+    var info = {lid: lid, startTime: t0};
     relatedDB.get(lid, function(err, data) {
-      if (data && !err) {
-        return returnData(data);
+      if (!err && data) {
+        return returnData(data, info);
       }
         lidDB.get(lid, function(err, patrons) {
           if (err) {
-            return returnData('{"error":"local id not found"}');
+            return returnData('{"error":"local id not found"}', info);
           }
           patrons = JSON.parse(patrons);
           patrons = patrons.slice(0, maxSamples);
@@ -47,7 +48,7 @@
             var result = Object.keys(coloans).map(function(coloan) {
               var n = coloans[coloan];
               var total = +coloan.split(',')[1];
-              var weight = n / Math.sqrt(total + 10) * 1000 | 0;
+              var weight = n ;// / Math.log(total + 10) * 1000 | 0;
               return [coloan.split(',')[0], weight];
             });
             result.sort(function(a, b) {
@@ -61,7 +62,7 @@
             });
             result = JSON.stringify(result.slice(0, relatedCount));
             relatedDB.put(lid, result);
-            return returnData(result);
+            return returnData(result, info);
           }
         });
     });
@@ -83,7 +84,7 @@
       lid = urlParts[2].split('?')[0];
       params = urlParts[2].split('?')[1];
     }
-    function returnData(data) {
+    function returnData(data, info) {
       if(params) {
         params = params.split('=');
         if(params.length === 2 && params[0] === 'callback' && params[1].match(/^[a-zA-Z_0-9]*$/)) {
@@ -94,6 +95,7 @@
       } else {
         res.end(data);
       }
+      console.log(Date(), info.lid, Date.now() - info.startTime, JSON.stringify(data).slice(0,50));
     }
     if (urlParts[1] === 'info') {
       lidInfoDB.get(lid, function(err, data) {
@@ -111,7 +113,7 @@
         .on('data', function(data) {
           stream.pause();
           related(data.key, function() {
-            stream.resume();
+            setTimeout(function() { stream.resume(); }, 0);
           });
         })
         .on('error', function(err) {
