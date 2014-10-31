@@ -188,22 +188,24 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 4) - todo and progress:
 
-- •visualisering af cirkulære relationer 
-  - √indhentning af data fra api-server
-  - •graph-walk, og identifikation af hvilke nodes der skal vises
-  - √tegning af relationer
-  - √knap til aktivering
-  - √jsonp in adhl-server
-  - √adhl-server pre-calculate related elements
-- visualisations on ting-collections
-  - talk with ting-collection-webservice
-  - generate+visualise graph for collections
-  - hidden edges between elements in collection
 - interaction
   - add click-detection/support to tap-handler abstraction
   - close relation browser on click on background
   - handle click on ting-object
     - optional handling function as parameter
+
+## Version 0.4 sprint 4
+### Version 0.4.0, released 31/10
+- visualisering af cirkulære relationer 
+  - indhentning af data fra api-server
+  - graph-walk, og identifikation af hvilke nodes der skal vises
+  - tegning af relationer
+  - knap til aktivering
+  - jsonp in adhl-server
+  - adhl-server pre-calculate related elements
+- visualisations on ting-collections
+  - generate+visualise graph for collections
+  - hidden edges between elements in collection
 
 ## Version 0.3 sprint 3
 ### Version 0.3.3, released 24/10
