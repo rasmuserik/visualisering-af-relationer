@@ -49,11 +49,22 @@
     relvis.layoutGraph();
   });
   relvis.addEventListener('tapend', function(e) { //{{{1
-    showStatus('tapend');
+    showStatus('tapend' + JSON.stringify({
+      x: e.x,
+      y: e.y,
+      node: node.label
+    }));
     node.fixed = false;
     relvis.fixedViewport = false;
     relvis.requestRedraw();
     relvis.layoutGraph();
+  });
+  relvis.addEventListener('tapclick', function(e) { //{{{1
+    showStatus('tapclick' + JSON.stringify({
+      x: e.x,
+      y: e.y,
+      node: node.label
+    }));
   });
   relvis.initUI = function() { //{{{1
     relvis.addEventListener('redraw', redraw);

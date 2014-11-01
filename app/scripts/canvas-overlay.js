@@ -6,10 +6,15 @@
   var touching = false;
 
   //taphandling{{{1
+  var tapTime = 300;
   var tapStartX;
   var tapStartY;
   var tapPrevX;
   var tapPrevY;
+  var tapPrevNode;
+  var tapStartTime;
+  var maxDX;
+  var maxDY;
 
   function taphandle(kind) {
     return function(e) {
@@ -31,12 +36,16 @@
       }
 
       if (kind === 'start') {
+        maxDX = maxDY = 0;
+        tapStartTime = Date.now();
         touching = true;
         tapPrevX = tapStartX = o.x;
         tapPrevY = tapStartY = o.y;
       }
 
       if (typeof o.x === 'number') {
+        maxDX = Math.max(maxDX, Math.abs(o.x - tapStartX));
+        maxDY = Math.max(maxDY, Math.abs(o.y - tapStartY));
         o.x = o.x * canvas.width / canvas.clientWidth;
         o.y = o.y * canvas.height / canvas.clientHeight;
         o.node = relvis.nodeAt(o.x, o.y);
@@ -46,6 +55,10 @@
         o.ddy = o.y - tapPrevY;
         tapPrevX = o.x;
         tapPrevY = o.y;
+        tapPrevNode = o.node;
+      }
+      if(!o.node) {
+        o.node = tapPrevNode;
       }
 
       if (touching || kind === 'start') {
@@ -53,6 +66,10 @@
       }
 
       if (kind === 'end') {
+        if(Date.now() - tapStartTime < tapTime &&
+            Math.sqrt(maxDX*maxDX + maxDY*maxDY) < relvis.unit) {
+            relvis.dispatchEvent('tapclick', o);
+        }
         touching = false;
       }
     };
