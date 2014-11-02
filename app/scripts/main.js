@@ -3,14 +3,20 @@
   var relvis = window.relvis = window.relvis || {};
 
 
+  var initDone = false;
   relvis.show = function() { //{{{1
     if (relvis.overlayVisible) {
       return;
     }
-    relvis.initData();
-    relvis.initCanvas();
+    if(!initDone) {
+      relvis.initData();
+      relvis.initCanvas();
+      relvis.initUI();
+      initDone = true;
+    }
+    relvis.nodes = [];
+    relvis.edges = [];
     relvis.showCanvasOverlay();
-    relvis.initUI();
   };
   relvis.init = function(obj) { //{{{1
     relvis.apiUrl = obj.apiUrl;

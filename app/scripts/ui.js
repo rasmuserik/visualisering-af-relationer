@@ -18,7 +18,8 @@
     info = text;
   }
 
-  relvis.addEventListener('tapstart', function(e) { //{{{1
+  relvis.initUI = function() { //{{{1
+  relvis.addEventListener('tapstart', function(e) { //{{{2
     node = (e.node || {});
     graphTouchCoord = relvis.toGraphCoord(e);
     showStatus('tapstart ' + JSON.stringify({
@@ -31,7 +32,7 @@
     relvis.fixedViewport = true;
     relvis.requestRedraw();
   });
-  relvis.addEventListener('tapmove', function(e) { //{{{1
+  relvis.addEventListener('tapmove', function(e) { //{{{2
     var coord = relvis.toGraphCoord(e);
     var dpos = relvis.xy.sub(coord, graphTouchCoord);
     showStatus('tapmove' + JSON.stringify({
@@ -48,7 +49,7 @@
     relvis.requestRedraw();
     relvis.layoutGraph();
   });
-  relvis.addEventListener('tapend', function(e) { //{{{1
+  relvis.addEventListener('tapend', function(e) { //{{{2
     showStatus('tapend' + JSON.stringify({
       x: e.x,
       y: e.y,
@@ -59,7 +60,7 @@
     relvis.requestRedraw();
     relvis.layoutGraph();
   });
-  relvis.addEventListener('tapclick', function(e) { //{{{1
+  relvis.addEventListener('tapclick', function(e) { //{{{2
     showStatus('tapclick' + JSON.stringify({
       x: e.x,
       y: e.y,
@@ -70,7 +71,6 @@
       relvis.hideCanvasOverlay();
     }
   });
-  relvis.initUI = function() { //{{{1
-    relvis.addEventListener('redraw', redraw);
+    relvis.addEventListener('redraw', redraw); //{{{2
   };
 })(); //{{{1
