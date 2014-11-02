@@ -101,80 +101,80 @@
 
     //{{{2 external relations
     function createExternalRelations(id, group) {
-    function createCategoryNodes() { // {{{3
-      var i;
-      categoryNodes = {};
-      categoryMap = {};
-      categoryNodeList = [];
-      for (var category in categories) {
-        if (categories.hasOwnProperty(category)) {
-          categoryNodes[category] = createNode({
-            id: 'category:' + category,
-            label: category,
-            type: 'category',
-            visible: false
-          });
-          categoryNodeList.push(categoryNodes[category]);
-          for (i = 0; i < categories[category].length; ++i) {
-            categoryMap[categories[category][i]] = category;
+      function createCategoryNodes() { // {{{3
+        var i;
+        categoryNodes = {};
+        categoryMap = {};
+        categoryNodeList = [];
+        for (var category in categories) {
+          if (categories.hasOwnProperty(category)) {
+            categoryNodes[category] = createNode({
+              id: 'category:' + category,
+              label: category,
+              type: 'category',
+              visible: false
+            });
+            categoryNodeList.push(categoryNodes[category]);
+            for (i = 0; i < categories[category].length; ++i) {
+              categoryMap[categories[category][i]] = category;
+            }
           }
         }
+        categoryNodeList[0].fixedPosition = {
+          x: 0,
+          y: 0
+        };
+        categoryNodeList[1].fixedPosition = {
+          x: 1,
+          y: 0
+        };
+        categoryNodeList[2].fixedPosition = {
+          x: 0,
+          y: 1
+        };
+        categoryNodeList[3].fixedPosition = {
+          x: 1,
+          y: 1
+        };
       }
-      categoryNodeList[0].fixedPosition = {
-        x: 0,
-        y: 0
-      };
-      categoryNodeList[1].fixedPosition = {
-        x: 1,
-        y: 0
-      };
-      categoryNodeList[2].fixedPosition = {
-        x: 0,
-        y: 1
-      };
-      categoryNodeList[3].fixedPosition = {
-        x: 1,
-        y: 1
-      };
-    }
 
-    function createRelationNodes() { //{{{3
-      Object.keys(categories).forEach(function(category) {
-        categories[category].forEach(function(property) {
-          relvis.getValues(id, property).forEach(function(value) {
-            node = createNode({
-              id: group + '-' + property + '-' + value,
-              label: value,
-              property: property,
-              value: value,
-              visible: true
-            });
-            if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
-              node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
-            }
-            edges.push({
-              source: categoryNodes[category],
-              target: node
-            });
-            edges.push({
-              source: root,
-              target: node
+      function createRelationNodes() { //{{{3
+        Object.keys(categories).forEach(function(category) {
+          categories[category].forEach(function(property) {
+            relvis.getValues(id, property).forEach(function(value) {
+              node = createNode({
+                id: group + '-' + property + '-' + value,
+                label: value,
+                property: property,
+                value: value,
+                visible: true
+              });
+              if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
+                node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
+              }
+              edges.push({
+                source: categoryNodes[category],
+                target: node
+              });
+              edges.push({
+                source: root,
+                target: node
+              });
             });
           });
         });
-      });
-    }
+      }
 
-    function createRootNode() { //{{{3
-      root = createNode({
-        id: id,
-        label: 'root',
-        type: 'root',
-        visible: true
-      });
-      root.imgSrc = relvis.getValues(id, 'cover')[0];
-      root.label = relvis.getValues(id, 'title')[0] || 'Loading...';
-    }
+      function createRootNode() { //{{{3
+        root = createNode({
+          id: id,
+          label: 'root',
+          type: 'root',
+          visible: true
+        });
+        root.imgSrc = relvis.getValues(id, 'cover')[0];
+        root.label = relvis.getValues(id, 'title')[0] || 'Loading...';
+      }
 
       createRootNode();
       createCategoryNodes();
@@ -183,9 +183,9 @@
     //actual execution {{{2
     if (type === 'ext') {
       console.log(ids);
-      for(i=0;i<ids.length;++i) {
+      for (i = 0; i < ids.length; ++i) {
         createExternalRelations(ids[i], ids);
-        for(var j = 0; j < i; ++j) {
+        for (var j = 0; j < i; ++j) {
           console.log(nodeMap[ids[i]], nodeMap[ids[j]]);
           console.log(ids[i], ids[j]);
           edges.push({
@@ -200,11 +200,11 @@
       //traverseRelatedGraph(ids[0], [6, 4]);
       traverseRelatedGraph(ids[0], [9, 3]);
     }
-      for (key in nodeMap) {
-        if (nodeMap.hasOwnProperty(key)) {
-          nodes.push(nodeMap[key]);
-        }
+    for (key in nodeMap) {
+      if (nodeMap.hasOwnProperty(key)) {
+        nodes.push(nodeMap[key]);
       }
+    }
 
     relvis.layoutGraph();
     return {

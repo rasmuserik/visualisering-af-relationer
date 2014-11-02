@@ -57,7 +57,7 @@
         tapPrevY = o.y;
         tapPrevNode = o.node;
       }
-      if(!o.node) {
+      if (!o.node) {
         o.node = tapPrevNode;
       }
 
@@ -66,9 +66,9 @@
       }
 
       if (kind === 'end') {
-        if(Date.now() - tapStartTime < tapTime &&
-            Math.sqrt(maxDX*maxDX + maxDY*maxDY) < relvis.unit) {
-            relvis.dispatchEvent('tapclick', o);
+        if (Date.now() - tapStartTime < tapTime &&
+          Math.sqrt(maxDX * maxDX + maxDY * maxDY) < relvis.unit) {
+          relvis.dispatchEvent('tapclick', o);
         }
         touching = false;
       }

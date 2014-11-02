@@ -5,7 +5,7 @@
   var images = {};
 
   relvis.drawEdge = function drawEdge(ctx, edge, x0, y0, x1, y1) { //{{{1
-    if(edge.type === 'collection') {
+    if (edge.type === 'collection') {
       ctx.lineWidth = relvis.unit * 10;
       ctx.strokeStyle = 'rgba(255,255,255,0.3)';
       ctx.lineCap = 'round';

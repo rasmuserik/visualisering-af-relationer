@@ -8,7 +8,7 @@
     if (relvis.overlayVisible) {
       return;
     }
-    if(!initDone) {
+    if (!initDone) {
       relvis.initData();
       relvis.initCanvas();
       relvis.initUI();

@@ -100,10 +100,10 @@
     });
 
     visibleEdges.forEach(function(e) {
-      if(e.visible !== false) {
-      relvis.drawEdge(ctx, e,
-        e.source.vx, e.source.vy,
-        e.target.vx, e.target.vy);
+      if (e.visible !== false) {
+        relvis.drawEdge(ctx, e,
+          e.source.vx, e.source.vy,
+          e.target.vx, e.target.vy);
       }
     });
 
