@@ -65,6 +65,10 @@
       y: e.y,
       node: node.label
     }));
+    if(!node.id) {
+      location.hash = '';
+      relvis.hideCanvasOverlay();
+    }
   });
   relvis.initUI = function() { //{{{1
     relvis.addEventListener('redraw', redraw);
