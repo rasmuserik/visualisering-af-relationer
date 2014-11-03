@@ -127,7 +127,10 @@
                 apiUrl: 'https://dev.vejlebib.dk/ting-visual-relation',
                 //relatedUrl: 'http://' + location.hostname + ':8001',
                 relatedUrl: 'http://relvis.solsort.com/relvis-api',
-                query: 'some search string if applicable'
+                query: 'some search string if applicable',
+                clickHandle: function(o) {
+                  console.log(o);
+                }
             });
         });
         </script>

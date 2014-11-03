@@ -13,6 +13,7 @@
   var tapPrevY;
   var tapPrevNode;
   var tapStartTime;
+  var tapStartNode;
   var maxDX;
   var maxDY;
 
@@ -56,6 +57,11 @@
         tapPrevX = o.x;
         tapPrevY = o.y;
         tapPrevNode = o.node;
+      }
+      if (kind === 'start') {
+        tapStartNode = o.node;
+      } else {
+        o.startNode = tapStartNode;
       }
       if (!o.node) {
         o.node = tapPrevNode;

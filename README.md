@@ -189,10 +189,13 @@ A development/sample data source for circular relations are generated. This is t
 Indeværende sprint (sprint 4) - todo and progress:
 
 - interaction
-  - add click-detection/support to tap-handler abstraction
-  - close relation browser on click on background
-  - handle click on ting-object
-    - optional handling function as parameter
+  - √add click-detection/support to tap-handler abstraction
+  - √close relation browser on click on background
+  - √handle click on ting-object
+    - optional handling function as parameter (clickHandle on init object)
+  - document
+- refactor/restructure README.md
+- look through code, make sure opening/closing browser repeatedly still works
 
 ## Version 0.4 sprint 4
 ### Version 0.4.0, released 31/10
