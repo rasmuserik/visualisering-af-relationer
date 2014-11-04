@@ -71,7 +71,7 @@
         relvis.hideCanvasOverlay();
       } else {
         relvis.clickHandle({
-          visualisation: relvis.visualisation.slice(0,3),
+          visualisation: relvis.type(),
           id: node.id});
       }
     });

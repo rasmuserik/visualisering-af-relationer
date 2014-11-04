@@ -4,6 +4,15 @@
 
 
   var initDone = false;
+  relvis.getType = function() {
+    return location.hash.slice(7, 10);
+  }
+  relvis.getIds = function() {
+    return location.hash.slice(10).split(',');
+  }
+  relvis.setIds = function(ids) {
+    location.hash = location.hash.slice(0,10) + String(ids);
+  }
   relvis.show = function() { //{{{1
     if (relvis.overlayVisible) {
       return;
@@ -52,8 +61,7 @@
       return function() {
         var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');
         var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
-        relvis.visualisation = type + id;
-        location.hash = '#relvis' + relvis.visualisation;
+        location.hash = '#relvis' + type + id;
         relvis.show();
       };
     }
@@ -72,12 +80,10 @@
 
     // show visualisation on load if we have #relvis hash //{{{2
     if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
-      relvis.visualisation = location.hash.slice(7);
       relvis.show();
     }
     $(window).on('hashchange', function() {
       if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
-        relvis.visualisation = location.hash.slice(7);
         relvis.show();
       } else {
         relvis.hideCanvasOverlay();

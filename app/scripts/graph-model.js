@@ -13,8 +13,9 @@
 
   relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
 
-    var type = relvis.visualisation.slice(0, 3);
-    var ids = relvis.visualisation.slice(3).split(',');
+    var type = relvis.getType();
+    var ids = relvis.getIds();
+    console.log(type, ids);
 
     var key;
     var nodeMap = {};
@@ -56,6 +57,7 @@
       node.imgSrc = relvis.getValues(id, 'cover')[0];
       node.label = relvis.getValues(id, 'title')[0] || '...';
       node.visible = !!node.label;
+      node.type = 'cir';
       nodeMap[id] = node;
 
       if (branchout.length && node.visible) {
@@ -207,7 +209,8 @@
         depth = [2, 2];
       }
       for(i=0;i<ids.length;++i) {
-        traverseRelatedGraph(ids[i], depth);
+        node = traverseRelatedGraph(ids[i], depth);
+        node.type = 'primary';
         for (j = 0; j < i; ++j) {
           edges.push({
             source: nodeMap[ids[i]],
