@@ -6,13 +6,14 @@
   var initDone = false;
   relvis.getType = function() {
     return location.hash.slice(7, 10);
-  }
+  };
   relvis.getIds = function() {
     return location.hash.slice(10).split(',');
-  }
+  };
   relvis.setIds = function(ids) {
     location.hash = location.hash.slice(0,10) + String(ids);
-  }
+    relvis.dispatchEvent('data-update');
+  };
   relvis.show = function() { //{{{1
     if (relvis.overlayVisible) {
       return;
@@ -88,6 +89,7 @@
       } else {
         relvis.hideCanvasOverlay();
       }
+      relvis.dispatchEvent('data-update');
     });
   };
 })(); //{{{1

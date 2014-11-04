@@ -194,8 +194,10 @@ Indeværende sprint (sprint 4) - todo and progress:
   - √handle click on ting-object
     - optional handling function as parameter (clickHandle on init object)
   - document
+  - √click adds/remove to klynge in circular relation visualisation
 - refactor/restructure README.md
 - look through code, make sure opening/closing browser repeatedly still works
+- circular relation breadth first instead of depth first + async
 
 ## Version 0.4 sprint 4
 ### Version 0.4.0, released 31/10
