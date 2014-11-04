@@ -199,16 +199,16 @@
       //traverseRelatedGraph(ids[0], [6, 3, 2]);
       //traverseRelatedGraph(ids[0], [6, 4]);
       var depth;
-      if(ids.length <= 1) {
+      if (ids.length <= 1) {
         depth = [9, 3];
-      } else if(ids.length <= 2) {
+      } else if (ids.length <= 2) {
         depth = [4, 3];
-      } else if(ids.length <= 5) {
+      } else if (ids.length <= 5) {
         depth = [3, 2];
       } else {
         depth = [2, 2];
       }
-      for(i=0;i<ids.length;++i) {
+      for (i = 0; i < ids.length; ++i) {
         node = traverseRelatedGraph(ids[i], depth);
         node.type = 'primary';
         for (j = 0; j < i; ++j) {

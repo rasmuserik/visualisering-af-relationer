@@ -70,19 +70,20 @@
         location.hash = '';
         relvis.hideCanvasOverlay();
       } else {
-        if(relvis.getType() === 'cir') { 
+        if (relvis.getType() === 'cir') {
           var ids = relvis.getIds();
           var pos = ids.indexOf(node.id);
-          if(pos === -1) {
+          if (pos === -1) {
             ids.push(node.id);
           } else {
             ids.splice(pos, 1);
           }
           relvis.setIds(ids);
         } else {
-        relvis.clickHandle({
-          visualisation: relvis.getType(),
-          id: node.id});
+          relvis.clickHandle({
+            visualisation: relvis.getType(),
+            id: node.id
+          });
         }
       }
     });
