@@ -18,7 +18,7 @@
 
     var key;
     var nodeMap = {};
-    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList;
+    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j;
 
 
     //{{{2 general graph generation
@@ -185,9 +185,7 @@
       console.log(ids);
       for (i = 0; i < ids.length; ++i) {
         createExternalRelations(ids[i], ids);
-        for (var j = 0; j < i; ++j) {
-          console.log(nodeMap[ids[i]], nodeMap[ids[j]]);
-          console.log(ids[i], ids[j]);
+        for (j = 0; j < i; ++j) {
           edges.push({
             source: nodeMap[ids[i]],
             target: nodeMap[ids[j]],
@@ -198,7 +196,26 @@
     } else {
       //traverseRelatedGraph(ids[0], [6, 3, 2]);
       //traverseRelatedGraph(ids[0], [6, 4]);
-      traverseRelatedGraph(ids[0], [9, 3]);
+      var depth;
+      if(ids.length <= 1) {
+        depth = [9, 3];
+      } else if(ids.length <= 2) {
+        depth = [4, 3];
+      } else if(ids.length <= 5) {
+        depth = [3, 2];
+      } else {
+        depth = [2, 2];
+      }
+      for(i=0;i<ids.length;++i) {
+        traverseRelatedGraph(ids[i], depth);
+        for (j = 0; j < i; ++j) {
+          edges.push({
+            source: nodeMap[ids[i]],
+            target: nodeMap[ids[j]],
+            type: 'collection'
+          });
+        }
+      }
     }
     for (key in nodeMap) {
       if (nodeMap.hasOwnProperty(key)) {
