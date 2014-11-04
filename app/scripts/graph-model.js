@@ -15,7 +15,6 @@
 
     var type = relvis.getType();
     var ids = relvis.getIds();
-    console.log(type, ids);
 
     var key;
     var nodeMap = {};
@@ -184,7 +183,6 @@
     }
     //actual execution {{{2
     if (type === 'ext') {
-      console.log(ids);
       for (i = 0; i < ids.length; ++i) {
         createExternalRelations(ids[i], ids);
         for (j = 0; j < i; ++j) {
