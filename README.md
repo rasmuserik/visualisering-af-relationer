@@ -66,10 +66,10 @@ Kommentarer indeholder desuden fold markers til at navigere i filen med editorer
 
 ## Indlejring/API
 
-Tilføj css-klassen `relvis-request` til de elementer der skal få relationsbrowseren til at poppe op. Tilføj derudover dataproperty'en `data-relvis-id` med ting-id for det pågældende element, og optional `data-relvis-type` der angiver hvilken type view det skal referere til, eksempelvis:
+Tilføj css-klassen `relvis-request` til de elementer der skal få relationsbrowseren til at poppe op. Tilføj derudover dataproperty'en `data-relvis-id` med et eller flere ting-id'er for det/de pågældende element, og optional `data-relvis-type` der angiver hvilken type view det skal referere til, eksempelvis:
 
     <button class="relvis-request" data-relvis-type="external"
-        data-relvis-id="870970-basis:22331892"> 
+        data-relvis-id="870970-basis:22331892,870970-basis%3A06520561,870970-basis%3A50588378"> 
       click me
     </button>
 
@@ -188,12 +188,12 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 4) - todo and progress:
 
-- interaction
+- √interaction
   - √add click-detection/support to tap-handler abstraction
   - √close relation browser on click on background
   - √handle click on ting-object
     - optional handling function as parameter (clickHandle on init object)
-  - document
+  - √document
   - √click adds/remove to klynge in circular relation visualisation
 - refactor/restructure README.md
 - look through code, make sure opening/closing browser repeatedly still works
