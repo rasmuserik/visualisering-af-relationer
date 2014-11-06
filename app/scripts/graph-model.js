@@ -93,59 +93,6 @@
       traverseGraph();
     }
 
-    function traverseRelatedGraph(id, branchout) {
-      var i;
-      if (nodeMap[id]) {
-        return nodeMap[id];
-      }
-      var node = createNode({
-        id: id,
-      });
-      node.visible = !!node.label;
-      node.type = 'cir';
-      nodeMap[id] = node;
-
-      if (branchout.length && node.visible) {
-        var branchCount = branchout[0];
-        branchout = branchout.slice(1);
-        var related = relvis.getValues(id, 'related');
-        if (related.length) {
-          related = related[0];
-          var count = 0;
-          for (i = 0; count < branchCount && i < related.length; ++i) {
-            var branchId = related[i].id;
-            if (!nodeMap[branchId]) {
-              ++count;
-              var branchNode = traverseRelatedGraph(related[i].id, branchout);
-              edges.push({
-                source: node,
-                target: branchNode
-              });
-            }
-          }
-        }
-      }
-
-      return node;
-    }
-    /*
-    //log related {{{2
-    var related = relvis.getValues(id, 'related');
-    var relatedList = [];
-    if(related.length) {
-      related = related[0].slice(0,10);
-      console.log(related.length, 'related to', relvis.getValues(id, 'title')[0]);
-      for(i = 0; i < related.length; ++i) {
-        var relatedName = relvis.getValues(related[i].id, 'title')[0];
-        if(relatedName) {
-          relatedList.push(relatedName);
-        }
-      }
-    console.log(relatedList.join(',  '));
-    }
-    */
-
-
     //{{{2 external relations
     function createExternalRelations(id, group) {
       function createCategoryNodes() { // {{{3
@@ -240,25 +187,21 @@
         }
       }
     } else {
-      //traverseRelatedGraph(ids[0], [6, 3, 2]);
-      //traverseRelatedGraph(ids[0], [6, 4]);
-      var depth;
       if (ids.length <= 1) {
-        depth = [9, 3];
+        traverseDepth = [9, 3];
       } else if (ids.length <= 2) {
-        depth = [4, 3];
+        traverseDepth = [4, 3];
       } else if (ids.length <= 3) {
-        depth = [3, 2];
+        traverseDepth = [3, 2];
       } else if (ids.length <= 7) {
-        depth = [2, 2];
+        traverseDepth = [2, 2];
       } else if (ids.length <= 13) {
-        depth = [3];
+        traverseDepth = [3];
       } else if (ids.length <= 20) {
-        depth = [2];
+        traverseDepth = [2];
       } else {
-        depth = [1];
+        traverseDepth = [1];
       }
-      traverseDepth = depth;
 
       for (i = 0; i < ids.length; ++i) {
         traverseIds.push(ids[i]);
@@ -276,23 +219,8 @@
         }
       }
       traverseGraph();
-      console.log(nodeMap);
-      /*
-      console.log(traverseIds);
-      for (i = 0; i < ids.length; ++i) {
-        node = traverseRelatedGraph(ids[i], depth);
-        node.type = 'primary';
-        nodeMap[ids[i]].type = 'primary';
-        for (j = 0; j < i; ++j) {
-          edges.push({
-            source: nodeMap[ids[i]],
-            target: nodeMap[ids[j]],
-            type: 'collection'
-          });
-        }
-      }
-      */
     }
+
     for (key in nodeMap) {
       if (nodeMap.hasOwnProperty(key)) {
         nodes.push(nodeMap[key]);
