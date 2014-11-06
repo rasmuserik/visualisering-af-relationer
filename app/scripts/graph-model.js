@@ -39,10 +39,10 @@
         }
         node = prev;
       }
-      if(node.imgSrc === undefined) {
+      if (node.imgSrc === undefined) {
         node.imgSrc = relvis.getValues(node.id, 'cover')[0];
       }
-      if(node.label === undefined || node.label === '...') {
+      if (node.label === undefined || node.label === '...') {
         node.label = relvis.getValues(node.id, 'title')[0] || '...';
       }
 
@@ -51,21 +51,22 @@
     }
 
     //circular relations {{{2
-    var traverseIds = []; 
+    var traverseIds = [];
     var nextIds = {};
     var traverseDepth;
+
     function traverseGraph() {
       var ids, id, j, i, node, depth;
       ids = traverseIds;
       traverseIds = [];
       depth = traverseDepth[0];
       traverseDepth = traverseDepth.slice(1);
-      if(typeof depth !== 'number') {
+      if (typeof depth !== 'number') {
         return;
       }
-      for(j = 0; j < ids.length; ++j) {
+      for (j = 0; j < ids.length; ++j) {
         id = ids[j];
-        if(!nodeMap[id]) {
+        if (!nodeMap[id]) {
           console.log('error: expected id in nodemap', id);
         }
         node = nodeMap[id];
