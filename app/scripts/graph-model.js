@@ -39,11 +39,59 @@
         }
         node = prev;
       }
+      if(node.imgSrc === undefined) {
+        node.imgSrc = relvis.getValues(node.id, 'cover')[0];
+      }
+      if(node.label === undefined || node.label === '...') {
+        node.label = relvis.getValues(node.id, 'title')[0] || '...';
+      }
+
       nodeMap[node.id] = node;
       return node;
     }
 
     //circular relations {{{2
+    var traverseIds = []; 
+    var nextIds = {};
+    var traverseDepth;
+    function traverseGraph() {
+      var ids, id, j, i, node, depth;
+      ids = traverseIds;
+      traverseIds = [];
+      depth = traverseDepth[0];
+      traverseDepth = traverseDepth.slice(1);
+      if(typeof depth !== 'number') {
+        return;
+      }
+      for(j = 0; j < ids.length; ++j) {
+        id = ids[j];
+        if(!nodeMap[id]) {
+          console.log('error: expected id in nodemap', id);
+        }
+        node = nodeMap[id];
+        var related = relvis.getValues(id, 'related');
+        if (related.length) {
+          related = related[0];
+          var count = 0;
+          for (i = 0; count < depth && i < related.length; ++i) {
+            var branchId = related[i].id;
+            if (!nodeMap[branchId]) {
+              ++count;
+              var branchNode = createNode({
+                id: branchId,
+                visible: true
+              });
+              traverseIds.push(branchId);
+              edges.push({
+                source: node,
+                target: branchNode
+              });
+            }
+          }
+        }
+      }
+      traverseGraph();
+    }
 
     function traverseRelatedGraph(id, branchout) {
       var i;
@@ -53,8 +101,6 @@
       var node = createNode({
         id: id,
       });
-      node.imgSrc = relvis.getValues(id, 'cover')[0];
-      node.label = relvis.getValues(id, 'title')[0] || '...';
       node.visible = !!node.label;
       node.type = 'cir';
       nodeMap[id] = node;
@@ -174,7 +220,7 @@
           visible: true
         });
         root.imgSrc = relvis.getValues(id, 'cover')[0];
-        root.label = relvis.getValues(id, 'title')[0] || 'Loading...';
+        root.label = relvis.getValues(id, 'title')[0] || '...';
       }
 
       createRootNode();
@@ -201,14 +247,26 @@
         depth = [9, 3];
       } else if (ids.length <= 2) {
         depth = [4, 3];
-      } else if (ids.length <= 5) {
+      } else if (ids.length <= 3) {
         depth = [3, 2];
-      } else {
+      } else if (ids.length <= 7) {
         depth = [2, 2];
+      } else if (ids.length <= 13) {
+        depth = [3];
+      } else if (ids.length <= 20) {
+        depth = [2];
+      } else {
+        depth = [1];
       }
+      traverseDepth = depth;
+
       for (i = 0; i < ids.length; ++i) {
-        node = traverseRelatedGraph(ids[i], depth);
-        node.type = 'primary';
+        traverseIds.push(ids[i]);
+        node = createNode({
+          id: ids[i],
+          type: 'primary',
+          visible: true
+        });
         for (j = 0; j < i; ++j) {
           edges.push({
             source: nodeMap[ids[i]],
@@ -217,6 +275,23 @@
           });
         }
       }
+      traverseGraph();
+      console.log(nodeMap);
+      /*
+      console.log(traverseIds);
+      for (i = 0; i < ids.length; ++i) {
+        node = traverseRelatedGraph(ids[i], depth);
+        node.type = 'primary';
+        nodeMap[ids[i]].type = 'primary';
+        for (j = 0; j < i; ++j) {
+          edges.push({
+            source: nodeMap[ids[i]],
+            target: nodeMap[ids[j]],
+            type: 'collection'
+          });
+        }
+      }
+      */
     }
     for (key in nodeMap) {
       if (nodeMap.hasOwnProperty(key)) {
