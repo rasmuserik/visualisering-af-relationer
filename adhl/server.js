@@ -51,7 +51,7 @@
           var result = Object.keys(coloans).map(function(coloan) {
             var n = coloans[coloan];
             var total = +coloan.split(',')[1];
-            var weight = n; // / Math.log(total + 10) * 1000 | 0;
+            var weight = n / Math.log(total + 10) * 1000 | 0;
             return [coloan.split(',')[0], weight];
           });
           result.sort(function(a, b) {
