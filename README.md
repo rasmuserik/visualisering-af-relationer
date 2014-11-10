@@ -188,6 +188,12 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 5) - todo and progress:
 
+- Opsamling af statistik / måling af anvendelse
+- Anvendelse af DDB-CMS ADHL webservice, som alternativ til udviklingswebservice
+- Fix issue når man gentagne gang lukker og åbner visualiseringen
+- Forbedr af interaktion på touch-devices
+- Refaktorering 
+- Dokumentation
 
 ## Version 0.4 sprint 4
 ### Version 0.4.1, released 7/11
@@ -311,16 +317,12 @@ Indeværende sprint (sprint 5) - todo and progress:
 
 # Backlog
 
-- refactor/restructure README.md
-- look through code, make sure opening/closing browser repeatedly still works
-- ensure repeated open/close of overlay doesn't leak resources
 - afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
 - visualiserings-view: strukturelle relationer
 - evt. sky/graf-agtig
 - evt. tile/mesh-visualisering
 - træstruktur-visualisering rettet mod små skærme
 - storskærmsapplikation (evt. via node-webkit)
-- opsamling af statistik / måling af anvendelse
 - forbedring/optimering ud fra indsamlet statistik - logger modul
 
 # Projektnoter
