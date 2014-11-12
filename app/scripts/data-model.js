@@ -61,24 +61,28 @@
                 obj.id = '870970-basis:' + obj.lid;
                 return obj;
               });
-              console.log(data);
               relvis.addTriple(id, 'related', data);
             }
           },
           error: function() {}
         });
       } else {
-        $.ajax(relvis.apiUrl + '/get-recommendations/' + id + '/30?callback=?', {
+        var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
+        $.ajax(url + '?callback=?', {
           cache: true,
           dataType: 'jsonp',
           success: function(data) {
-            data = data.map(function(id) {
-              return {
-                id: id
-              };
-            });
-            relvis.addTriple(id, 'related', data);
-            console.log(data);
+            if (Array.isArray(data)) {
+              if (data.length === 0) {
+                console.log('warning: empty array from recommendation-service', url);
+              }
+              data = data.map(function(id) {
+                return {
+                  id: id
+                };
+              });
+              relvis.addTriple(id, 'related', data);
+            }
           },
           error: function(err) {
             console.log(err);
