@@ -50,38 +50,40 @@
     loadedObjects[obj.object] = true;
     var id = obj.object;
     relvis.nextTick(function() {
-      if(relvis.relatedApiUrl) {
-      var lid = id.split(/(:|%3A)/)[2];
-      $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
-        cache: true,
-        dataType: 'jsonp',
-        success: function(data) {
-          if (Array.isArray(data)) {
-            data = data.map(function(obj) {
-              obj.id = '870970-basis:' + obj.lid;
-              return obj;
-            });
-            console.log(data);
-            relvis.addTriple(id, 'related', data);
-          }
-        },
-        error: function() {}
-      });
+      if (relvis.relatedApiUrl) {
+        var lid = id.split(/(:|%3A)/)[2];
+        $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
+          cache: true,
+          dataType: 'jsonp',
+          success: function(data) {
+            if (Array.isArray(data)) {
+              data = data.map(function(obj) {
+                obj.id = '870970-basis:' + obj.lid;
+                return obj;
+              });
+              console.log(data);
+              relvis.addTriple(id, 'related', data);
+            }
+          },
+          error: function() {}
+        });
       } else {
-      $.ajax(relvis.apiUrl + '/get-recommendations/' + id + '/30?callback=?', {
-        cache: true,
-        dataType: 'jsonp',
-        success: function(data) {
-          data = data.map(function(id) {
-            return { id: id};
-          });
-          relvis.addTriple(id, 'related', data);
-          console.log(data);
-        },
-        error: function(err) {
-          console.log(err);
-        }
-      });
+        $.ajax(relvis.apiUrl + '/get-recommendations/' + id + '/30?callback=?', {
+          cache: true,
+          dataType: 'jsonp',
+          success: function(data) {
+            data = data.map(function(id) {
+              return {
+                id: id
+              };
+            });
+            relvis.addTriple(id, 'related', data);
+            console.log(data);
+          },
+          error: function(err) {
+            console.log(err);
+          }
+        });
       }
     });
 
