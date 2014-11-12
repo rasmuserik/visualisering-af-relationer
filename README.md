@@ -189,11 +189,16 @@ A development/sample data source for circular relations are generated. This is t
 Indeværende sprint (sprint 5) - todo and progress:
 
 - Opsamling af statistik / måling af anvendelse
-- Anvendelse af DDB-CMS ADHL webservice, som alternativ til udviklingswebservice
 - Fix issue når man gentagne gang lukker og åbner visualiseringen
 - Forbedr af interaktion på touch-devices
 - Refaktorering 
 - Dokumentation
+
+## Version 0.5 sprint 5
+### Version 0.5.0, released 12/11
+- Anvendelse af DDB-CMS recommendations webservice, som alternativ til udviklingswebservice
+  - demo DDB-CMS: http://localhost:9000/#relviscir870970-basis:29970874 http://localhost:9000/#relviscir870970-basis:29847193
+  - demo udvilingswebservice: http://localhost:9000/solsort-related.html#relviscir870970-basis:29970874 http://localhost:9000/solsort-related.html#relviscir870970-basis:29847193
 
 ## Version 0.4 sprint 4
 ### Version 0.4.1, released 7/11
