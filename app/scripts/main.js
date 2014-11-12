@@ -31,7 +31,7 @@
   relvis.init = function(obj) { //{{{1
     relvis.apiUrl = obj.apiUrl;
     relvis.clickHandle = obj.clickHandle || function() {};
-    relvis.relatedApiUrl = obj.relatedUrl || obj.apiUrl + '/related';
+    relvis.relatedApiUrl = obj.relatedUrl;
     var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
