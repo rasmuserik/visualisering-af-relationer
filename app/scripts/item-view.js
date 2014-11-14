@@ -2,6 +2,7 @@
   'use strict';
   var relvis = window.relvis = window.relvis || {};
   relvis.visualObjectRatio = 13 / 8;
+  relvis.visualObjectRatio = 3 / 4;
   var images = {};
 
   relvis.drawEdge = function drawEdge(ctx, edge, x0, y0, x1, y1) { //{{{1
@@ -35,46 +36,36 @@
       }
     }
 
-    /*
-    // draw superellipsis as text background
-    ctx.lineWidth = unit /10 1;
-    ctx.fillStyle = 'rgba(255,255,255,1)';
-    ctx.beginPath();
-    ctx.moveTo(x, y + h / 2);
-    ctx.quadraticCurveTo(x, y, x + w / 2, y);
-    ctx.quadraticCurveTo(x + w, y, x + w, y + h / 2);
-    ctx.quadraticCurveTo(x + w, y + h, x + w / 2, y + h);
-    ctx.quadraticCurveTo(x, y + h, x, y + h / 2);
-    ctx.fill();
-    ctx.stroke();
-    */
-
-    // draw background box with border
-    ctx.fillStyle = '#000';
-    ctx.fillRect(x - relvis.unit / 10,
-      y - relvis.unit / 10,
-      w + relvis.unit / 10 * 2,
-      h + relvis.unit / 10 * 2);
-    ctx.fillStyle = 'rgba(255,255,255,1)';
-    ctx.fillRect(x, y, w, h);
-
     // draw image if available
-    var imgWidth = 0;
     if (img && img.complete && img.naturalWidth) {
-      var imgRatio = img.naturalWidth / img.naturalHeight;
-      var imgHeight = boxSize * h;
-      imgWidth = imgHeight * Math.min(imgRatio, 0.8);
-      imgHeight = imgWidth / imgRatio;
-      ctx.drawImage(img, x0, y0, imgWidth, imgHeight);
-    }
+      var iw = img.naturalWidth;
+      var ih = img.naturalHeight;
+      var is = Math.min(w / iw, h / ih);
+      iw *= is;
+      ih *= is;
+      ctx.drawImage(img, x + (w - iw) / 2 | 0, y + (h - ih) / 2 | 0, iw | 0, ih | 0);
 
-    // draw text
-    var textLeftMargin = 0.02 * w;
-    ctx.fillStyle = '#000';
-    relvis.writeBox(ctx, node.label,
-      x + w * (1 - boxSize) / 2 + imgWidth + textLeftMargin,
-      y + h * (1 - boxSize) / 2,
-      w * boxSize - imgWidth - textLeftMargin,
-      h * boxSize);
+    } else {
+      // draw background box with border
+      ctx.fillStyle = '#000';
+      ctx.fillRect(x - relvis.unit / 10,
+        y - relvis.unit / 10,
+        w + relvis.unit / 10 * 2,
+        h + relvis.unit / 10 * 2);
+      ctx.fillStyle = 'rgba(255,255,255,1)';
+      ctx.fillRect(x, y, w, h);
+
+      // draw text
+      var textLeftMargin = 0.02 * w;
+      textLeftMargin = 0;
+      ctx.fillStyle = 'rgba(255,255,255,0.8)';
+      var u = relvis.unit / 5;
+      x += w / 10;
+      y += h / 10;
+      w *= 0.8;
+      h *= 0.8;
+      ctx.fillStyle = 'rgba(0,0,0,0.8)';
+      relvis.writeBox(ctx, node.label, x, y, w, h);
+    }
   };
 })();
