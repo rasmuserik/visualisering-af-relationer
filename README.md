@@ -21,8 +21,6 @@ Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://
 
 ## Successkriterier og produktmål for HTML5 relationsbrowseren
 
-*foreløbigt udkast*
-
 - Relationsbrowseren skal fungere uanset hvilket system den implementeres i:
   - Skal kunne indlejres på hjemmesider, herunder særligt DDB
   - Skal kunne indlejres i applikation til storskærm (dog kun med en interagerende bruger ad gangen)
@@ -322,18 +320,28 @@ Indeværende sprint (sprint 5) - todo and progress:
 
 # Backlog
 
-- afklaring: hvilke relationstyper/data har vi tilgængelige fra brønd etc.
-- visualiserings-view: strukturelle relationer
-- evt. sky/graf-agtig
-- evt. tile/mesh-visualisering
-- træstruktur-visualisering rettet mod små skærme
-- storskærmsapplikation (evt. via node-webkit)
+- _strukturelle relationer_
+- interaktion med enkelte materialer i cirkulær browser
 - forbedring/optimering ud fra indsamlet statistik - logger modul
 
 # Projektnoter
 
 _nedenstående er mine(rasmuserik) umiddelbare noter_
 
+## Arbejdsmøde 19. november
+
+- cirkulære relationer/related
+  - branchout?
+  - services: DDB-CMS og solsort-related (data+node.js service)
+- eksterne relationer
+  - mulige flere data
+- strukturelle relationer
+  - hvilke relationer + service
+- Grænseflade interaktion
+  - reaktion på klik: åben materiale?
+- strukturelle relationer
+
+## Diverse
 - Use cases
   - DDB-CMS - mobil - tablet - pc 
     - eksempelvis knap/overlay på værkvisning object/collection
