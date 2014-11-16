@@ -188,6 +188,7 @@
         }
       }
     } else {
+      if(true) {
       if (ids.length <= 1) {
         traverseDepth = [9, 3];
       } else if (ids.length <= 2) {
@@ -202,6 +203,10 @@
         traverseDepth = [2];
       } else {
         traverseDepth = [1];
+      }
+      } else {
+        traverseDepth = [Math.ceil(13 / ids.length)];
+        traverseDepth = [Math.ceil(19 / ids.length)];
       }
 
       for (i = 0; i < ids.length; ++i) {
