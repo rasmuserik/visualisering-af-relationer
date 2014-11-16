@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<body>
+<style>
+body {
+  overflow: hidden;
+}
+iframe {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+}
+#b {
+  left: 50%;
+}
+</style>
+<script>
+document.write('<iframe id=a src="' + location.href.replace('compare.html', 'index.html') + '"></iframe>');
+document.write('<iframe id=b src="' + location.href.replace('compare.html', 'solsort-related.html') + '"></iframe>');
+</script>
+</body>
+</html>
