@@ -191,6 +191,10 @@ Indeværende sprint (sprint 5) - todo and progress:
 - Forbedr af interaktion på touch-devices
 - Refaktorering 
 - Dokumentation
+- request-redraw on image-load
+
+- √forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
+- 
 
 ## Version 0.5 sprint 5
 ### Version 0.5.0, released 12/11
@@ -321,8 +325,11 @@ Indeværende sprint (sprint 5) - todo and progress:
 # Backlog
 
 - _strukturelle relationer_
+- production-ready related-service
 - interaktion med enkelte materialer i cirkulær browser
 - forbedring/optimering ud fra indsamlet statistik - logger modul
+- bedre håndtering af visualisering med 1,2,3 eller 4 objekter
+- vis kun link for objekter med data
 
 # Projektnoter
 
@@ -330,16 +337,26 @@ _nedenstående er mine(rasmuserik) umiddelbare noter_
 
 ## Arbejdsmøde 19. november
 
+- status
+  - visualisering-demo
+  - indlejring i DDB-CMS?
 - cirkulære relationer/related
-  - branchout?
   - services: DDB-CMS og solsort-related (data+node.js service)
 - eksterne relationer
   - mulige flere data
-- strukturelle relationer
+- _strukturelle relationer_
   - hvilke relationer + service
-- Grænseflade interaktion
+- Grænseflade
   - reaktion på klik: åben materiale?
-- strukturelle relationer
+  - branchout?
+- webservice stabilitet? - nogle gange tomme data
+- udviklernetværksmøde?
+- plan - 2 sprints tilbage
+  - strukturelle relationer
+- andre webservices
+  - søg
+  - status
+- overblik over DDB-CMS webservices
 
 ## Diverse
 - Use cases
