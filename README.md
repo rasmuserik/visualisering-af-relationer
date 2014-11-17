@@ -357,6 +357,7 @@ _nedenstående er mine(rasmuserik) umiddelbare noter_
   - søg
   - status
 - overblik over DDB-CMS webservices
+- NB: udtræk over materialer/id'er som biblioteket har
 
 ## Diverse
 - Use cases
