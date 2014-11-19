@@ -188,13 +188,12 @@ Indeværende sprint (sprint 5) - todo and progress:
 
 - Opsamling af statistik / måling af anvendelse
 - Fix issue når man gentagne gang lukker og åbner visualiseringen
-- Forbedr af interaktion på touch-devices
+- √Forbedr af interaktion på touch-devices
 - Refaktorering 
 - Dokumentation
 - request-redraw on image-load
 
 - √forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
-- 
 
 ## Version 0.5 sprint 5
 ### Version 0.5.0, released 12/11

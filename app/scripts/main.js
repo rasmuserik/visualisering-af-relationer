@@ -57,7 +57,6 @@
       elems.push(elemsSel[i]);
     }
 
-
     function makeHandler(elem) {
       return function() {
         var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');

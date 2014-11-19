@@ -4,6 +4,7 @@
   var relvis = window.relvis = window.relvis || {};
 
   var touching = false;
+  var noInteractUntil = 0;
 
   //taphandling{{{1
   var tapTime = 300;
@@ -21,6 +22,9 @@
     return function(e) {
       var canvas = relvis.canvas;
       e.preventDefault();
+      if (Date.now() < noInteractUntil) {
+        return;
+      }
       var o = {
         orig: e
       };
@@ -117,6 +121,8 @@
       return;
     }
     this.overlayVisible = true;
+
+    noInteractUntil = Date.now() + tapTime;
 
     // hide scrollbars
     this._originalOverflow = document.body.style.overflow;
