@@ -33,6 +33,7 @@
       if (!img) {
         window.img = img = images[node.imgSrc] = new Image();
         img.src = node.imgSrc;
+        img.onload = relvis.requestRedraw;
       }
     }
 
