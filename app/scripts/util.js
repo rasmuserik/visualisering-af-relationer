@@ -40,10 +40,11 @@
   };
 
   //Logging {{{1
+  var logdata = [];
   relvis.log = function() {
     var logentry = [Date.now()].concat(Array.prototype.slice.call(arguments, 0));
-    if(window.solsort_log) {
-      solsort_log.apply(null, arguments);
+    if(window.solsort && window.solsort.log) {
+      window.solsort.log.apply(null, arguments);
     } else {
       console.log(logentry);
       logdata.push(JSON.stringify(logentry));
