@@ -67,7 +67,7 @@
       for (j = 0; j < ids.length; ++j) {
         id = ids[j];
         if (!nodeMap[id]) {
-          console.log('error: expected id in nodemap', id);
+          relvis.log('error: expected id in nodemap', id);
         }
         node = nodeMap[id];
         var related = relvis.getValues(id, 'related');

@@ -39,6 +39,16 @@
     p1.y = p2.y;
   };
 
+  //Logging {{{1
+  relvis.log = function() {
+    var logentry = [Date.now()].concat(Array.prototype.slice.call(arguments, 0));
+    if(window.solsort_log) {
+      solsort_log.apply(null, arguments);
+    } else {
+      console.log(logentry);
+      logdata.push(JSON.stringify(logentry));
+    }
+  };
   relvis.eventListeners = {}; //{{{1
   relvis.addEventListener = function addEventListener(name, handler) { //{{{2
     var listeners = relvis.eventListeners[name] || [];

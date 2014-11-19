@@ -74,7 +74,7 @@
           success: function(data) {
             if (Array.isArray(data)) {
               if (data.length === 0) {
-                console.log('warning: empty array from recommendation-service', url);
+                relvis.log('warning: empty array from recommendation-service', url);
               }
               data = data.map(function(id) {
                 return {
@@ -85,7 +85,11 @@
             }
           },
           error: function(err) {
-            console.log(err);
+            try {
+              relvis.log(err);
+            } catch(e) {
+              relvis.log('unserilisable error', String(err));
+            }
           }
         });
       }
@@ -104,7 +108,11 @@
           });
         },
         error: function(err) {
-          console.log(err);
+          try {
+            relvis.log(err);
+          } catch(e) {
+            relvis.log('unserilisable error', String(err));
+          }
           tryGet(count - 1);
         }
       });

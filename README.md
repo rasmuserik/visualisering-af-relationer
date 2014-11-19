@@ -130,6 +130,7 @@ A development/sample data source for circular relations are generated. This is t
   - edges
   - nodes
   - reacts on `data-update`
+- data-model
 - util
   - nearestPoints(...)
   - findBoundaries(...)
@@ -187,11 +188,11 @@ A development/sample data source for circular relations are generated. This is t
 Indeværende sprint (sprint 5) - todo and progress:
 
 - Opsamling af statistik / måling af anvendelse
-- Fix issue når man gentagne gang lukker og åbner visualiseringen
+- √Fix issue når man gentagne gang lukker og åbner visualiseringen - haven't seen this issue recently
 - √Forbedr af interaktion på touch-devices
 - Refaktorering 
 - Dokumentation
-- request-redraw on image-load
+- √request-redraw on image-load
 
 - √forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
 
