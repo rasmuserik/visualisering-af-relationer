@@ -334,30 +334,6 @@ Indeværende sprint (sprint 5) - todo and progress:
 
 _nedenstående er mine(rasmuserik) umiddelbare noter_
 
-## Arbejdsmøde 19. november
-
-- status
-  - visualisering-demo
-  - indlejring i DDB-CMS?
-- cirkulære relationer/related
-  - services: DDB-CMS og solsort-related (data+node.js service)
-- eksterne relationer
-  - mulige flere data
-- _strukturelle relationer_
-  - hvilke relationer + service
-- Grænseflade
-  - reaktion på klik: åben materiale?
-  - branchout?
-- webservice stabilitet? - nogle gange tomme data
-- udviklernetværksmøde?
-- plan - 2 sprints tilbage
-  - strukturelle relationer
-- andre webservices
-  - søg
-  - status
-- overblik over DDB-CMS webservices
-- NB: udtræk over materialer/id'er som biblioteket har
-
 ## Diverse
 - Use cases
   - DDB-CMS - mobil - tablet - pc 
@@ -377,3 +353,4 @@ _nedenstående er mine(rasmuserik) umiddelbare noter_
 
 - indledende møde vejle 2014-08-06
 - arbejdsmøde vejle 2014-09-10
+- arbejdsmøde vejle 2014-11-19
