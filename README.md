@@ -187,13 +187,8 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 5) - todo and progress:
 
-- Opsamling af statistik / måling af anvendelse
-- √Fix issue når man gentagne gang lukker og åbner visualiseringen - haven't seen this issue recently
 - √Forbedr af interaktion på touch-devices
-- Refaktorering 
-- Dokumentation
 - √request-redraw on image-load
-
 - √forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
 
 ## Version 0.5 sprint 5
@@ -324,12 +319,14 @@ Indeværende sprint (sprint 5) - todo and progress:
 
 # Backlog
 
-- _strukturelle relationer_
+- strukturelle relationer - søgesæt
 - production-ready related-service
-- interaktion med enkelte materialer i cirkulær browser
-- forbedring/optimering ud fra indsamlet statistik - logger modul
+- cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element
+- eksterne relationer - tekst på overlsy forfatter/anmeldelser/emne/struktur
+- warmup - precache - vis kun link for objekter med data
+- navigationslinje i topppen med luk-knap, samt frem/tilbageknap
+- Opsamling af statistik / måling af anvendelse
 - bedre håndtering af visualisering med 1,2,3 eller 4 objekter
-- vis kun link for objekter med data
 
 # Projektnoter
 
