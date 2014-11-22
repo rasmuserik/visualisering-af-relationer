@@ -185,13 +185,19 @@ A development/sample data source for circular relations are generated. This is t
 
 # Releaselog
 
-Indeværende sprint (sprint 5) - todo and progress:
-
-- √Forbedr af interaktion på touch-devices
-- √request-redraw on image-load
-- √forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
+Indeværende sprint (sprint 6) - todo and progress:
+- datakilder: både søgning, ting-objekt og håndtering af tomt objekt
+- start på strukturelle relationer - baseret på søgning
+- eksterne relationer - tekst på overlay forfatter/anmeldelser/emne/struktur
+- bedre håndtering af visualisering med 1,2,3 eller 4 objekter
+- production-ready related-service
 
 ## Version 0.5 sprint 5
+### Version 0.5.1, released 22/11
+- Forbedr af interaktion på touch-devices
+- request-redraw on image-load
+- forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
+
 ### Version 0.5.0, released 12/11
 - Anvendelse af DDB-CMS recommendations webservice, som alternativ til udviklingswebservice
   - demo DDB-CMS: http://relvis.solsort.com/visualisering-af-relationer/#relviscir870970-basis:29970874 http://relvis.solsort.com/visualisering-af-relationer/#relviscir870970-basis:29847193
@@ -319,14 +325,11 @@ Indeværende sprint (sprint 5) - todo and progress:
 
 # Backlog
 
-- strukturelle relationer - søgesæt
-- production-ready related-service
+- færdigør strukturelle relationer ud fra søgning
 - cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element
-- eksterne relationer - tekst på overlsy forfatter/anmeldelser/emne/struktur
 - warmup - precache - vis kun link for objekter med data
 - navigationslinje i topppen med luk-knap, samt frem/tilbageknap
 - Opsamling af statistik / måling af anvendelse
-- bedre håndtering af visualisering med 1,2,3 eller 4 objekter
 
 # Projektnoter
 
