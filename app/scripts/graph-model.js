@@ -188,22 +188,22 @@
         }
       }
     } else {
-      if(true) {
-      if (ids.length <= 1) {
-        traverseDepth = [9, 3];
-      } else if (ids.length <= 2) {
-        traverseDepth = [4, 3];
-      } else if (ids.length <= 3) {
-        traverseDepth = [3, 2];
-      } else if (ids.length <= 7) {
-        traverseDepth = [2, 2];
-      } else if (ids.length <= 13) {
-        traverseDepth = [3];
-      } else if (ids.length <= 20) {
-        traverseDepth = [2];
-      } else {
-        traverseDepth = [1];
-      }
+      if (true) {
+        if (ids.length <= 1) {
+          traverseDepth = [9, 3];
+        } else if (ids.length <= 2) {
+          traverseDepth = [4, 3];
+        } else if (ids.length <= 3) {
+          traverseDepth = [3, 2];
+        } else if (ids.length <= 7) {
+          traverseDepth = [2, 2];
+        } else if (ids.length <= 13) {
+          traverseDepth = [3];
+        } else if (ids.length <= 20) {
+          traverseDepth = [2];
+        } else {
+          traverseDepth = [1];
+        }
       } else {
         traverseDepth = [Math.ceil(13 / ids.length)];
         traverseDepth = [Math.ceil(19 / ids.length)];

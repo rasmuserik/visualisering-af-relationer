@@ -43,7 +43,7 @@
   var logdata = [];
   relvis.log = function() {
     var logentry = [Date.now()].concat(Array.prototype.slice.call(arguments, 0));
-    if(window.solsort && window.solsort.log) {
+    if (window.solsort && window.solsort.log) {
       window.solsort.log.apply(null, arguments);
     } else {
       console.log(logentry);

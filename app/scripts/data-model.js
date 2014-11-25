@@ -49,6 +49,7 @@
     }
     loadedObjects[obj.object] = true;
     var id = obj.object;
+
     function tryGet(count) {
       if (count < 1) {
         return;
@@ -64,26 +65,26 @@
         error: function(err) {
           try {
             relvis.log(err);
-          } catch(e) {
+          } catch (e) {
             relvis.log('unserilisable error', String(err));
           }
           tryGet(count - 1);
         }
       });
     }
-    if(!id) {
+    if (!id) {
       return
     }
-    if(id.slice(0,7) == 'search:') {
+    if (id.slice(0, 7) == 'search:') {
       $.ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
         cache: true,
         dataType: 'jsonp',
         success: function(data) {
-          var results =  [];
+          var results = [];
           var cols = data.collections;
-          for(var i = 0; i < cols.length; ++i) {
+          for (var i = 0; i < cols.length; ++i) {
             var entities = cols[i].entities;
-            for(var j = 0; j < entities.length; ++j) {
+            for (var j = 0; j < entities.length; ++j) {
               results.push(entities[j]);
             }
           }
@@ -93,58 +94,58 @@
         error: function(err) {
           try {
             relvis.log(err);
-          } catch(e) {
+          } catch (e) {
             relvis.log('unserilisable error', String(err));
           }
         }
       });
     } else {
-    relvis.nextTick(function() {
-      if (relvis.relatedApiUrl) {
-        var lid = id.split(/(:|%3A)/)[2];
-        $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
-          cache: true,
-          dataType: 'jsonp',
-          success: function(data) {
-            if (Array.isArray(data)) {
-              data = data.map(function(obj) {
-                obj.id = '870970-basis:' + obj.lid;
-                return obj;
-              });
-              relvis.addTriple(id, 'related', data);
-            }
-          },
-          error: function() {}
-        });
-      } else {
-        var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
-        $.ajax(url + '?callback=?', {
-          cache: true,
-          dataType: 'jsonp',
-          success: function(data) {
-            if (Array.isArray(data)) {
-              if (data.length === 0) {
-                relvis.log('warning: empty array from recommendation-service', url);
+      relvis.nextTick(function() {
+        if (relvis.relatedApiUrl) {
+          var lid = id.split(/(:|%3A)/)[2];
+          $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
+            cache: true,
+            dataType: 'jsonp',
+            success: function(data) {
+              if (Array.isArray(data)) {
+                data = data.map(function(obj) {
+                  obj.id = '870970-basis:' + obj.lid;
+                  return obj;
+                });
+                relvis.addTriple(id, 'related', data);
               }
-              data = data.map(function(id) {
-                return {
-                  id: id
-                };
-              });
-              relvis.addTriple(id, 'related', data);
+            },
+            error: function() {}
+          });
+        } else {
+          var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
+          $.ajax(url + '?callback=?', {
+            cache: true,
+            dataType: 'jsonp',
+            success: function(data) {
+              if (Array.isArray(data)) {
+                if (data.length === 0) {
+                  relvis.log('warning: empty array from recommendation-service', url);
+                }
+                data = data.map(function(id) {
+                  return {
+                    id: id
+                  };
+                });
+                relvis.addTriple(id, 'related', data);
+              }
+            },
+            error: function(err) {
+              try {
+                relvis.log(err);
+              } catch (e) {
+                relvis.log('unserilisable error', String(err));
+              }
             }
-          },
-          error: function(err) {
-            try {
-              relvis.log(err);
-            } catch(e) {
-              relvis.log('unserilisable error', String(err));
-            }
-          }
-        });
-      }
-    });
-    tryGet(3);
+          });
+        }
+      });
+      tryGet(3);
     }
 
   });
