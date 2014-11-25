@@ -73,9 +73,9 @@
       });
     }
     if (!id) {
-      return
+      return;
     }
-    if (id.slice(0, 7) == 'search:') {
+    if (id.slice(0, 7) === 'search:') {
       $.ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
         cache: true,
         dataType: 'jsonp',
@@ -88,7 +88,7 @@
               results.push(entities[j]);
             }
           }
-          relvis.addTriple(id, results, results);
+          relvis.addTriple(id, 'results', results);
           console.log(id, data, results, results.length);
         },
         error: function(err) {

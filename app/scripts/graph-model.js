@@ -18,8 +18,22 @@
 
     var key;
     var nodeMap = {};
-    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j;
+    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children;
+    var searchresults = 100;
 
+    console.log('here');
+    for(i = 0; i < ids.length; ++i) {
+      id = ids[i];
+      if(id.slice(0,7) === 'search:') {
+        children = relvis.getValues(id, 'results');
+        console.log(children);
+        if(children.length) {
+          ids = id.slice(0,i).concat(children[0].slice(0,searchresults)).concat(ids.slice(i+1));
+          relvis.setIds(ids);
+          return;
+        }
+      }
+    }
 
     //{{{2 general graph generation
     prevNodes = {};
@@ -176,7 +190,7 @@
       createRelationNodes();
     }
     //actual execution {{{2
-    if (type === 'ext') {
+    if (type === 'ext') { //{{{3
       for (i = 0; i < ids.length; ++i) {
         createExternalRelations(ids[i], ids);
         for (j = 0; j < i; ++j) {
@@ -187,7 +201,7 @@
           });
         }
       }
-    } else {
+    } else if(type === 'cir') { //{{{3
       if (true) {
         if (ids.length <= 1) {
           traverseDepth = [9, 3];
@@ -225,8 +239,17 @@
         }
       }
       traverseGraph();
+    } else if(type === 'str') {  //{{{3
+      for (i = 0; i < ids.length; ++i) {
+        node = createNode({
+          id: ids[i],
+          type: 'primary',
+          visible: true
+        });
+      }
     }
 
+    //{{{3 commit
     for (key in nodeMap) {
       if (nodeMap.hasOwnProperty(key)) {
         nodes.push(nodeMap[key]);
