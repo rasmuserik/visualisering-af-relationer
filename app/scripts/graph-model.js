@@ -22,13 +22,13 @@
     var searchresults = 1000;
 
     console.log('here');
-    for(i = 0; i < ids.length; ++i) {
+    for (i = 0; i < ids.length; ++i) {
       id = ids[i];
-      if(id.slice(0,7) === 'search:') {
+      if (id.slice(0, 7) === 'search:') {
         children = relvis.getValues(id, 'results');
         console.log(children);
-        if(children.length) {
-          ids = id.slice(0,i).concat(children[0].slice(0,searchresults)).concat(ids.slice(i+1));
+        if (children.length) {
+          ids = id.slice(0, i).concat(children[0].slice(0, searchresults)).concat(ids.slice(i + 1));
           relvis.setIds(ids);
           return;
         }
@@ -191,7 +191,9 @@
     }
     //actual execution {{{2
     if (type === 'ext') { //{{{3
-      if(relvis.d3force) { relvis.d3force.gravity(1); }
+      if (relvis.d3force) {
+        relvis.d3force.gravity(1);
+      }
       for (i = 0; i < ids.length; ++i) {
         createExternalRelations(ids[i], ids);
         for (j = 0; j < i; ++j) {
@@ -202,8 +204,10 @@
           });
         }
       }
-    } else if(type === 'cir') { //{{{3
-      if(relvis.d3force) { relvis.d3force.gravity(0); }
+    } else if (type === 'cir') { //{{{3
+      if (relvis.d3force) {
+        relvis.d3force.gravity(0);
+      }
       if (true) {
         if (ids.length <= 1) {
           traverseDepth = [9, 3];
@@ -241,9 +245,11 @@
         }
       }
       traverseGraph();
-    } else if(type === 'str') {  //{{{3
-      if(relvis.d3force) { relvis.d3force.gravity(1); }
-      var relations = ['creator', 'subject', 'type'/*, 'dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack'*/];
+    } else if (type === 'str') { //{{{3
+      if (relvis.d3force) {
+        relvis.d3force.gravity(1);
+      }
+      var relations = ['creator', 'subject', 'type' /*, 'dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack'*/ ];
       for (i = 0; i < ids.length; ++i) {
         node = createNode({
           id: ids[i],
@@ -254,18 +260,18 @@
       var relmap = {};
       for (i = 0; i < ids.length; ++i) {
         id = ids[i];
-        for(j=0;j<relations.length;++j) {
+        for (j = 0; j < relations.length; ++j) {
           var relation = relations[j];
           var values = relvis.getValues(id, relation);
-          for(k=0;k<values.length;++k) {
-            var name = relation +'\u0000' + values[k];
+          for (k = 0; k < values.length; ++k) {
+            var name = relation + '\u0000' + values[k];
             relmap[name] = (relmap[name] || 0) + 1;
           }
         }
       }
       var rellist = [];
       Object.keys(relmap).forEach(function(key) {
-        if(relmap[key] > 1) {
+        if (relmap[key] > 1) {
           rellist.push({
             name: key.split('\u0000')[0],
             value: key.split('\u0000')[1],
@@ -273,19 +279,21 @@
           });
         }
       });
-      rellist.sort(function(a,b) { return b.count - a.count; });
+      rellist.sort(function(a, b) {
+        return b.count - a.count;
+      });
       rellist = rellist.slice(0, 20);
       console.log(JSON.stringify(rellist));
-      for(i = 0; i < rellist.length; ++i) {
+      for (i = 0; i < rellist.length; ++i) {
         rel = rellist[i];
         node = createNode({
-          id: rel.name+rel.value,
+          id: rel.name + rel.value,
           label: rel.value,
           type: 'category',
           visible: true
         });
         for (j = 0; j < ids.length; ++j) {
-          if(relvis.getValues(ids[j], rel.name).indexOf(rel.value) !== -1) {
+          if (relvis.getValues(ids[j], rel.name).indexOf(rel.value) !== -1) {
             edges.push({
               source: node,
               target: nodeMap[ids[j]],
