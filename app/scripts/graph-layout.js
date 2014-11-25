@@ -8,8 +8,9 @@
       // Create forcegraph
       force = window.d3.layout.force()
         .size([window.innerWidth, window.innerHeight])
-        .charge(-120)
-        .linkDistance(30);
+        .charge(-200)
+        .gravity(0.5)
+        .linkDistance(40);
 
       // handle each frame
       force.on('tick', function() {

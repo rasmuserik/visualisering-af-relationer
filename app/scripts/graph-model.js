@@ -19,7 +19,7 @@
     var key;
     var nodeMap = {};
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children, k;
-    var searchresults = 10000;
+    var searchresults = 1000;
 
     console.log('here');
     for(i = 0; i < ids.length; ++i) {
@@ -191,6 +191,7 @@
     }
     //actual execution {{{2
     if (type === 'ext') { //{{{3
+      if(relvis.d3force) { relvis.d3force.gravity(1); }
       for (i = 0; i < ids.length; ++i) {
         createExternalRelations(ids[i], ids);
         for (j = 0; j < i; ++j) {
@@ -202,6 +203,7 @@
         }
       }
     } else if(type === 'cir') { //{{{3
+      if(relvis.d3force) { relvis.d3force.gravity(0); }
       if (true) {
         if (ids.length <= 1) {
           traverseDepth = [9, 3];
@@ -240,7 +242,8 @@
       }
       traverseGraph();
     } else if(type === 'str') {  //{{{3
-      var relations = ['creator', 'subject' /*, 'dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack'*/];
+      if(relvis.d3force) { relvis.d3force.gravity(1); }
+      var relations = ['creator', 'subject', 'type'/*, 'dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack'*/];
       for (i = 0; i < ids.length; ++i) {
         node = createNode({
           id: ids[i],
