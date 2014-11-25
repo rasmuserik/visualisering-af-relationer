@@ -47,6 +47,11 @@
       ctx.drawImage(img, x + (w - iw) / 2 | 0, y + (h - ih) / 2 | 0, iw | 0, ih | 0);
 
     } else {
+    if (node.type === 'category') {
+      // draw background box with border
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.fillRect(x, y, w, h);
+    } else {
       // draw background box with border
       ctx.fillStyle = '#000';
       ctx.fillRect(x - relvis.unit / 10,
@@ -55,6 +60,7 @@
         h + relvis.unit / 10 * 2);
       ctx.fillStyle = 'rgba(255,255,255,1)';
       ctx.fillRect(x, y, w, h);
+    } 
 
       // draw text
       var textLeftMargin = 0.02 * w;

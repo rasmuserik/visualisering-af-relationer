@@ -18,8 +18,8 @@
 
     var key;
     var nodeMap = {};
-    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children;
-    var searchresults = 100;
+    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children, k;
+    var searchresults = 10000;
 
     console.log('here');
     for(i = 0; i < ids.length; ++i) {
@@ -240,12 +240,56 @@
       }
       traverseGraph();
     } else if(type === 'str') {  //{{{3
+      var relations = ['creator', 'subject' /*, 'dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack'*/];
       for (i = 0; i < ids.length; ++i) {
         node = createNode({
           id: ids[i],
           type: 'primary',
           visible: true
         });
+      }
+      var relmap = {};
+      for (i = 0; i < ids.length; ++i) {
+        id = ids[i];
+        for(j=0;j<relations.length;++j) {
+          var relation = relations[j];
+          var values = relvis.getValues(id, relation);
+          for(k=0;k<values.length;++k) {
+            var name = relation +'\u0000' + values[k];
+            relmap[name] = (relmap[name] || 0) + 1;
+          }
+        }
+      }
+      var rellist = [];
+      Object.keys(relmap).forEach(function(key) {
+        if(relmap[key] > 1) {
+          rellist.push({
+            name: key.split('\u0000')[0],
+            value: key.split('\u0000')[1],
+            count: relmap[key]
+          });
+        }
+      });
+      rellist.sort(function(a,b) { return b.count - a.count; });
+      rellist = rellist.slice(0, 20);
+      console.log(JSON.stringify(rellist));
+      for(i = 0; i < rellist.length; ++i) {
+        rel = rellist[i];
+        node = createNode({
+          id: rel.name+rel.value,
+          label: rel.value,
+          type: 'category',
+          visible: true
+        });
+        for (j = 0; j < ids.length; ++j) {
+          if(relvis.getValues(ids[j], rel.name).indexOf(rel.value) !== -1) {
+            edges.push({
+              source: node,
+              target: nodeMap[ids[j]],
+              type: 'category'
+            });
+          }
+        }
       }
     }
 
