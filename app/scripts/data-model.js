@@ -49,6 +49,56 @@
     }
     loadedObjects[obj.object] = true;
     var id = obj.object;
+    function tryGet(count) {
+      if (count < 1) {
+        return;
+      }
+      $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
+        cache: true,
+        dataType: 'jsonp',
+        success: function(data) {
+          data.forEach(function(obj) {
+            relvis.addTriple(id, obj.type || obj.property, obj.value);
+          });
+        },
+        error: function(err) {
+          try {
+            relvis.log(err);
+          } catch(e) {
+            relvis.log('unserilisable error', String(err));
+          }
+          tryGet(count - 1);
+        }
+      });
+    }
+    if(!id) {
+      return
+    }
+    if(id.slice(0,7) == 'search:') {
+      $.ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
+        cache: true,
+        dataType: 'jsonp',
+        success: function(data) {
+          var results =  [];
+          var cols = data.collections;
+          for(var i = 0; i < cols.length; ++i) {
+            var entities = cols[i].entities;
+            for(var j = 0; j < entities.length; ++j) {
+              results.push(entities[j]);
+            }
+          }
+          relvis.addTriple(id, results, results);
+          console.log(id, data, results, results.length);
+        },
+        error: function(err) {
+          try {
+            relvis.log(err);
+          } catch(e) {
+            relvis.log('unserilisable error', String(err));
+          }
+        }
+      });
+    } else {
     relvis.nextTick(function() {
       if (relvis.relatedApiUrl) {
         var lid = id.split(/(:|%3A)/)[2];
@@ -94,29 +144,8 @@
         });
       }
     });
-
-    function tryGet(count) {
-      if (count < 1) {
-        return;
-      }
-      $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
-        cache: true,
-        dataType: 'jsonp',
-        success: function(data) {
-          data.forEach(function(obj) {
-            relvis.addTriple(id, obj.type || obj.property, obj.value);
-          });
-        },
-        error: function(err) {
-          try {
-            relvis.log(err);
-          } catch(e) {
-            relvis.log('unserilisable error', String(err));
-          }
-          tryGet(count - 1);
-        }
-      });
-    }
     tryGet(3);
+    }
+
   });
 })(); //{{{1
