@@ -131,7 +131,7 @@
         console.log('caching done');
       });
   }
-  genCache();
+  //genCache();
 
   console.log('started adhl-api-server on port', port);
 })();

@@ -186,8 +186,9 @@ A development/sample data source for circular relations are generated. This is t
 # Releaselog
 
 Indeværende sprint (sprint 6) - todo and progress:
-- datakilder: både søgning, ting-objekt og håndtering af tomt objekt
+
 - start på strukturelle relationer - baseret på søgning
+- snak med søgeapi; objekt-id kan både være søgning, ting-objekt, collection. 
 - eksterne relationer - tekst på overlay forfatter/anmeldelser/emne/struktur
 - bedre håndtering af visualisering med 1,2,3 eller 4 objekter
 - production-ready related-service
