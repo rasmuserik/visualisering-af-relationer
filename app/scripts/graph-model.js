@@ -19,7 +19,7 @@
     var key;
     var nodeMap = {};
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children, k;
-    var searchresults = 1000;
+    var searchresults = 30;
 
     console.log('here');
     for (i = 0; i < ids.length; ++i) {

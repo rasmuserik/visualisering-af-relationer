@@ -10,7 +10,7 @@
         .size([window.innerWidth, window.innerHeight])
         .charge(-200)
         .gravity(0.5)
-        .linkDistance(40);
+        .linkDistance(30);
 
       // handle each frame
       force.on('tick', function() {
