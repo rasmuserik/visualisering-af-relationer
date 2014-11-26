@@ -187,11 +187,11 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 6) - todo and progress:
 
-- start på strukturelle relationer - baseret på søgning
-- snak med søgeapi; objekt-id kan både være søgning, ting-objekt, collection. 
+- •start på strukturelle relationer - baseret på søgning
+- √snak med søgeapi; objekt-id kan både være søgning, ting-objekt, collection. 
 - eksterne relationer - tekst på overlay forfatter/anmeldelser/emne/struktur
 - bedre håndtering af visualisering med 1,2,3 eller 4 objekter
-- production-ready related-service
+- •production-ready related-service
 
 ## Version 0.5 sprint 5
 ### Version 0.5.1, released 22/11
