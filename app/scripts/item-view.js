@@ -8,18 +8,18 @@
   relvis.drawBackground = function(ctx, _, __, w, h) {
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
     ctx.fillRect(0, 0, w, h);
-    if(relvis.getType() === 'ext') {
+    if (relvis.getType() === 'ext') {
       ctx.shadowBlur = relvis.unit / 2;
       ctx.shadowColor = '#fff';
       ctx.fillStyle = '#000';
       ctx.font = relvis.unit * 3 + 'px sans-serif';
-      ctx.fillText('Forfatter', 2 * relvis.unit, 4*relvis.unit);
+      ctx.fillText('Forfatter', 2 * relvis.unit, 4 * relvis.unit);
       var width = ctx.measureText('Anmeldelser').width;
-      ctx.fillText('Anmeldelser', w - width - 2 * relvis.unit, 4*relvis.unit);
+      ctx.fillText('Anmeldelser', w - width - 2 * relvis.unit, 4 * relvis.unit);
 
-      ctx.fillText('Emner', 2 * relvis.unit, h - 2*relvis.unit);
+      ctx.fillText('Emner', 2 * relvis.unit, h - 2 * relvis.unit);
       width = ctx.measureText('Struktur').width;
-      ctx.fillText('Struktur', w - width - 2 * relvis.unit, h - 2*relvis.unit);
+      ctx.fillText('Struktur', w - width - 2 * relvis.unit, h - 2 * relvis.unit);
       ctx.shadowBlur = 0;
     }
   };
@@ -62,35 +62,35 @@
 
     // draw image if available
     if (img && img.complete && img.naturalWidth) {
-    ctx.shadowBlur = relvis.unit * 2;
-    ctx.shadowOffsetX= relvis.unit/2;
-    ctx.shadowOffsetY= relvis.unit/2;
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+      ctx.shadowBlur = relvis.unit * 2;
+      ctx.shadowOffsetX = relvis.unit / 2;
+      ctx.shadowOffsetY = relvis.unit / 2;
+      ctx.shadowColor = 'rgba(0,0,0,0.4)';
       var iw = img.naturalWidth;
       var ih = img.naturalHeight;
       var is = Math.min(w / iw, h / ih);
       iw *= is;
       ih *= is;
       ctx.drawImage(img, x + (w - iw) / 2 | 0, y + (h - ih) / 2 | 0, iw | 0, ih | 0);
-    ctx.shadowBlur = 0;
-    ctx.shadowOffsetX= 0;
-    ctx.shadowOffsetY= 0;
+      ctx.shadowBlur = 0;
+      ctx.shadowOffsetX = 0;
+      ctx.shadowOffsetY = 0;
 
     } else {
       if (node.type !== 'category') {
-    ctx.shadowBlur = relvis.unit * 2;
-    ctx.shadowOffsetX= relvis.unit/2;
-    ctx.shadowOffsetY= relvis.unit/2;
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+        ctx.shadowBlur = relvis.unit * 2;
+        ctx.shadowOffsetX = relvis.unit / 2;
+        ctx.shadowOffsetY = relvis.unit / 2;
+        ctx.shadowColor = 'rgba(0,0,0,0.4)';
         ctx.fillStyle = 'rgba(255,255,255,1)';
         ctx.fillRect(x, y, w, h);
-    ctx.shadowBlur = 0;
-    ctx.shadowOffsetX= 0;
-    ctx.shadowOffsetY= 0;
+        ctx.shadowBlur = 0;
+        ctx.shadowOffsetX = 0;
+        ctx.shadowOffsetY = 0;
       }
 
       // draw text
-      if(node.type === 'category') {
+      if (node.type === 'category') {
         ctx.shadowBlur = relvis.unit / 2;
         var color = ({
           'creator': '#f88',
@@ -99,7 +99,9 @@
         })[node.subtype] || '#fff';
         ctx.fillStyle = '#000';
         ctx.shadowColor = color;
-        relvis.writeBox(ctx, node.label, x, y, w, h, {vcenter: true});
+        relvis.writeBox(ctx, node.label, x, y, w, h, {
+          vcenter: true
+        });
         ctx.shadowBlur = 0;
       } else {
         ctx.shadowBlur = 0;
@@ -113,4 +115,4 @@
     }
     ctx.shadowBlur = 0;
   };
-  })();
+})();

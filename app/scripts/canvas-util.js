@@ -56,7 +56,7 @@
       }
     } while (size > relvis.unit && (maxLen > w || lines.length * size > h));
 
-    if(opt.vcenter) {
+    if (opt.vcenter) {
       y += (h - size * (lines.length + 0.5)) / 2;
     }
     // draw the lines of text

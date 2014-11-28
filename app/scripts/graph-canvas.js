@@ -43,7 +43,7 @@
     var canvas = relvis.canvas;
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    relvis.drawBackground(ctx,0,0,canvas.width,canvas.height);
+    relvis.drawBackground(ctx, 0, 0, canvas.width, canvas.height);
 
     // Find coordinate transformation {{{2
     if (!relvis.fixedViewport && visibleNodes.length && typeof visibleNodes[0].x === 'number') {
