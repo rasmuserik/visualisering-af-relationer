@@ -40,8 +40,9 @@
     return lines;
   };
 
-  relvis.writeBox = function writeBox(ctx, str, x, y, w, h) { //{{{1
+  relvis.writeBox = function writeBox(ctx, str, x, y, w, h, opt) { //{{{1
     var lines, i, maxLen;
+    opt = opt || {};
 
     // repeatedly reduce font-size until text fits within box
     var size = 6 * relvis.unit;
@@ -55,6 +56,9 @@
       }
     } while (size > relvis.unit && (maxLen > w || lines.length * size > h));
 
+    if(opt.vcenter) {
+      y += (h - size * (lines.length + 0.5)) / 2;
+    }
     // draw the lines of text
     for (i = 0; i < lines.length; ++i) {
       if (size * (i + 1) < h) {

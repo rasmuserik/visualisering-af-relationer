@@ -290,6 +290,7 @@
           id: rel.name + rel.value,
           label: rel.value,
           type: 'category',
+          subtype: rel.name,
           visible: true
         });
         for (j = 0; j < ids.length; ++j) {
