@@ -18,7 +18,7 @@
       ctx.fillText('Anmeldelser', w - width - 2 * relvis.unit, 4*relvis.unit);
 
       ctx.fillText('Emner', 2 * relvis.unit, h - 2*relvis.unit);
-      var width = ctx.measureText('Struktur').width;
+      width = ctx.measureText('Struktur').width;
       ctx.fillText('Struktur', w - width - 2 * relvis.unit, h - 2*relvis.unit);
       ctx.shadowBlur = 0;
     }
@@ -96,7 +96,7 @@
           'creator': '#f88',
           'type': '#88f',
           'subject': '#8f8'
-        })[node.subtype] || "#fff";
+        })[node.subtype] || '#fff';
         ctx.fillStyle = '#000';
         ctx.shadowColor = color;
         relvis.writeBox(ctx, node.label, x, y, w, h, {vcenter: true});
