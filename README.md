@@ -185,10 +185,18 @@ A development/sample data source for circular relations are generated. This is t
 
 # Releaselog
 
-Indeværende sprint (sprint 6) - todo and progress:
+Backlog - todo and progress:
 
+Sprint 6:
 - √bedre håndtering af visualisering med 1,2,3 eller 4 objekter
 - •production-ready related-service
+
+Sprint 7:
+- cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element
+- warmup - precache - vis kun link for objekter med data
+- navigationslinje i topppen med luk-knap, samt frem/tilbageknap
+- Opsamling af statistik / måling af anvendelse
+
 
 ## Version 0.6 sprint 6
 ### Version 0.6.1, released 29/11
@@ -328,13 +336,7 @@ Indeværende sprint (sprint 6) - todo and progress:
   - udkast til release og test-strategi
   - udkast til produktmål
 
-# Backlog
 
-- færdigør strukturelle relationer ud fra søgning
-- cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element
-- warmup - precache - vis kun link for objekter med data
-- navigationslinje i topppen med luk-knap, samt frem/tilbageknap
-- Opsamling af statistik / måling af anvendelse
 
 # Projektnoter
 
