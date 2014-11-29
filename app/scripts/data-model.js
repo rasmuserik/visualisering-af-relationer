@@ -89,7 +89,6 @@
             }
           }
           relvis.addTriple(id, 'results', results);
-          console.log(id, data, results, results.length);
         },
         error: function(err) {
           try {
@@ -125,7 +124,8 @@
             success: function(data) {
               if (Array.isArray(data)) {
                 if (data.length === 0) {
-                  relvis.log('warning: empty array from recommendation-service', url);
+                  //relvis.log('warning: empty array from recommendation-service', url);
+                  data = [];
                 }
                 data = data.map(function(id) {
                   return {

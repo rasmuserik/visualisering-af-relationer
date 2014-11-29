@@ -8,7 +8,7 @@
   relvis.drawBackground = function(ctx, _, __, w, h) {
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
     ctx.fillRect(0, 0, w, h);
-    if (relvis.getType() === 'ext' && relvis.nodes.length >= 15 ) {
+    if (relvis.getType() === 'ext' && relvis.nodes.length >= 15) {
       ctx.shadowBlur = relvis.unit / 2;
       ctx.shadowColor = '#fff';
       ctx.fillStyle = '#000';

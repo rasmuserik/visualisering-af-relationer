@@ -18,11 +18,11 @@
         var visibleNodes = relvis.nodes.filter(function(o) {
           return o.visible;
         });
-        if(visibleNodes.length < 10) {
-          for(var i = 0; i < visibleNodes.length; ++i) {
+        if (visibleNodes.length < 10) {
+          for (var i = 0; i < visibleNodes.length; ++i) {
             var node = visibleNodes[i];
-            node.y = node.py = -Math.sin(2 * Math.PI * i/visibleNodes.length);
-            node.x = node.px = -Math.cos(2 * Math.PI * i/visibleNodes.length);
+            node.y = node.py = -Math.sin(2 * Math.PI * i / visibleNodes.length);
+            node.x = node.px = -Math.cos(2 * Math.PI * i / visibleNodes.length);
           }
         }
         var boundaries = relvis.findBoundaries(visibleNodes);

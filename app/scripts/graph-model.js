@@ -21,12 +21,10 @@
     var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children, k;
     var searchresults = 30;
 
-    console.log('here');
     for (i = 0; i < ids.length; ++i) {
       id = ids[i];
       if (id.slice(0, 7) === 'search:') {
         children = relvis.getValues(id, 'results');
-        console.log(children);
         if (children.length) {
           ids = id.slice(0, i).concat(children[0].slice(0, searchresults)).concat(ids.slice(i + 1));
           relvis.setIds(ids);
@@ -283,7 +281,6 @@
         return b.count - a.count;
       });
       rellist = rellist.slice(0, 20);
-      console.log(JSON.stringify(rellist));
       for (i = 0; i < rellist.length; ++i) {
         rel = rellist[i];
         node = createNode({
