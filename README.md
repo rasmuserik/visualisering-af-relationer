@@ -187,7 +187,7 @@ A development/sample data source for circular relations are generated. This is t
 
 Indeværende sprint (sprint 6) - todo and progress:
 
-- bedre håndtering af visualisering med 1,2,3 eller 4 objekter
+- √bedre håndtering af visualisering med 1,2,3 eller 4 objekter
 - •production-ready related-service
 
 ## Version 0.6 sprint 6
