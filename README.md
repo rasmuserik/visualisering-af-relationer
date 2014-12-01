@@ -189,7 +189,7 @@ Backlog - todo and progress:
 
 Sprint 6:
 - √bedre håndtering af visualisering med 2,3 eller 4 objekter
-- bedre håndtering af visualisering af 1 objekt, - evt. luk/hide hvis loaded
+- √bedre håndtering af visualisering af 1 objekt
 - •production-ready related-service
 
 Sprint 7:
