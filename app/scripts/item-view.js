@@ -13,15 +13,34 @@
       ctx.shadowColor = '#fff';
       ctx.fillStyle = '#000';
       ctx.font = relvis.unit * 3 + 'px sans-serif';
-      ctx.fillText('Forfatter', 2 * relvis.unit, 4 * relvis.unit);
+      ctx.fillText('Forfatter', 4 * relvis.unit, 4 * relvis.unit);
       var width = ctx.measureText('Anmeldelser').width;
-      ctx.fillText('Anmeldelser', w - width - 2 * relvis.unit, 4 * relvis.unit);
+      ctx.fillText('Anmeldelser', w - width - 4 * relvis.unit, 4 * relvis.unit);
 
-      ctx.fillText('Emner', 2 * relvis.unit, h - 2 * relvis.unit);
+      ctx.fillText('Emner', 4 * relvis.unit, h - 2 * relvis.unit);
       width = ctx.measureText('Struktur').width;
-      ctx.fillText('Struktur', w - width - 2 * relvis.unit, h - 2 * relvis.unit);
+      ctx.fillText('Struktur', w - width - 4 * relvis.unit, h - 2 * relvis.unit);
       ctx.shadowBlur = 0;
     }
+
+    ctx.shadowBlur = relvis.unit * 2;
+    ctx.shadowOffsetX = relvis.unit / 2;
+    ctx.shadowOffsetY = relvis.unit / 2;
+    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+    ctx.fillStyle = 'rgba(255,255,255,1.0)';
+    ctx.strokeStyle = 'rgba(255,255,255,1.0)';
+    ctx.lineWidth = relvis.unit /2;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(w - relvis.unit * 3, relvis.unit);
+    ctx.lineTo(w - relvis.unit * 1, relvis.unit * 3);
+    ctx.moveTo(w - relvis.unit * 3, relvis.unit * 3);
+    ctx.lineTo(w - relvis.unit * 1, relvis.unit * 1);
+    ctx.stroke();
+    ctx.shadowBlur = 0;
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
+    ctx.lineCap = 'butt';
   };
 
   relvis.drawEdge = function drawEdge(ctx, edge, x0, y0, x1, y1) { //{{{1
