@@ -29,7 +29,7 @@
     ctx.shadowColor = 'rgba(0,0,0,0.4)';
     ctx.fillStyle = 'rgba(255,255,255,1.0)';
     ctx.strokeStyle = 'rgba(255,255,255,1.0)';
-    ctx.lineWidth = relvis.unit /2;
+    ctx.lineWidth = relvis.unit / 2;
     ctx.lineCap = 'round';
     ctx.beginPath();
     ctx.moveTo(w - relvis.unit * 3, relvis.unit);
