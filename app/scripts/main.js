@@ -86,7 +86,7 @@
   function disableButton(elem) { //{{{1
     elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
   }
-  relvis.updateButtons = relvis.throttle(4000, function() { //{{{1
+  relvis.updateButtons = relvis.throttle(300, function() { //{{{1
     var elemsSel = document.getElementsByClassName('relvis-request'); //{{{2
     var elems = [];
     var i, j;
