@@ -190,16 +190,14 @@ Backlog - todo and progress:
 Sprint 6:
 - √bedre håndtering af visualisering med 2,3 eller 4 objekter
 - √bedre håndtering af visualisering af 1 objekt
-- •production-ready related-service
 - √cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element, fjern ikke det sidste element fra skyen
+- √only query requested/available info, ie. no requests on subjects etc., only related if related-expand, ...
+- √luk-'knap'
 
 Sprint 7:
-- only query requested/available info, ie. no requests on subjects etc., only related if related-expand, ...
-  - by id
-  - by requested data
 - warmup - precache - vis kun link for objekter med data
-- navigationslinje i topppen med luk-knap, samt frem/tilbageknap
 - Opsamling af statistik / måling af anvendelse
+- •production-ready related-service
 
 
 ## Version 0.6 sprint 6
