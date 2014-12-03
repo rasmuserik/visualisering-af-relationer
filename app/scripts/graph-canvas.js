@@ -84,7 +84,7 @@
       if (node.nearestNode) {
         size = (node.nearestDist * 0.8 - 0.2 * node.nearestNode.nearestDist) * Math.SQRT1_2;
       } else {
-        size = Math.min(relvis.canvas.height, relvis.canvas.width) / 2;
+        size = Math.min(relvis.canvas.height, relvis.canvas.width) / 2.8;
       }
       node.xsize = size;
       node.ysize = size / relvis.visualObjectRatio;
