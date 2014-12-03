@@ -61,22 +61,29 @@
       relvis.fixedViewport = false;
       relvis.requestRedraw();
       relvis.layoutGraph();
-      console.log('tapend');
-        /*
-        if (relvis.getType() === 'cir') {
-          var ids = relvis.getIds();
-          var pos = ids.indexOf(node.id);
+    });
+    relvis.addEventListener('drag', function(e) { //{{{2
+      var h, w, x, y, px, py;
+      if (relvis.getType() === 'cir') {
+        var ids = relvis.getIds();
+        var pos = ids.indexOf(node.id);
+        px = e.x / relvis.canvas.width * 2 - 1;
+        py = e.y / relvis.canvas.height * 2 - 1;
+        if (px * px + py * py < 0.2) {
           if (pos === -1) {
             ids.push(node.id);
-          } else {
-            ids.splice(pos, 1);
+            relvis.setIds(ids);
           }
-          relvis.setIds(ids);
-        } 
-        */
+        } else {
+          if (pos !== -1 && ids.length > 1) {
+            ids.splice(pos, 1);
+            relvis.setIds(ids);
+          }
+        }
+
+      }
     });
     relvis.addEventListener('tapclick', function(e) { //{{{2
-      console.log('here');
       showStatus('tapclick' + JSON.stringify({
         x: e.x,
         y: e.y,
@@ -86,10 +93,10 @@
         location.hash = '';
         relvis.hideCanvasOverlay();
       } else {
-          relvis.clickHandle({
-            visualisation: relvis.getType(),
-            id: node.id
-          });
+        relvis.clickHandle({
+          visualisation: relvis.getType(),
+          id: node.id
+        });
       }
     });
     relvis.addEventListener('redraw', redraw); //{{{2

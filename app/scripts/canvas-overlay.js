@@ -79,6 +79,8 @@
         if (Date.now() - tapStartTime < tapTime &&
           Math.sqrt(maxDX * maxDX + maxDY * maxDY) < relvis.unit) {
           relvis.dispatchEvent('tapclick', o);
+        } else {
+          relvis.dispatchEvent('drag', o);
         }
         touching = false;
       }
