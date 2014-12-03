@@ -44,38 +44,18 @@
   };
   var loadedObjects = {};
   relvis.addEventListener('get-triple', function(obj) {
-    if (loadedObjects[obj.object]) {
-      return;
-    }
-    loadedObjects[obj.object] = true;
-    var id = obj.object;
 
-    function tryGet(count) {
-      if (count < 1) {
-        return;
-      }
-      $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
-        cache: true,
-        dataType: 'jsonp',
-        success: function(data) {
-          data.forEach(function(obj) {
-            relvis.addTriple(id, obj.type || obj.property, obj.value);
-          });
-        },
-        error: function(err) {
-          try {
-            relvis.log(err);
-          } catch (e) {
-            relvis.log('unserilisable error', String(err));
-          }
-          tryGet(count - 1);
-        }
-      });
-    }
+    var id = obj.object; //{{{2
     if (!id) {
       return;
     }
-    if (id.slice(0, 7) === 'search:') {
+
+    if (loadedObjects[obj.object]) { //{{{2
+      return;
+    }
+    loadedObjects[obj.object] = true;
+
+    if (id.slice(0, 7) === 'search:') { //{{{2
       $.ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
         cache: true,
         dataType: 'jsonp',
@@ -98,8 +78,34 @@
           }
         }
       });
-    } else {
-      relvis.nextTick(function() {
+      return;
+    } 
+
+    function tryGet(count) { //{{{2
+      if (count < 1) {
+        return;
+      }
+      $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
+        cache: true,
+        dataType: 'jsonp',
+        success: function(data) {
+          data.forEach(function(obj) {
+            relvis.addTriple(id, obj.type || obj.property, obj.value);
+          });
+        },
+        error: function(err) {
+          try {
+            relvis.log(err);
+          } catch (e) {
+            relvis.log('unserilisable error', String(err));
+          }
+          tryGet(count - 1);
+        }
+      });
+    }
+
+      tryGet(3); ///{{{2
+      relvis.nextTick(function() { //related {{{2
         if (relvis.relatedApiUrl) {
           var lid = id.split(/(:|%3A)/)[2];
           $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
@@ -145,8 +151,5 @@
           });
         }
       });
-      tryGet(3);
-    }
-
-  });
+  });  //{{{2
 })(); //{{{1
