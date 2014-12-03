@@ -98,7 +98,7 @@
       var elem = elems[i];
       if (relvis.unsupportedPlatform) {
         disableButton(elem);
-      } else if(relvis.disablePrefetch) {
+      } else if (relvis.disablePrefetch) {
         enableButton(elem);
       } else {
         var ids = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',');
