@@ -32,6 +32,8 @@
     relvis.apiUrl = obj.apiUrl;
     relvis.clickHandle = obj.clickHandle || function() {};
     relvis.relatedApiUrl = obj.relatedUrl;
+    relvis.disablePrefetch = obj.disablePrefetch;
+    console.log(obj);
     relvis.unsupportedPlatform = (function() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
@@ -92,12 +94,12 @@
     for (i = 0; i < elemsSel.length; ++i) {
       elems.push(elemsSel[i]);
     }
-    console.log(elems);
-
     for (i = 0; i < elems.length; ++i) {
       var elem = elems[i];
       if (relvis.unsupportedPlatform) {
         disableButton(elem);
+      } else if(relvis.disablePrefetch) {
+        enableButton(elem);
       } else {
         var ids = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',');
         var id = ids[0];
