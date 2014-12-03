@@ -88,7 +88,8 @@
   relvis.updateButtons = relvis.throttle(4000, function() { //{{{1
     var elemsSel = document.getElementsByClassName('relvis-request'); //{{{2
     var elems = [];
-    for (var i = 0; i < elemsSel.length; ++i) {
+    var i, j;
+    for (i = 0; i < elemsSel.length; ++i) {
       elems.push(elemsSel[i]);
     }
     console.log(elems);
@@ -98,22 +99,30 @@
       if (relvis.unsupportedPlatform) {
         disableButton(elem);
       } else {
-        var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',')[0];
+        var ids = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',');
+        var id = ids[0];
         var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
         if (id.slice(0, 7) === 'search:') {
           if (relvis.getValues(id, 'results').length > 0) {
             enableButton(elem);
           }
         } else if (type === 'cir') {
-          var related = relvis.getValues(id, 'related');
-          if (related.length > 0) {
-            if (related[0].length === 0) {
-              disableButton(elem);
-            } else {
-              enableButton(elem);
+          var bad = 0;
+          for (j = 0; j < ids.length; ++j) {
+            id = ids[j];
+            relvis.getValues(id, 'title');
+            var related = relvis.getValues(id, 'related');
+            if (related.length > 0) {
+              if (related[0].length === 0) {
+                ++bad;
+              } else {
+                enableButton(elem);
+              }
             }
           }
-          relvis.getValues(id, 'name');
+          if (bad === ids.length) {
+            disableButton(elem);
+          }
         } else {
           if (relvis.getValues(id, 'title').length > 0) {
             enableButton(elem);
