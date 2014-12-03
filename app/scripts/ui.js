@@ -61,17 +61,8 @@
       relvis.fixedViewport = false;
       relvis.requestRedraw();
       relvis.layoutGraph();
-    });
-    relvis.addEventListener('tapclick', function(e) { //{{{2
-      showStatus('tapclick' + JSON.stringify({
-        x: e.x,
-        y: e.y,
-        node: node.label
-      }));
-      if (!node.id) {
-        location.hash = '';
-        relvis.hideCanvasOverlay();
-      } else {
+      console.log('tapend');
+        /*
         if (relvis.getType() === 'cir') {
           var ids = relvis.getIds();
           var pos = ids.indexOf(node.id);
@@ -81,12 +72,24 @@
             ids.splice(pos, 1);
           }
           relvis.setIds(ids);
-        } else {
+        } 
+        */
+    });
+    relvis.addEventListener('tapclick', function(e) { //{{{2
+      console.log('here');
+      showStatus('tapclick' + JSON.stringify({
+        x: e.x,
+        y: e.y,
+        node: node.label
+      }));
+      if (!node.id) {
+        location.hash = '';
+        relvis.hideCanvasOverlay();
+      } else {
           relvis.clickHandle({
             visualisation: relvis.getType(),
             id: node.id
           });
-        }
       }
     });
     relvis.addEventListener('redraw', redraw); //{{{2
