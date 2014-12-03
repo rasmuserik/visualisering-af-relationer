@@ -193,9 +193,9 @@ Sprint 6:
 - √cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element, fjern ikke det sidste element fra skyen
 - √only query requested/available info, ie. no requests on subjects etc., only related if related-expand, ...
 - √luk-'knap'
+- √warmup - precache - vis kun link for objekter med data
 
 Sprint 7:
-- warmup - precache - vis kun link for objekter med data
 - Opsamling af statistik / måling af anvendelse
 - •production-ready related-service
 
