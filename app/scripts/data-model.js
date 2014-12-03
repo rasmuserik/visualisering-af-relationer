@@ -51,8 +51,8 @@
       return;
     }
 
-    if(obj.property === 'related') { //{{{2
-      if(relatedLoaded[id]) {
+    if (obj.property === 'related') { //{{{2
+      if (relatedLoaded[id]) {
         return;
       }
       relatedLoaded[id] = true;
@@ -134,8 +134,8 @@
         }
       });
       return;
-    } 
-    if(!id.match(/[0-9]+-[a-zæøå]+:[0-9]*/)) { //{{{2
+    }
+    if (!id.match(/[0-9]+-[a-zæøå]+:[0-9]*/)) { //{{{2
       //console.log('not ting-object', id);
       return;
     }
@@ -163,6 +163,6 @@
       });
     }
 
-      tryGet(3); ///{{{2
-  });  //{{{2
+    tryGet(3); ///{{{2
+  }); //{{{2
 })(); //{{{1

@@ -64,24 +64,27 @@
     relvis.addEventListener('data-update', relvis.updateButtons);
     relvis.nextTick(relvis.updateButtons);
   };
-    function makeHandler(elem) { //{{{1
-      return function() {
-        var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');
-        var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
-        location.hash = '#relvis' + type + id;
-        relvis.show();
-      };
-    }
-    function enableButton(elem) {//{{{1
-        var handler = makeHandler(elem);
-        elem.className = elem.className.replace('relvis-request', 'relvis-enabled');
-        elem.addEventListener('mousedown', handler);
-        elem.addEventListener('click', handler);
-        elem.addEventListener('touchstart', handler);
-    }
-    function disableButton(elem) {//{{{1
-        elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
-    }
+
+  function makeHandler(elem) { //{{{1
+    return function() {
+      var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');
+      var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
+      location.hash = '#relvis' + type + id;
+      relvis.show();
+    };
+  }
+
+  function enableButton(elem) { //{{{1
+    var handler = makeHandler(elem);
+    elem.className = elem.className.replace('relvis-request', 'relvis-enabled');
+    elem.addEventListener('mousedown', handler);
+    elem.addEventListener('click', handler);
+    elem.addEventListener('touchstart', handler);
+  }
+
+  function disableButton(elem) { //{{{1
+    elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
+  }
   relvis.updateButtons = relvis.throttle(4000, function() { //{{{1
     var elemsSel = document.getElementsByClassName('relvis-request'); //{{{2
     var elems = [];
@@ -97,24 +100,24 @@
       } else {
         var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',')[0];
         var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
-        if(id.slice(0,7) === 'search:') {
-            if(relvis.getValues(id, 'results').length > 0) {
-                enableButton(elem);
-            }
-        } else if(type === 'cir') {
+        if (id.slice(0, 7) === 'search:') {
+          if (relvis.getValues(id, 'results').length > 0) {
+            enableButton(elem);
+          }
+        } else if (type === 'cir') {
           var related = relvis.getValues(id, 'related');
-            if(related.length > 0) {
-              if(related[0].length === 0) {
-                disableButton(elem);
-              } else {
-                enableButton(elem);
-              }
-            }
-            relvis.getValues(id, 'name');
-        } else {
-            if(relvis.getValues(id, 'title').length > 0) {
+          if (related.length > 0) {
+            if (related[0].length === 0) {
+              disableButton(elem);
+            } else {
               enableButton(elem);
             }
+          }
+          relvis.getValues(id, 'name');
+        } else {
+          if (relvis.getValues(id, 'title').length > 0) {
+            enableButton(elem);
+          }
         }
       }
     }
