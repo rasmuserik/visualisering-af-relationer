@@ -79,7 +79,7 @@
         }
       });
       return;
-    } 
+    }
 
     function tryGet(count) { //{{{2
       if (count < 1) {
@@ -104,52 +104,52 @@
       });
     }
 
-      tryGet(3); ///{{{2
-      relvis.nextTick(function() { //related {{{2
-        if (relvis.relatedApiUrl) {
-          var lid = id.split(/(:|%3A)/)[2];
-          $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
-            cache: true,
-            dataType: 'jsonp',
-            success: function(data) {
-              if (Array.isArray(data)) {
-                data = data.map(function(obj) {
-                  obj.id = '870970-basis:' + obj.lid;
-                  return obj;
-                });
-                relvis.addTriple(id, 'related', data);
-              }
-            },
-            error: function() {}
-          });
-        } else {
-          var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
-          $.ajax(url + '?callback=?', {
-            cache: true,
-            dataType: 'jsonp',
-            success: function(data) {
-              if (Array.isArray(data)) {
-                if (data.length === 0) {
-                  //relvis.log('warning: empty array from recommendation-service', url);
-                  data = [];
-                }
-                data = data.map(function(id) {
-                  return {
-                    id: id
-                  };
-                });
-                relvis.addTriple(id, 'related', data);
-              }
-            },
-            error: function(err) {
-              try {
-                relvis.log(err);
-              } catch (e) {
-                relvis.log('unserilisable error', String(err));
-              }
+    tryGet(3); ///{{{2
+    relvis.nextTick(function() { //related {{{2
+      if (relvis.relatedApiUrl) {
+        var lid = id.split(/(:|%3A)/)[2];
+        $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
+          cache: true,
+          dataType: 'jsonp',
+          success: function(data) {
+            if (Array.isArray(data)) {
+              data = data.map(function(obj) {
+                obj.id = '870970-basis:' + obj.lid;
+                return obj;
+              });
+              relvis.addTriple(id, 'related', data);
             }
-          });
-        }
-      });
-  });  //{{{2
+          },
+          error: function() {}
+        });
+      } else {
+        var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
+        $.ajax(url + '?callback=?', {
+          cache: true,
+          dataType: 'jsonp',
+          success: function(data) {
+            if (Array.isArray(data)) {
+              if (data.length === 0) {
+                //relvis.log('warning: empty array from recommendation-service', url);
+                data = [];
+              }
+              data = data.map(function(id) {
+                return {
+                  id: id
+                };
+              });
+              relvis.addTriple(id, 'related', data);
+            }
+          },
+          error: function(err) {
+            try {
+              relvis.log(err);
+            } catch (e) {
+              relvis.log('unserilisable error', String(err));
+            }
+          }
+        });
+      }
+    });
+  }); //{{{2
 })(); //{{{1
