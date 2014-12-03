@@ -64,7 +64,7 @@
     });
     relvis.addEventListener('drag', function(e) { //{{{2
       var h, w, x, y, px, py;
-      if (relvis.getType() === 'cir') {
+      if (relvis.getType() === 'cir' && node) {
         var ids = relvis.getIds();
         var pos = ids.indexOf(node.id);
         px = e.x / relvis.canvas.width * 2 - 1;
