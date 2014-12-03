@@ -32,7 +32,7 @@
     relvis.apiUrl = obj.apiUrl;
     relvis.clickHandle = obj.clickHandle || function() {};
     relvis.relatedApiUrl = obj.relatedUrl;
-    var unsupportedPlatform = (function unsupportedPlatform() { //{{{2
+    relvis.unsupportedPlatform = (function() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
       if (!elem.getContext) {
@@ -49,15 +49,22 @@
       // everything is ok
       return false;
     })();
-    // button on sample page pops up visualisation //{{{2
-    $('#relvis-button').click(relvis.show);
-    var elemsSel = document.getElementsByClassName('relvis-request');
-    var elems = [];
-    for (var i = 0; i < elemsSel.length; ++i) {
-      elems.push(elemsSel[i]);
+    // show visualisation on load if we have #relvis hash //{{{2
+    if (location.hash.slice(0, 7) === '#relvis' && !relvis.unsupportedPlatform) {
+      relvis.show();
     }
-
-    function makeHandler(elem) {
+    $(window).on('hashchange', function() {
+      if (location.hash.slice(0, 7) === '#relvis' && !relvis.unsupportedPlatform) {
+        relvis.show();
+      } else {
+        relvis.hideCanvasOverlay();
+      }
+      relvis.dispatchEvent('data-update');
+    });
+    relvis.addEventListener('data-update', relvis.updateButtons);
+    relvis.nextTick(relvis.updateButtons);
+  };
+    function makeHandler(elem) { //{{{1
       return function() {
         var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');
         var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
@@ -65,30 +72,51 @@
         relvis.show();
       };
     }
-    for (i = 0; i < elems.length; ++i) {
-      var elem = elems[i];
-      if (unsupportedPlatform) {
-        elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
-      } else {
+    function enableButton(elem) {//{{{1
         var handler = makeHandler(elem);
         elem.className = elem.className.replace('relvis-request', 'relvis-enabled');
         elem.addEventListener('mousedown', handler);
         elem.addEventListener('click', handler);
         elem.addEventListener('touchstart', handler);
-      }
     }
+    function disableButton(elem) {//{{{1
+        elem.className = elem.className.replace('relvis-request', 'relvis-disabled');
+    }
+  relvis.updateButtons = relvis.throttle(4000, function() { //{{{1
+    var elemsSel = document.getElementsByClassName('relvis-request'); //{{{2
+    var elems = [];
+    for (var i = 0; i < elemsSel.length; ++i) {
+      elems.push(elemsSel[i]);
+    }
+    console.log(elems);
 
-    // show visualisation on load if we have #relvis hash //{{{2
-    if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
-      relvis.show();
-    }
-    $(window).on('hashchange', function() {
-      if (location.hash.slice(0, 7) === '#relvis' && !unsupportedPlatform) {
-        relvis.show();
+    for (i = 0; i < elems.length; ++i) {
+      var elem = elems[i];
+      if (relvis.unsupportedPlatform) {
+        disableButton(elem);
       } else {
-        relvis.hideCanvasOverlay();
+        var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',')[0];
+        var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
+        if(id.slice(0,7) === 'search:') {
+            if(relvis.getValues(id, 'results').length > 0) {
+                enableButton(elem);
+            }
+        } else if(type === 'cir') {
+          var related = relvis.getValues(id, 'related');
+            if(related.length > 0) {
+              if(related[0].length === 0) {
+                disableButton(elem);
+              } else {
+                enableButton(elem);
+              }
+            }
+            relvis.getValues(id, 'name');
+        } else {
+            if(relvis.getValues(id, 'title').length > 0) {
+              enableButton(elem);
+            }
+        }
       }
-      relvis.dispatchEvent('data-update');
-    });
-  };
+    }
+  });
 })(); //{{{1
