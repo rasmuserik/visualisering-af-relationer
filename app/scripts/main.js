@@ -33,7 +33,6 @@
     relvis.clickHandle = obj.clickHandle || function() {};
     relvis.relatedApiUrl = obj.relatedUrl;
     relvis.disablePrefetch = obj.disablePrefetch;
-    console.log(obj);
     relvis.unsupportedPlatform = (function() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
