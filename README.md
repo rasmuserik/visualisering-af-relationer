@@ -187,20 +187,22 @@ A development/sample data source for circular relations are generated. This is t
 
 Backlog - todo and progress:
 
-Sprint 6:
-- √bedre håndtering af visualisering med 2,3 eller 4 objekter
-- √bedre håndtering af visualisering af 1 objekt
-- √cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element, fjern ikke det sidste element fra skyen
-- √only query requested/available info, ie. no requests on subjects etc., only related if related-expand, ...
-- √luk-'knap'
-- √warmup - precache - vis kun link for objekter med data
-
 Sprint 7:
-- Opsamling af statistik / måling af anvendelse
-- •production-ready related-service
-
+- opsamling af statistik / måling af anvendelse
+- production-ready related-service
+- make sure it works on all platforms, including IE10, check IE9
+- polish
 
 ## Version 0.6 sprint 6
+### Version 0.6.2, released 5/12
+
+- bedre håndtering af visualisering med 1,2,3 eller 4 objekter
+- cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element, fjern ikke det sidste element fra skyen
+- only query requested/available info, ie. no requests on subjects etc., only related if related-expand, ...
+- luk-'knap'
+- warmup - precache - vis kun link for objekter med data
+- visual-relation-server-data
+
 ### Version 0.6.1, released 29/11
 
 - strukturelle relationer indenfor samling af relationer - demo baseret på søgning
