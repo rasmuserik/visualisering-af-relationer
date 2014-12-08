@@ -189,10 +189,13 @@ Backlog - todo and progress:
 
 Sprint 7:
 - √fix interaction bug on android
+- √reduce graphics quality if rendering takes too long - for better performance on slow devices
 - opsamling af statistik / måling af anvendelse
 - production-ready related-service
 - make sure it works on all platforms, including IE10, check IE9
 - polish
+- maybe: highlight links to currently dragged node
+- maybe: fix position of dragged elements in search visualisation
 
 ## Version 0.6 sprint 6
 ### Version 0.6.2, released 5/12
