@@ -40,6 +40,14 @@
         o.y = e.clientY;
       }
 
+      if(typeof o.x === 'undefined') {
+        o.x = tapPrevX;
+        o.y = tapPrevY;
+      } else {
+        o.x = o.x * canvas.width / canvas.clientWidth;
+        o.y = o.y * canvas.height / canvas.clientHeight;
+      }
+
       if (kind === 'start') {
         maxDX = maxDY = 0;
         tapStartTime = Date.now();
@@ -51,8 +59,6 @@
       if (typeof o.x === 'number') {
         maxDX = Math.max(maxDX, Math.abs(o.x - tapStartX));
         maxDY = Math.max(maxDY, Math.abs(o.y - tapStartY));
-        o.x = o.x * canvas.width / canvas.clientWidth;
-        o.y = o.y * canvas.height / canvas.clientHeight;
         o.node = relvis.nodeAt(o.x, o.y);
         o.dx = o.x - tapStartX;
         o.dy = o.y - tapStartY;
@@ -124,7 +130,7 @@
     }
     this.overlayVisible = true;
 
-    noInteractUntil = Date.now() + tapTime;
+    noInteractUntil = Date.now() + tapTime * 3;
 
     // hide scrollbars
     this._originalOverflow = document.body.style.overflow;

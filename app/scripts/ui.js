@@ -1,19 +1,17 @@
 (function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
-  var info = '';
+  var info = window.navigator.userAgent;
   var graphTouchCoord = {};
   var node;
 
   function redraw() { //{{{1
-    /*
     var ctx = relvis.canvas.getContext('2d');
     ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, 500, 10);
-    ctx.font = '10px sans-serif';
+    ctx.fillRect(0, 20, 500, 20);
+    ctx.font = '15px sans-serif';
     ctx.fillStyle = '#000';
-    ctx.fillText(info + ' ' + Date.now(), 10, 10);
-    */
+    ctx.fillText(info + ' ' + relvis.renderTime, 10, 35);
   }
 
   function showStatus(text) { //{{{1
@@ -64,6 +62,12 @@
     });
     relvis.addEventListener('drag', function(e) { //{{{2
       var h, w, x, y, px, py;
+      showStatus('drag' + JSON.stringify({
+        x: e.x,
+        y: e.y,
+        w: relvis.canvas.width,
+        h: relvis.canvas.height
+      }));
       if (relvis.getType() === 'cir' && node) {
         var ids = relvis.getIds();
         var pos = ids.indexOf(node.id);

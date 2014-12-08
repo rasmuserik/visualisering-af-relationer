@@ -188,6 +188,7 @@ A development/sample data source for circular relations are generated. This is t
 Backlog - todo and progress:
 
 Sprint 7:
+- √fix interaction bug on android
 - opsamling af statistik / måling af anvendelse
 - production-ready related-service
 - make sure it works on all platforms, including IE10, check IE9

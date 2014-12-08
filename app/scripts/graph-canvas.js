@@ -34,6 +34,7 @@
     if (!relvis.nodes || !relvis.overlayVisible) {
       return;
     }
+    var t0 = Date.now();
 
     var visibleNodes = relvis.nodes.filter(function(o) {
       return o.visible;
@@ -114,6 +115,7 @@
 
       relvis.drawNode(ctx, node, x, y, node.xsize * 2, node.ysize * 2);
     }
+    relvis.renderTime = Date.now() - t0;
   });
 
 
