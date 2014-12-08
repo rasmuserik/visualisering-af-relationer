@@ -10,7 +10,7 @@
   relvis.drawBackground = function(ctx, _, __, w, h) {
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
     ctx.fillRect(0, 0, w, h);
-    if(relvis.renderTime > 200) {
+    if (relvis.renderTime > 200) {
       shadow = false;
     }
 
@@ -96,14 +96,14 @@
       ih = ih | 0;
       var ix = x + (w - iw) / 2 | 0;
       var iy = y + (h - ih) / 2 | 0;
-      if(shadow) {
-      ctx.shadowBlur = relvis.unit * 2;
-      ctx.shadowOffsetX = relvis.unit / 2;
-      ctx.shadowOffsetY = relvis.unit / 2;
-      ctx.shadowColor = 'rgba(0,0,0,0.4)';
+      if (shadow) {
+        ctx.shadowBlur = relvis.unit * 2;
+        ctx.shadowOffsetX = relvis.unit / 2;
+        ctx.shadowOffsetY = relvis.unit / 2;
+        ctx.shadowColor = 'rgba(0,0,0,0.4)';
       } else {
         ctx.fillStyle = 'rgba(0,0,0,0.3)';
-        ctx.fillRect(ix+0.1*iw, iy+0.1*iw, iw, ih);
+        ctx.fillRect(ix + 0.1 * iw, iy + 0.1 * iw, iw, ih);
       }
       ctx.drawImage(img, ix, iy, iw, ih);
       ctx.shadowBlur = 0;
@@ -112,15 +112,15 @@
 
     } else {
       if (node.type !== 'category') {
-      if(shadow) {
-        ctx.shadowBlur = relvis.unit * 2;
-        ctx.shadowOffsetX = relvis.unit / 2;
-        ctx.shadowOffsetY = relvis.unit / 2;
-        ctx.shadowColor = 'rgba(0,0,0,0.4)';
-      } else {
-        ctx.fillStyle = 'rgba(0,0,0,0.3)';
-        ctx.fillRect(x+0.1*w, y+0.1*w, w, h);
-      }
+        if (shadow) {
+          ctx.shadowBlur = relvis.unit * 2;
+          ctx.shadowOffsetX = relvis.unit / 2;
+          ctx.shadowOffsetY = relvis.unit / 2;
+          ctx.shadowColor = 'rgba(0,0,0,0.4)';
+        } else {
+          ctx.fillStyle = 'rgba(0,0,0,0.3)';
+          ctx.fillRect(x + 0.1 * w, y + 0.1 * w, w, h);
+        }
         ctx.fillStyle = 'rgba(255,255,255,1)';
         ctx.fillRect(x, y, w, h);
         ctx.shadowBlur = 0;

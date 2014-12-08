@@ -40,7 +40,7 @@
         o.y = e.clientY;
       }
 
-      if(typeof o.x === 'undefined') {
+      if (typeof o.x === 'undefined') {
         o.x = tapPrevX;
         o.y = tapPrevY;
       } else {
