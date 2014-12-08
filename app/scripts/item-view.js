@@ -5,13 +5,19 @@
   relvis.visualObjectRatio = 3 / 4;
   var images = {};
 
+  var slowCount = 0;
   var shadow = true;
 
   relvis.drawBackground = function(ctx, _, __, w, h) {
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
     ctx.fillRect(0, 0, w, h);
-    if (relvis.renderTime > 200) {
-      shadow = false;
+    if (relvis.renderTime > 150) {
+      ++slowCount;
+      if(slowCount > 5) {
+        shadow = false;
+      }
+    } else {
+      slowCount = 0;
     }
 
     if (relvis.getType() === 'ext' && relvis.nodes.length >= 15) {
