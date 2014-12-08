@@ -192,7 +192,7 @@ Sprint 7:
 - √reduce graphics quality if rendering takes too long - for better performance on slow devices
 - opsamling af statistik / måling af anvendelse
 - production-ready related-service
-- make sure it works on all platforms, including IE10, check IE9
+- √make sure it works on all platforms, including √IE10, check √IE9, √webkit-mobile, √blink-mobile, √firefox-mobile
 - polish
 - maybe: highlight links to currently dragged node
 - maybe: fix position of dragged elements in search visualisation

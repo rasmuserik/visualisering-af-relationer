@@ -6,12 +6,14 @@
   var node;
 
   function redraw() { //{{{1
+    /*
     var ctx = relvis.canvas.getContext('2d');
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 20, 500, 20);
     ctx.font = '15px sans-serif';
     ctx.fillStyle = '#000';
     ctx.fillText(info + ' ' + relvis.renderTime, 10, 35);
+    */
   }
 
   function showStatus(text) { //{{{1
