@@ -48,9 +48,7 @@ y: p1.y + p2.y,
       obj.time = Date.now();
       var logentry = JSON.stringify(obj);
       $.ajax(relvis.logUrl + '?' + window.encodeURIComponent(logentry)+ '&callback=?', {
-        dataType: "jsonp"
-        //success: function(){}
-      });
+        dataType: 'jsonp'});
     }
   };
   relvis.eventListeners = {}; //{{{1
