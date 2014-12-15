@@ -8,7 +8,7 @@
   var slowCount = 0;
   var shadow = true;
 
-  relvis.drawBackground = function(ctx, _, __, w, h) {
+  relvis.drawBackground = function(ctx, _, __, w, h) {//{{{1
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
     ctx.fillRect(0, 0, w, h);
     if (relvis.renderTime > 150) {
@@ -91,6 +91,18 @@
       }
     }
 
+    var cover, coverUrl;
+    coverUrl = relvis.getValues(node.id, 'defaultCover')[0];
+    if(coverUrl) {
+      cover = images[coverUrl];
+      if(!cover) {
+        window.cover = cover = images[coverUrl] = new Image();
+        cover.src = coverUrl;
+      }
+    }
+
+
+
     // draw image if available
     if (img && img.complete && img.naturalWidth) {
       var iw = img.naturalWidth;
@@ -132,6 +144,11 @@
         ctx.shadowBlur = 0;
         ctx.shadowOffsetX = 0;
         ctx.shadowOffsetY = 0;
+        if(cover && cover.complete && cover.naturalWidth) {
+          ctx.drawImage(cover, x + w * 0.05, y + h * 0.05, w * 0.85, h * 0.85);
+          ctx.fillStyle = 'rgba(255,255,255,0.3)';
+          ctx.fillRect(x, y, w, h);
+        }
       }
 
       // draw text
