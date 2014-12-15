@@ -27,12 +27,19 @@
     relvis.nodes = [];
     relvis.edges = [];
     relvis.showCanvasOverlay();
+    relvis.log('start', location.hash.slice(7));
   };
   relvis.init = function(obj) { //{{{1
     relvis.apiUrl = obj.apiUrl;
+    relvis.logUrl = obj.logUrl;
     relvis.clickHandle = obj.clickHandle || function() {};
     relvis.relatedApiUrl = obj.relatedUrl;
     relvis.disablePrefetch = obj.disablePrefetch;
+    relvis.log('init', {
+      apiUrl: relvis.apiUrl,
+      relatedApiUrl: obj.relatedUrl,
+      prefetch: !relvis.disablePrefetch
+    });
     relvis.unsupportedPlatform = (function() { //{{{2
       // check that canvas is supported
       var elem = document.createElement('canvas');
@@ -93,12 +100,14 @@
     for (i = 0; i < elemsSel.length; ++i) {
       elems.push(elemsSel[i]);
     }
+    var enabled = [];
     for (i = 0; i < elems.length; ++i) {
       var elem = elems[i];
       if (relvis.unsupportedPlatform) {
         disableButton(elem);
       } else if (relvis.disablePrefetch) {
         enableButton(elem);
+        enabled.push(elem.getAttribute('data-relvis-id'));
       } else {
         var ids = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':').split(',');
         var id = ids[0];
@@ -106,6 +115,7 @@
         if (id.slice(0, 7) === 'search:') {
           if (relvis.getValues(id, 'results').length > 0) {
             enableButton(elem);
+            enabled.push(elem.getAttribute('data-relvis-id'));
           }
         } else if (type === 'cir') {
           var bad = 0;
@@ -118,6 +128,7 @@
                 ++bad;
               } else {
                 enableButton(elem);
+                enabled.push(elem.getAttribute('data-relvis-id'));
               }
             }
           }
@@ -127,9 +138,13 @@
         } else {
           if (relvis.getValues(id, 'title').length > 0) {
             enableButton(elem);
+            enabled.push(elem.getAttribute('data-relvis-id'));
           }
         }
       }
+    }
+    if(enabled.length > 0) {
+      relvis.log('enabled', enabled);
     }
   });
 })(); //{{{1

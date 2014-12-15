@@ -71,7 +71,9 @@
                 relvis.addTriple(id, 'related', data);
               }
             },
-            error: function() {}
+            error: function() {
+              relvis.log('apierr', 'related-' + id);
+            }
           });
         } else {
           var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
@@ -81,7 +83,6 @@
             success: function(data) {
               if (Array.isArray(data)) {
                 if (data.length === 0) {
-                  //relvis.log('warning: empty array from recommendation-service', url);
                   data = [];
                 }
                 data = data.map(function(id) {
@@ -93,11 +94,7 @@
               }
             },
             error: function(err) {
-              try {
-                relvis.log(err);
-              } catch (e) {
-                relvis.log('unserilisable error', String(err));
-              }
+              relvis.log('apierr', 'related-' + id);
             }
           });
         }
@@ -126,11 +123,7 @@
           relvis.addTriple(id, 'results', results);
         },
         error: function(err) {
-          try {
-            relvis.log(err);
-          } catch (e) {
-            relvis.log('unserilisable error', String(err));
-          }
+              relvis.log('apierr', id);
         }
       });
       return;
@@ -142,6 +135,7 @@
 
     function tryGet(count) { //{{{2
       if (count < 1) {
+        relvis.log('apierr', id);
         return;
       }
       $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
@@ -153,11 +147,6 @@
           });
         },
         error: function(err) {
-          try {
-            relvis.log(err);
-          } catch (e) {
-            relvis.log('unserilisable error', String(err));
-          }
           tryGet(count - 1);
         }
       });

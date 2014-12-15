@@ -70,6 +70,7 @@
         w: relvis.canvas.width,
         h: relvis.canvas.height
       }));
+      relvis.log('drag ', node && node.id);
       if (relvis.getType() === 'cir' && node) {
         var ids = relvis.getIds();
         var pos = ids.indexOf(node.id);
@@ -77,11 +78,13 @@
         py = e.y / relvis.canvas.height * 2 - 1;
         if (px * px + py * py < 0.2) {
           if (pos === -1) {
+            relvis.log('add-node', node.id);
             ids.push(node.id);
             relvis.setIds(ids);
           }
         } else {
           if (pos !== -1 && ids.length > 1) {
+            relvis.log('remove-node' + node.id);
             ids.splice(pos, 1);
             relvis.setIds(ids);
           }
@@ -97,8 +100,10 @@
       }));
       if (!node.id) {
         location.hash = '';
+        relvis.log('click');
         relvis.hideCanvasOverlay();
       } else {
+        relvis.log('click', node.id);
         relvis.clickHandle({
           visualisation: relvis.getType(),
           id: node.id

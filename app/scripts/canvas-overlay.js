@@ -6,7 +6,7 @@
   var touching = false;
   var noInteractUntil = 0;
 
-  //taphandling{{{1
+  // taphandling{{{1
   var tapTime = 300;
   var tapStartX;
   var tapStartY;
