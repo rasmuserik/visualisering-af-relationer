@@ -58,7 +58,7 @@
   relvis.drawEdge = function drawEdge(ctx, edge, x0, y0, x1, y1) { //{{{1
     if (edge.type === 'collection') {
       ctx.lineWidth = relvis.unit * 10;
-      ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+      ctx.strokeStyle = 'rgba(255,255,255,0.5)';
       ctx.lineCap = 'round';
     } else {
       ctx.shadowBlur = relvis.unit / 8;
@@ -92,7 +92,7 @@
     }
 
     var cover, coverUrl;
-    coverUrl = relvis.getValues(node.id, 'defaultCover')[0];
+    coverUrl = relvis.getValues(node.value, 'defaultCover')[0];
     if(coverUrl) {
       cover = images[coverUrl];
       if(!cover) {

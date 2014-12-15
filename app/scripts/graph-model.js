@@ -92,6 +92,7 @@
               ++count;
               var branchNode = createNode({
                 id: branchId,
+                value: branchId,
                 visible: true
               });
               traverseIds.push(branchId);
@@ -158,6 +159,9 @@
               });
               if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
                 node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
+                if(node.label === 'Anmeldelse') {
+                  node.label = relvis.getValues(node.value, 'isPartOf')[0] || node.label;
+                }
               }
               edges.push({
                 source: categoryNodes[category],
@@ -175,6 +179,7 @@
       function createRootNode() { //{{{3
         root = createNode({
           id: id,
+          value: id,
           label: 'root',
           type: 'root',
           visible: true
@@ -231,6 +236,7 @@
         traverseIds.push(ids[i]);
         node = createNode({
           id: ids[i],
+          value: ids[i],
           type: 'primary',
           visible: true
         });
@@ -251,6 +257,7 @@
       for (i = 0; i < ids.length; ++i) {
         node = createNode({
           id: ids[i],
+          value: ids[i],
           type: 'primary',
           visible: true
         });
