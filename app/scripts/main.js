@@ -143,7 +143,7 @@
         }
       }
     }
-    if(enabled.length > 0) {
+    if (enabled.length > 0) {
       relvis.log('enabled', enabled);
     }
   });

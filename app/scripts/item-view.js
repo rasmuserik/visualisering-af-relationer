@@ -13,7 +13,7 @@
     ctx.fillRect(0, 0, w, h);
     if (relvis.renderTime > 150) {
       ++slowCount;
-      if(slowCount > 5) {
+      if (slowCount > 5) {
         shadow = false;
       }
     } else {

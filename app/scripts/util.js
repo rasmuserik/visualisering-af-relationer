@@ -7,31 +7,31 @@
   xy.mul = function(p1, p2) {
     return {
       x: p1.x * p2.x,
-y: p1.y * p2.y,
+      y: p1.y * p2.y,
     };
   };
   xy.add = function(p1, p2) {
     return {
       x: p1.x + p2.x,
-y: p1.y + p2.y,
+      y: p1.y + p2.y,
     };
   };
   xy.sub = function(p1, p2) {
     return {
       x: p1.x - p2.x,
-        y: p1.y - p2.y,
+      y: p1.y - p2.y,
     };
   };
   xy.scale = function(p, a) {
     return {
       x: p.x * a,
-        y: p.y * a,
+      y: p.y * a,
     };
   };
   xy.inv = function(p) {
     return {
       x: 1 / p.x,
-        y: 1 / p.y
+      y: 1 / p.y
     };
   };
   xy.assign = function(p1, p2) {
@@ -39,16 +39,17 @@ y: p1.y + p2.y,
     p1.y = p2.y;
   };
 
-  relvis.log = function() {//{{{1
-    if(relvis.logUrl) {
+  relvis.log = function() { //{{{1
+    if (relvis.logUrl) {
       var obj = {};
-      for(var i = 0; i < arguments.length; ++i) {
+      for (var i = 0; i < arguments.length; ++i) {
         obj[i] = arguments[i];
       }
       obj.time = Date.now();
       var logentry = JSON.stringify(obj);
-      $.ajax(relvis.logUrl + '?' + window.encodeURIComponent(logentry)+ '&callback=?', {
-        dataType: 'jsonp'});
+      $.ajax(relvis.logUrl + '?' + window.encodeURIComponent(logentry) + '&callback=?', {
+        dataType: 'jsonp'
+      });
     }
   };
   relvis.eventListeners = {}; //{{{1
@@ -134,14 +135,14 @@ y: p1.y + p2.y,
 
     return {
       min: min,
-        max: max,
-        range: range,
-        zeroOne: function(item) {
-          var result = {};
-          result.y = (item.y - this.min.y) / this.range.y;
-          result.x = (item.x - this.min.x) / this.range.x;
-          return result;
-        }
+      max: max,
+      range: range,
+      zeroOne: function(item) {
+        var result = {};
+        result.y = (item.y - this.min.y) / this.range.y;
+        result.x = (item.x - this.min.x) / this.range.x;
+        return result;
+      }
     };
   };
   relvis.nextTick = function(fn) { //{{{1

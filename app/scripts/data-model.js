@@ -123,7 +123,7 @@
           relvis.addTriple(id, 'results', results);
         },
         error: function(err) {
-              relvis.log('apierr', id);
+          relvis.log('apierr', id);
         }
       });
       return;
