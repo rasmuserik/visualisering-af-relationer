@@ -188,14 +188,19 @@ A development/sample data source for circular relations are generated. This is t
 Backlog - todo and progress:
 
 Sprint 7:
-- √fix interaction bug on android
-- √reduce graphics quality if rendering takes too long - for better performance on slow devices
-- √opsamling af statistik / måling af anvendelse
 - •production-ready related-service
-- √make sure it works on all platforms, including √IE10, check √IE9, √webkit-mobile, √blink-mobile, √firefox-mobile
 - polish
 - maybe: highlight links to currently dragged node
 - maybe: fix position of dragged elements in search visualisation
+
+## Version 0.7 sprint 7
+### Version 0.7.0, released 16/12
+- fix interaction bug on android
+- reduce graphics quality if rendering takes too long - for better performance on slow devices
+- opsamling af statistik / måling af anvendelse
+- make sure it works on all platforms, including √IE10, check √IE9, √webkit-mobile, √blink-mobile, √firefox-mobile
+- erstat "Anmeldelse" med mere sigende tekst
+- default-covers
 
 ## Version 0.6 sprint 6
 ### Version 0.6.2, released 5/12
