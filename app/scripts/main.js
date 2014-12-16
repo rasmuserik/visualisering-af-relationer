@@ -5,13 +5,13 @@
 
   var initDone = false;
   relvis.getType = function() {
-    return location.hash.slice(7, 10);
+    return location.hash.slice(8, 11);
   };
   relvis.getIds = function() {
-    return location.hash.slice(10).split(',');
+    return location.hash.slice(11).split(',');
   };
   relvis.setIds = function(ids) {
-    location.hash = location.hash.slice(0, 10) + String(ids);
+    location.hash = location.hash.slice(0, 11) + String(ids);
     relvis.dispatchEvent('data-update');
   };
   relvis.show = function() { //{{{1
@@ -27,7 +27,7 @@
     relvis.nodes = [];
     relvis.edges = [];
     relvis.showCanvasOverlay();
-    relvis.log('start', location.hash.slice(7));
+    relvis.log('start', location.hash.slice(8));
   };
   relvis.init = function(obj) { //{{{1
     relvis.apiUrl = obj.apiUrl;
@@ -77,7 +77,7 @@
     return function() {
       var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');
       var type = (elem.getAttribute('data-relvis-type') || 'ext').slice(0, 3);
-      location.hash = '#relvis' + type + id;
+      location.hash = '#relvis/' + type + id;
       relvis.show();
     };
   }

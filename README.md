@@ -190,7 +190,7 @@ Backlog - todo and progress:
 Sprint 7:
 - •production-ready related-service
 - polish
-- location-fragment: "#relvis:cir" instead of "#relviscir" etc.
+- √location-fragment: "#relvis/cir" instead of "#relviscir" etc.
 - maybe: highlight links to currently dragged node
 - maybe: fix position of dragged elements in search visualisation
 
