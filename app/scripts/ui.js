@@ -84,7 +84,7 @@
           }
         } else {
           if (pos !== -1 && ids.length > 1) {
-            relvis.log('remove-node' + node.id);
+            relvis.log('remove-node', node.id);
             ids.splice(pos, 1);
             relvis.setIds(ids);
           }
