@@ -189,16 +189,15 @@ Backlog - todo and progress:
 
 Sprint 7:
 - publish production-ready related-service
+- update README.md
+
 - √funktion til manuel aktivering af visualisering - relvis.open(ids)
 - √closeHandle funktion til lukning af relationsbrowser
 - √relvis.close()
 - √topMargin/bottomMargin
 - √example with different background
-- cover, titel, defaultCover, abstract (÷beholdningsoplysninger)
-- polish code
-  - update README.md
-  - √code-climate
-  - extra go through code and cleanup/refactor
+- √cover, titel, defaultCover, abstract med ved 'click'-event
+- √polish code / code-climate-fixes
 - √location-fragment: "#relvis/cir" instead of "#relviscir" etc.
 - √highlight links to currently dragged edges
 

@@ -107,7 +107,11 @@
         relvis.log('click', node.id);
         relvis.clickHandle({
           visualisation: relvis.getType(),
-          id: node.id
+          id: node.value,
+          title: node.label,
+          cover: node.imgSrc,
+          defaultCover: relvis.getValues(node.value, 'defaultCover')[0],
+          'abstract': relvis.getValues(node.value, 'abstract')[0]
         });
       }
     });
