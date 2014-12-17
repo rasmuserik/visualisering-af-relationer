@@ -14,6 +14,15 @@
     ctx.shadowOffsetY = 0;
   }
 
+  function dropShadow(ctx) { //{{{1
+    if (shadow) {
+      ctx.shadowBlur = relvis.unit * 2;
+    }
+    ctx.shadowOffsetX = relvis.unit / 2;
+    ctx.shadowOffsetY = relvis.unit / 2;
+    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+  }
+
   function getImage(url) { //{{{1
     if (!url) {
       return undefined;
@@ -45,10 +54,7 @@
   }
 
   function drawCloseIcon(ctx, w) { //{{{2
-    ctx.shadowBlur = relvis.unit * 2;
-    ctx.shadowOffsetX = relvis.unit / 2;
-    ctx.shadowOffsetY = relvis.unit / 2;
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+    dropShadow(ctx);
     ctx.fillStyle = 'rgba(255,255,255,1.0)';
     ctx.strokeStyle = 'rgba(255,255,255,1.0)';
     ctx.lineWidth = relvis.unit / 2;
@@ -116,12 +122,7 @@
     ih = ih * is | 0;
     var ix = x + (w - iw) / 2 | 0;
     var iy = y + (h - ih) / 2 | 0;
-    if (shadow) {
-      ctx.shadowBlur = relvis.unit * 2;
-    }
-    ctx.shadowOffsetX = relvis.unit / 2;
-    ctx.shadowOffsetY = relvis.unit / 2;
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+    dropShadow(ctx);
     ctx.drawImage(img, ix, iy, iw, ih);
   }
 
@@ -141,12 +142,7 @@
   }
 
   function drawTitle(ctx, node, x, y, w, h) { //{{{2
-    if (shadow) {
-      ctx.shadowBlur = relvis.unit * 2;
-    }
-    ctx.shadowOffsetX = relvis.unit / 2;
-    ctx.shadowOffsetY = relvis.unit / 2;
-    ctx.shadowColor = 'rgba(0,0,0,0.4)';
+    dropShadow(ctx);
     ctx.fillStyle = 'rgba(255,255,255,1)';
     ctx.fillRect(x, y, w, h);
 
