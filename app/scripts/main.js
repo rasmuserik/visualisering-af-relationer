@@ -82,8 +82,9 @@
   };
 
   relvis.open = function(type, ids) {
-    location.hash = "relvis/" + type.slice(0,3) + String(ids);
+    location.hash = "relvis/" + type.slice(0, 3) + String(ids);
   }
+
   function makeHandler(elem) { //{{{1
     return function() {
       var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');
