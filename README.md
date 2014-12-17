@@ -191,8 +191,8 @@ Sprint 7:
 - publish production-ready related-service
 - polish code
   - update README.md
-  - code-climate
-  - go through code and cleanup/refactor
+  - √code-climate
+  - extra go through code and cleanup/refactor
 - √location-fragment: "#relvis/cir" instead of "#relviscir" etc.
 - √highlight links to currently dragged edges
 
