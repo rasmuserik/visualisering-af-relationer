@@ -93,6 +93,7 @@
     };
   }
 
+
   relvis.initCanvas = function() { //{{{1
     if (relvis.canvas) {
       return;

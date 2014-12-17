@@ -189,6 +189,12 @@ Backlog - todo and progress:
 
 Sprint 7:
 - publish production-ready related-service
+- √funktion til manuel aktivering af visualisering - relvis.open(ids)
+- √closeHandle funktion til lukning af relationsbrowser
+- √relvis.close()
+- √topMargin/bottomMargin
+- baggrundsfarve.
+- cover, titel, defaultCover, abstract (÷beholdningsoplysninger)
 - polish code
   - update README.md
   - √code-climate

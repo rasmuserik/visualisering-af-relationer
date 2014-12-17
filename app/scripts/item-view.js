@@ -38,40 +38,40 @@
   }
 
   //{{{1 Draw background
-  function externalRelationLabels(ctx, w, h) { //{{{2
+  function externalRelationLabels(ctx, x, y, w, h) { //{{{2
     ctx.shadowBlur = relvis.unit / 2;
     ctx.shadowColor = '#fff';
     ctx.fillStyle = '#000';
     ctx.font = relvis.unit * 3 + 'px sans-serif';
-    ctx.fillText('Forfatter', 4 * relvis.unit, 4 * relvis.unit);
+    ctx.fillText('Forfatter', x + 4 * relvis.unit, y + 4 * relvis.unit);
     var width = ctx.measureText('Anmeldelser').width;
-    ctx.fillText('Anmeldelser', w - width - 4 * relvis.unit, 4 * relvis.unit);
+    ctx.fillText('Anmeldelser', x + w - width - 4 * relvis.unit, y + 4 * relvis.unit);
 
-    ctx.fillText('Emner', 4 * relvis.unit, h - 2 * relvis.unit);
+    ctx.fillText('Emner', x + 4 * relvis.unit, y + h - 2 * relvis.unit);
     width = ctx.measureText('Struktur').width;
-    ctx.fillText('Struktur', w - width - 4 * relvis.unit, h - 2 * relvis.unit);
+    ctx.fillText('Struktur', x + w - width - 4 * relvis.unit, y + h - 2 * relvis.unit);
     ctx.shadowBlur = 0;
   }
 
-  function drawCloseIcon(ctx, w) { //{{{2
+  function drawCloseIcon(ctx, y, w) { //{{{2
     dropShadow(ctx);
     ctx.fillStyle = 'rgba(255,255,255,1.0)';
     ctx.strokeStyle = 'rgba(255,255,255,1.0)';
     ctx.lineWidth = relvis.unit / 2;
     ctx.lineCap = 'round';
     ctx.beginPath();
-    ctx.moveTo(w - relvis.unit * 3, relvis.unit);
-    ctx.lineTo(w - relvis.unit * 1, relvis.unit * 3);
-    ctx.moveTo(w - relvis.unit * 3, relvis.unit * 3);
-    ctx.lineTo(w - relvis.unit * 1, relvis.unit * 1);
+    ctx.moveTo(w - relvis.unit * 3, y + relvis.unit);
+    ctx.lineTo(w - relvis.unit * 1, y + relvis.unit * 3);
+    ctx.moveTo(w - relvis.unit * 3, y + relvis.unit * 3);
+    ctx.lineTo(w - relvis.unit * 1, y + relvis.unit * 1);
     ctx.stroke();
     noShadow(ctx);
     ctx.lineCap = 'butt';
   }
 
-  relvis.drawBackground = function(ctx, _, __, w, h) { //{{{2
+  relvis.drawBackground = function(ctx, x, y, w, h) { //{{{2
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
-    ctx.fillRect(0, 0, w, h);
+    ctx.fillRect(x, y, w, h);
 
     if (relvis.renderTime > 150) {
       ++slowCount;
@@ -83,10 +83,10 @@
     }
 
     if (relvis.getType() === 'ext' && relvis.nodes.length >= 15) {
-      externalRelationLabels(ctx, w, h);
+      externalRelationLabels(ctx, x, y, w, h);
     }
 
-    drawCloseIcon(ctx, w);
+    drawCloseIcon(ctx, y, w);
   };
 
   relvis.drawEdge = function drawEdge(ctx, edge, x0, y0, x1, y1) { //{{{1

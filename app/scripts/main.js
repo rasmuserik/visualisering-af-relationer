@@ -14,6 +14,10 @@
     location.hash = location.hash.slice(0, 11) + String(ids);
     relvis.dispatchEvent('data-update');
   };
+  relvis.close = function() {
+    location.hash = '';
+    relvis.hideCanvasOverlay();
+  }
   relvis.show = function() { //{{{1
     if (relvis.overlayVisible) {
       return;
@@ -35,6 +39,9 @@
     relvis.clickHandle = obj.clickHandle || function() {};
     relvis.relatedApiUrl = obj.relatedUrl;
     relvis.disablePrefetch = obj.disablePrefetch;
+    relvis.closeHandle = obj.closeHandle || relvis.close;
+    relvis.topMargin = obj.topMargin || 0;
+    relvis.bottomMargin = obj.bottomMargin || 0;
     relvis.log('init', {
       apiUrl: relvis.apiUrl,
       relatedApiUrl: obj.relatedUrl,
@@ -74,6 +81,9 @@
     relvis.nextTick(relvis.updateButtons);
   };
 
+  relvis.open = function(type, ids) {
+    location.hash = "relvis/" + type.slice(0,3) + String(ids);
+  }
   function makeHandler(elem) { //{{{1
     return function() {
       var id = elem.getAttribute('data-relvis-id').replace(/%3[aA]/g, ':');

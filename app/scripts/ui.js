@@ -101,9 +101,8 @@
         node: node.label
       }));
       if (!node.id) {
-        location.hash = '';
         relvis.log('click');
-        relvis.hideCanvasOverlay();
+        relvis.closeHandle();
       } else {
         relvis.log('click', node.id);
         relvis.clickHandle({

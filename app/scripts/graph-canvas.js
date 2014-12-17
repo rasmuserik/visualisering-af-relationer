@@ -31,6 +31,8 @@
   };
 
   relvis.addEventListener('redraw', function() { //{{{1
+    var topMargin = relvis.topMargin * (window.devicePixelRatio || 1);
+    var bottomMargin = relvis.bottomMargin * (window.devicePixelRatio || 1);
     if (!relvis.nodes || !relvis.overlayVisible) {
       return;
     }
@@ -44,7 +46,7 @@
     var canvas = relvis.canvas;
     var ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    relvis.drawBackground(ctx, 0, 0, canvas.width, canvas.height);
+    relvis.drawBackground(ctx, 0, topMargin, canvas.width, canvas.height - topMargin - bottomMargin);
 
     // Find coordinate transformation {{{2
     if (!relvis.fixedViewport && visibleNodes.length && typeof visibleNodes[0].x === 'number') {
@@ -63,9 +65,10 @@
       relvis.scale = xy.scale(boundaries.range, 1 + 2 * margin);
       relvis.scale = xy.mul({
           x: canvas.width,
-          y: canvas.height
+          y: canvas.height - (bottomMargin + topMargin)
         },
         xy.inv(relvis.scale));
+      relvis.offset.y -= topMargin / relvis.scale.y;
     }
 
     // Calculate view coordinates for all points {{{2
