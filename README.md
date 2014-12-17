@@ -193,7 +193,7 @@ Sprint 7:
 - √closeHandle funktion til lukning af relationsbrowser
 - √relvis.close()
 - √topMargin/bottomMargin
-- baggrundsfarve.
+- √example with different background
 - cover, titel, defaultCover, abstract (÷beholdningsoplysninger)
 - polish code
   - update README.md

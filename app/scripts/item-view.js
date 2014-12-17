@@ -7,6 +7,16 @@
 
   var slowCount = 0;
   var shadow = true;
+  relvis.addEventListener('redraw', function() {
+    if (relvis.renderTime > 150) {
+      ++slowCount;
+      if (slowCount > 5) {
+        shadow = false;
+      }
+    } else {
+      slowCount = 0;
+    }
+  });
 
   function noShadow(ctx) { //{{{1
     ctx.shadowBlur = 0;
@@ -72,15 +82,6 @@
   relvis.drawBackground = function(ctx, x, y, w, h) { //{{{2
     ctx.fillStyle = 'rgba(200,200,200,0.9)';
     ctx.fillRect(x, y, w, h);
-
-    if (relvis.renderTime > 150) {
-      ++slowCount;
-      if (slowCount > 5) {
-        shadow = false;
-      }
-    } else {
-      slowCount = 0;
-    }
 
     if (relvis.getType() === 'ext' && relvis.nodes.length >= 15) {
       externalRelationLabels(ctx, x, y, w, h);
