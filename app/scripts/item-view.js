@@ -61,17 +61,19 @@
       ctx.strokeStyle = 'rgba(255,255,255,0.5)';
       ctx.lineCap = 'round';
     } else {
-      ctx.shadowBlur = relvis.unit / 8;
-      ctx.shadowBlur = 0;
-      ctx.shadowColor = '#000';
       ctx.lineWidth = relvis.unit / 4;
       ctx.strokeStyle = 'rgba(255,255,255,1)';
       ctx.lineCap = 'butt';
+      if(edge.source.highlight || edge.target.highlight) {
+        ctx.strokeStyle = 'rgba(30,40,20,1)';
+      }
     }
     ctx.beginPath();
     ctx.moveTo(x0, y0);
     ctx.lineTo(x1, y1);
     ctx.stroke();
+    ctx.shadowOffsetX = 0;
+    ctx.shadowOffsetY = 0;
     ctx.shadowBlur = 0;
   };
 
@@ -156,8 +158,8 @@
         ctx.shadowBlur = relvis.unit / 2;
         var color = ({
           'creator': '#f88',
-          'type': '#88f',
-          'subject': '#8f8'
+            'type': '#88f',
+            'subject': '#8f8'
         })[node.subtype] || '#fff';
         ctx.fillStyle = '#000';
         ctx.shadowColor = color;
@@ -177,4 +179,4 @@
     }
     ctx.shadowBlur = 0;
   };
-})();
+  })();

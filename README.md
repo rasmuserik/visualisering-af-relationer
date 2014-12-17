@@ -188,11 +188,13 @@ A development/sample data source for circular relations are generated. This is t
 Backlog - todo and progress:
 
 Sprint 7:
-- •production-ready related-service
-- polish
+- publish production-ready related-service
+- polish code
+  - update README.md
+  - code-climate
+  - go through code and cleanup/refactor
 - √location-fragment: "#relvis/cir" instead of "#relviscir" etc.
-- maybe: highlight links to currently dragged node
-- maybe: fix position of dragged elements in search visualisation
+- √highlight links to currently dragged edges
 
 ## Version 0.7 sprint 7
 ### Version 0.7.0, released 16/12
@@ -352,27 +354,3 @@ Sprint 7:
 
 
 
-# Projektnoter
-
-_nedenstående er mine(rasmuserik) umiddelbare noter_
-
-## Diverse
-- Use cases
-  - DDB-CMS - mobil - tablet - pc 
-    - eksempelvis knap/overlay på værkvisning object/collection
-    - eksempelvis knap/overlay ved hvert værk i søgeresultat
-  - storskærme med touch - dog kun én bruger per skærm (ikke flere samtidige brugere af samme skærm)
-- Formål: udforskning af biblioteksmaterialer, evt. lappe på værkvisning, præsentere relationer bedre
-- Inspiration:
-  - kig på spotify ui
-  - tiles/mesh
-  - komplekse strukturelle relationer i klassiske musikværker
-
-
-## Møder og arrangementer
-
-- næste udviklernetværksmøde i Herning - med præsentation/status på projekt
-
-- indledende møde vejle 2014-08-06
-- arbejdsmøde vejle 2014-09-10
-- arbejdsmøde vejle 2014-11-19

@@ -31,6 +31,7 @@
         node: node.label
       }));
       node.fixed = true;
+      node.highlight = true;
       relvis.fixedViewport = true;
       relvis.requestRedraw();
     });
@@ -58,6 +59,7 @@
         node: node.label
       }));
       node.fixed = false;
+      node.highlight = false;
       relvis.fixedViewport = false;
       relvis.requestRedraw();
       relvis.layoutGraph();
