@@ -186,22 +186,24 @@ A development/sample data source for circular relations are generated. This is t
 # Releaselog
 
 Backlog - todo and progress:
+- publish production-ready related-service
 
 Sprint 7:
-- publish production-ready related-service
 - update README.md
-
-- √funktion til manuel aktivering af visualisering - relvis.open(ids)
-- √closeHandle funktion til lukning af relationsbrowser
-- √relvis.close()
-- √topMargin/bottomMargin
-- √example with different background
-- √cover, titel, defaultCover, abstract med ved 'click'-event
-- √polish code / code-climate-fixes
-- √location-fragment: "#relvis/cir" instead of "#relviscir" etc.
-- √highlight links to currently dragged edges
+- evt more code polish
 
 ## Version 0.7 sprint 7
+### Version 0.7.1, released 18/12
+- funktion til manuel aktivering af visualisering - relvis.open(ids)
+- closeHandle funktion til lukning af relationsbrowser
+- relvis.close()
+- topMargin/bottomMargin
+- example with different background
+- cover, titel, defaultCover, abstract med ved 'click'-event
+- polish code / code-climate-fixes
+- location-fragment: "#relvis/cir" instead of "#relviscir" etc.
+- highlight links to currently dragged edges
+
 ### Version 0.7.0, released 16/12
 - fix interaction bug on android
 - reduce graphics quality if rendering takes too long - for better performance on slow devices
