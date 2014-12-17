@@ -3,24 +3,15 @@
   var relvis = window.relvis = window.relvis || {};
   relvis.nodes = [];
   relvis.edges = [];
-  var categories = { //{{{1
-    authorInfo: ['creator', 'dbcaddi:hasCreatorDescription'],
-    review: ['dbcaddi:hasReview', 'dbcaddi:hasAnalysis', 'dbcaddi:hasDescriptionFromPublisher', 'dbcaddi:discussedIn'],
-    circular: ['subject'],
-    structure: ['dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack']
-  };
-  //'dbcaddi:hasOnlineAccess', 'dbcaddi:hasSoundClip'
-
-  relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() { //{{{1
+  relvis.addEventListener('data-update', relvis.throttle(300, function createGraph() {
 
     var type = relvis.getType();
     var ids = relvis.getIds();
 
-    var key;
     var nodeMap = {};
-    var prevNodes, root, nodes, edges, i, rel, categoryMap, categoryNodes, property, node, categoryNodeList, j, id, children, k;
-    var searchresults = 30;
+    var i, j, id, children, k;
 
+    var searchresults = 30; //{{{1 expand searches
     for (i = 0; i < ids.length; ++i) {
       id = ids[i];
       if (id.slice(0, 7) === 'search:') {
@@ -33,13 +24,13 @@
       }
     }
 
-    //{{{2 general graph generation
-    prevNodes = {};
+    //{{{1 general graph generation
+    var prevNodes = {};
     relvis.nodes.forEach(function(node) {
       prevNodes[node.id] = node;
     });
-    nodes = relvis.nodes = [];
-    edges = relvis.edges = [];
+    var nodes = relvis.nodes = [];
+    var edges = relvis.edges = [];
 
     function createNode(node) {
       var prev = nodeMap[node.id] || prevNodes[node.id];
@@ -62,179 +53,74 @@
       return node;
     }
 
-    //circular relations {{{2
-    var traverseIds = [];
-    var nextIds = {};
-    var traverseDepth;
+    function circularRelations() { //{{{1
 
-    function traverseGraph() {
-      var ids, id, j, i, node, depth;
-      ids = traverseIds;
-      traverseIds = [];
-      depth = traverseDepth[0];
-      traverseDepth = traverseDepth.slice(1);
-      if (typeof depth !== 'number') {
-        return;
-      }
-      for (j = 0; j < ids.length; ++j) {
-        id = ids[j];
-        if (!nodeMap[id]) {
-          relvis.log('errnodemap', id);
-        }
-        node = nodeMap[id];
-        var related = relvis.getValues(id, 'related');
-        if (related.length) {
-          related = related[0];
-          var count = 0;
-          for (i = 0; count < depth && i < related.length; ++i) {
-            var branchId = related[i].id;
-            if (!nodeMap[branchId]) {
-              ++count;
-              var branchNode = createNode({
-                id: branchId,
-                value: branchId,
-                visible: true
-              });
-              traverseIds.push(branchId);
-              edges.push({
-                source: node,
-                target: branchNode
-              });
-            }
-          }
-        }
-      }
-      traverseGraph();
-    }
-
-    //{{{2 external relations
-    function createExternalRelations(id, group) {
-      function createCategoryNodes() { // {{{3
-        var i;
-        categoryNodes = {};
-        categoryMap = {};
-        categoryNodeList = [];
-        for (var category in categories) {
-          if (categories.hasOwnProperty(category)) {
-            categoryNodes[category] = createNode({
-              id: 'category:' + category,
-              label: category,
-              type: 'category',
-              visible: false
-            });
-            categoryNodeList.push(categoryNodes[category]);
-            for (i = 0; i < categories[category].length; ++i) {
-              categoryMap[categories[category][i]] = category;
-            }
-          }
-        }
-        categoryNodeList[0].fixedPosition = {
-          x: 0,
-          y: 0
-        };
-        categoryNodeList[1].fixedPosition = {
-          x: 1,
-          y: 0
-        };
-        categoryNodeList[2].fixedPosition = {
-          x: 0,
-          y: 1
-        };
-        categoryNodeList[3].fixedPosition = {
-          x: 1,
-          y: 1
-        };
-      }
-
-      function createRelationNodes() { //{{{3
-        Object.keys(categories).forEach(function(category) {
-          categories[category].forEach(function(property) {
-            relvis.getValues(id, property).forEach(function(value) {
-              node = createNode({
-                id: group + '-' + property + '-' + value,
-                label: value,
-                property: property,
-                value: value,
-                visible: true
-              });
-              if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
-                node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
-                if(node.label === 'Anmeldelse') {
-                  node.label = relvis.getValues(node.value, 'isPartOf')[0] || node.label;
-                }
-              }
-              edges.push({
-                source: categoryNodes[category],
-                target: node
-              });
-              edges.push({
-                source: root,
-                target: node
-              });
-            });
-          });
-        });
-      }
-
-      function createRootNode() { //{{{3
-        root = createNode({
-          id: id,
-          value: id,
-          label: 'root',
-          type: 'root',
-          visible: true
-        });
-        root.imgSrc = relvis.getValues(id, 'cover')[0];
-        root.label = relvis.getValues(id, 'title')[0] || '...';
-      }
-
-      createRootNode();
-      createCategoryNodes();
-      createRelationNodes();
-    }
-    //actual execution {{{2
-    if (type === 'ext') { //{{{3
-      if (relvis.d3force) {
-        relvis.d3force.gravity(1);
-      }
-      for (i = 0; i < ids.length; ++i) {
-        createExternalRelations(ids[i], ids);
-        for (j = 0; j < i; ++j) {
-          edges.push({
-            source: nodeMap[ids[i]],
-            target: nodeMap[ids[j]],
-            type: 'collection'
-          });
-        }
-      }
-    } else if (type === 'cir') { //{{{3
       if (relvis.d3force) {
         relvis.d3force.gravity(0);
       }
-      if (true) {
-        if (ids.length <= 1) {
-          traverseDepth = [9, 3];
-        } else if (ids.length <= 2) {
-          traverseDepth = [4, 3];
-        } else if (ids.length <= 3) {
-          traverseDepth = [3, 2];
-        } else if (ids.length <= 7) {
-          traverseDepth = [2, 2];
-        } else if (ids.length <= 13) {
-          traverseDepth = [3];
-        } else if (ids.length <= 20) {
-          traverseDepth = [2];
-        } else {
-          traverseDepth = [1];
+      var traverseIds = [];
+      var nextIds = {};
+      var traverseDepth;
+
+      function traverseGraph() { //{{{2
+        var ids, id, j, i, node, depth;
+        ids = traverseIds;
+        traverseIds = [];
+        depth = traverseDepth[0];
+        traverseDepth = traverseDepth.slice(1);
+        if (typeof depth !== 'number') {
+          return;
         }
+        for (j = 0; j < ids.length; ++j) {
+          id = ids[j];
+          if (!nodeMap[id]) {
+            relvis.log('errnodemap', id);
+          }
+          node = nodeMap[id];
+          var related = relvis.getValues(id, 'related');
+          if (related.length) {
+            related = related[0];
+            var count = 0;
+            for (i = 0; count < depth && i < related.length; ++i) {
+              var branchId = related[i].id;
+              if (!nodeMap[branchId]) {
+                ++count;
+                var branchNode = createNode({
+                  id: branchId,
+                  value: branchId,
+                  visible: true
+                });
+                traverseIds.push(branchId);
+                edges.push({
+                  source: node,
+                  target: branchNode
+                });
+              }
+            }
+          }
+        }
+        traverseGraph();
+      }
+      //{{{2 travers depths/patterns
+      if (ids.length <= 1) {
+        traverseDepth = [9, 3];
+      } else if (ids.length <= 2) {
+        traverseDepth = [4, 3];
+      } else if (ids.length <= 3) {
+        traverseDepth = [3, 2];
+      } else if (ids.length <= 7) {
+        traverseDepth = [2, 2];
+      } else if (ids.length <= 13) {
+        traverseDepth = [3];
+      } else if (ids.length <= 20) {
+        traverseDepth = [2];
       } else {
-        traverseDepth = [Math.ceil(13 / ids.length)];
-        traverseDepth = [Math.ceil(19 / ids.length)];
+        traverseDepth = [1];
       }
 
-      for (i = 0; i < ids.length; ++i) {
+      for (i = 0; i < ids.length; ++i) { //{{{2 init/execute traversal
         traverseIds.push(ids[i]);
-        node = createNode({
+        var node = createNode({
           id: ids[i],
           value: ids[i],
           type: 'primary',
@@ -249,7 +135,123 @@
         }
       }
       traverseGraph();
-    } else if (type === 'str') { //{{{3
+    }
+
+    function externalRelations() { //{{{1
+      var root;
+      var categories = { //{{{2
+        authorInfo: ['creator', 'dbcaddi:hasCreatorDescription'],
+        review: ['dbcaddi:hasReview', 'dbcaddi:hasAnalysis', 'dbcaddi:hasDescriptionFromPublisher', 'dbcaddi:discussedIn'],
+        circular: ['subject'],
+        structure: ['dbcaddi:isAnalysisOf', 'dbcaddi:isReviewOf', 'dbcbib:isPartOfManifestation', 'dbcaddi:isDescriptionFromPublisherOf', 'dbcaddi:discusses', 'dbcaddi:hasAdaptation', 'dbcaddi:isAdaptationOf', 'dbcaddi:isManuscriptOf', 'dbcaddi:hasManuscript', 'dbcaddi:continues', 'dbcaddi:continuedIn', 'dbcaddi:isSoundtrackOfMovie', 'dbcaddi:isSoundtrackOfGame', 'dbcaddi:hasSoundtrack', 'dbcaddi:isPartOfAlbum', 'dbcaddi:hasTrack']
+      };
+      //'dbcaddi:hasOnlineAccess', 'dbcaddi:hasSoundClip'
+
+      function createExternalRelations(id, group) { //{{{2
+        var categoryNodes;
+
+        function createCategoryNodes() { // {{{3
+          var i;
+          categoryNodes = {};
+          var categoryMap = {};
+          var categoryNodeList = [];
+          for (var category in categories) {
+            if (categories.hasOwnProperty(category)) {
+              categoryNodes[category] = createNode({
+                id: 'category:' + category,
+                label: category,
+                type: 'category',
+                visible: false
+              });
+              categoryNodeList.push(categoryNodes[category]);
+              for (i = 0; i < categories[category].length; ++i) {
+                categoryMap[categories[category][i]] = category;
+              }
+            }
+          }
+          categoryNodeList[0].fixedPosition = {
+            x: 0,
+            y: 0
+          };
+          categoryNodeList[1].fixedPosition = {
+            x: 1,
+            y: 0
+          };
+          categoryNodeList[2].fixedPosition = {
+            x: 0,
+            y: 1
+          };
+          categoryNodeList[3].fixedPosition = {
+            x: 1,
+            y: 1
+          };
+        }
+
+        function createRelationNodes() { //{{{3
+          Object.keys(categories).forEach(function(category) {
+            categories[category].forEach(function(property) {
+              relvis.getValues(id, property).forEach(function(value) {
+                var node = createNode({
+                  id: group + '-' + property + '-' + value,
+                  label: value,
+                  property: property,
+                  value: value,
+                  visible: true
+                });
+                if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
+                  node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
+                  if (node.label === 'Anmeldelse') {
+                    node.label = relvis.getValues(node.value, 'isPartOf')[0] || node.label;
+                  }
+                }
+                edges.push({
+                  source: categoryNodes[category],
+                  target: node
+                });
+                edges.push({
+                  source: root,
+                  target: node
+                });
+              });
+            });
+          });
+        }
+
+        function createRootNode() { //{{{3
+          root = createNode({
+            id: id,
+            value: id,
+            label: 'root',
+            type: 'root',
+            visible: true
+          });
+          root.imgSrc = relvis.getValues(id, 'cover')[0];
+          root.label = relvis.getValues(id, 'title')[0] || '...';
+        }
+
+        createRootNode();
+        createCategoryNodes();
+        createRelationNodes();
+      }
+      //{{{2 execute
+
+      if (relvis.d3force) {
+        relvis.d3force.gravity(1);
+      }
+      for (i = 0; i < ids.length; ++i) {
+        createExternalRelations(ids[i], ids);
+        for (j = 0; j < i; ++j) {
+          edges.push({
+            source: nodeMap[ids[i]],
+            target: nodeMap[ids[j]],
+            type: 'collection'
+          });
+        }
+      }
+    }
+
+    function structuralRelations() { //{{{1
+      var node;
       if (relvis.d3force) {
         relvis.d3force.gravity(1);
       }
@@ -289,7 +291,7 @@
       });
       rellist = rellist.slice(0, 20);
       for (i = 0; i < rellist.length; ++i) {
-        rel = rellist[i];
+        var rel = rellist[i];
         node = createNode({
           id: rel.name + rel.value,
           label: rel.value,
@@ -308,9 +310,17 @@
         }
       }
     }
+    //actual execution {{{1
+    if (type === 'ext') {
+      externalRelations();
+    } else if (type === 'cir') {
+      circularRelations();
+    } else if (type === 'str') {
+      structuralRelations();
+    }
 
-    //{{{3 commit
-    for (key in nodeMap) {
+    //{{{2 commit
+    for (var key in nodeMap) {
       if (nodeMap.hasOwnProperty(key)) {
         nodes.push(nodeMap[key]);
       }
