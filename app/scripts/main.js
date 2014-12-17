@@ -38,7 +38,8 @@
     relvis.log('init', {
       apiUrl: relvis.apiUrl,
       relatedApiUrl: obj.relatedUrl,
-      prefetch: !relvis.disablePrefetch
+      prefetch: !relvis.disablePrefetch,
+      href: location.href
     });
     relvis.unsupportedPlatform = (function() { //{{{2
       // check that canvas is supported
