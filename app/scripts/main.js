@@ -17,7 +17,7 @@
   relvis.close = function() {
     location.hash = '';
     relvis.hideCanvasOverlay();
-  }
+  };
   relvis.show = function() { //{{{1
     if (relvis.overlayVisible) {
       return;
@@ -82,8 +82,8 @@
   };
 
   relvis.open = function(type, ids) {
-    location.hash = "relvis/" + type.slice(0, 3) + String(ids);
-  }
+    location.hash = 'relvis/' + type.slice(0, 3) + String(ids);
+  };
 
   function makeHandler(elem) { //{{{1
     return function() {
