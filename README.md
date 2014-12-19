@@ -169,9 +169,10 @@ After the release, the minified version can be included in  https://github.com/v
 
 # Release Log
 ## Version 0.7.2, released 19/12
-- pass all properties/values of object to click-handler
+- improve documentation in README.md
 - code polish
-- update README.md
+- pass all properties/values of object to click-handler
+- loading image when data not available on nodes yet
 
 ## Version 0.7.1, released 18/12
 - funktion til manuel aktivering af visualisering - relvis.open(ids)
