@@ -80,7 +80,6 @@
   });
   describe('util', function() {
     it('should run here few assertions', function() {
-      assert(relvis.square(3) === 9);
       var pts = [{
         x: 1,
         y: 1

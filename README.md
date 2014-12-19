@@ -3,10 +3,10 @@
 
 Contents:
 - About / Features
-- User Guide
-- Release Log
+- User and Embedding Guide
 - Code Architechture
 - Coding Guidelines
+- Release Log
 
 # About / Features (rewrite progress)
 
@@ -15,9 +15,9 @@ Dette repositorie indeholder kode i forbindelse med projektet `visualisering af 
 Projektet drives af Vejle og Herning biblioteker med støtte fra DDB-puljen.
 
 
-# User Guide (rewrite in progress)
+# User and Embedding Guide (rewrite in progress)
 
-Installation
+Build:
 
 - installer _npm_, _bower_ `npm install -g bower` og _grunt_ `npm install -g grunt-cli`
 - hent projekt-afhængigheder `npm install`, `bower install`, `cd test; bower install`
@@ -80,6 +80,103 @@ Et mere komplet eksempel er:
       });
     });
     </script>
+
+# Code Architechture: Components and Cross-component Functions
+
+`main.js` - entry point, and handle/dispatch visualisation through `location.hash`, create visualisation-links on page, and initialises all other components.
+- `getType()`, `getIds()`, `setIds(..)` which visualisation is running, and on which ting-objects
+- `close()`, `open(..)` user-callable function to open and close visualisation
+- `init()` initialise the system, must be called first
+
+----
+
+`data-model.js` is responsible for loading data from the webservice, it also include an internal in-memory triple-store:
+- `getValues(..)` returns a list of available values given an object+property-name. It also schedules loading the data from the webservice asynchronously.
+- event `data-update` is emitted when data available is updated
+- `apiUrl`, `relatedApiUrl` - configuration, set in main.js, that tells where data-model should load its data from
+- `initData()` initialise data model
+
+----
+
+`graph-model.js` listens on `data-updates`, and generate graph based on `getIds()`. Can generate either graph of circular relations, external relations og structural relations based on `getType()`:
+- `nodes` `edges` contains the graph itself
+
+----
+
+`graph-layout.js` calls d3 for graph layout.
+- `layoutGraph()` create force graph lay out the graph
+- `d3force` d3 object for the layout
+
+----
+
+`ui.js` all user interaction, including interaction with different visualisations.
+- `initUI()` initialise
+- `closeHandle`, `clickHandle` functions called when the user clicks on node, or outside of node.
+
+----
+
+`graph-canvas.js` draw the graph-visualisation onto the canvas:
+- `toCanvasCoord(..)`, `toGraphCoord(..)` mapping between coordinate systems for canvas and for graph-layout
+- `fixedViewport` whether the viewport should adjust to fit graph, settable
+- `renderTime` information about how long last drawing of visualisation took
+- `nodeAt(..)` locate node at given canvas coordinates
+- event `redraw` is emitted when the graph is redrawn
+- `topMargin`, `bottomMargin` margin of where to draw upon the canvas. Not clipping, so parts of nodes may be ouside of this. Settable.
+- `requestRedraw()` schedule a redraw.
+
+----
+
+`canvas-overlay.js` is browser abstractions for a full screen hdpi canvas that will resize with browser window:
+- `initCanvas()` `showCanvasOverlay()` `hideCanvasOverlay()`
+- events `tapstart` `tapmove` `tapend` `drag` `tapclick` abstracts mouse and touch interaction
+- `unit` the number of canvas pixels per "screen unit" (screen unit is approx the height of an 12pt letter)
+- `canvas` the canvas itself
+
+----
+
+`item-view.js` is responsible for drawing the visualisation:
+- `drawBackground(..)` draw static elements of visualisation
+- `drawNode(..)` draw a node element
+- `drawEdge(..)` draw an edge element
+- `visualObjectRatio` tells the desired width/height ratio of the nodes
+
+----
+
+`canvas-util.js` has utility functions for drawing to canvas - only used by item-view:
+- `writeBox(..)` draw text to canvas, fitted to certain dimensions
+
+----
+
+`util.js` contains general utility functions:
+- `xy.*` simple 2d math
+- `log(..)` send log information to server
+- `logUrl` set in main.js, that tells where logging information should be sent to
+- `addEventListener`, `dispatchEvent` simple event system, allowing components to subscribe to events similar to how you do it in the DOM
+- `nearestPoints(..)` find the nearest point, it is weighted by the `visualObjectRatio` and thus very strongly linked to this application
+- `findBoundaries(..)` find bounding box and create normalization-code for af set of 2d-points
+- `nextTick(..)` execute function next tick
+- `throttle(..)` limit rate of execution of function, so it is called at most once per n ms.
+
+# Coding Guidelines (rewrite in progress)
+
+Som udgangspunkt anvendes Ding coding standard for javascript http://ting.dk/wiki/ding-code-guidelines/.
+
+Se `.jshintrc`, samt `jsbeautifier: {...}` afsnittet i `Gruntfile.js` for konkrete valg om formattering og valg af tilgang.
+I forhold til jshint, er der truffet en del valg om at være mere stringent end ding-code-guidelines kræver. 
+Nuværende eneste undtagelse hvor vi er mindre stringente, er at vi tillader brug af bitwise operatorer da disse skal bruges til geometriske beregninger.
+
+Kommentarer indeholder desuden fold markers til at navigere i filen med editorer der understøtter dette, ie.: `{{{1`, `{{{2`, ...
+
+- Release strategi html5-applikationen
+  - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
+  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://ssl.solsort.com/visualisering-af-relationer
+  - Releases bliver tagget i git `git tag v0.?.?; git push --tags`, og også opdateret i `package.json`, og i releaseloggen i `README.md`
+  - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
+- Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
+  - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
+  - På Android og iOS enheder, både tablet og telefon.
+  - Bugs, ændringer etc. tilføjes på https://github.com/solsort/visualisering-af-relationer/issues/new
+- Efter test kan den minifiserede udgave inkluderes i https://github.com/vejlebib/ting_visual_relation og https://github.com/vejlebib/visual_relation
 
 # Release Log
 
@@ -257,85 +354,6 @@ Sprint 7:
   - udkast til release og test-strategi
   - udkast til produktmål
 
-
-# Code Architechture: Components and Cross-component Functions
-
-`main.js` - entry point, and handle/dispatch visualisation through `location.hash`, create visualisation-links on page, and initialises all other components.
-- `getType()`, `getIds()`, `setIds(..)` which visualisation is running, and on which ting-objects
-- `close()`, `open(..)` user-callable function to open and close visualisation
-- `init()` initialise the system, must be called first
-
-`data-model.js` is responsible for loading data from the webservice, it also include an internal in-memory triple-store:
-- `getValues(..)` returns a list of available values given an object+property-name. It also schedules loading the data from the webservice asynchronously.
-- event `data-update` is emitted when data available is updated
-- `apiUrl`, `relatedApiUrl` - configuration, set in main.js, that tells where data-model should load its data from
-- `initData()` initialise data model
-
-`graph-model.js` listens on `data-updates`, and generate graph based on `getIds()`. Can generate either graph of circular relations, external relations og structural relations based on `getType()`:
-- `nodes` `edges` contains the graph itself
-
-`graph-layout.js` calls d3 for graph layout.
-- `layoutGraph()` create force graph lay out the graph
-- `d3force` d3 object for the layout
-
-`ui.js` all user interaction, including interaction with different visualisations.
-- `initUI()` initialise
-- `closeHandle`, `clickHandle` functions called when the user clicks on node, or outside of node.
-
-`graph-canvas.js` draw the graph-visualisation onto the canvas:
-- `toCanvasCoord(..)`, `toGraphCoord(..)` mapping between coordinate systems for canvas and for graph-layout
-- `fixedViewport` whether the viewport should adjust to fit graph, settable
-- `renderTime` information about how long last drawing of visualisation took
-- `nodeAt(..)` locate node at given canvas coordinates
-- event `redraw` is emitted when the graph is redrawn
-- `topMargin`, `bottomMargin` margin of where to draw upon the canvas. Not clipping, so parts of nodes may be ouside of this. Settable.
-- `requestRedraw()` schedule a redraw.
-
-`canvas-overlay.js` is browser abstractions for a full screen hdpi canvas that will resize with browser window:
-- `initCanvas()` `showCanvasOverlay()` `hideCanvasOverlay()`
-- events `tapstart` `tapmove` `tapend` `drag` `tapclick` abstracts mouse and touch interaction
-- `unit` the number of canvas pixels per "screen unit" (screen unit is approx the height of an 12pt letter)
-- `canvas` the canvas itself
-
-`item-view.js` is responsible for drawing the visualisation:
-- `drawBackground(..)` draw static elements of visualisation
-- `drawNode(..)` draw a node element
-- `drawEdge(..)` draw an edge element
-- `visualObjectRatio` tells the desired width/height ratio of the nodes
-
-`canvas-util.js` utility functions for drawing to canvas - only used by item-view:
-- `writeBox(..)` draw text to canvas, fitted to certain dimensions
-
-`util.js` general utility functions:
-- `xy.*` simple 2d math
-- `log(..)` send log information to server
-- `logUrl` set in main.js, that tells where logging information should be sent to
-- `addEventListener`, `dispatchEvent` simple event system, allowing components to subscribe to events similar to how you do it in the DOM
-- `nearestPoints(..)` find the nearest point, it is weighted by the `visualObjectRatio` and thus very strongly linked to this application
-- `findBoundaries(..)` find bounding box and create normalization-code for af set of 2d-points
-- `nextTick(..)` execute function next tick
-- `throttle(..)` limit rate of execution of function, so it is called at most once per n ms.
-
-# Coding Guidelines (rewrite in progress)
-
-Som udgangspunkt anvendes Ding coding standard for javascript http://ting.dk/wiki/ding-code-guidelines/.
-
-Se `.jshintrc`, samt `jsbeautifier: {...}` afsnittet i `Gruntfile.js` for konkrete valg om formattering og valg af tilgang.
-I forhold til jshint, er der truffet en del valg om at være mere stringent end ding-code-guidelines kræver. 
-Nuværende eneste undtagelse hvor vi er mindre stringente, er at vi tillader brug af bitwise operatorer da disse skal bruges til geometriske beregninger.
-
-Kommentarer indeholder desuden fold markers til at navigere i filen med editorer der understøtter dette, ie.: `{{{1`, `{{{2`, ...
-
-- Release strategi html5-applikationen
-  - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
-  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://ssl.solsort.com/visualisering-af-relationer
-  - Releases bliver tagget i git `git tag v0.?.?; git push --tags`, og også opdateret i `package.json`, og i releaseloggen i `README.md`
-  - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
-- Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
-  - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
-  - På Android og iOS enheder, både tablet og telefon.
-  - Bugs, ændringer etc. tilføjes på https://github.com/solsort/visualisering-af-relationer/issues/new
-- Efter test kan den minifiserede udgave inkluderes i https://github.com/vejlebib/ting_visual_relation og https://github.com/vejlebib/visual_relation
 
 # old notes (refactoring/removal in progress)
 ## Visualisering af relationer - HTML5 visual relationsbrowser
