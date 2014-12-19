@@ -1,19 +1,9 @@
 [![Build Status](https://travis-ci.org/solsort/visualisering-af-relationer.svg?branch=master)](https://travis-ci.org/solsort/visualisering-af-relationer)
 [![Code Climate](https://codeclimate.com/github/solsort/visualisering-af-relationer/badges/gpa.svg)](https://codeclimate.com/github/solsort/visualisering-af-relationer)
 
-Contents:
-- About / Features
-- User and Embedding Guide
-- Code Architecture
-- Coding Guidelines
-- Release Log
-
-# About / Features (rewrite progress)
-
-Dette repositorie indeholder kode i forbindelse med projektet `visualisering af relationer`, og kommer til at indeholde en html5 visuel relationsbrowser til de danske biblioteker.
-
-Projektet drives af Vejle og Herning biblioteker med støtte fra DDB-puljen.
-
+Visualisation of relations between books and other library materials. 
+This visualisation is created for [Vejle Bibliotekerne](https://vejlebib.dk) and [Herning Bibliotekerne](https://herningbib.dk) with support from [DDB-Puljen](http://www.danskernesdigitalebibliotek.dk/).
+It will be used on many of the danish public library websites, and can (soon) be seen in action there.
 
 # User and Embedding Guide (rewrite in progress)
 
@@ -338,37 +328,4 @@ After the release, the minified version can be included in  https://github.com/v
   - applikationsarkitektur
   - udkast til release og test-strategi
   - udkast til produktmål
-
-# old notes (refactoring/removal in progress)
-## Visualisering af relationer - HTML5 visual relationsbrowser
-
-Dette repositorie indeholder kode i forbindelse med projektet `visualisering af relationer`, og kommer til at indeholde en html5 visuel relationsbrowser til de danske biblioteker.
-
-Projektet drives af Vejle og Herning biblioteker med støtte fra DDB-puljen.
-
-Udviklingen foregår agilt/scrum-inspireret gennem 7 sprints á 2 uger. 
-Hvert sprint afsluttes med en ny release, demo og retrospektiv.
-Datoerne for sprintafslutningerne 26/9, 10/10, 24/10, 7/11, 21/11, 5/12 og 19/12.
-
-Vi bruger scrumdo til at holde styr på opgaverne. Taskboard etc. er på http://www.scrumdo.com/projects/project/visualisering-af-relationer
-
-## Successkriterier og produktmål for HTML5 relationsbrowseren
-
-- Relationsbrowseren skal fungere uanset hvilket system den implementeres i:
-  - Skal kunne indlejres på hjemmesider, herunder særligt DDB
-  - Skal kunne indlejres i applikation til storskærm (dog kun med en interagerende bruger ad gangen)
-- Resultatet skal være en enkeltstående minifiseret javascript-fil, der kun afhænger af jquery og d3js
-  - Skal have sit eget JavaScript scope, og ikke kollidere med globale objekter
-  - Skal kunne initialiseres og styres med et enkelt api
-- Relationsbrowseren skad mindst have tre "views":
-  - Eksterne relationer: Fokus på et enkelt materiale, med visning tilhørende relationer (anmeldelser, forfatterinfo, værkstruktur og emner/cirkulære-relationer)
-  - Strukturelle relationer: En samling af materialer og deres indbyrdes struktur, ie. bind i serie, eller et tidskrift med artikler
-  - Cirkulære relationer: Relationer mellem forskellige værker eksempelvis på baggrund af emne, forfatter eller ADHL(andre der har lånt)
-- Målplatform er efgrænset til nyere browsere der har features til at understøtte en visuel dynamisk relationsbrowser 
-  - Webbrowsere: IE10+, Chrome, Safari, Firefox, iOS browser, Android 4+ browser
-  - Skal fungere på mobil, tablet, computer og storskærm (dog kun med én interagerende bruger ad gangen)
-- Teknologi og kode
-  - Der kan frit vælges teknologi der gør det mest effektivt at udvikle modulet
-  - Arkitektur og valg skal dokumenteres
-  - Koden skal overholde best practices
 
