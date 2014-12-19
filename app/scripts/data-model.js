@@ -44,7 +44,7 @@
       triples[obj] = {};
     }
     Object.keys(triples[obj]).forEach(function(key) {
-      if(triples[obj][key].length) {
+      if (triples[obj][key].length) {
         result[key] = JSON.parse(JSON.stringify(triples[obj][key]));
       }
     });
