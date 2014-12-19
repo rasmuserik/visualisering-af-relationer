@@ -1,3 +1,5 @@
+# Visualisation of Relations
+
 [![Build Status](https://travis-ci.org/solsort/visualisering-af-relationer.svg?branch=master)](https://travis-ci.org/solsort/visualisering-af-relationer)
 [![Code Climate](https://codeclimate.com/github/solsort/visualisering-af-relationer/badges/gpa.svg)](https://codeclimate.com/github/solsort/visualisering-af-relationer)
 
@@ -25,43 +27,39 @@ The project has the following directory structure
 - `bower.json`, `.gitignore`, `package.json`, `.yo-rc.json`, `.travis.yml`, `Gruntfile.js`, `.editorconfig`, `.gitattributes`, `COPYING`, `.jshintrc`  - configuration files and meta information
 - `README.md` - documentation / this fil
 
-## Embedding Guide (rewrite in progress)
+# Embedding Guide
 
-Tilføj css-klassen `relvis-request` til de elementer der skal få relationsbrowseren til at poppe op. Tilføj derudover dataproperty'en `data-relvis-id` med et eller flere ting-id'er for det/de pågældende element, og optional `data-relvis-type` der angiver hvilken type view det skal referere til, eksempelvis:
+The visualisation can be included in a html-page by including the js-files in `dist/`. The vendor-js is only needed if the page doesn't have jquery.
 
-    <button class="relvis-request" data-relvis-type="external"
-        data-relvis-id="870970-basis:22331892,870970-basis%3A06520561,870970-basis%3A50588378"> 
-      click me
-    </button>
+To create links to visualisations on a page, give a html-element the `class="relvis-request"`, and set the data properties:
+ `data-relvis-type="..."` and `data-relvis-id="..."`. The relvis-type can be one of `circular`, `external` and `structural`. The relvis-id is either a comma-separated list of ting-object-ids or a `search:some search query` request.
 
-Når siden loades, eller ændres skal `relvis.init({...});` kaldes. 
-Denne gør at elementer ændre klasse fra `relvis-request` til enten `relvis-enabled` eller `relvis-disabled` afhængigt af om klient-browseren understøtter relationsvisualiseringen. Samtidigt vil `relvis.init` også bind'e events til `relvis-enabled` elementer så relationsbrowseren popper op ved klik/touch af elementet.
+See the html-files in the `app/` folder for examples.
 
-`relvis.init` tager et objekt med forskellige parametre som argument. Eksempler på parametre kan være `apiUrl` for url'en på det API widget'en skal tale med, eller `searchQuery`, hvis den nuværende side er en søgning.
+Styling should be added for the `relvis-request`, `relvis-disabled` and `relvis-enabled` css-classes, probably making the first two hidden.
 
-Et mere komplet eksempel er:
+----
 
-    <style>
-      .relvis-request {
-        display: none;
-      }
-      .relvis-disabled {
-        display: none;
-      }
-      .relvis-enabled {
-      }
-    </style>
-    <button class="relvis-request" 
-        data-relvis-id="870970-basis:22331892"> 
-      click me
-    </button>
-    <script>
-    $(function() {
-      relvis.init({
-        apiUrl: '//api.vejlebib.dk/'
-      });
-    });
-    </script>
+The visualisation code is initialised with `relvis.init({...})`. The init function takes an object as a parameter where the following properties can be set:
+
+- `apiURL` - the url to the API
+- `relatedURL` - optional url to related-API if separate related-API is used, for example `http://relvis.solsort.com/relvis-api`.
+- `logURL` - optional url where logging events should be sent
+- `loadingCover` - optional url for image to show for while loading data for element
+- `clickHandle` - optional function that will be called when user clicks on element
+- `closeHandle` - optional function that will be called when the user tries to close the visualisation, - should call `relvis.close()` if the visualisation should be closed.
+- `disablePrefetch` - optional boolean, used for disable prefetching of data (will then show make all `relvis-request`s `relvis-enabled` instead of only those where the api returns usable data
+- `topMargin` and `bottomMargin` - area in top/bottom of canvas which the visualisation should avoid.
+
+After the visualisation is initialised, it will go through the document and change with the class `relvis-request` to either the `relvis-enabled` class or `relvis-disabled` class. Elements where the visualisation is enabled, also handled touch/click by opening the visualisation.
+
+If the url contains a `#relvis/...` hash, then the visualisation will open automatically. This also makes it possible to link to the visualisation.
+
+The visualisation can be programmatically opened with `relvis.open(kind, ids)` where kind is "circular", "external" or "structural". It can similarly be closed with `relvis.close()`.
+
+It is possible to change certain properties on the fly, including `relvis.topMargin` and `relvis.bottomMargin`, but in those cases `relvis.requestRedraw()` should be called to ensure that it is actually redrawn.
+
+The look and feel of the visualisation can bed altered, either by changing `app/scripts/item-view.js` or by replacing the functions `relvis.drawBackground`, `relvis.drawNode` or `relvis.drawEdge` directly. 
 
 # Code Guidelines
 
