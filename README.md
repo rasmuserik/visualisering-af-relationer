@@ -4,7 +4,7 @@
 Contents:
 - About / Features
 - User and Embedding Guide
-- Code Architechture
+- Code Architecture
 - Coding Guidelines
 - Release Log
 
@@ -40,6 +40,7 @@ Utilities
 - bower - styring af afhængigheder ifht. browserafhængigheder
 - npm - bruges primært til installation af øvrige værktøj
 - travis-ci - service for continous integration - automatisk kørsel af test
+- code-climate
 - jshint, jsbeautifier - værktøj til at understøtte best practices og formattering af kode
 
 
@@ -81,7 +82,7 @@ Et mere komplet eksempel er:
     });
     </script>
 
-# Code Architechture: Components and Cross-component Functions
+# Code Architecture: Components and Cross-component Functions
 
 `main.js` - entry point, and handle/dispatch visualisation through `location.hash`, create visualisation-links on page, and initialises all other components.
 - `getType()`, `getIds()`, `setIds(..)` which visualisation is running, and on which ting-objects
@@ -92,6 +93,7 @@ Et mere komplet eksempel er:
 
 `data-model.js` is responsible for loading data from the webservice, it also include an internal in-memory triple-store:
 - `getValues(..)` returns a list of available values given an object+property-name. It also schedules loading the data from the webservice asynchronously.
+- `getProperties(..)` get all available property/values for a given object-id.
 - event `data-update` is emitted when data available is updated
 - `apiUrl`, `relatedApiUrl` - configuration, set in main.js, that tells where data-model should load its data from
 - `initData()` initialise data model
@@ -157,38 +159,31 @@ Et mere komplet eksempel er:
 - `nextTick(..)` execute function next tick
 - `throttle(..)` limit rate of execution of function, so it is called at most once per n ms.
 
-# Coding Guidelines (rewrite in progress)
+# Coding Guidelines
 
-Som udgangspunkt anvendes Ding coding standard for javascript http://ting.dk/wiki/ding-code-guidelines/.
+We follow the DING JavaScript coding standard http://ting.dk/wiki/ding-code-guidelines/
+with the single exception that we allow use of bitwise operators, these are needed for some calculations.
 
-Se `.jshintrc`, samt `jsbeautifier: {...}` afsnittet i `Gruntfile.js` for konkrete valg om formattering og valg af tilgang.
-I forhold til jshint, er der truffet en del valg om at være mere stringent end ding-code-guidelines kræver. 
-Nuværende eneste undtagelse hvor vi er mindre stringente, er at vi tillader brug af bitwise operatorer da disse skal bruges til geometriske beregninger.
+JSHint is used to find and avoid style violations, and can be run with the command `grunt jshint`. 
+This is also run on the integration server. 
+Please also read `.jshintrc` as we are much more strict that the DING-guidelines requires.
 
-Kommentarer indeholder desuden fold markers til at navigere i filen med editorer der understøtter dette, ie.: `{{{1`, `{{{2`, ...
+We use two spaces indent, and also has tooling for automatic indentation, ie. run `grunt jsbeautifier` the indent is ok.
+Code comments contains fold markers (`{{{1`, `{{{2`, ...), to make it easier to navigate the source with editors that support this kind of folding.
 
-- Release strategi html5-applikationen
-  - Vi bruger semantisk versionering(http://semver.org), og laver typisk en ny release efter hvert sprint.
-  - Minifiseret udgave (`grunt build`) af seneste release bliver lagt online på http://ssl.solsort.com/visualisering-af-relationer
-  - Releases bliver tagget i git `git tag v0.?.?; git push --tags`, og også opdateret i `package.json`, og i releaseloggen i `README.md`
-  - Email sendes herefter ud til arbejdsgruppen om ny udviklingsrelease, så yderligere manuel test og inkludering i drupal-modulet kan udføres.
-- Teststrategi for manuel afprøvning: eksisterende, samt nyudviklede features i releaset testes:
-  - På desktop browsere: IE10, IE11, Chrome, Safari, og Firefox
-  - På Android og iOS enheder, både tablet og telefon.
-  - Bugs, ændringer etc. tilføjes på https://github.com/solsort/visualisering-af-relationer/issues/new
-- Efter test kan den minifiserede udgave inkluderes i https://github.com/vejlebib/ting_visual_relation og https://github.com/vejlebib/visual_relation
+Automatic test resides in `test/`, and new releases should be tested to work in IE9+ and recent (not bleeding edge) Chrome, Safari and Firefox. It should be teste on PCs, and Android and iOS devices, and both on tablets and phones. Minified version for test and release are build with `grunt build`. https://github.com/solsort/visualisering-af-relationer/issues are used for issue tracking.
+
+Releases uses semantic versioning ( http://semver.org/. ), and the minor version is incremented after each sprint during development.
+The version is kept track of in `package.json`, in the release log as a part of `README.md`, and releases are then tagged in git: `git tag v0.?.?; git push --tags`.
+After the release, the minified version can be included in  https://github.com/vejlebib/ting_visual_relation og https://github.com/vejlebib/visual_relation
 
 # Release Log
-
-Backlog - todo and progress:
-- publish production-ready related-service
-
-Sprint 7:
+## Version 0.7.2, released 19/12
+- pass all properties/values of object to click-handler
+- code polish
 - update README.md
-- evt more code polish
 
-## Version 0.7 sprint 7
-### Version 0.7.1, released 18/12
+## Version 0.7.1, released 18/12
 - funktion til manuel aktivering af visualisering - relvis.open(ids)
 - closeHandle funktion til lukning af relationsbrowser
 - relvis.close()
@@ -199,7 +194,7 @@ Sprint 7:
 - location-fragment: "#relvis/cir" instead of "#relviscir" etc.
 - highlight links to currently dragged edges
 
-### Version 0.7.0, released 16/12
+## Version 0.7.0, released 16/12
 - fix interaction bug on android
 - reduce graphics quality if rendering takes too long - for better performance on slow devices
 - opsamling af statistik / måling af anvendelse
@@ -207,8 +202,7 @@ Sprint 7:
 - erstat "Anmeldelse" med mere sigende tekst
 - default-covers
 
-## Version 0.6 sprint 6
-### Version 0.6.2, released 5/12
+## Version 0.6.2, released 5/12
 
 - bedre håndtering af visualisering med 1,2,3 eller 4 objekter
 - cirkulære relationer - interaktion træk til/fra centersky tilføjer/fjerner til/fra sky, klik medfører åben element, fjern ikke det sidste element fra skyen
@@ -217,25 +211,23 @@ Sprint 7:
 - warmup - precache - vis kun link for objekter med data
 - visual-relation-server-data
 
-### Version 0.6.1, released 29/11
+## Version 0.6.1, released 29/11
 
 - strukturelle relationer indenfor samling af relationer - demo baseret på søgning
 - snak med søgeapi; objekt-id kan både være søgning, ting-objekt, collection. 
 - eksterne relationer - tekst på overlay forfatter/anmeldelser/emne/struktur
 
-## Version 0.5 sprint 5
-### Version 0.5.1, released 22/11
+## Version 0.5.1, released 22/11
 - Forbedr af interaktion på touch-devices
 - request-redraw on image-load
 - forbedret visualisering - objekter tegnes som forside, evt. hvid m. titel 
 
-### Version 0.5.0, released 12/11
+## Version 0.5.0, released 12/11
 - Anvendelse af DDB-CMS recommendations webservice, som alternativ til udviklingswebservice
   - demo DDB-CMS: http://relvis.solsort.com/visualisering-af-relationer/#relviscir870970-basis:29970874 http://relvis.solsort.com/visualisering-af-relationer/#relviscir870970-basis:29847193
   - demo udvilingswebservice: http://relvis.solsort.com/visualisering-af-relationer/solsort-related.html#relviscir870970-basis:29970874 http://relvis.solsort.com/visualisering-af-relationer/solsort-related.html#relviscir870970-basis:29847193
 
-## Version 0.4 sprint 4
-### Version 0.4.1, released 7/11
+## Version 0.4.1, released 7/11
 - interaction
   - add click-detection/support to tap-handler abstraction
   - close relation browser on click on background
@@ -245,7 +237,7 @@ Sprint 7:
   - click adds/remove to klynge in circular relation visualisation
 - circular relation breadth first instead of depth first + async
 
-### Version 0.4.0, released 31/10
+## Version 0.4.0, released 31/10
 - visualisering af cirkulære relationer 
   - indhentning af data fra api-server
   - graph-walk, og identifikation af hvilke nodes der skal vises
@@ -257,17 +249,14 @@ Sprint 7:
   - generate+visualise graph for collections
   - hidden edges between elements in collection
 
-## Version 0.3 sprint 3
-### Version 0.3.3, released 24/10
-
+## Version 0.3.3, released 24/10
 - sample server for cirkulære relationer (baseret på ADHL)
   - undersøg om det kan lade sig gøre, ie. korrespondans mellem ting-id og adhl-data
   - script der skaber database
   - api-server
 - handling of relation types listed on http://oss.dbc.dk/services/open-search-web-service
 
-### Version 0.3.2, released 21/10
-
+## Version 0.3.2, released 21/10
 - visualisation polish
   - fixed zoom/dpi-bug when interacting
   - margin fit size of objects
@@ -276,13 +265,11 @@ Sprint 7:
   - more sample queries in demo page
   - hashchange support, ie. forward/back button moves to and from visualisation
 
-### Version 0.3.1, released 19/10
-
+## Version 0.3.1, released 19/10
 - kommunikation med APIet
   - make sure we use the supplied api-url instead of the hard-coded one during development
 
-### Version 0.3.0, released 18/10
-
+## Version 0.3.0, released 18/10
 - klarere data model
   - triple-store: `addTriple(obj, prop, val)`, `removeTriple(obj, prop, val)`, `getTripleValues(obj, prop)`
   - generering af graf-data fra triple-store-data
@@ -302,8 +289,7 @@ Sprint 7:
   - handle release
 - sikr den kan køre rent asynkront, ie. ikke anvender jquery og d3 før init kaldes
 
-## Version 0.2.0, released 10/10, sprint 2
-
+## Version 0.2.0, released 10/10
 - API for embedning
   - afklar api for embedning
   - implementér
@@ -333,8 +319,7 @@ Sprint 7:
     - android 2.1 virker ikke pga. https://code.google.com/p/android/issues/detail?id=5141
     - android 2.2 ser ud til at virke
 
-## Version 0.1.0, released 27/9, sprint 1
-
+## Version 0.1.0, released 27/9
 - Infrastruktur udvikling af HTML5 relationsbrowseren
   - oprettelse af github-repositorie http://github.com/solsort/visualisering-af-relationer så der er åbenhed om udviklingsprocessen, og muligt løbende at følge med
   - application skeleton
@@ -353,7 +338,6 @@ Sprint 7:
   - applikationsarkitektur
   - udkast til release og test-strategi
   - udkast til produktmål
-
 
 # old notes (refactoring/removal in progress)
 ## Visualisering af relationer - HTML5 visual relationsbrowser

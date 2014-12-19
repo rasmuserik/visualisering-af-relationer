@@ -108,7 +108,7 @@
   relvis.findBoundaries = function findBoundaries(list) { //{{{1
     // returns an object telling the min/max/range of each of the keys
     // and a function to normalise another object to the range
-    var i, j, item;
+    var i, item;
     var min = {};
     var max = {};
     var range = {};

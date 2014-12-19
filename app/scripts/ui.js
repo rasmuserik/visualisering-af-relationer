@@ -65,7 +65,7 @@
       relvis.layoutGraph();
     });
     relvis.addEventListener('drag', function(e) { //{{{2
-      var h, w, x, y, px, py;
+      var px, py;
       showStatus('drag' + JSON.stringify({
         x: e.x,
         y: e.y,
@@ -109,9 +109,7 @@
           visualisation: relvis.getType(),
           id: node.value,
           title: node.label,
-          cover: node.imgSrc,
-          defaultCover: relvis.getValues(node.value, 'defaultCover')[0],
-          'abstract': relvis.getValues(node.value, 'abstract')[0]
+          properties: relvis.getProperties(node.value)
         });
       }
     });

@@ -38,6 +38,18 @@
     }
     return triples[obj][prop];
   };
+  relvis.getProperties = function(obj) { //{{{2
+    var result = {};
+    if (!triples[obj]) {
+      triples[obj] = {};
+    }
+    Object.keys(triples[obj]).forEach(function(key) {
+      if(triples[obj][key].length) {
+        result[key] = JSON.parse(JSON.stringify(triples[obj][key]));
+      }
+    });
+    return result;
+  };
 
   relvis.initData = function() { //{{{1 
     dataupdate();
@@ -93,7 +105,7 @@
                 relvis.addTriple(id, 'related', data);
               }
             },
-            error: function(err) {
+            error: function() {
               relvis.log('apierr', 'related-' + id);
             }
           });
@@ -122,7 +134,7 @@
           }
           relvis.addTriple(id, 'results', results);
         },
-        error: function(err) {
+        error: function() {
           relvis.log('apierr', id);
         }
       });
@@ -146,7 +158,7 @@
             relvis.addTriple(id, obj.type || obj.property, obj.value);
           });
         },
-        error: function(err) {
+        error: function() {
           tryGet(count - 1);
         }
       });

@@ -59,7 +59,6 @@
         relvis.d3force.gravity(0);
       }
       var traverseIds = [];
-      var nextIds = {};
       var traverseDepth;
 
       function traverseGraph() { //{{{2
@@ -120,7 +119,7 @@
 
       for (i = 0; i < ids.length; ++i) { //{{{2 init/execute traversal
         traverseIds.push(ids[i]);
-        var node = createNode({
+        createNode({
           id: ids[i],
           value: ids[i],
           type: 'primary',

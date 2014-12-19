@@ -16,6 +16,7 @@
   "strict": true,
   "undef": true,
 
+  "unused": true,
   "camelcase": true,
   "curly": true,
   "node": true,
