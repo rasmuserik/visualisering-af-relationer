@@ -36,6 +36,7 @@
   relvis.init = function(obj) { //{{{1
     relvis.apiUrl = obj.apiUrl;
     relvis.logUrl = obj.logUrl;
+    relvis.loadingCover = obj.loadingCover;
     relvis.clickHandle = obj.clickHandle || function() {};
     relvis.relatedApiUrl = obj.relatedUrl;
     relvis.disablePrefetch = obj.disablePrefetch;

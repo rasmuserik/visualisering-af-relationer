@@ -148,6 +148,7 @@ After the release, the minified version can be included in  https://github.com/v
 - `drawNode(..)` draw a node element
 - `drawEdge(..)` draw an edge element
 - `visualObjectRatio` tells the desired width/height ratio of the nodes
+- `loadingCover` url for image that will be shown while we do not have the title of an element
 
 ----
 

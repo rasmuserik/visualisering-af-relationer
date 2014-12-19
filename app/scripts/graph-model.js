@@ -198,7 +198,7 @@
                   visible: true
                 });
                 if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
-                  node.label = relvis.getValues(node.label, 'title')[0] || 'Loading...';
+                  node.label = relvis.getValues(node.label, 'title')[0] || '...';
                   if (node.label === 'Anmeldelse') {
                     node.label = relvis.getValues(node.value, 'isPartOf')[0] || node.label;
                   }

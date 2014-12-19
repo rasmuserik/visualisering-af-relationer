@@ -166,6 +166,9 @@
 
   relvis.drawNode = function drawNode(ctx, node, x, y, w, h) { //{{{2
     var img = getImage(node.imgSrc);
+    if(!img && node.label === '...' && !!relvis.loadingCover) {
+      img = getImage(relvis.loadingCover);
+    }
 
     // draw image if available
     if (img && img.complete && img.naturalWidth) {
