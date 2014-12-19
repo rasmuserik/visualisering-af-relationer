@@ -73,9 +73,9 @@
     }
   };
 
-  relvis.square = function(a) { //{{{1
+  function square(a) { //{{{1
     return a * a;
-  };
+  }
 
   relvis.nearestPoints = function(list, x, y) { //{{{1
     // this is a function that finds the neares points for a list of nodes
@@ -98,7 +98,7 @@
       var a = list[i];
       for (var j = 0; j < i; ++j) {
         var b = list[j];
-        var dist = Math.sqrt(relvis.square(a[x] - b[x]) + relvis.square((a[y] - b[y]) * relvis.visualObjectRatio));
+        var dist = Math.sqrt(square(a[x] - b[x]) + square((a[y] - b[y]) * relvis.visualObjectRatio));
         assignDist(a, b, dist);
         assignDist(b, a, dist);
       }
