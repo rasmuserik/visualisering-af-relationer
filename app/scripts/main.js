@@ -1,4 +1,4 @@
-(function($) {
+(function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
@@ -70,7 +70,7 @@
     if (location.hash.slice(0, 7) === '#relvis' && !relvis.unsupportedPlatform) {
       relvis.show();
     }
-    $(window).on('hashchange', function() {
+    (window.$ || window.jQuery)(window).on('hashchange', function() {
       if (location.hash.slice(0, 7) === '#relvis' && !relvis.unsupportedPlatform) {
         relvis.show();
       } else {
@@ -160,4 +160,4 @@
       relvis.log('enabled', enabled);
     }
   });
-})(window.$ || window.jQuery); //{{{1
+})(); //{{{1

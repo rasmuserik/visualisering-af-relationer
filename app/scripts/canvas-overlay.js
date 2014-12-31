@@ -1,5 +1,5 @@
 // A canvas-element at device resolution, that fits the entire window
-(function($) {
+(function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
@@ -108,10 +108,10 @@
     relvis.unit = 12 * (window.devicePixelRatio || 1);
 
     // resize canvas on screen resize
-    $(window).scroll(function() {
+    (window.$ || window.jQuery)(window).scroll(function() {
       relvis.updateOverlayPosition();
     });
-    $(window).resize(function() {
+    (window.$ || window.jQuery)(window).resize(function() {
       relvis.updateOverlayPosition();
     });
 
@@ -192,4 +192,4 @@
       this.requestRedraw();
     }
   };
-})(window.$ || window.jQuery);
+})();

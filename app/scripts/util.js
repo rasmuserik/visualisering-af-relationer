@@ -1,4 +1,4 @@
-(function($) {
+(function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
@@ -47,7 +47,7 @@
       }
       obj.time = Date.now();
       var logentry = JSON.stringify(obj);
-      $.ajax(relvis.logUrl + '?' + window.encodeURIComponent(logentry) + '&callback=?', {
+      (window.$ || window.jQuery).ajax(relvis.logUrl + '?' + window.encodeURIComponent(logentry) + '&callback=?', {
         dataType: 'jsonp'
       });
     }
@@ -168,4 +168,4 @@
       }
     };
   };
-})(window.$ || window.jQuery); //{{{1
+})(); //{{{1

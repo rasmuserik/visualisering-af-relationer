@@ -1,4 +1,4 @@
-(function($) {
+(function() {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
   //{{{1 triple store
@@ -71,7 +71,7 @@
       relvis.nextTick(function() {
         if (relvis.relatedApiUrl) {
           var lid = id.split(/(:|%3A)/)[2];
-          $.ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
+          (window.$ || window.jQuery).ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
             cache: true,
             dataType: 'jsonp',
             success: function(data) {
@@ -89,7 +89,7 @@
           });
         } else {
           var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
-          $.ajax(url + '?callback=?', {
+          (window.$ || window.jQuery).ajax(url + '?callback=?', {
             cache: true,
             dataType: 'jsonp',
             success: function(data) {
@@ -120,7 +120,7 @@
     loadedObjects[obj.object] = true;
 
     if (id.slice(0, 7) === 'search:') { //{{{2
-      $.ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
+      (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
         cache: true,
         dataType: 'jsonp',
         success: function(data) {
@@ -150,7 +150,7 @@
         relvis.log('apierr', id);
         return;
       }
-      $.ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
+      (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
         cache: true,
         dataType: 'jsonp',
         success: function(data) {
@@ -166,4 +166,4 @@
 
     tryGet(3); ///{{{2
   }); //{{{2
-})(window.$ || window.jQuery); //{{{1
+})(); //{{{1
