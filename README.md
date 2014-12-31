@@ -168,6 +168,10 @@ After the release, the minified version can be included in  https://github.com/v
 - `throttle(..)` limit rate of execution of function, so it is called at most once per n ms.
 
 # Release Log
+## Version 0.8.0, - in progress not released yet
+
+- handle the jquery is sometimes called `jQuery` instead of `$`
+
 ## Version 0.7.2, released 19/12
 - improve documentation in README.md
 - code polish
