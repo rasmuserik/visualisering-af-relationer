@@ -1,4 +1,4 @@
-(function() {
+(function($) {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
@@ -160,4 +160,4 @@
       relvis.log('enabled', enabled);
     }
   });
-})(); //{{{1
+})(window.$ || window.jQuery); //{{{1

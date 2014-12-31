@@ -1,4 +1,4 @@
-(function() {
+(function($) {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
   //{{{1 triple store
@@ -166,4 +166,4 @@
 
     tryGet(3); ///{{{2
   }); //{{{2
-})(); //{{{1
+})(window.$ || window.jQuery); //{{{1

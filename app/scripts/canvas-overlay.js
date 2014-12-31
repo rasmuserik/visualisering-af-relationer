@@ -1,5 +1,5 @@
 // A canvas-element at device resolution, that fits the entire window
-(function() {
+(function($) {
   'use strict';
   var relvis = window.relvis = window.relvis || {};
 
@@ -192,4 +192,4 @@
       this.requestRedraw();
     }
   };
-})();
+})(window.$ || window.jQuery);
