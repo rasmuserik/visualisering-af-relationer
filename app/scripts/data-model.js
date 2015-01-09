@@ -152,15 +152,15 @@
       }
       (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-ting-object/' + id + '?callback=?', {
         cache: true,
-      dataType: 'jsonp',
-      success: function(data) {
-        data.forEach(function(obj) {
-          relvis.addTriple(id, obj.type || obj.property, obj.value);
-        });
-      },
-      error: function() {
-        tryGet(count - 1);
-      }
+        dataType: 'jsonp',
+        success: function(data) {
+          data.forEach(function(obj) {
+            relvis.addTriple(id, obj.type || obj.property, obj.value);
+          });
+        },
+        error: function() {
+          tryGet(count - 1);
+        }
       });
     }
 
@@ -170,7 +170,7 @@
         cache: true,
         dataType: 'jsonp',
         success: function(data) {
-          if(data.title) {
+          if (data.title) {
             relvis.addTriple(id, 'title', data.title);
           }
         },
@@ -180,5 +180,5 @@
       });
     }
 
-    }); //{{{2
-    })(); //{{{1
+  }); //{{{2
+})(); //{{{1

@@ -195,7 +195,7 @@
                   visible: true
                 });
                 if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
-                  if (relvis.getValues(node.label, 'title')[0]  === 'Anmeldelse') {
+                  if (relvis.getValues(node.label, 'title')[0] === 'Anmeldelse') {
                     node.label = relvis.getValues(node.value, 'isPartOf')[0];
                   } else {
                     node.label = undefined;

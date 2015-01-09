@@ -170,7 +170,7 @@
 
   relvis.drawNode = function drawNode(ctx, node, x, y, w, h) { //{{{2
     var img = getImage(node.imgSrc);
-    if(!img && getLabel(node) === '...' && !!relvis.loadingCover) {
+    if (!img && getLabel(node) === '...' && !!relvis.loadingCover) {
       img = getImage(relvis.loadingCover);
     }
 
