@@ -45,9 +45,6 @@
       if (node.imgSrc === undefined) {
         node.imgSrc = relvis.getValues(node.id, 'cover')[0];
       }
-      if (node.label === undefined || node.label === '...') {
-        node.label = relvis.getValues(node.id, 'title')[0] || '...';
-      }
 
       nodeMap[node.id] = node;
       return node;
@@ -198,9 +195,10 @@
                   visible: true
                 });
                 if (node.label.trim().match(/^\d\d\d\d\d\d-[a-z]*:\d*$/)) {
-                  node.label = relvis.getValues(node.label, 'title')[0] || '...';
-                  if (node.label === 'Anmeldelse') {
-                    node.label = relvis.getValues(node.value, 'isPartOf')[0] || node.label;
+                  if (relvis.getValues(node.label, 'title')[0]  === 'Anmeldelse') {
+                    node.label = relvis.getValues(node.value, 'isPartOf')[0];
+                  } else {
+                    node.label = undefined;
                   }
                 }
                 edges.push({
@@ -220,12 +218,10 @@
           root = createNode({
             id: id,
             value: id,
-            label: 'root',
             type: 'root',
             visible: true
           });
           root.imgSrc = relvis.getValues(id, 'cover')[0];
-          root.label = relvis.getValues(id, 'title')[0] || '...';
         }
 
         createRootNode();

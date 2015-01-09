@@ -8,9 +8,9 @@
   var slowCount = 0;
   var shadow = true;
   relvis.addEventListener('redraw', function() {
-    if (relvis.renderTime > 150) {
+    if (relvis.renderTime > 100) {
       ++slowCount;
-      if (slowCount > 5) {
+      if (slowCount > 3) {
         shadow = false;
       }
     } else {
@@ -142,6 +142,10 @@
     noShadow(ctx);
   }
 
+  function getLabel(node) { //{{{2
+    return node.label || relvis.getValues(node.id, 'title').slice(-1)[0] || '...';
+  }
+
   function drawTitle(ctx, node, x, y, w, h) { //{{{2
     dropShadow(ctx);
     ctx.fillStyle = 'rgba(255,255,255,1)';
@@ -161,12 +165,12 @@
     w *= 0.8;
     h *= 0.8;
     ctx.fillStyle = 'rgba(0,0,0,0.8)';
-    relvis.writeBox(ctx, node.label, x, y, w, h);
+    relvis.writeBox(ctx, getLabel(node), x, y, w, h);
   }
 
   relvis.drawNode = function drawNode(ctx, node, x, y, w, h) { //{{{2
     var img = getImage(node.imgSrc);
-    if(!img && node.label === '...' && !!relvis.loadingCover) {
+    if(!img && getLabel(node) === '...' && !!relvis.loadingCover) {
       img = getImage(relvis.loadingCover);
     }
 

@@ -8,7 +8,7 @@
     return location.hash.slice(8, 11);
   };
   relvis.getIds = function() {
-    return location.hash.slice(11).split(',');
+    return location.hash.slice(11).replace(/%3A/g, ':').split(',');
   };
   relvis.setIds = function(ids) {
     location.hash = location.hash.slice(0, 11) + String(ids);
