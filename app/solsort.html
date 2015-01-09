@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
     <style>
+      body {
+        background: #ccc;
+        color: #333;
+      }
       .relvis-request {
         display: none;
       }
@@ -29,7 +33,10 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <h1>solsort related webservice</h1>
+    solsort.com related-webservice + DDB-CMS webservice<br><br>
+    Baseret på data frigivet af DBC på Hack4DK 2014<br>
+    (de ligger online på github/vejlebib)
+
         <!-- build:js({app,.tmp}) scripts/main.js -->
         <script src="scripts/util.js"></script>
         <script src="scripts/canvas-overlay.js"></script>
@@ -63,6 +70,7 @@
                   console.log('click', o);
                 }
             });
+            relvis.drawBackground = function() {};
         });
         </script>
 </body>
