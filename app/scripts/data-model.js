@@ -65,59 +65,62 @@
     var lid = id.split(/(:|%3A)/)[2];
 
     if (obj.property === 'related') { //{{{2
-      if (relatedLoaded[id]) {
-        return;
-      }
-      relatedLoaded[id] = true;
-      relvis.nextTick(function() {
-        if (relvis.relatedApiUrl) {
-          (window.$ || window.jQuery).ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
-            cache: true,
-            dataType: 'jsonp',
-            success: function(data) {
-              if (Array.isArray(data)) {
-                data = data.map(function(obj) {
-                  obj.id = '870970-basis:' + obj.lid;
-                  return obj;
-                });
-                relvis.addTriple(id, 'related', data);
-              }
-            },
-            error: function() {
-              relvis.log('apierr', 'related-' + id);
-            }
-          });
-        } else {
-          var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
-          (window.$ || window.jQuery).ajax(url + '?callback=?', {
-            cache: true,
-            dataType: 'jsonp',
-            success: function(data) {
-              if (Array.isArray(data)) {
-                if (data.length === 0) {
-                  data = [];
+      if (!relatedLoaded[id]) {
+        relatedLoaded[id] = true;
+        relvis.nextTick(function() {
+          if (relvis.relatedApiUrl) {
+            (window.$ || window.jQuery).ajax(relvis.relatedApiUrl + '/related/' + lid + '?callback=?', {
+              cache: true,
+              dataType: 'jsonp',
+              success: function(data) {
+                if (Array.isArray(data)) {
+                  data = data.map(function(obj) {
+                    obj.id = '870970-basis:' + obj.lid;
+                    return obj;
+                  });
+                  relvis.addTriple(id, 'related', data);
                 }
-                data = data.map(function(id) {
-                  return {
-                    id: id
-                  };
-                });
-                relvis.addTriple(id, 'related', data);
+              },
+              error: function() {
+                relvis.log('apierr', 'related-' + id);
               }
-            },
-            error: function() {
-              relvis.log('apierr', 'related-' + id);
-            }
-          });
-        }
-      });
+            });
+          } else {
+            var url = relvis.apiUrl + '/get-recommendations/' + id + '/30';
+            (window.$ || window.jQuery).ajax(url + '?callback=?', {
+              cache: true,
+              dataType: 'jsonp',
+              success: function(data) {
+                if (Array.isArray(data)) {
+                  if (data.length === 0) {
+                    data = [];
+                  }
+                  data = data.map(function(id) {
+                    return {
+                      id: id
+                    };
+                  });
+                  relvis.addTriple(id, 'related', data);
+                }
+              },
+              error: function() {
+                relvis.log('apierr', 'related-' + id);
+              }
+            });
+          }
+        });
+      }
+    }
+
+    if (!id.match(/[0-9]+-[a-zæøå]+:[0-9]*/)) { //{{{2
+      //console.log('not ting-object', id);
       return;
     }
 
-    if (loadedObjects[obj.object]) { //{{{2
+    if (loadedObjects[id]) { //{{{2
       return;
     }
-    loadedObjects[obj.object] = true;
+    loadedObjects[id] = true;
 
     if (id.slice(0, 7) === 'search:') { //{{{2
       (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
@@ -138,10 +141,6 @@
           relvis.log('apierr', id);
         }
       });
-      return;
-    }
-    if (!id.match(/[0-9]+-[a-zæøå]+:[0-9]*/)) { //{{{2
-      //console.log('not ting-object', id);
       return;
     }
 
