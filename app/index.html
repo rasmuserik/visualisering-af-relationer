@@ -27,7 +27,7 @@
   </head>
   <body>
     <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="//browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <p>Using DDB-CMS related webservice</p>
     <a href=solsort-related.html>using solsort related webservice instead</a>
@@ -150,9 +150,9 @@
         $(function(){
             relvis.init({
                 apiUrl: 'https://dev.vejlebib.dk/ting-visual-relation',
-                //relatedUrl: 'http://' + location.hostname + ':8001',
-                //relatedUrl: 'http://relvis.solsort.com/bib',
-                //logUrl: 'http://relvis.solsort.com/_relvis_log.js',
+                //relatedUrl: '//' + location.hostname + ':8001',
+                //relatedUrl: '//relvis.solsort.com/bib',
+                //logUrl: '//relvis.solsort.com/_relvis_log.js',
  //               disablePrefetch: true, 
                 clickHandle: function(o) {
                   console.log('click', o);
