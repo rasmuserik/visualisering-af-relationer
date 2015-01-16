@@ -167,6 +167,14 @@ After the release, the minified version can be included in  https://github.com/v
 - `nextTick(..)` execute function next tick
 - `throttle(..)` limit rate of execution of function, so it is called at most once per n ms.
 
+# Backlog
+
+Version 0.9.0
+
+- bugfix: moving mouse out of window after dragging node
+- click-event on søge-emne-ord
+- choice of search engine ie. data-relvis-searchengine and last part of search-url
+
 # Release Log
 ## Version 0.8.0, released 9/1
 
