@@ -176,6 +176,10 @@ Version 0.9.0
 - choice of search engine ie. data-relvis-searchengine and last part of search-url
 
 # Release Log
+## Version 0.8.1, released 30/1
+
+- fix bug in finding nearest distance, when node is already has initialised nearest node, but is in a new graph with no other nodes.
+
 ## Version 0.8.0, released 9/1
 
 - more example/demo code

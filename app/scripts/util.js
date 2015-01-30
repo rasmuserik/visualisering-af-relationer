@@ -47,7 +47,7 @@
       }
       obj.time = Date.now();
       var logentry = JSON.stringify(obj);
-      (window.$ || window.jQuery).ajax(relvis.logUrl + '?' + window.encodeURIComponent(logentry) + '&callback=?', {
+      (window.$ || window.jQuery).ajax(relvis.logUrl + '?log=' + window.encodeURIComponent(logentry) + '&callback=?', {
         dataType: 'jsonp'
       });
     }
@@ -93,6 +93,7 @@
     }
     for (var i = 0; i < list.length; ++i) {
       list[i].nearestDist = Number.POSITIVE_INFINITY;
+      list[i].nearestNode = null;
     }
     for (i = 0; i < list.length; ++i) {
       var a = list[i];

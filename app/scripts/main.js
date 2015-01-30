@@ -82,7 +82,7 @@
     relvis.nextTick(relvis.updateButtons);
   };
 
-  relvis.open = function(type, ids) {
+  relvis.open = function(type, ids) { //{{{1
     location.hash = 'relvis/' + type.slice(0, 3) + String(ids);
   };
 
