@@ -143,7 +143,7 @@
   }
 
   function getLabel(node) { //{{{2
-    return node.label || relvis.getValues(node.id, 'title').slice(-1)[0] || '...';
+    return node.label || relvis.getValues(node.value, 'title').slice(-1)[0] || '...';
   }
 
   function drawTitle(ctx, node, x, y, w, h) { //{{{2

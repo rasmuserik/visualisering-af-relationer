@@ -176,6 +176,10 @@ Version 0.9.0
 - choice of search engine ie. data-relvis-searchengine and last part of search-url
 
 # Release Log
+## Version 0.8.3, released 2/2
+
+- bugfix - used node.id instead of node.value after refactoring to find, label which meant that the labels was missing on non-book/material extern relations
+
 ## Version 0.8.2, released 2/2
 
 - bugfix - search working again (had a regression during some refactoring a while ago)
