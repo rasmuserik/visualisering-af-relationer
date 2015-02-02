@@ -64,6 +64,28 @@
     }
     var lid = id.split(/(:|%3A)/)[2];
 
+    if (id.slice(0, 7) === 'search:') { //{{{2
+      (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
+        cache: true,
+        dataType: 'jsonp',
+        success: function(data) {
+          var results = [];
+          var cols = data.collections;
+          for (var i = 0; i < cols.length; ++i) {
+            var entities = cols[i].entities;
+            for (var j = 0; j < entities.length; ++j) {
+              results.push(entities[j]);
+            }
+          }
+          relvis.addTriple(id, 'results', results);
+        },
+        error: function() {
+          relvis.log('apierr', id);
+        }
+      });
+      return;
+    }
+
     if (obj.property === 'related') { //{{{2
       if (!relatedLoaded[id]) {
         relatedLoaded[id] = true;
@@ -121,28 +143,6 @@
       return;
     }
     loadedObjects[id] = true;
-
-    if (id.slice(0, 7) === 'search:') { //{{{2
-      (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
-        cache: true,
-        dataType: 'jsonp',
-        success: function(data) {
-          var results = [];
-          var cols = data.collections;
-          for (var i = 0; i < cols.length; ++i) {
-            var entities = cols[i].entities;
-            for (var j = 0; j < entities.length; ++j) {
-              results.push(entities[j]);
-            }
-          }
-          relvis.addTriple(id, 'results', results);
-        },
-        error: function() {
-          relvis.log('apierr', id);
-        }
-      });
-      return;
-    }
 
     function tryGet(count) { //{{{2
       if (count < 1) {
