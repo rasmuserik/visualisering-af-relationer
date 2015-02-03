@@ -64,8 +64,15 @@
     }
     var lid = id.split(/(:|%3A)/)[2];
 
-    if (id.slice(0, 7) === 'search:') { //{{{2
-      (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-search-result/ting-search/' + id.slice(7) + '?callback=?', {
+    if (id.slice(0, 6) === 'search') { //{{{2
+      var searchPath;
+      if (id[6] === ':') {
+        searchPath = 'ting-search/' + id.slice(7);
+      } else {
+        searchPath = id.slice(7).replace(/:/, '/');
+      }
+
+      (window.$ || window.jQuery).ajax(relvis.apiUrl + '/get-search-result/' + searchPath + '?callback=?', {
         cache: true,
         dataType: 'jsonp',
         success: function(data) {

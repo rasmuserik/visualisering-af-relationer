@@ -34,6 +34,8 @@ The visualisation can be included in a html-page by including the js-files in `d
 To create links to visualisations on a page, give a html-element the `class="relvis-request"`, and set the data properties:
  `data-relvis-type="..."` and `data-relvis-id="..."`. The relvis-type can be one of `circular`, `external` and `structural`. The relvis-id is either a comma-separated list of ting-object-ids or a `search:some search query` request.
 
+Search requests can include search engine `search/search-engine: search query`, - and if no search-engine is given `search: search query` defaults to `search/ting-search: search query`.
+
 See the html-files in the `app/` folder for examples.
 
 Styling should be added for the `relvis-request`, `relvis-disabled` and `relvis-enabled` css-classes, probably making the first two hidden.
@@ -173,7 +175,7 @@ Version 0.9.0
 
 - bugfix: moving mouse out of window after dragging node
 - click-event on søge-emne-ord
-- choice of search engine ie. data-relvis-searchengine and last part of search-url
+- √optional choice of search engine in url
 
 # Release Log
 ## Version 0.8.3, released 2/2
