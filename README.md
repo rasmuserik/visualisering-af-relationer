@@ -173,8 +173,9 @@ After the release, the minified version can be included in  https://github.com/v
 
 Version 0.9.0
 
-- bugfix: moving mouse out of window after dragging node
-- click-event on søge-emne-ord
+- apply open source licenses
+- ?click-event on søge-emneord
+- √bugfix: moving mouse out of window after dragging node
 - √optional choice of search engine in url
 
 # Release Log

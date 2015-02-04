@@ -81,7 +81,7 @@
         relvis.dispatchEvent('tap' + kind, o);
       }
 
-      if (kind === 'end') {
+      if (touching && kind === 'end') {
         if (Date.now() - tapStartTime < tapTime &&
           Math.sqrt(maxDX * maxDX + maxDY * maxDY) < relvis.unit) {
           relvis.dispatchEvent('tapclick', o);
