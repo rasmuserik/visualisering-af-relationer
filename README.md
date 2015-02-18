@@ -171,14 +171,13 @@ After the release, the minified version can be included in  https://github.com/v
 
 # Backlog
 
-Version 0.9.0
+# Release Log
+## Version 0.9.0, released 18/2
 
 - apply open source licenses
-- ?click-event on søge-emneord
-- √bugfix: moving mouse out of window after dragging node
-- √optional choice of search engine in url
+- bugfix: moving mouse out of window after dragging node
+- optional choice of search engine in url
 
-# Release Log
 ## Version 0.8.3, released 2/2
 
 - bugfix - used node.id instead of node.value after refactoring to find, label which meant that the labels was missing on non-book/material extern relations
