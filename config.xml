@@ -2,6 +2,7 @@
 <widget id="solsort.relvis" version="0.0.1" 
   xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Visualisering af Relationer</name>
+    <date>2014-12</date>
     <shortdescription>Widget for visualising relations between library books</shortdescription>
     <description>Simple demo of visualisation of relations between library books, and also benchmarking/comparing different recommendation services</description>
     <author email="app@solsort.com" href="http://solsort.com">solsort.com</author>
